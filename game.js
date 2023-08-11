@@ -1,3 +1,5 @@
+import Point from './elements/point';
+
 const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -12,17 +14,21 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
+  let points;  // Para almacenar los círculos dibujados
   
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
+    points = this.add.group();
   
-    // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', createCircle.bind(this));
+    const point = new Point(this, 0, 0);
+  
+    this.input.on('pointerdown', (pointer) => {
+      const circle = point.createCircle(pointer);
+      points.add(circle);
+    });
   }
   
   function update() {
