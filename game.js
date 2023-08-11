@@ -37,9 +37,12 @@ const config = {
   
   
   function update() {
+    if (isMovingEnabled && selectedCircle) {
+        moveCircle(this.input.activePointer);
+      }  
     // Actualizaciones del juego en cada fotograma
   }
-  
+
   function toggleMoving() {
     isMovingEnabled = true;
     isDrawingEnabled = false;
