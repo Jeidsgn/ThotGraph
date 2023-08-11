@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  #game-container {
+    width: 100%; /* Cambio aquí para que ocupe todo el ancho */
+    max-width: 800px; /* Limitar el ancho máximo para una mejor visualización */
+    height: 600px;
+    border: 2px solid #000;
+  }
+
+  
