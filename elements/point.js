@@ -3,23 +3,20 @@ class Point {
       this.scene = scene;
       this.x = x;
       this.y = y;
-      this.create();
+  
+      this.graphics = this.scene.add.graphics();
+      this.graphics.fillStyle(0xff0000, 1);
+      this.graphics.fillCircle(this.x, this.y, 5);
     }
   
-    createCircle(pointer) {
-      const x = this.x;
-      const y = this.y;
-  
-      const circle = this.scene.add.circle(x, y, 20, 0xff0000);  // Usar this.scene.add.circle
-      // Agregar la lógica para almacenar el círculo o realizar verificaciones adicionales
-  
-      return circle;
-    }
-  
-    destroy() {
-      this.pointGraphic.destroy();
-    }
+    // Aquí puedes agregar métodos para la interacción y lógica específica del punto
   }
+  function createPoint(pointer) {
+    const x = pointer.x;
+    const y = pointer.y;
   
-  export default Point;
+    const point = new Point(this, x, y); // Crear un nuevo punto
+    points.add(point); // Agregar el punto al grupo
   
+    // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el punto
+  }  
