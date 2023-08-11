@@ -17,8 +17,6 @@ const config = {
   }
   
   function create() {
-    
-
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', createPoint.bind(this));
   }
