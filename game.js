@@ -1,4 +1,3 @@
-import Point from './elements/point.js';
 
 const config = {
     type: Phaser.AUTO,
