@@ -15,7 +15,7 @@ class Point {
       });
   
       this.drawButton.setInteractive();
-      this.drawButton.on('pointerdown', this.toggleDraw.bind(this));
+      this.drawButton.on('pointerdown', this.toggleDraw, this); // Cambio aquí
     }
   
     toggleDraw() {
@@ -27,10 +27,14 @@ class Point {
       return this.canDraw;
     }
   }
-  function createPoint(pointer) {
-    const x = pointer.x;
-    const y = pointer.y;
   
-    const point = new Point(this, x, y); // Crear un nuevo punto
+  // En game.js, donde se crea el punto:
+  function createPoint(pointer) {
+    if (point.allowDrawing()) { // Verificar si se puede dibujar
+      const x = pointer.x;
+      const y = pointer.y;
+  
+      const point = new Point(this, x, y); // Crear un nuevo punto
+    }
   }
   
