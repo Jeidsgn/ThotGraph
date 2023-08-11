@@ -33,7 +33,7 @@ const config = {
     const x = pointer.x;
     const y = pointer.y;
   
-    const circle = game.add.circle(x, y, 20, 0xff0000);  // Crear un círculo rojo
+    const circle = this.add.circle(x, y, 20, 0xff0000);  // Crear un círculo rojo
     circles.add(circle);  // Agregar el círculo al grupo
   
     // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
