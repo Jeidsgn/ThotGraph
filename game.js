@@ -54,12 +54,6 @@ const config = {
   
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-  
-    if (isDrawingEnabled) {
-      this.input.on('pointerdown', createCircle.bind(this));
-    } else {
-      this.input.off('pointerdown', createCircle.bind(this));
-    }
   }
   
   function createCircle(pointer) {
