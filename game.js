@@ -12,7 +12,7 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
+  let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   
   function preload() {
@@ -20,12 +20,14 @@ const config = {
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
-    
+    points = this.add.group();  // Crear un grupo para almacenar los puntos
+  
     // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+  
+    // No es necesario configurar la función de clic aquí
   }
   
   function update() {
@@ -37,24 +39,25 @@ const config = {
   
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-    
+  
     if (isDrawingEnabled) {
       // Configurar la función de clic en el contenedor solo si el dibujo está activado
-      this.input.on('pointerdown', createCircle.bind(this));
+      this.input.on('pointerdown', createPoint.bind(this));
     } else {
-      this.input.off('pointerdown', createCircle.bind(this));
+      // Desactivar la función de clic cuando el dibujo está desactivado
+      this.input.off('pointerdown', createPoint.bind(this));
     }
   }
   
-  function createCircle(pointer) {
+  function createPoint(pointer) {
     if (isDrawingEnabled) {
       const x = pointer.x;
       const y = pointer.y;
   
-      const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
-      circles.add(circle);  // Agregar el círculo al grupo
+      const point = this.add.circle(x, y, 2, 0xff0000);  // Usar this.add.circle
+      points.add(point);  // Agregar el punto al grupo
   
-      // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
+      // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el punto
     }
   }
   
