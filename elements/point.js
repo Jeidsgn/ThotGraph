@@ -27,7 +27,11 @@ class Point {
         this.toggleButton.setText('Modo Dibujo: Desactivado');
       }
     }
-  
-    // Otras funciones y lógica específicas del punto
+      // Otras funciones y lógica específicas del punto
   }
-  
+  function createPoint(pointer) {
+    const x = pointer.x;
+    const y = pointer.y;
+    
+    const point = new Point(this, x, y); // Crear un nuevo punto
+  }
