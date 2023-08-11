@@ -30,11 +30,12 @@ class Point {
   
   // En game.js, donde se crea el punto:
   function createPoint(pointer) {
-    if (point.allowDrawing()) { // Verificar si se puede dibujar
+    if (points.getChildren().length === 0 || points.getFirstAlive().allowDrawing()) { // Verificar si se puede dibujar
       const x = pointer.x;
       const y = pointer.y;
   
-      const point = new Point(this, x, y); // Crear un nuevo punto
+      const newPoint = new Point(this, x, y); // Cambio aquí
+      points.add(newPoint);
     }
   }
   
