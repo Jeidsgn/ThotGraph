@@ -1,6 +1,6 @@
 const config = {
     type: Phaser.AUTO,
-    width: '100%', // Cambio aquí para que el juego ocupe todo el ancho
+    width: 800,
     height: 600,
     parent: 'game-container',
     scene: {
@@ -12,15 +12,30 @@ const config = {
   
   const game = new Phaser.Game(config);
   
+  let circles;  // Para almacenar los círculos dibujados
+  
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
-    // Configurar la interfaz de usuario y la mecánica del juego
+    circles = this.add.group();  // Crear un grupo para almacenar los círculos
+  
+    // Configurar la función de clic en el contenedor
+    this.input.on('pointerdown', createCircle);
   }
   
   function update() {
     // Actualizaciones del juego en cada fotograma
+  }
+  
+  function createCircle(pointer) {
+    const x = pointer.x;
+    const y = pointer.y;
+  
+    const circle = game.add.circle(x, y, 20, 0xff0000);  // Crear un círculo rojo
+    circles.add(circle);  // Agregar el círculo al grupo
+  
+    // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
   }
   
