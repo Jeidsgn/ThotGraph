@@ -8,34 +8,26 @@ class Point {
       this.graphics.fillStyle(0xff0000, 1);
       this.graphics.fillCircle(this.x, this.y, 5);
   
-      this.canDraw = false; // Inicialmente no se puede dibujar
-      this.drawButton = this.scene.add.text(10, 10, 'Dibujar Puntos', {
-        font: '16px Arial',
-        fill: '#000'
+      this.active = false; // Estado inicial del modo de dibujo
+  
+      // Agregar el botón para alternar el modo de dibujo
+      this.toggleButton = this.scene.add.text(10, 10, 'Modo Dibujo: Desactivado', {
+        fontSize: '16px',
+        fill: '#000',
       });
-  
-      this.drawButton.setInteractive();
-      this.drawButton.on('pointerdown', this.toggleDraw, this); // Cambio aquí
+      this.toggleButton.setInteractive();
+      this.toggleButton.on('pointerdown', this.toggleDrawingMode, this);
     }
   
-    toggleDraw() {
-      this.canDraw = !this.canDraw;
-      this.drawButton.setText(this.canDraw ? 'Dibujando' : 'Dibujar Puntos');
+    toggleDrawingMode() {
+      this.active = !this.active;
+      if (this.active) {
+        this.toggleButton.setText('Modo Dibujo: Activado');
+      } else {
+        this.toggleButton.setText('Modo Dibujo: Desactivado');
+      }
     }
   
-    allowDrawing() {
-      return this.canDraw;
-    }
-  }
-  
-  // En game.js, donde se crea el punto:
-  function createPoint(pointer) {
-    if (points.getChildren().length === 0 || points.getFirstAlive().allowDrawing()) { // Verificar si se puede dibujar
-      const x = pointer.x;
-      const y = pointer.y;
-  
-      const newPoint = new Point(this, x, y); // Cambio aquí
-      points.add(newPoint);
-    }
+    // Otras funciones y lógica específicas del punto
   }
   
