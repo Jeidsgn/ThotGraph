@@ -1,4 +1,25 @@
-function create() {
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    parent: 'game-container',
+    scene: {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  };
+  
+  const game = new Phaser.Game(config);
+  
+  let circles;  // Para almacenar los círculos dibujados
+  let isDrawingEnabled = false;  // Estado del dibujo
+  
+  function preload() {
+    // Cargar recursos como imágenes y sprites
+  }
+  
+  function create() {
     circles = this.add.group();  // Crear un grupo para almacenar los círculos
     
     // Agregar un botón para activar/desactivar el dibujo
