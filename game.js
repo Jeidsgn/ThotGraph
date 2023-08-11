@@ -40,6 +40,12 @@ const config = {
     // Actualizaciones del juego en cada fotograma
   }
   
+  function toggleMoving() {
+    isMovingEnabled = true;
+    isDrawingEnabled = false;
+    this.children.list[0].setText('Activar Dibujo');
+    this.children.list[1].setText('Deshabilitar Mover');
+  }
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
   
