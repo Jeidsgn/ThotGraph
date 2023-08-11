@@ -12,6 +12,7 @@ body {
     width: 100%; /* Cambio aquí para que ocupe todo el ancho */
     max-width: 800px; /* Limitar el ancho máximo para una mejor visualización */
     height: 600px;
+    background-color: #ffb65f;
     border: 8px solid #723706;
   }
 
