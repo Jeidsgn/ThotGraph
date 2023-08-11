@@ -26,11 +26,6 @@ const config = {
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
-  
-    // Configurar la función de clic en el contenedor solo si el dibujo está activado
-    if (isDrawingEnabled) {
-      this.input.on('pointerdown', createCircle.bind(this));
-    }
   }
   
   function update() {
@@ -54,10 +49,10 @@ const config = {
     if (isDrawingEnabled) {
       const x = pointer.x;
       const y = pointer.y;
-    
+  
       const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
       circles.add(circle);  // Agregar el círculo al grupo
-    
+  
       // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
     }
   }
