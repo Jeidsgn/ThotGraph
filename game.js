@@ -14,6 +14,8 @@ const config = {
   
   let circles;  // Para almacenar los círculos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
+  let isMovingEnabled = false;     // Estado del movimiento
+  let selectedCircle = null;       // Círculo seleccionado para mover
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -23,10 +25,16 @@ const config = {
     circles = this.add.group();  // Crear un grupo para almacenar los círculos
     
     // Agregar un botón para activar/desactivar el dibujo
-    const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
+    const drawButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+  
+    // Agregar un botón para habilitar el movimiento
+    const moveButton = this.add.text(10, 40, 'Habilitar Mover', { fill: '#ffffff' })
+      .setInteractive()
+      .on('pointerdown', toggleMoving.bind(this));
   }
+  
   
   function update() {
     // Actualizaciones del juego en cada fotograma
@@ -52,8 +60,13 @@ const config = {
   
       const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
       circles.add(circle);  // Agregar el círculo al grupo
-  
       // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
+    }
+  }
+  function moveCircle(pointer) {
+    if (isMovingEnabled && selectedCircle) {
+      selectedCircle.x = pointer.x;
+      selectedCircle.y = pointer.y;
     }
   }
   
