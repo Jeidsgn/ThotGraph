@@ -12,15 +12,13 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let points; // Para almacenar los puntos dibujados
-  
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
     points = this.add.group(); // Crear un grupo para almacenar los puntos
-  
+    
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', createPoint.bind(this));
   }

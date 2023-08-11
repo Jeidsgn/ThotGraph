@@ -11,6 +11,9 @@ class Point {
   
     // Aquí puedes agregar métodos para la interacción y lógica específica del punto
   }
+  
+  let points; // Para almacenar los puntos dibujados
+
   function createPoint(pointer) {
     const x = pointer.x;
     const y = pointer.y;
