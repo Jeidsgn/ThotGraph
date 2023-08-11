@@ -22,7 +22,7 @@ const config = {
     circles = this.add.group();  // Crear un grupo para almacenar los círculos
   
     // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', createCircle);
+    this.input.on('pointerdown', createCircle.bind(this));  // Usar bind para mantener el contexto correcto
   }
   
   function update() {
@@ -33,7 +33,7 @@ const config = {
     const x = pointer.x;
     const y = pointer.y;
   
-    const circle = this.add.circle(x, y, 20, 0xff0000);  // Crear un círculo rojo
+    const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
     circles.add(circle);  // Agregar el círculo al grupo
   
     // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
