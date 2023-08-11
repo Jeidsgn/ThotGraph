@@ -22,7 +22,7 @@ const config = {
     circles = this.add.group();  // Crear un grupo para almacenar los círculos
   
     // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', createCircle.bind(this));  // Usar bind para mantener el contexto correcto
+    this.input.on('pointerdown', createCircle.bind(this));
   }
   
   function update() {
