@@ -12,20 +12,24 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
+  let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
+  let isNextClickForDrawing = false;  // Estado para determinar si el siguiente clic es para dibujar
   
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
-      
+    points = this.add.group();  // Crear un grupo para almacenar los puntos
+  
     // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+  
+    // Configurar la función de clic en el contenedor
+    this.input.on('pointerdown', handlePointerDown.bind(this));
   }
   
   function update() {
@@ -34,24 +38,30 @@ const config = {
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-    
+  
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-    
+  
+    // Si el dibujo está activado, habilitar el siguiente clic para dibujar
     if (isDrawingEnabled) {
-      this.input.on('pointerdown', createCircle, this); // Pasar "this" como contexto
+      isNextClickForDrawing = true;
     } else {
-      this.input.off('pointerdown', createCircle, this); // Pasar "this" como contexto
+      isNextClickForDrawing = false;
     }
   }
   
-  function createCircle(pointer) {
-    const x = pointer.x;
-    const y = pointer.y;
+  function handlePointerDown(pointer) {
+    if (isNextClickForDrawing) {
+      const x = pointer.x;
+      const y = pointer.y;
   
-    const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
-    circles.add(circle);  // Agregar el círculo al grupo
-      
-    // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
+      const point = this.add.circle(x, y, 2, 0xff0000);  // Usar this.add.circle
+      points.add(point);  // Agregar el punto al grupo
+  
+      // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el punto
+  
+      // Restablecer el estado para el siguiente clic
+      isNextClickForDrawing = false;
+    }
   }
   
