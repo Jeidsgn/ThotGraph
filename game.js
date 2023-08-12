@@ -49,6 +49,7 @@ const config = {
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
+    waitingForClick = true;  // Cambiar a false después del primer clic
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   }
