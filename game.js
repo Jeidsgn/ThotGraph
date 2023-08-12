@@ -12,72 +12,64 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
-  let letters;  // Para almacenar las letras
+  let letters;  // Para almacenar las letras dibujadas
   let isDrawingEnabled = false;  // Estado del dibujo
   let waitingForClick = false;  // Variable de espera
-  let lettersText;  // Para mostrar las letras en un cuadro
   
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
-    letters = this.add.group();   // Crear un grupo para almacenar las letras
+    letters = this.add.group();  // Crear un grupo para almacenar las letras
     
     // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
   
+    // Crear un cuadro para mostrar las letras
+    const letterBox = this.add.graphics();
+    letterBox.fillStyle(0x000000);
+    letterBox.fillRect(10, 40, 100, 100);
+  
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
-    
-    // Crear el cuadro para las letras
-    lettersText = this.add.text(10, 40, '', { fill: '#000000', wordWrap: { width: 200 } });
   }
   
   function update() {
     if (isDrawingEnabled) {
-      circles.children.iterate(circle => {
-        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada círculo
-        // por ejemplo: circle.x += 1; para mover el círculo hacia la derecha
+      letters.children.iterate(letter => {
+        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada letra
+        // por ejemplo: letter.x += 1; para mover la letra hacia la derecha
       });
     }
   }
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-  
+    
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   }
   
   function handlePointerDown(pointer) {
-    if (isDrawingEnabled && waitingForClick) {
-      waitingForClick = false;  // Cambiar a false después del primer clic
-    } else if (isDrawingEnabled && !waitingForClick) {
-      createCircle.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
+    if (isDrawingEnabled) {
+      createLetter.call(this, pointer);  // Crear la letra en la posición del clic
     }
   }
   
-  function createCircle(pointer) {
+  function createLetter(pointer) {
     const x = pointer.x;
     const y = pointer.y;
-  
-    const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
-    circles.add(circle);  // Agregar el círculo al grupo
-  
-    const letter = String.fromCharCode(65 + letters.getLength());  // Obtener la siguiente letra del alfabeto
-    const letterText = this.add.text(x - 8, y - 8, letter, { fill: '#000000' });  // Crear el objeto de texto para la letra
-    letters.add(letterText);  // Agregar la letra al grupo
-  
-    updateLettersText();  // Actualizar el cuadro de letras
+    
+    const letter = this.add.text(x, y, getRandomLetter(), { fill: '#ffffff' });  // Crear la letra
+    letters.add(letter);  // Agregar la letra al grupo
   }
   
-  function updateLettersText() {
-    const letterStrings = letters.getChildren().map(text => text.text);
-    lettersText.setText('Letras:\n' + letterStrings.join(', '));
+  function getRandomLetter() {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    return alphabet.charAt(randomIndex);
   }
   
