@@ -70,4 +70,4 @@ const config = {
     const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
     textContainer.text += letter; // Agregar la letra al contenedor de texto
   }
-  
+        
