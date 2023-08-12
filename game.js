@@ -9,60 +9,55 @@ const config = {
       update: update
     }
   };
-  
+
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
-  let isDrawingEnabled = false;  // Estado del dibujo
-  let canDraw = false;  // Variable de espera para permitir el dibujo
+  let circles;
+  let isDrawingEnabled = false;
+  let waitForNextClick = false;  // Variable de espera
   
   function preload() {
-    // Cargar recursos como imágenes y sprites
+    // Cargar recursos
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
-  
-    // Agregar un botón para activar/desactivar el dibujo
+    circles = this.add.group();
+    
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
-  
-    // Configurar la función de clic en el contenedor solo si el dibujo está activado
-    this.input.on('pointerdown', handlePointerDown.bind(this));
   }
   
   function update() {
-    if (isDrawingEnabled && canDraw) {
+    if (isDrawingEnabled && !waitForNextClick) {
       circles.children.iterate(circle => {
-        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada círculo
-        // por ejemplo: circle.x += 1; para mover el círculo hacia la derecha
+        // Actualizar círculos si es necesario
       });
     }
   }
   
   function toggleDrawing() {
-    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-  
-    // Cambiar el texto del botón según el estado del dibujo
+    isDrawingEnabled = !isDrawingEnabled;
+    waitForNextClick = false;  // Reiniciar la variable de espera
+    
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   
-    canDraw = isDrawingEnabled;  // Habilitar el dibujo cuando está activado
-  }
-  
-  function handlePointerDown(pointer) {
-    if (canDraw) {
-      createCircle.call(this, pointer);
+    if (isDrawingEnabled) {
+      this.input.on('pointerdown', createCircle.bind(this));
+    } else {
+      this.input.off('pointerdown', createCircle.bind(this));
     }
   }
   
   function createCircle(pointer) {
-    if (isDrawingEnabled) {
+    if (isDrawingEnabled && !waitForNextClick) {
+      waitForNextClick = true;  // Establecer la variable de espera
+  
       const x = pointer.x;
       const y = pointer.y;
   
-      const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
-      circles.add(circle);  // Agregar el círculo al grupo
+      const circle = this.add.circle(x, y, 20, 0xff0000);
+      circles.add(circle);
   
       // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
     }
