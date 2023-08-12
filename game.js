@@ -15,7 +15,7 @@ const config = {
   let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
-  let waitingForClick = false;  // Variable de espera
+  let waitingForClick = true;  // Variable de espera
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -57,7 +57,7 @@ const config = {
     if (isDrawingEnabled && waitingForClick) {
       waitingForClick = false;  // Cambiar a false después del primer clic
     } else if (isDrawingEnabled && !waitingForClick) {
-      createPoint.call(this, pointer);  // Crear el punto sin esperar después del primer clic
+      createCircle.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
     }
   }
   
