@@ -8,68 +8,66 @@ const config = {
       create: create,
       update: update
     }
-  };
-  
-  const game = new Phaser.Game(config);
-  
-  let circles;
-  let isDrawingEnabled = false;
-  let isPendingDrawing = false;
-  
-  function preload() {
-    // ...
-  }
-  
-  function create() {
-    circles = this.add.group();
-  
+};
+
+const game = new Phaser.Game(config);
+
+let circles;  // Para almacenar los círculos dibujados
+let isDrawingEnabled = false;  // Estado del dibujo
+let isDrawing = false; // Variable para controlar si se está dibujando actualmente
+
+function preload() {
+    // Cargar recursos como imágenes y sprites
+}
+
+function create() {
+    circles = this.add.group();  // Crear un grupo para almacenar los círculos
+    
+    // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
   
-    // Configuración del evento pointerdown solo después de activar el dibujo
+    // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
-    this.input.off('pointerdown', handlePointerDown.bind(this));
-  }
-  
-  function update() {
-    if (isDrawingEnabled) {
-      circles.children.iterate(circle => {
-        // Actualizaciones de los círculos
-      });
+}
+
+function update() {
+    if (isDrawing && isDrawingEnabled) {
+        circles.children.iterate(circle => {
+            // Aplica aquí las modificaciones o actualizaciones que necesitas en cada círculo
+            // por ejemplo: circle.x += 1; para mover el círculo hacia la derecha
+        });
     }
-  }
+}
+
+function toggleDrawing() {
+    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
   
-  function toggleDrawing() {
-    isDrawingEnabled = !isDrawingEnabled;
+    // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-    
-    // Activar o desactivar el evento pointerdown según el estado del dibujo
+}
+
+function handlePointerDown(pointer) {
     if (isDrawingEnabled) {
-      this.input.on('pointerdown', handlePointerDown.bind(this));
-    } else {
-      this.input.off('pointerdown', handlePointerDown.bind(this));
+        isDrawing = true; // Comenzar a dibujar
+        createCircle.call(this, pointer);
     }
-  }
-  
-  function handlePointerDown(pointer) {
-    if (isPendingDrawing) {
-      createCircle.call(this, pointer);
-      isPendingDrawing = false;
-    } else {
-      isPendingDrawing = true;
+}
+
+function createCircle(pointer) {
+    if (isDrawingEnabled && isDrawing) {
+        const x = pointer.x;
+        const y = pointer.y;
+
+        const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
+        circles.add(circle);  // Agregar el círculo al grupo
+
+        // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
     }
-  }
-  
-  function createCircle(pointer) {
-    if (isDrawingEnabled) {
-      const x = pointer.x;
-      const y = pointer.y;
-  
-      const circle = this.add.circle(x, y, 20, 0xff0000);
-      circles.add(circle);
-  
-      // Lógica adicional para dibujar el círculo
-    }
-  }
-  
+}
+
+// Evento para detener el dibujo cuando se suelta el botón del mouse
+game.canvas.addEventListener('pointerup', () => {
+    isDrawing = false;
+});
