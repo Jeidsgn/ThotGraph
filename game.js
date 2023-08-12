@@ -9,12 +9,12 @@ const config = {
       update: update
     }
   };
-
+  
   const game = new Phaser.Game(config);
   
   let circles;
   let isDrawingEnabled = false;
-  let waitForNextClick = false;  // Variable de espera
+  let isDrawingQueued = false;
   
   function preload() {
     // Cargar recursos
@@ -22,37 +22,30 @@ const config = {
   
   function create() {
     circles = this.add.group();
-    
+  
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
   }
   
   function update() {
-    if (isDrawingEnabled && !waitForNextClick) {
-      circles.children.iterate(circle => {
-        // Actualizar círculos si es necesario
-      });
+    if (isDrawingQueued && isDrawingEnabled) {
+      createCircle.call(this, this.input.activePointer);
+      isDrawingQueued = false;
     }
+  
+    circles.children.iterate(circle => {
+      // Actualizar círculos si es necesario
+    });
   }
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;
-    waitForNextClick = true;  // Reiniciar la variable de espera
-    
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-  
-    if (isDrawingEnabled) {
-      this.input.on('pointerdown', createCircle.bind(this));
-    } else {
-      this.input.off('pointerdown', createCircle.bind(this));
-    }
   }
   
   function createCircle(pointer) {
-    if (isDrawingEnabled && !waitForNextClick) {
-      waitForNextClick = false;  // Establecer la variable de espera
-  
+    if (isDrawingEnabled) {
       const x = pointer.x;
       const y = pointer.y;
   
@@ -62,4 +55,11 @@ const config = {
       // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
     }
   }
+  
+  // Configurar la función de clic en el contenedor para agregar un círculo si el dibujo está habilitado
+  this.input.on('pointerdown', function (pointer) {
+    if (isDrawingEnabled) {
+      isDrawingQueued = true;
+    }
+  });
   
