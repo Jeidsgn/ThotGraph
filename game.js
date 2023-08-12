@@ -14,7 +14,6 @@ const config = {
   
   let circles;  // Para almacenar los círculos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
-  let isPendingDrawing = false;  // Variable de espera para el próximo dibujo
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -27,9 +26,6 @@ const config = {
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
-  
-    // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', handlePointerDown.bind(this));
   }
   
   function update() {
@@ -46,20 +42,15 @@ const config = {
     
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-  }
-  
-  function handlePointerDown(pointer) {
+    
     if (isDrawingEnabled) {
-      if (isPendingDrawing) {
-        createCircle.call(this, pointer);
-        isPendingDrawing = false;
-      } else {
-        isPendingDrawing = true;
-      }
+      this.input.on('pointerdown', handlePointerDown.bind(this));
+    } else {
+      this.input.off('pointerdown', handlePointerDown.bind(this));
     }
   }
   
-  function createCircle(pointer) {
+  function handlePointerDown(pointer) {
     if (isDrawingEnabled) {
       const x = pointer.x;
       const y = pointer.y;
