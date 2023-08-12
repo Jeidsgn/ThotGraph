@@ -15,8 +15,9 @@ const config = {
   let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
-  let waitingForClick = false;  // Variable de espera
-  let selectedPoint = null; // Punto seleccionado para mover
+  let waitingForClick = true;  // Variable de espera
+  let selectedPoint = null;  // Punto seleccionado para mover
+
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -33,48 +34,33 @@ const config = {
       
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
-    this.input.on('pointerup', handlePointerUp.bind(this));
   }
   
   function update() {
-    if (isDrawingEnabled) {
-      if (!waitingForClick) {
-        points.children.iterate(point => {
-          // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
-          // por ejemplo: point.x += 1; para mover el punto hacia la derecha
-        });
-      }
+    
+  if (isDrawingEnabled) {
+    if (!waitingForClick) {
+      createPoint.call(this);  // Crear un punto si el dibujo está habilitado y no se espera clic
+      points.children.iterate(point => {
+        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
+        // por ejemplo: point.x += 1; para mover el punto hacia la derecha
+      });
     }
+  }
   }
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
+    waitingForClick = true;  // Cambiar a false después del primer clic
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   }
   
   function handlePointerDown(pointer) {
-    if (isDrawingEnabled) {
+    if (isDrawingEnabled && waitingForClick) {
       waitingForClick = false;  // Cambiar a false después del primer clic
-      
-      // Comprobar si se hizo clic en un punto existente
-      points.children.iterate(point => {
-        if (point.getBounds().contains(pointer.x, pointer.y)) {
-          selectedPoint = point;
-          return;
-        }
-      });
-      
-      // Si no se seleccionó un punto existente, crear uno nuevo
-      if (!selectedPoint) {
-        createPoint.call(this, pointer);
-      }
-    }
-  }
-  
-  function handlePointerUp(pointer) {
-    if (selectedPoint) {
-      selectedPoint = null; // Liberar el punto seleccionado
+    } else if (isDrawingEnabled && !waitingForClick) {
+      createPoint.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
     }
   }
   
@@ -84,10 +70,31 @@ const config = {
   
     const point = this.add.graphics();
     point.fillStyle(0xff0000);  // Color del punto
-    point.fillCircle(x, y, 5);  // Dibujar un punto con radio de 5 píxeles
+    point.fillCircle(x, y, 10);  // Aumenta el radio para hacer el punto más fácil de seleccionar
     points.add(point);  // Agregar el punto al grupo
+  
+    point.setInteractive({ draggable: true });  // Hacer el punto arrastrable
+  
+    point.on('dragstart', function (pointer) {
+      selectedPoint = point;  // Establecer el punto seleccionado para mover
+      point.setAlpha(0.5);  // Cambiar la transparencia del punto mientras se arrastra
+    });
+  
+    point.on('drag', function (pointer, dragX, dragY) {
+      if (selectedPoint === point) {
+        point.setPosition(dragX, dragY);  // Cambiar la posición del punto mientras se arrastra
+      }
+    });
+  
+    point.on('dragend', function () {
+      selectedPoint = null;  // Restablecer el punto seleccionado
+      point.setAlpha(1);  // Restaurar la transparencia del punto
+    });
   
     const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
     textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
   }
+  
+  
+
   
