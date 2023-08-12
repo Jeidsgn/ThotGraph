@@ -12,37 +12,39 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let circles;  // Para almacenar los círculos dibujados
-  let isDrawingEnabled = false;  // Estado del dibujo
+  let circles;
+  let isDrawingEnabled = false;
+  let isPendingDrawing = false;
   
   function preload() {
-    // Cargar recursos como imágenes y sprites
+    // ...
   }
   
   function create() {
-    circles = this.add.group();  // Crear un grupo para almacenar los círculos
-    
-    // Agregar un botón para activar/desactivar el dibujo
+    circles = this.add.group();
+  
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+  
+    // Configuración del evento pointerdown solo después de activar el dibujo
+    this.input.on('pointerdown', handlePointerDown.bind(this));
+    this.input.off('pointerdown', handlePointerDown.bind(this));
   }
   
   function update() {
     if (isDrawingEnabled) {
       circles.children.iterate(circle => {
-        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada círculo
-        // por ejemplo: circle.x += 1; para mover el círculo hacia la derecha
+        // Actualizaciones de los círculos
       });
     }
   }
   
   function toggleDrawing() {
-    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-    
-    // Cambiar el texto del botón según el estado del dibujo
+    isDrawingEnabled = !isDrawingEnabled;
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
     
+    // Activar o desactivar el evento pointerdown según el estado del dibujo
     if (isDrawingEnabled) {
       this.input.on('pointerdown', handlePointerDown.bind(this));
     } else {
@@ -51,14 +53,23 @@ const config = {
   }
   
   function handlePointerDown(pointer) {
+    if (isPendingDrawing) {
+      createCircle.call(this, pointer);
+      isPendingDrawing = false;
+    } else {
+      isPendingDrawing = true;
+    }
+  }
+  
+  function createCircle(pointer) {
     if (isDrawingEnabled) {
       const x = pointer.x;
       const y = pointer.y;
   
-      const circle = this.add.circle(x, y, 20, 0xff0000);  // Usar this.add.circle
-      circles.add(circle);  // Agregar el círculo al grupo
+      const circle = this.add.circle(x, y, 20, 0xff0000);
+      circles.add(circle);
   
-      // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
+      // Lógica adicional para dibujar el círculo
     }
   }
   
