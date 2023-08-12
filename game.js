@@ -51,7 +51,7 @@ const config = {
   function handlePointerDown(pointer) {
     if (isDrawingEnabled && waitingForClick) {
       createCircle.call(this, pointer);
-      waitingForClick = false;
+      // waitingForClick = false;
     } else {
       waitingForClick = true;
     }
