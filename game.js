@@ -15,6 +15,7 @@ const config = {
   let circles;  // Para almacenar los círculos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   let isWaitingForFirstClick = false;  // Estado para esperar el primer clic después de la activación
+  let pointerDownEvent; // Referencia al evento pointerdown
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -31,7 +32,7 @@ const config = {
   
   function update() {
     if (isWaitingForFirstClick && isDrawingEnabled) {
-      this.input.on('pointerdown', createCircle.bind(this));
+      pointerDownEvent = this.input.on('pointerdown', createCircle.bind(this));
       isWaitingForFirstClick = false;
     }
   
@@ -48,6 +49,8 @@ const config = {
   
     if (isDrawingEnabled) {
       isWaitingForFirstClick = true; // Esperar el primer clic después de la activación
+    } else {
+      pointerDownEvent.off(); // Desconectar el evento pointerdown
     }
   
     // Cambiar el texto del botón según el estado del dibujo
