@@ -15,6 +15,7 @@ const config = {
   let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
+  let waitingForClick = false;  // Variable de espera
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -34,12 +35,16 @@ const config = {
   }
   
   function update() {
-    if (isDrawingEnabled) {
+    
+  if (isDrawingEnabled) {
+    if (!waitingForClick) {
+      createPoint.call(this);  // Crear un punto si el dibujo está habilitado y no se espera clic
       points.children.iterate(point => {
         // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
         // por ejemplo: point.x += 1; para mover el punto hacia la derecha
       });
     }
+  }
   }
   
   function toggleDrawing() {
@@ -49,8 +54,10 @@ const config = {
   }
   
   function handlePointerDown(pointer) {
-    if (isDrawingEnabled) {
-      createPoint.call(this, pointer);  // Crear el punto si el dibujo está habilitado
+    if (isDrawingEnabled && waitingForClick) {
+      waitingForClick = false;  // Cambiar a false después del primer clic
+    } else if (isDrawingEnabled && !waitingForClick) {
+      createPoint.call(this, pointer);  // Crear el punto sin esperar después del primer clic
     }
   }
   
