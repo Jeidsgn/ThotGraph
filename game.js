@@ -16,7 +16,7 @@ const config = {
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
   let selectedPoint; // Punto seleccionado
-  let pointerDown = false; // Estado del puntero
+  let isDragging = false; // Estado del arrastre
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -39,11 +39,9 @@ const config = {
     if (isDrawingEnabled) {
       points.children.iterate(point => {
         // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
-        if (selectedPoint === point) {
-          if (pointerDown) {
-            point.x = this.input.x;
-            point.y = this.input.y;
-          }
+        if (isDragging && selectedPoint === point) {
+          point.x = this.input.x;
+          point.y = this.input.y;
         }
       });
     }
@@ -60,7 +58,7 @@ const config = {
       points.children.iterate(point => {
         if (Phaser.Geom.Circle.ContainsPoint(point.geom, pointer)) {
           selectedPoint = point;
-          pointerDown = true;
+          isDragging = true;
         }
       });
     }
@@ -68,7 +66,7 @@ const config = {
   
   function handlePointerUp(pointer) {
     if (isDrawingEnabled) {
-      pointerDown = false;
+      isDragging = false;
     }
   }
   
