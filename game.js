@@ -57,7 +57,7 @@ const config = {
     if (isDrawingEnabled && waitingForClick) {
       waitingForClick = false;  // Cambiar a false después del primer clic
     } else if (isDrawingEnabled && !waitingForClick) {
-      createCircle.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
+      createPoint.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
     }
   }
   
