@@ -26,10 +26,8 @@ const config = {
     // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
-      .on('pointerdown', toggleDrawing.bind(this));
+      .on('pointerdown', toggleDrawing.bind(this) && handlePointerDown.bind(this));
   
-    // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', handlePointerDown.bind(this));
   }
   
   function update() {
