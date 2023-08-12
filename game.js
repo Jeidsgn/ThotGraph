@@ -28,14 +28,14 @@ const config = {
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
   
-    // Función de callback para el evento pointerdown
+    // Configurar la función de clic en el contenedor solo si el dibujo está activado
     pointerDownCallback = function(pointer) {
       if (isDrawingEnabled) {
         createCircle.call(this, pointer);
       }
     };
   
-    // Configurar la función de clic en el contenedor solo si el dibujo está activado
+    // Configurar el evento pointerdown con la función de callback
     this.input.on('pointerdown', pointerDownCallback);
   }
   
