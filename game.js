@@ -38,7 +38,7 @@ const config = {
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;
-    waitForNextClick = false;  // Reiniciar la variable de espera
+    waitForNextClick = true;  // Reiniciar la variable de espera
     
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   
@@ -51,7 +51,7 @@ const config = {
   
   function createCircle(pointer) {
     if (isDrawingEnabled && !waitForNextClick) {
-      waitForNextClick = true;  // Establecer la variable de espera
+      waitForNextClick = false;  // Establecer la variable de espera
   
       const x = pointer.x;
       const y = pointer.y;
