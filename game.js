@@ -12,72 +12,82 @@ const config = {
   
   const game = new Phaser.Game(config);
   
-  let points;
-  let isDrawingEnabled = false;
-  let textContainer;
-  let waitingForClick = true;
+  let points;  // Para almacenar los puntos dibujados
+  let isDrawingEnabled = false;  // Estado del dibujo
+  let textContainer; // Contenedor para mostrar letras
+  let waitingForClick = true;  // Variable de espera
+  let draggingPoint = null; // Punto actualmente siendo arrastrado
   
   function preload() {
     // Cargar recursos como imágenes y sprites
   }
   
   function create() {
-    points = this.add.group();
-    textContainer = this.add.text(10, 10, '', { fill: '#ffffff' });
-  
+    points = this.add.group();  // Crear un grupo para almacenar los puntos
+    textContainer = this.add.text(10, 10, '', { fill: '#ffffff' }); // Crear el contenedor de texto
+    
+    // Agregar un botón para activar/desactivar el dibujo
     const toggleButton = this.add.text(10, 550, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
-  
+    
+    // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
+    this.input.on('pointerup', handlePointerUp.bind(this));
+    this.input.on('pointermove', handlePointerMove.bind(this));
   }
   
   function update() {
     if (isDrawingEnabled) {
       if (!waitingForClick) {
         points.children.iterate(point => {
-          // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
-          // por ejemplo: point.x += 1; para mover el punto hacia la derecha
+          if (point.dragging) {
+            point.x = this.input.x;
+            point.y = this.input.y;
+          }
         });
       }
     }
   }
   
   function toggleDrawing() {
-    isDrawingEnabled = !isDrawingEnabled;
-    waitingForClick = true;
+    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
+    waitingForClick = true;  // Cambiar a false después del primer clic
+    // Cambiar el texto del botón según el estado del dibujo
     this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   }
   
   function handlePointerDown(pointer) {
     if (isDrawingEnabled && waitingForClick) {
-      waitingForClick = false;
+      waitingForClick = false;  // Cambiar a false después del primer clic
     } else if (isDrawingEnabled && !waitingForClick) {
-      createPoint.call(this, pointer);
+      const newPoint = createPoint.call(this, pointer.x, pointer.y);  // Crear el punto sin esperar después del primer clic
+      draggingPoint = newPoint;
     }
   }
   
-  function createPoint(pointer) {
-    if (pointer) {
-      const x = pointer.x || 0;
-      const y = pointer.y || 0;
+  function handlePointerUp(pointer) {
+    draggingPoint = null;
+  }
   
-      const point = this.add.graphics();
-      point.fillStyle(0xff0000);
-      point.fillCircle(x, y, 10);
-      points.add(point);
-  
-      point.setInteractive({ draggable: true });
-      point.on('dragstart', function(pointer) {
-        isDrawingEnabled = false;
-      });
-      point.on('drag', function(pointer, dragX, dragY) {
-        this.x = dragX;
-        this.y = dragY;
-      });
-  
-      const letter = String.fromCharCode(65 + points.getLength() - 1);
-      textContainer.text += letter + ' ';
+  function handlePointerMove(pointer) {
+    if (draggingPoint) {
+      draggingPoint.x = pointer.x;
+      draggingPoint.y = pointer.y;
     }
+  }
+  
+  function createPoint(x, y) {
+    const point = this.add.graphics();
+    point.fillStyle(0xff0000);  // Color del punto
+    point.fillCircle(x, y, 10);  // Dibujar un punto con radio de 10 píxeles
+    points.add(point);  // Agregar el punto al grupo
+  
+    const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
+    textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
+  
+    point.setInteractive(); // Hacer el punto interactivo para arrastre
+    point.dragging = true;  // Marcar el punto como arrastrable
+    return point;
   }
   
