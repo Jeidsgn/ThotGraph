@@ -13,10 +13,10 @@ const config = {
   const game = new Phaser.Game(config);
   
   let points;  // Para almacenar los puntos dibujados
-  let selectedPoint = null; // Punto seleccionado
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
-  let waitingForClick = true;  // Variable de espera
+  let selectedPoint; // Punto seleccionado
+  let pointerDown = false; // Estado del puntero
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -25,61 +25,65 @@ const config = {
   function create() {
     points = this.add.group();  // Crear un grupo para almacenar los puntos
     textContainer = this.add.text(10, 10, '', { fill: '#ffffff' }); // Crear el contenedor de texto
-  
-    // Crear dos puntos iniciales
+    
+    // Agregar dos puntos iniciales
     createPoint.call(this, { x: 100, y: 100 });
     createPoint.call(this, { x: 200, y: 200 });
   
-    // Agregar un botón para activar/desactivar el dibujo
-    const toggleButton = this.add.text(10, 550, 'Activar Dibujo', { fill: '#ffffff' })
-      .setInteractive()
-      .on('pointerdown', toggleDrawing.bind(this));
-  
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
+    this.input.on('pointerup', handlePointerUp.bind(this));
   }
   
   function update() {
     if (isDrawingEnabled) {
-      if (!waitingForClick) {
-        points.children.iterate(point => {
-          // Actualiza la posición del punto seleccionado mientras se mantenga el clic
-          if (selectedPoint === point) {
+      points.children.iterate(point => {
+        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
+        if (selectedPoint === point) {
+          if (pointerDown) {
             point.x = this.input.x;
             point.y = this.input.y;
           }
-        });
-      }
-    }
-  }
-  
-  function toggleDrawing() {
-    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-    waitingForClick = true;  // Cambiar a false después del primer clic
-    // Cambiar el texto del botón según el estado del dibujo
-    this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
-  }
-  
-  function handlePointerDown(pointer) {
-    if (isDrawingEnabled && waitingForClick) {
-      waitingForClick = false;  // Cambiar a false después del primer clic
-  
-      // Comprobar si se hizo clic en un punto existente
-      points.children.iterate(point => {
-        if (Phaser.Geom.Circle.ContainsPoint(point.getBounds(), pointer)) {
-          selectedPoint = point; // Marcar el punto como seleccionado
         }
       });
     }
   }
   
-  function createPoint(position) {
+  function toggleDrawing() {
+    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
+    // Cambiar el texto del botón según el estado del dibujo
+    this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
+  }
+  
+  function handlePointerDown(pointer) {
+    if (isDrawingEnabled) {
+      points.children.iterate(point => {
+        if (Phaser.Geom.Circle.ContainsPoint(point.geom, pointer)) {
+          selectedPoint = point;
+          pointerDown = true;
+        }
+      });
+    }
+  }
+  
+  function handlePointerUp(pointer) {
+    if (isDrawingEnabled) {
+      pointerDown = false;
+    }
+  }
+  
+  function createPoint(initialPosition) {
+    const x = initialPosition.x || 0;
+    const y = initialPosition.y || 0;
+  
     const point = this.add.graphics();
     point.fillStyle(0xff0000);  // Color del punto
-    point.fillCircle(position.x, position.y, 10);  // Dibujar un punto con radio de 10 píxeles
+    point.fillCircle(x, y, 5);  // Dibujar un punto con radio de 5 píxeles
     points.add(point);  // Agregar el punto al grupo
   
     const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
     textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
+  
+    point.geom = new Phaser.Geom.Circle(x, y, 5); // Crear un círculo geométrico para el punto
   }
   
