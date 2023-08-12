@@ -14,7 +14,7 @@ const config = {
   
   let circles;
   let isDrawingEnabled = false;
-  let isDrawingQueued = false;
+  let waitForNextClick = false;
   
   function preload() {
     // Cargar recursos
@@ -22,30 +22,33 @@ const config = {
   
   function create() {
     circles = this.add.group();
-  
+    
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+    
+    this.input.on('pointerdown', createCircle.bind(this)); // Mantener este listener siempre activo
   }
   
   function update() {
-    if (isDrawingQueued && isDrawingEnabled) {
-      createCircle.call(this, this.input.activePointer);
-      isDrawingQueued = false;
+    if (isDrawingEnabled && !waitForNextClick) {
+      circles.children.iterate(circle => {
+        // Actualizar círculos si es necesario
+      });
     }
-  
-    circles.children.iterate(circle => {
-      // Actualizar círculos si es necesario
-    });
   }
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;
+    waitForNextClick = true;  // Establecer la variable de espera
+    
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
   }
   
   function createCircle(pointer) {
-    if (isDrawingEnabled) {
+    if (isDrawingEnabled && waitForNextClick) {
+      waitForNextClick = false;  // Reiniciar la variable de espera
+  
       const x = pointer.x;
       const y = pointer.y;
   
@@ -55,11 +58,4 @@ const config = {
       // Aquí puedes realizar las verificaciones y lógica adicional para dibujar el círculo
     }
   }
-  
-  // Configurar la función de clic en el contenedor para agregar un círculo si el dibujo está habilitado
-  this.input.on('pointerdown', function (pointer) {
-    if (isDrawingEnabled) {
-      isDrawingQueued = true;
-    }
-  });
   
