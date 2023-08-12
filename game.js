@@ -13,8 +13,7 @@ const config = {
   const game = new Phaser.Game(config);
   
   let points;  // Para almacenar los puntos dibujados
-  let isDrawingEnabled = true;  // Estado del dibujo
-  let waitingForClick = false;  // Variable de espera
+  let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
   
   function preload() {
@@ -25,6 +24,11 @@ const config = {
     points = this.add.group();  // Crear un grupo para almacenar los puntos
     textContainer = this.add.text(10, 10, '', { fill: '#ffffff' }); // Crear el contenedor de texto
     
+    // Agregar un botón para activar/desactivar el dibujo
+    const toggleButton = this.add.text(10, 550, 'Activar Dibujo', { fill: '#ffffff' })
+      .setInteractive()
+      .on('pointerdown', toggleDrawing.bind(this));
+      
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', handlePointerDown.bind(this));
   }
@@ -38,9 +42,15 @@ const config = {
     }
   }
   
+  function toggleDrawing() {
+    isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
+    // Cambiar el texto del botón según el estado del dibujo
+    this.children.list[1].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
+  }
+  
   function handlePointerDown(pointer) {
-    if (isDrawingEnabled && !waitingForClick) {
-      createPoint.call(this, pointer);  // Crear el punto sin esperar clic
+    if (isDrawingEnabled) {
+      createPoint.call(this, pointer);  // Crear el punto si el dibujo está habilitado
     }
   }
   
