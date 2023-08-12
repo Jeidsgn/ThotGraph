@@ -15,7 +15,7 @@ const config = {
   let circles;  // Para almacenar los círculos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
   let isWaitingForFirstClick = false;  // Estado para esperar el primer clic después de la activación
-  let pointerClickEvent;  // Almacena la referencia al evento de clic para habilitar/deshabilitar
+  let drawEvent;  // Referencia al evento de dibujo
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -32,8 +32,12 @@ const config = {
   
   function update() {
     if (isWaitingForFirstClick && isDrawingEnabled) {
-      pointerClickEvent = this.input.on('pointerdown', createCircle.bind(this));
+      drawEvent = this.input.on('pointerdown', createCircle.bind(this));
       isWaitingForFirstClick = false;
+    }
+  
+    if (!isDrawingEnabled && drawEvent) {
+      drawEvent.removeListener('pointerdown', createCircle.bind(this));
     }
   
     if (isDrawingEnabled) {
@@ -49,11 +53,6 @@ const config = {
   
     if (isDrawingEnabled) {
       isWaitingForFirstClick = true; // Esperar el primer clic después de la activación
-    } else {
-      if (pointerClickEvent) {
-        pointerClickEvent.off(); // Desactivar el evento de clic
-        pointerClickEvent = undefined; // Limpiar la referencia al evento
-      }
     }
   
     // Cambiar el texto del botón según el estado del dibujo
