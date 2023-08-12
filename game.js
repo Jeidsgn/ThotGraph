@@ -14,8 +14,7 @@ const config = {
   
   let circles;  // Para almacenar los círculos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
-  let isWaitingForFirstClick = false;  // Estado para esperar el primer clic después de la activación
-  let drawEvent;  // Referencia al evento de dibujo
+  let pointerDownCallback; // Función de callback para el evento pointerdown
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -28,18 +27,19 @@ const config = {
     const toggleButton = this.add.text(10, 10, 'Activar Dibujo', { fill: '#ffffff' })
       .setInteractive()
       .on('pointerdown', toggleDrawing.bind(this));
+  
+    // Función de callback para el evento pointerdown
+    pointerDownCallback = function(pointer) {
+      if (isDrawingEnabled) {
+        createCircle.call(this, pointer);
+      }
+    };
+  
+    // Configurar la función de clic en el contenedor solo si el dibujo está activado
+    this.input.on('pointerdown', pointerDownCallback);
   }
   
   function update() {
-    if (isWaitingForFirstClick && isDrawingEnabled) {
-      drawEvent = this.input.on('pointerdown', createCircle.bind(this));
-      isWaitingForFirstClick = false;
-    }
-  
-    if (!isDrawingEnabled && drawEvent) {
-      drawEvent.removeListener('pointerdown', createCircle.bind(this));
-    }
-  
     if (isDrawingEnabled) {
       circles.children.iterate(circle => {
         // Aplica aquí las modificaciones o actualizaciones que necesitas en cada círculo
@@ -50,10 +50,6 @@ const config = {
   
   function toggleDrawing() {
     isDrawingEnabled = !isDrawingEnabled;  // Cambiar el estado del dibujo
-  
-    if (isDrawingEnabled) {
-      isWaitingForFirstClick = true; // Esperar el primer clic después de la activación
-    }
   
     // Cambiar el texto del botón según el estado del dibujo
     this.children.list[0].setText(isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
