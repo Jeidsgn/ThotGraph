@@ -16,8 +16,6 @@ const config = {
   let isDrawingEnabled = false;  // Estado del dibujo
   let textContainer; // Contenedor para mostrar letras
   let waitingForClick = true;  // Variable de espera
-  let selectedPoint = null;  // Punto seleccionado para mover
-
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -65,36 +63,19 @@ const config = {
   }
   
   function createPoint(pointer) {
-    const x = pointer.x;
-    const y = pointer.y;
+    if (pointer) {
+      const x = pointer.x || 0;  // Si pointer.x no está definido, usa 0 como valor predeterminado
+      const y = pointer.y || 0;  // Si pointer.y no está definido, usa 0 como valor predeterminado
   
-    const point = this.add.graphics();
-    point.fillStyle(0xff0000);  // Color del punto
-    point.fillCircle(x, y, 10);  // Aumenta el radio para hacer el punto más fácil de seleccionar
-    points.add(point);  // Agregar el punto al grupo
+      const point = this.add.graphics();
+      point.fillStyle(0xff0000);  // Color del punto
+      point.fillCircle(x, y, 5);  // Dibujar un punto con radio de 5 píxeles
+      points.add(point);  // Agregar el punto al grupo
   
-    point.setInteractive({ draggable: true });  // Hacer el punto arrastrable
-  
-    point.on('dragstart', function (pointer) {
-      selectedPoint = point;  // Establecer el punto seleccionado para mover
-      point.setAlpha(0.5);  // Cambiar la transparencia del punto mientras se arrastra
-    });
-  
-    point.on('drag', function (pointer, dragX, dragY) {
-      if (selectedPoint === point) {
-        point.setPosition(dragX, dragY);  // Cambiar la posición del punto mientras se arrastra
-      }
-    });
-  
-    point.on('dragend', function () {
-      selectedPoint = null;  // Restablecer el punto seleccionado
-      point.setAlpha(1);  // Restaurar la transparencia del punto
-    });
-  
-    const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
-    textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
+      const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
+      textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
+    }
   }
-  
   
 
   
