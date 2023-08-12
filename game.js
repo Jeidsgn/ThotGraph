@@ -14,9 +14,9 @@ const config = {
   
   let points;  // Para almacenar los puntos dibujados
   let isDrawingEnabled = false;  // Estado del dibujo
-  let textContainer; // Contenedor para mostrar letras
+  let textContainer; // Contenedor para mostrar letras;
   let selectedPoint; // Punto seleccionado
-  let isDragging = false; // Estado del arrastre
+  let pointerDown = false; // Estado del puntero
   
   function preload() {
     // Cargar recursos como imágenes y sprites
@@ -38,8 +38,7 @@ const config = {
   function update() {
     if (isDrawingEnabled) {
       points.children.iterate(point => {
-        // Aplica aquí las modificaciones o actualizaciones que necesitas en cada punto
-        if (isDragging && selectedPoint === point) {
+        if (selectedPoint === point && pointerDown) {
           point.x = this.input.x;
           point.y = this.input.y;
         }
@@ -58,7 +57,7 @@ const config = {
       points.children.iterate(point => {
         if (Phaser.Geom.Circle.ContainsPoint(point.geom, pointer)) {
           selectedPoint = point;
-          isDragging = true;
+          pointerDown = true;
         }
       });
     }
@@ -66,7 +65,8 @@ const config = {
   
   function handlePointerUp(pointer) {
     if (isDrawingEnabled) {
-      isDragging = false;
+      pointerDown = false;
+      selectedPoint = null;
     }
   }
   
@@ -76,12 +76,12 @@ const config = {
   
     const point = this.add.graphics();
     point.fillStyle(0xff0000);  // Color del punto
-    point.fillCircle(x, y, 5);  // Dibujar un punto con radio de 5 píxeles
+    point.fillCircle(x, y, 10);  // Dibujar un punto con radio de 10 píxeles
     points.add(point);  // Agregar el punto al grupo
   
     const letter = String.fromCharCode(65 + points.getLength() - 1); // Convertir número en letra (A, B, C, ...)
     textContainer.text += letter + ' '; // Agregar la letra al contenedor de texto
   
-    point.geom = new Phaser.Geom.Circle(x, y, 5); // Crear un círculo geométrico para el punto
+    point.geom = new Phaser.Geom.Circle(x, y, 10); // Crear un círculo geométrico para el punto
   }
   
