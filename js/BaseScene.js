@@ -30,7 +30,7 @@ function update() {
 }
 
 function createToolbox() {
-    // Crear botones base y botones dependientes (según elementos en js/)
+    // Crear botones base y botones dependientes (según elementos en elements/)
     createBaseButtons.call(this);
     createDependentButtons.call(this);
 }
