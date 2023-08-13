@@ -56,12 +56,12 @@ function createDependentButtons() {
 }
 
 function activateButton(buttonName) {
-    // Desactivar el botón activo actual
     if (activeButton) {
         activeButton.setStyle({ fill: '#ffffff' });
     }
 
-    // Activar el botón seleccionado y almacenar referencia
     activeButton = toolboxButtons.find(button => button.text === buttonName);
-    activeButton.setStyle({ fill: '#00ff00' });
+    if (activeButton) {
+        activeButton.setStyle({ fill: '#00ff00' });
+    }
 }
