@@ -1,4 +1,4 @@
-class BaseElement {
+class Element {
     constructor(scene) {
         this.scene = scene;
     }
