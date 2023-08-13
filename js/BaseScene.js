@@ -43,7 +43,7 @@ function createBaseButtons() {
     // Crear botones base y agregarlos al toolbox
     const moveButton = this.add.text(10, 550, 'Mover', { fill: '#ffffff' })
         .setInteractive()
-        .on('pointerdown', this.activateButton.bind(this));
+        .on('pointerdown', (buttonName) => activateButton.call(this, (buttonName)));
 
     this.toolboxButtons.push(moveButton);
 }
@@ -53,7 +53,7 @@ function createDependentButtons() {
     for (let i = 0; i < elementNames.length; i++) {
         const button = this.add.text(100 + i * 100, 550, elementNames[i], { fill: '#ffffff' })
             .setInteractive()
-            .on('pointerdown', (buttonName) => activateButton.call(this, buttonName));
+            .on('pointerdown', (buttonName) => activateButton.call(this, (buttonName)));
 
         toolboxButtons.push(button);
     }
