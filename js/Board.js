@@ -1,45 +1,37 @@
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    parent: 'game-container',
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
+export class Board extends Pasher.Scene{
+    constructor(){
+        super({key:'scene'});
+        let toolboxButtons = [];  // Array para almacenar los botones en el toolbox
+        let activeButton = null;  // Referencia al botón activo
+        let elementNames = []; // Array para almacenar los nombres de los elementos
+        let isDrawingEnabled = false;
+        let waitingForClick = true;
     }
-};
 
-const game = new Phaser.Game(config);
 
-let toolboxButtons = [];  // Array para almacenar los botones en el toolbox
-let activeButton = null;  // Referencia al botón activo
-let elementNames = []; // Array para almacenar los nombres de los elementos
-let isDrawingEnabled = false;
-let waitingForClick = true;
 
-function preload() {
+preload() {
     // Cargar recursos como imágenes y sprites
 }
 
-function create() {
+create() {
     // Crear el toolbox
     createToolbox.call(this);
     // Configurar la función de clic en el contenedor
     this.input.on('pointerdown', (pointer) => this.BoardClic(pointer)); 
 }
 
-function update() {
+update() {
     // Lógica de actualización común, si es necesario
 }
 
-function createToolbox() {
+createToolbox() {
     // Crear botones base y botones dependientes (según elementos en elements/)
     createBaseButtons.call(this);
     createDependentButtons.call(this);
 }
 
-function createBaseButtons() {
+createBaseButtons() {
     // Crear botones base y agregarlos al toolbox
     const moveButton = this.add.text(10, 550, 'Mover', { fill: '#ffffff' })
         .setInteractive()
@@ -48,7 +40,7 @@ function createBaseButtons() {
     this.toolboxButtons.push(moveButton);
 }
 
-function createDependentButtons() {
+reateDependentButtons() {
     // Crear botones dependientes según los elementos en js/
     for (let i = 0; i < elementNames.length; i++) {
         const button = this.add.text(100 + i * 100, 550, elementNames[i], { fill: '#ffffff' })
@@ -59,7 +51,7 @@ function createDependentButtons() {
     }
 }
 
-function activateButton(buttonName) {
+activateButton(buttonName) {
     if (activeButton) {
         activeButton.setStyle({ fill: '#ffffff' });
     }
@@ -74,10 +66,11 @@ function activateButton(buttonName) {
 
     }
 }
-function BoardClic(pointer) {
+BoardClic(pointer) {
     if (isDrawingEnabled && waitingForClick) {
       waitingForClick = false;  // Cambiar a false después del primer clic
     } else if (isDrawingEnabled && !waitingForClick) {
       createPoint.call(this, pointer);  // Crear el círculo sin esperar después del primer clic
     }
   }
+}
