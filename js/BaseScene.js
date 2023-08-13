@@ -26,7 +26,7 @@ function create() {
     // Crear el toolbox
     createToolbox.call(this);
     // Configurar la función de clic en el contenedor
-    this.input.on('pointerdown', this.BoardClic.bind(this));
+    this.input.on('pointerdown', (pointer) => this.BoardClic(pointer)); 
 }
 
 function update() {
@@ -53,7 +53,7 @@ function createDependentButtons() {
     for (let i = 0; i < elementNames.length; i++) {
         const button = this.add.text(100 + i * 100, 550, elementNames[i], { fill: '#ffffff' })
             .setInteractive()
-            .on('pointerdown', activateButton.bind(this, elementNames[i]));
+            .on('pointerdown', (buttonName) => activateButton.call(this, buttonName));
 
         toolboxButtons.push(button);
     }
