@@ -14,6 +14,7 @@ const game = new Phaser.Game(config);
 
 let toolboxButtons = [];  // Array para almacenar los botones en el toolbox
 let activeButton = null;  // Referencia al botón activo
+let elementNames = []; // Array para almacenar los nombres de los elementos
 
 function preload() {
     // Cargar recursos como imágenes y sprites

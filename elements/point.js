@@ -1,3 +1,5 @@
+elementNames.push('Point');
+
 class Point extends BaseElement {
     constructor(scene, x, y) {
         super(scene);
