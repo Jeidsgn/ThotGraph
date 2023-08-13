@@ -1,0 +1,64 @@
+class BaseScene extends Phaser.Scene {
+    constructor(key) {
+        super({ key });
+    }
+
+    preload() {
+        // Cargar recursos como imágenes y sprites
+    }
+
+    create() {
+        // Configurar área de juego, caja de herramientas y área de historial
+        this.createToolbox();
+        // Configurar función de clic en el área de juego
+    }
+
+    createToolbox() {
+        const toolbox = this.add.group();
+        
+        // Agregar botones base
+        const toggleButton = this.add.text(10, 550, 'Activar Dibujo', { fill: '#ffffff' })
+            .setInteractive()
+            .on('pointerdown', this.toggleDrawing.bind(this));
+        toolbox.add(toggleButton);
+        
+        // Agregar botones dependientes de los elementos
+        const elementButtons = this.getElementButtons();
+        elementButtons.forEach(button => toolbox.add(button));
+    }
+
+    getElementButtons() {
+        const elementButtons = [];
+        // Recorrer los archivos js en la carpeta 'js/elements'
+        // Cada archivo js debe tener un método estático que devuelve un objeto botón
+        // Agregar los botones dependientes a 'elementButtons'
+        return elementButtons;
+    }
+
+    update() {
+        // Lógica de actualización común a todas las escenas
+        if (this.isDrawingEnabled) {
+            if (!this.waitingForClick) {
+                this.createPoint();  // Crear un punto si el dibujo está habilitado y no se espera clic
+                this.points.children.iterate(point => {
+                    // Aplicar modificaciones o actualizaciones que necesites en cada punto
+                    // por ejemplo: point.x += 1; para mover el punto hacia la derecha
+                });
+            }
+        }
+    }
+
+    toggleDrawing() {
+        this.isDrawingEnabled = !this.isDrawingEnabled;
+        this.waitingForClick = true;
+        this.children.list[1].setText(this.isDrawingEnabled ? 'Desactivar Dibujo' : 'Activar Dibujo');
+    }
+
+    handlePointerDown(pointer) {
+        if (this.isDrawingEnabled && this.waitingForClick) {
+            this.waitingForClick = false;
+        } else if (this.isDrawingEnabled && !this.waitingForClick) {
+            this.createPoint(pointer);
+        }
+    }
+}

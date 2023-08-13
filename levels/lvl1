@@ -1,0 +1,13 @@
+class Level1 extends BaseScene {
+    constructor() {
+        super('Level1');
+    }
+
+    create() {
+        super.create();
+    }
+
+    update() {
+        super.update();
+    }
+}

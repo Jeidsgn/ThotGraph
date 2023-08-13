@@ -1,48 +1,21 @@
-class Point {
+class Point extends BaseElement {
     constructor(scene, x, y) {
-      this.scene = scene;
-      this.x = x;
-      this.y = y;
-  
-      this.graphics = this.scene.add.graphics();
-      this.graphics.fillStyle(0xff0000, 1);
-      this.graphics.fillCircle(this.x, this.y, 5);
-  
-      this.active = false; // Estado inicial del modo de dibujo
+        super(scene);
+        this.x = x || 0;
+        this.y = y || 0;
+        this.fillStyle(0xff0000);  // Color del punto
+        this.fillCircle(this.x, this.y, 5);  // Dibujar un punto con radio de 5 píxeles
     }
-  
-    toggleDrawingMode() {
-      this.active = !this.active;
+
+    static getButton(scene) {
+        const button = scene.add.text(10, 570, 'Punto', { fill: '#ffffff' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                // Lógica específica para la creación del punto
+                // Por ejemplo, activar la creación de puntos
+                scene.waitingForClick = false;
+                scene.isDrawingEnabled = true;
+            });
+        return button;
     }
-  
-    // Otras funciones y lógica específicas del punto
-  }
-  
-  // Crear un nuevo punto y configurar el botón fuera de la clase
-  let point;
-  let toggleButton;
-  
-  function createPoint(pointer) {
-    const x = pointer.x;
-    const y = pointer.y;
-    
-    point = new Point(this, x, y);
-    toggleButton = this.add.text(10, 10, 'Modo Dibujo: Desactivado', {
-      fontSize: '16px',
-      fill: '#000',
-    });
-    toggleButton.setInteractive();
-    toggleButton.on('pointerdown', toggleDrawingMode, this);
-  }
-  
-  function toggleDrawingMode() {
-    point.toggleDrawingMode();
-    if (point.active) {
-      toggleButton.setText('Modo Dibujo: Activado');
-    } else {
-      toggleButton.setText('Modo Dibujo: Desactivado');
-    }
-  }
-  
-  export { createPoint }; // Exportar la función de creación del punto
-  
+}
