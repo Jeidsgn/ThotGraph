@@ -45,9 +45,6 @@ function createBaseButtons() {
 }
 
 function createDependentButtons() {
-    // Array con los nombres de los elementos
-    const elementNames = ['Point', 'Line', 'Circle'];
-
     // Crear botones dependientes según los elementos en js/
     for (let i = 0; i < elementNames.length; i++) {
         const button = this.add.text(100 + i * 100, 550, elementNames[i], { fill: '#ffffff' })
