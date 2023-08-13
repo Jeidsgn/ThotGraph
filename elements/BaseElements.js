@@ -1,9 +1,8 @@
-class BaseElement extends Phaser.GameObjects.Graphics {
+class BaseElement {
     constructor(scene) {
-        super(scene);
-        scene.add.existing(this);
-        console.log("funciono");
+        this.scene = scene;
     }
 
-    // Lógica y métodos comunes a todos los elementos
+    // Puedes agregar métodos comunes a todos los elementos aquí
+    // Por ejemplo, para manejar restricciones y dependencias de movimiento
 }
