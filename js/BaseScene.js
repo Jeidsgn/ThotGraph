@@ -43,7 +43,7 @@ function createBaseButtons() {
     // Crear botones base y agregarlos al toolbox
     const moveButton = this.add.text(10, 550, 'Mover', { fill: '#ffffff' })
         .setInteractive()
-        .on('pointerdown', activateButton.bind(this, move));
+        .on('pointerdown', activateButton.bind(this, 'move'));
 
     toolboxButtons.push(moveButton);
 }
