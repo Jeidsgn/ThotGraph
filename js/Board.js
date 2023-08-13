@@ -1,4 +1,4 @@
-export class Board extends Pasher.Scene{
+export class Board extends Phaser.Scene {
     constructor(){
         super({key:'scene'});
         let toolboxButtons = [];  // Array para almacenar los botones en el toolbox
