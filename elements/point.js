@@ -1,11 +1,12 @@
-elementNames.push('Point'); // Agregar el nombre 'Point' al array de elementos
-
-class Point extends Element {
+export class Point {
     constructor(scene) {
         this.scene = scene;
         this.points = scene.add.group();
         this.textContainer = scene.add.text(10, 10, '', { fill: '#ffffff' });
-    }     
+    } 
+      addName(){
+        elementNames.push('Point'); // Agregar el nombre 'Point' al array de elementos
+      }
       createPoint(pointer) {
         if (pointer) {
           const x = pointer.x || 0;  // Si pointer.x no está definido, usa 0 como valor predeterminado

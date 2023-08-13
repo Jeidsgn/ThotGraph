@@ -1,32 +1,31 @@
 export class ToolBox {
   constructor(scene) {
-    this.relatedScene = scene;
+    this.scene = scene;
   }
   createToolbox() {
     // Crear botones base y botones dependientes (según elementos en elements/)
-
-    createBaseButtons.call(this.relatedScene);
-    createDependentButtons.call(this.relatedScene);
+    createBaseButtons.call(this.scene);
+    createDependentButtons.call(this.scene);
   }
 
   createBaseButtons() {
     // Crear botones base y agregarlos al toolbox
-    const moveButton = this.relatedScene.add
+    const moveButton = this.scene.add
       .text(10, 550, "Mover", { fill: "#ffffff" })
       .setInteractive()
-      .on("pointerdown", (buttonName) => activateButton.call(this.relatedScene, buttonName));
+      .on("pointerdown", (buttonName) => activateButton.call(this.scene, buttonName));
 
-    this.relatedScene.toolboxButtons.push(moveButton);
+    this.scene.toolboxButtons.push(moveButton);
   }
 
   createDependentButtons() {
     // Crear botones dependientes según los elementos en js/
     for (let i = 0; i < elementNames.length; i++) {
-      const button = this.relatedScene.add
+      const button = this.scene.add
         .text(100 + i * 100, 550, elementNames[i], { fill: "#ffffff" })
         .setInteractive()
         .on("pointerdown", (buttonName) =>
-          activateButton.call(this.relatedScene, buttonName)
+          activateButton.call(this.scene, buttonName)
         );
 
       toolboxButtons.push(button);
@@ -44,7 +43,7 @@ export class ToolBox {
       isDrawingEnabled = !isDrawingEnabled; // Cambiar el estado del dibujo
       waitingForClick = true; // Cambiar a false después del primer clic
       // Cambiar el texto del botón según el estado del dibujo
-      this.relatedScene.children.list[1].setText(
+      this.scene.children.list[1].setText(
         isDrawingEnabled ? "Desactivar Dibujo" : "Activar Dibujo"
       );
     }
