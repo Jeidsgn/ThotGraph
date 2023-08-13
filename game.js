@@ -1,6 +1,3 @@
-tengo un codigo en el que uno dibuja puntos, quiero usar ese mismo pero que los puntos ya estén dibujados, que aparezcan dos puntos, y que uno los pueda mover al seleccionarlos independientemente y manteniendo click oprimido
-
-
 const config = {
     type: Phaser.AUTO,
     width: 800,
