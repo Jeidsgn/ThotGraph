@@ -1,6 +1,6 @@
 elementNames.push('Point'); // Agregar el nombre 'Point' al array de elementos
 
-class Point extends BaseElement {
+class Point extends Element {
     constructor(scene) {
         this.scene = scene;
         this.points = scene.add.group();
