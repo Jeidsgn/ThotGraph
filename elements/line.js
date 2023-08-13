@@ -6,7 +6,7 @@ class Line extends BaseElement {
 
     static getButton(scene) {
         // Crear y configurar el botón para el elemento Line
-        const button = scene.add.button(...);
+        const button = scene.add.button();
         return button;
     }
 }

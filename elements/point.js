@@ -5,6 +5,8 @@ class Point extends BaseElement {
         this.isDrawingEnabled = false;
         this.textContainer = scene.add.text(10, 10, '', { fill: '#ffffff' });
         this.waitingForClick = true;
+        
+        elementNames.push('Point'); // Agregar el nombre 'Point' al array de elementos
 
         // Agregar botón para activar/desactivar el dibujo
         const toggleButton = scene.add.text(10, 550, 'Activar Dibujo', { fill: '#ffffff' })
