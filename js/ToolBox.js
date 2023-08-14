@@ -39,33 +39,36 @@ export class ToolBox {
       }
     }
 
-    // Activa el botón seleccionado en el cuadro de herramientas
     activateButton(buttonName) {
         if (this.scene.activeButton) {
           this.scene.activeButton.setStyle({ fill: "#ffffff" });
         }
-    
+      
         this.scene.activeButton = this.scene.toolboxButtons.find(
           (button) => button.text === buttonName
         );
-    
+      
         if (this.scene.activeButton) {
           this.scene.activeButton.setStyle({ fill: "#00ff00" });
-    
+      
           this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
           this.scene.waitingForClick = true;
-    
-          if (buttonName === "Point") {
-            console.log("El punto se seleccionó bien"); 
-            this.scene.activeFunction() = this.scene.elements.point.createPoint();
-          } else if (buttonName === "Mover") {
-            console.log("El mover se seleccionó bien"); 
-            this.scene.elements.point.movePoint();
-          } else {
-            // Agrega más condiciones aquí para otros botones y funciones
+      
+          // Define un objeto de mapeo entre nombres de botones y funciones
+          const buttonToFunction = {
+            "Point": this.scene.elements.point.createPoint,
+            "Mover": this.scene.elements.point.movePoint,
+            // Agrega más mapeos para otros botones y funciones
+          };
+      
+          // Obtén la función correspondiente al botón seleccionado y llámala
+          const selectedFunction = buttonToFunction[buttonName];
+          if (selectedFunction) {
+            selectedFunction.call(this.scene.elements);
           }
         }
       }
+      
       
   }
   
