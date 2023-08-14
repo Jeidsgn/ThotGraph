@@ -60,9 +60,9 @@ export class ToolBox {
       
           // Ejecuta la función correspondiente según el botón activado
           if (buttonName === "Punto") {
-            this.scene.activeFunction = this.scene.elements.point.createPoint(pointer);
+            this.scene.activeFunction = this.scene.elements.point.createPoint();
           } else if (buttonName === "Mover") {
-            this.scene.activeFunction = this.scene.elements.point.movePoint(pointer);
+            this.scene.activeFunction = this.scene.elements.point.movePoint();
           }
         }
       }
