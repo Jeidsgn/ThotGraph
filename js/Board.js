@@ -46,12 +46,12 @@ export class Board extends Phaser.Scene {
   // Función para manejar el clic en el tablero
   BoardClic() {
     if (this.isDrawingEnabled && !this.waitingForClick) {
-      //console.log("Clic activo"); check
       // Llama a la función activa correspondiente
-      this.scene.activeFunction();
+      this.scene.activeButtonCallback();
     } else if (this.isDrawingEnabled && this.waitingForClick) {
       // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
       this.waitingForClick = false;
     }
   }
+  
 }
