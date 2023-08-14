@@ -57,8 +57,8 @@ export class ToolBox {
 
       // Define un objeto de mapeo entre nombres de botones y funciones
       const buttonToFunction = {
-        "Point": () => this.scene.elements.point.createPoint(),
-        "Mover": () => this.scene.elements.point.movePoint(),
+        "Point": () => this.scene.elements.point.createPoint,
+        "Mover": () => this.scene.elements.point.movePoint,
         // Agrega más mapeos para otros botones y funciones
       };
       // Define el callback para el botón activo
