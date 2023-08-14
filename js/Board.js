@@ -36,19 +36,18 @@ export class Board extends Phaser.Scene {
   // Función de actualización que se ejecuta en cada frame
   update() {
     // Configura la función de clic en el contenedor (tablero)
-
     // Lógica de actualización común, si es necesario
   }
 
   // Función para manejar el clic en el tablero
   BoardClic() {
     if (this.isDrawingEnabled && !this.waitingForClick) {
-        console.log('Clic activo');
+      console.log("Clic activo");
       // Llama a la función activa correspondiente
-        this.scene.activeFunction();
+      this.scene.activeFunction();
     } else if (this.isDrawingEnabled && this.waitingForClick) {
       // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
       this.waitingForClick = false;
     }
-  }  
+  }
 }
