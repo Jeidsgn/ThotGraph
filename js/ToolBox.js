@@ -55,12 +55,12 @@ export class ToolBox {
           this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
           this.scene.waitingForClick = true;
     
-          if (buttonName === "Punto") {
+          if (buttonName === "Point") {
             console.log("El punto se seleccionó bien"); 
-            this.scene.activeFunction = this.scene.elements.point.createPoint.bind(this.scene.elements.point);
+            this.scene.elements.point.createPoint();
           } else if (buttonName === "Mover") {
             console.log("El mover se seleccionó bien"); 
-            this.scene.activeFunction = this.scene.elements.point.movePoint.bind(this.scene.elements.point);
+            this.scene.elements.point.movePoint();
           } else {
             // Agrega más condiciones aquí para otros botones y funciones
           }

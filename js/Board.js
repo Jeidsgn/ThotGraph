@@ -44,8 +44,7 @@ export class Board extends Phaser.Scene {
     if (this.isDrawingEnabled && !this.waitingForClick) {
       //console.log("Clic activo"); check
       // Llama a la función activa correspondiente
-      this.toolbox.prueba();
-      //this.scene.activeFunction();
+      this.scene.activeFunction();
     } else if (this.isDrawingEnabled && this.waitingForClick) {
       // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
       this.waitingForClick = false;
