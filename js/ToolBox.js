@@ -1,10 +1,10 @@
-import { Element } from "../elements/Elements.js";
 export class ToolBox {
   constructor(scene) {
     this.scene = scene;
     this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
     this.scene.activeButton = null; // Referencia al botón activo en el cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
+    this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
   }
 
   // Crea los botones en el cuadro de herramientas
@@ -57,20 +57,12 @@ export class ToolBox {
 
       // Define un objeto de mapeo entre nombres de botones y funciones
       const buttonToFunction = {
-        "Point": console.log("punto seleccionado"),
-        "Mover": this.scene.elements.point.movePoint(),
+        "Point": () => this.scene.elements.point.createPoint(),
+        "Mover": () => this.scene.elements.point.movePoint(),
         // Agrega más mapeos para otros botones y funciones
       };
-
-      // Obtén la función seleccionada según el botón activo
-      const selectedFunction = buttonToFunction[this.scene.activeButton];
-
       // Define el callback para el botón activo
-      this.scene.activeButtonCallback = () => {
-        if (selectedFunction) {
-          selectedFunction.call(this.scene.elements);
-        }
-      };
+      this.activeButtonCallback = buttonToFunction[buttonName];      
     }
   }
 }

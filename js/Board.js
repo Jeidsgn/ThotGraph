@@ -8,6 +8,7 @@ export class Board extends Phaser.Scene {
     // Propiedades para controlar el estado de la interacción en el tablero
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
+    this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
 
   }
 
@@ -39,6 +40,7 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    this.activeButtonCallback();
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
