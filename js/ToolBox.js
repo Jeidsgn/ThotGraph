@@ -39,8 +39,7 @@ export class ToolBox {
   activateButton(buttonName) {
     if (this.scene.activeButton) {
       this.scene.activeButton.setStyle({ fill: "#ffffff" });
-    }
-  
+    }  
     this.scene.activeButton = this.scene.toolboxButtons.find(button => button.text === buttonName);
     if (this.scene.activeButton) {
       this.scene.activeButton.setStyle({ fill: "#00ff00" });
