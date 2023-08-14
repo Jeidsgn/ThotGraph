@@ -22,34 +22,34 @@ export class ToolBox {
   
       this.scene.toolboxButtons.push(moveButton); // Use the scene's array
     }
+
+createDependentButtons() {
+    for (let i = 0; i < this.scene.elementNames.length; i++) { // Use this.scene.elementNames.length
+      const button = this.scene.add
+        .text(100 + i * 100, 550, this.scene.elementNames[i], { fill: "#ffffff" })
+        .setInteractive()
+        .on("pointerdown", () => this.activateButton(this.scene.elementNames[i])); // Use this.scene.elementNames[i]
   
-    createDependentButtons() {
-      // Crear botones dependientes según los elementos en js/
-      for (let i = 0; i < elementNames.length; i++) {
-        const button = this.scene.add
-          .text(100 + i * 100, 550, elementNames[i], { fill: "#ffffff" })
-          .setInteractive()
-          .on("pointerdown", () => this.activateButton(elementNames[i]));
+      this.scene.toolboxButtons.push(button);
+    }
+  }
   
-        this.scene.toolboxButtons.push(button); // Use the scene's array
-      }
+  activateButton(buttonName) {
+    if (this.scene.activeButton) { // Use this.scene.activeButton
+      this.scene.activeButton.setStyle({ fill: "#ffffff" }); // Use this.scene.activeButton
     }
   
-    activateButton(buttonName) {
-      if (activeButton) {
-        activeButton.setStyle({ fill: "#ffffff" });
-      }
+    this.scene.activeButton = this.scene.toolboxButtons.find(button => button.text === buttonName);
+    if (this.scene.activeButton) {
+      this.scene.activeButton.setStyle({ fill: "#00ff00" });
+      this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled; // Use this.scene.isDrawingEnabled
+      this.scene.waitingForClick = true;
   
-      activeButton = this.scene.toolboxButtons.find(button => button.text === buttonName);
-      if (activeButton) {
-        activeButton.setStyle({ fill: "#00ff00" });
-        isDrawingEnabled = !isDrawingEnabled;
-        waitingForClick = true;
-  
-        this.scene.children.list[1].setText(
-          isDrawingEnabled ? "Desactivar Dibujo" : "Activar Dibujo"
-        );
-      }
+      this.scene.children.list[1].setText(
+        this.scene.isDrawingEnabled ? "Desactivar Dibujo" : "Activar Dibujo"
+      );
     }
+  }
+  
   }
   
