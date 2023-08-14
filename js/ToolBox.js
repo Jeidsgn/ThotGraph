@@ -46,13 +46,6 @@ export class ToolBox {
       this.scene.activeButton.setStyle({ fill: "#00ff00" });
       this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
       this.scene.waitingForClick = true;
-  
-      const textContainer = this.scene.children.list.find(child => child instanceof Phaser.GameObjects.Text); // Find the text container
-      if (textContainer) {
-        textContainer.setText(
-          this.scene.isDrawingEnabled ? "Desactivar Dibujo" : "Activar Dibujo"
-        );
-      }
     }
   }
 }
