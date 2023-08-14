@@ -1,7 +1,7 @@
 import { ToolBox } from "./ToolBox.js";
-import { Element } from "../elements/BaseElements.js";
-//import { HistoryBox } from "../elements/BaseElements.js";
-//import { lvl } from "../elements/BaseElements.js";
+import { Element } from "../elements/Elements.js";
+//import { HistoryBox } from "../elements/Elements.js";
+//import { lvl } from "../elements/Elements.js";
 
 export class Board extends Phaser.Scene {
   constructor() {
@@ -12,11 +12,11 @@ export class Board extends Phaser.Scene {
 
   }
 
-  init() {
-    this.toolbox = new ToolBox(this);
+  init() {    
     this.elements = new Element(this);
     this.elements.Names();
     this.elements.init();
+    this.toolbox = new ToolBox(this);
   }
 
   preload() {
