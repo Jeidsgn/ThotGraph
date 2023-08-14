@@ -38,7 +38,7 @@ export class Board extends Phaser.Scene {
     if (this.isDrawingEnabled && this.waitingForClick) {
         this.waitingForClick = false;
       } else if (this.isDrawingEnabled && !this.waitingForClick) {
-        this.elements.Point.createPoint(pointer); // Usa this.elements.point
+        this.elements.point.createPoint(pointer); // Usa this.elements.point
       }
   }
 }
