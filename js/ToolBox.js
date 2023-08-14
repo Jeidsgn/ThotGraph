@@ -39,10 +39,6 @@ export class ToolBox {
       }
     }
 
-    prueba(){
-        console.log("Clic activo");
-    }
-  
     // Activa el botón seleccionado en el cuadro de herramientas
     activateButton(buttonName) {
         if (this.scene.activeButton) {
@@ -60,8 +56,10 @@ export class ToolBox {
           this.scene.waitingForClick = true;
     
           if (buttonName === "Punto") {
+            console.log("El punto se seleccionó bien"); 
             this.scene.activeFunction = this.scene.elements.point.createPoint.bind(this.scene.elements.point);
           } else if (buttonName === "Mover") {
+            console.log("El mover se seleccionó bien"); 
             this.scene.activeFunction = this.scene.elements.point.movePoint.bind(this.scene.elements.point);
           } else {
             // Agrega más condiciones aquí para otros botones y funciones
