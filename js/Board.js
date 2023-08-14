@@ -16,7 +16,7 @@ export class Board extends Phaser.Scene {
 
   create() {
     // Crear el toolbox
-    this.ToolBox.createToolbox();
+    this.toolbox.createToolbox();
     // Configurar la función de clic en el contenedor
     this.input.on("pointerdown", (pointer) => this.BoardClic(pointer));
   }
