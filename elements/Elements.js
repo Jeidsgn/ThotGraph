@@ -24,7 +24,7 @@ export class Element {
   // Crea un nuevo elemento
   createElement (){
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    this.scene.point.createPoint(null);
+    this.scene.point.createPoint();
   }
   
   // Puedes agregar métodos comunes a todos los elementos aquí
