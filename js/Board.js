@@ -16,7 +16,7 @@ export class Board extends Phaser.Scene {
 
   create() {
     // Crear el toolbox
-    createToolbox.call(this);
+    this.ToolBox.createToolbox();
     // Configurar la función de clic en el contenedor
     this.input.on("pointerdown", (pointer) => this.BoardClic(pointer));
   }
@@ -25,9 +25,6 @@ export class Board extends Phaser.Scene {
     // Lógica de actualización común, si es necesario
   }
 
-  createToolbox() {
-    this.ToolBox.createToolbox();
-  }
   BoardClic(pointer) {
     if (isDrawingEnabled && waitingForClick) {
       waitingForClick = false; // Cambiar a false después del primer clic
