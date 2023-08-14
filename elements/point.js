@@ -1,5 +1,3 @@
-// ...
-
 export class Point {
     constructor(scene) {
       this.scene = scene;
