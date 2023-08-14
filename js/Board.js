@@ -45,6 +45,7 @@ export class Board extends Phaser.Scene {
     if (this.isDrawingEnabled && !this.waitingForClick) {
       // Llama a la función activa correspondiente
       if (this.scene.activeFunction) {
+        console. log('Función de activación');
         this.scene.activeFunction();
       }
     } else if (this.isDrawingEnabled && this.waitingForClick) {
