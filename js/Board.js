@@ -17,7 +17,6 @@ export class Board extends Phaser.Scene {
     this.elements = new Element(this);
     // Inicializa los nombres y elementos
     this.elements.Names();
-    this.elements.init();
   }
 
   // Precarga de recursos (imágenes, sprites, etc.)
