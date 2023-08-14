@@ -12,11 +12,12 @@ export class Board extends Phaser.Scene {
 
   }
 
-  init() {    
+  init() { 
+    this.toolbox = new ToolBox(this);   
     this.elements = new Element(this);
     this.elements.Names();
     this.elements.init();
-    this.toolbox = new ToolBox(this);
+    
   }
 
   preload() {
