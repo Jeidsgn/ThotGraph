@@ -3,6 +3,9 @@ import { ToolBox } from "./ToolBox.js";
 export class Board extends Phaser.Scene {
   constructor() {
     super({ key: "scene" });
+    this.elementNames = [];// Array para almacenar los nombres de los elementos.
+    this.waitingForClick = true; 
+    this.isDrawingEnabled = false;
 
   }
 
