@@ -4,11 +4,9 @@ export class Point {
     this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
     this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
     this.selectedPoint = null; // Punto seleccionado para mover
-    this.pointer = null; // Variable para almacenar el puntero
+    this.pointer = scene.pointer; // Variable para almacenar el puntero
     // Configura el evento de clic en la escena para capturar el puntero
-    this.scene.input.on("pointerdown", (pointer) => {
-      this.pointer = pointer;
-    });
+
   }
 
   addName() {
