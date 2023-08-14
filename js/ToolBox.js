@@ -38,6 +38,10 @@ export class ToolBox {
         this.scene.toolboxButtons.push(button); // Agrega el botón al array en la escena
       }
     }
+
+    prueba(){
+        console.log("Clic activo");
+    }
   
     // Activa el botón seleccionado en el cuadro de herramientas
     activateButton(buttonName) {
