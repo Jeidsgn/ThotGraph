@@ -9,7 +9,7 @@ export class Element {
     }
     Names(){
         this.scene.point.addName();
-    }
+    } 
     createElement (){
         this.scene.point.createPoint();
     }
