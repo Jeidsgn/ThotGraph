@@ -4,8 +4,8 @@ export class ToolBox {
   }
   createToolbox() {
     // Crear botones base y botones dependientes (según elementos en elements/)
-    createBaseButtons.call(this.scene);
-    createDependentButtons.call(this.scene);
+    this.createBaseButtons();
+    this.createDependentButtons();
   }
 
   createBaseButtons() {
