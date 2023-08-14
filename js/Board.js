@@ -1,4 +1,5 @@
 import { ToolBox } from "./ToolBox.js";
+import { Element } from "../elements/BaseElements.js";
 
 export class Board extends Phaser.Scene {
   constructor() {
