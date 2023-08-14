@@ -8,9 +8,7 @@ export class Board extends Phaser.Scene {
     // Propiedades para controlar el estado de la interacción en el tablero
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
-    this.input.on("pointerdown", (pointer) => {
-        this.pointer = pointer;
-      });
+
   }
 
   // Función de inicialización de la escena
@@ -33,6 +31,9 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Configura el evento de clic en el contenedor (tablero)
+    this.input.on("pointerdown", (pointer) => {
+        this.pointer = pointer;
+      });
     this.input.on("pointerdown", this.BoardClic, this);
   }
 
