@@ -11,7 +11,7 @@ export class Board extends Phaser.Scene {
 
   init() {
     this.toolbox = new ToolBox(this);
-    this.elements = new this.Element(this)
+    this.elements = new Element(this)
   }
 
   preload() {
