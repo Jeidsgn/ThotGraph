@@ -11,7 +11,7 @@ export class Element {
     this.scene.point.addName();
   } 
   createElement (){
-    this.scene.point.createPoint();
+    this.scene.point.createPoint(null);
   }
     // Puedes agregar métodos comunes a todos los elementos aquí
     // Por ejemplo, para manejar restricciones y dependencias de movimiento

@@ -11,7 +11,7 @@ export class Board extends Phaser.Scene {
 
   init() {
     this.toolbox = new ToolBox(this);
-    this.elements = new this.elements(this)
+    this.elements = new this.Element(this)
   }
 
   preload() {
@@ -30,10 +30,10 @@ export class Board extends Phaser.Scene {
   }
 
   BoardClic(pointer) {
-    if (isDrawingEnabled && waitingForClick) {
-      waitingForClick = false; // Cambiar a false después del primer clic
-    } else if (isDrawingEnabled && !waitingForClick) {
-      createPoint.call(this, pointer); // Crear el círculo sin esperar después del primer clic
-    }
+    if (this.isDrawingEnabled && this.waitingForClick) {
+        this.waitingForClick = false;
+      } else if (this.isDrawingEnabled && !this.waitingForClick) {
+        this.elements.point.createPoint(pointer); // Usa this.elements.point
+      }
   }
 }
