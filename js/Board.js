@@ -29,8 +29,6 @@ export class Board extends Phaser.Scene {
   create() {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
-    // Configura la función de clic en el contenedor (tablero)
-    this.input.on("pointerdown", (pointer) => this.BoardClic(pointer));
   }
 
   // Función de actualización que se ejecuta en cada frame
@@ -39,11 +37,11 @@ export class Board extends Phaser.Scene {
   }
 
   // Función para manejar el clic en el tablero
-  BoardClic(pointer) {
+  BoardClic() {
     if (this.isDrawingEnabled && !this.waitingForClick) {
       // Llama a la función activa correspondiente
       if (this.scene.activeFunction) {
-        this.scene.activeFunction(pointer);
+        this.scene.activeFunction();
       }
     } else if (this.isDrawingEnabled && this.waitingForClick) {
       // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
