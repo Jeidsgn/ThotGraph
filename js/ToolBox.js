@@ -57,7 +57,7 @@ export class ToolBox {
     
           if (buttonName === "Point") {
             console.log("El punto se seleccionó bien"); 
-            this.scene.elements.point.createPoint();
+            this.scene.activeFunction() = this.scene.elements.point.createPoint();
           } else if (buttonName === "Mover") {
             console.log("El mover se seleccionó bien"); 
             this.scene.elements.point.movePoint();
