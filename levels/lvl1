@@ -1,2 +1,5 @@
-class Level1  {
-}
+export class LVL {
+    constructor(scene) {
+      this.scene = scene;
+    }
+  }
