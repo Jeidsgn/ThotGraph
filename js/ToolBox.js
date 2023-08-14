@@ -3,11 +3,12 @@ export class ToolBox {
       this.scene = scene;
       this.scene.toolboxButtons = []; // Initialize the array here
       this.scene.activeButton = null; // Referencia al botón activo
+      this.scene.elementNames = [];// Array para almacenar los nombres de los elementos.
     }
 
     createToolbox() {
       // Crear botones base y botones dependientes (según elementos en elements/)
-      this.elementNames = [];// Array para almacenar los nombres de los elementos.
+      
       this.createBaseButtons();
       this.createDependentButtons();
     }
