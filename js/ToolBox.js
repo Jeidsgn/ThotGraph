@@ -62,6 +62,9 @@ export class ToolBox {
         // Agrega más mapeos para otros botones y funciones
       };
 
+      // Obtén la función seleccionada según el botón activo
+      const selectedFunction = buttonToFunction[this.scene.activeButton];
+
       // Define el callback para el botón activo
       this.scene.activeButtonCallback = () => {
         if (selectedFunction) {
