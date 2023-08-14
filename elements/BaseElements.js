@@ -3,9 +3,9 @@ import { Point } from "./point.js";
 export class Element {
   constructor(scene) {
     this.scene = scene;
+    this.init();
   }
   init() {
-    this.init();
     this.scene.point = new Point(this.scene);
   }
   Names(){

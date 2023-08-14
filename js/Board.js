@@ -1,5 +1,7 @@
 import { ToolBox } from "./ToolBox.js";
 import { Element } from "../elements/BaseElements.js";
+//import { HistoryBox } from "../elements/BaseElements.js";
+//import { lvl } from "../elements/BaseElements.js";
 
 export class Board extends Phaser.Scene {
   constructor() {
