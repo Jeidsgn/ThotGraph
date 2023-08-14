@@ -4,7 +4,7 @@ export class ToolBox {
     this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
     this.scene.activeButton = null; // Referencia al botón activo en el cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
-    this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
+    this.scene.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
   }
 
   // Crea los botones en el cuadro de herramientas
@@ -62,7 +62,7 @@ export class ToolBox {
         // Agrega más mapeos para otros botones y funciones
       };
       // Define el callback para el botón activo
-      this.activeButtonCallback = buttonToFunction[buttonName]();      
+      this.scene.activeButtonCallback = buttonToFunction[buttonName]();      
     }
   }
 }
