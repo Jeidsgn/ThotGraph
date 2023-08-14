@@ -24,7 +24,6 @@ export class Board extends Phaser.Scene {
   }
 
   create() {
-    this.elements.init(); // Inicializa los elementos 
     // Crear el toolbox
     this.toolbox.createToolbox();
     // Configurar la función de clic en el contenedor
