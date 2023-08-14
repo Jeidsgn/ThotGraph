@@ -42,27 +42,25 @@ export class ToolBox {
     // Activa el botón seleccionado en el cuadro de herramientas
     activateButton(buttonName) {
         if (this.scene.activeButton) {
-          this.scene.activeButton.setStyle({ fill: "#ffffff" }); // Restaura el estilo del botón previamente activo
+          this.scene.activeButton.setStyle({ fill: "#ffffff" });
         }
-      
-        // Encuentra el botón seleccionado en el array de botones del cuadro de herramientas
+    
         this.scene.activeButton = this.scene.toolboxButtons.find(
           (button) => button.text === buttonName
         );
-      
+    
         if (this.scene.activeButton) {
-          // Cambia el estilo del botón seleccionado
           this.scene.activeButton.setStyle({ fill: "#00ff00" });
-      
-          // Actualiza el estado de dibujo habilitado y establece la espera para el clic
+    
           this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
           this.scene.waitingForClick = true;
-      
-          // Ejecuta la función correspondiente según el botón activado
+    
           if (buttonName === "Punto") {
             this.scene.activeFunction = this.scene.elements.point.createPoint.bind(this.scene.elements.point);
           } else if (buttonName === "Mover") {
             this.scene.activeFunction = this.scene.elements.point.movePoint.bind(this.scene.elements.point);
+          } else {
+            // Agrega más condiciones aquí para otros botones y funciones
           }
         }
       }
