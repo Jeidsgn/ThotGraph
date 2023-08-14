@@ -12,7 +12,8 @@ export class Board extends Phaser.Scene {
 
   init() {
     this.toolbox = new ToolBox(this);
-    this.elements = new Element(this)
+    this.elements = new Element(this);
+    this.elements.Names();
   }
 
   preload() {
@@ -20,6 +21,7 @@ export class Board extends Phaser.Scene {
   }
 
   create() {
+    this.elements.init(); // Inicializa los elementos 
     // Crear el toolbox
     this.toolbox.createToolbox();
     // Configurar la función de clic en el contenedor

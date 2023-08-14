@@ -5,6 +5,7 @@ export class Element {
     this.scene = scene;
   }
   init() {
+    this.init();
     this.scene.point = new Point(this.scene);
   }
   Names(){
