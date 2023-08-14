@@ -1,34 +1,49 @@
-
 export class Point {
     constructor(scene) {
       this.scene = scene;
-      // Crea un grupo para almacenar los puntos en la escena
-      this.points = scene.add.group();
-      // Crea un contenedor de texto para mostrar las letras asociadas a los puntos
-      this.textContainer = scene.add.text(10, 10, '', { fill: '#ffffff' });
+      this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
+      this.textContainer = scene.add.text(10, 10, '', { fill: '#ffffff' }); // Contenedor de texto para las letras de los puntos
+      this.selectedPoint = null; // Punto seleccionado para mover
     } 
   
-    // Agrega el nombre "Point" al array de nombres de elementos en la escena
     addName(){
-      this.scene.elementNames.push('Point');
+      this.scene.elementNames.push('Point'); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
   
-    // Crea un nuevo punto en las coordenadas del puntero (si se proporciona)
     createPoint(pointer) {
       if (pointer) {
-        // Obtiene las coordenadas x e y del puntero, o establece valores predeterminados en caso de que no se proporcionen
         const x = pointer.x || 0;
         const y = pointer.y || 0;
     
-        // Crea un gráfico para representar el punto y lo añade al grupo de puntos en la escena
         const point = this.scene.add.graphics();
-        point.fillStyle(0xff0000); // Color rojo
-        point.fillCircle(x, y, 5); // Dibuja un círculo en las coordenadas del puntero
-        this.points.add(point);
+        point.fillStyle(0xff0000);
+        point.fillCircle(x, y, 5);
+        this.points.add(point); // Añade el punto al grupo
     
-        // Calcula la letra asociada al punto en función de la cantidad de puntos en el grupo y la agrega al contenedor de texto
         const letter = String.fromCharCode(65 + this.points.getLength() - 1);
-        this.textContainer.text += letter + ' ';
+        this.textContainer.text += letter + ' '; // Agrega la letra asociada al punto al contenedor de texto
       }
+    }
+    
+    movePoint() {
+      this.points.getChildren().forEach(point => {
+        point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto
+        
+        point.on('drag', (pointer, dragX, dragY) => {
+          if (this.selectedPoint === point) {
+            point.clear();
+            point.fillStyle(0xff0000);
+            point.fillCircle(dragX, dragY, 5); // Actualiza la posición mientras se arrastra
+          }
+        });
+        
+        point.on('dragend', () => {
+          this.selectedPoint = null; // Al soltar, se desactiva la selección
+        });
+        
+        point.on('dragstart', () => {
+          this.selectedPoint = point; // Al comenzar el arrastre, se selecciona el punto
+        });
+      });
     }
 }
