@@ -1,3 +1,4 @@
+import { Element } from "../elements/Elements.js";
 export class ToolBox {
   constructor(scene) {
     this.scene = scene;
