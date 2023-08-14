@@ -1,6 +1,6 @@
 import { Point } from "point.js";
 
-class Element {
+export class Element {
     constructor(scene) {
         this.scene = scene;
     }
@@ -11,7 +11,7 @@ class Element {
         this.scene.point.addName();
     }
     createElement (){
-
+        this.scene.point.createPoint();
     }
     // Puedes agregar métodos comunes a todos los elementos aquí
     // Por ejemplo, para manejar restricciones y dependencias de movimiento
