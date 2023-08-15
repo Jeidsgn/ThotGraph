@@ -51,7 +51,7 @@ export class Point {
     }
   }
 
-  mmovePoint() {
+  movePoint() {
     if (this.selectedPoint) {
       // Already in drag mode, disable it
       this.selectedPoint.clearTint();
