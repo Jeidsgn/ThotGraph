@@ -43,9 +43,6 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
-    if (this.input.activePointer.isDown && this.activeButtonCallback) {
-        this.activeButtonCallback();
-    }
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
