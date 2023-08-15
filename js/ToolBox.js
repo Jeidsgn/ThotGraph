@@ -67,10 +67,7 @@ export class ToolBox {
         // Agrega más mapeos para otros botones y funciones
       };
       /// Almacena el nombre de la función en una variable
-      const functionToCall = buttonToFunction[buttonName];
-      if (functionToCall) {
-          this.scene.activeButtonCallback = () => functionToCall.call(this.scene.elements.point);
-      } 
+      this.scene.activeButtonCallback = buttonToFunction[buttonName];
     }
   }
 }
