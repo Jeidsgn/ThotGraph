@@ -20,7 +20,7 @@ export class Point {
       point.fillStyle(0xff0000);
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
-      point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto
+      
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
     }
@@ -34,7 +34,8 @@ export class Point {
       point.on("drag", (elementalpointer, dragX, dragY) => {
         console.log("drag");
         if (this.selectedPoint === point) {
-          console.log("selectedPoin");  
+          console.log("drag");
+          point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto  
           point.clear();
           point.fillStyle(0xff0000);
           point.fillCircle(dragX, dragY, 5); // Actualiza la posición mientras se arrastra
