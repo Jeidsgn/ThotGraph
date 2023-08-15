@@ -10,13 +10,13 @@ export class Element {
   // Agrega nombres a los elementos
   Names(){
     // Agrega nombres a los puntos utilizando el método "addName" de la instancia de Point en la escena
-    this.scene.point.addName();
+    this.point.addName();
   } 
 
   // Crea un nuevo elemento
   createElement (){
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    this.scene.point.createPoint(null);
+    this.point.createPoint(null);
   }
   
   // Puedes agregar métodos comunes a todos los elementos aquí
