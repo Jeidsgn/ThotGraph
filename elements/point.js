@@ -30,26 +30,25 @@ export class Point {
     this.points.getChildren().forEach(point => {
       point.setInteractive();
   
-      this.scene.input.setDraggable(point);
-  
-      point.on('dragstart', (pointer) => {
+      point.on('pointerdown', (pointer) => {
         this.selectedPoint = point;
-        point.setTint(0x00ff00); // Cambia el color del punto mientras se arrastra
+        this.offsetX = pointer.x - point.x;
+        this.offsetY = pointer.y - point.y;
       });
   
-      point.on('drag', (pointer, dragX, dragY) => {
-        if (this.selectedPoint === point) {
-          point.x = dragX;
-          point.y = dragY;
+      this.scene.input.on('pointermove', (pointer) => {
+        if (this.selectedPoint) {
+          this.selectedPoint.x = pointer.x - this.offsetX;
+          this.selectedPoint.y = pointer.y - this.offsetY;
         }
       });
   
-      point.on('dragend', () => {
+      this.scene.input.on('pointerup', () => {
         this.selectedPoint = null;
-        point.clearTint(); // Restaura el color del punto después de arrastrarlo
       });
     });
   }
+  
   
   
   
