@@ -27,25 +27,26 @@ export class Point {
   }
 
   movePoint() {
-    // Configura la interacción para cada punto individual
+    // Habilita la interacción para cada punto individual
     this.points.getChildren().forEach(point => {
-      point.setInteractive({ draggable: true });
+      point.setInteractive();
   
-      point.on('dragstart', (pointer) => {
+      point.on('pointerdown', (pointer) => {
         this.selectedPoint = point;
       });
   
-      point.on('drag', (pointer, dragX, dragY) => {
+      point.on('pointermove', (pointer) => {
         if (this.selectedPoint === point) {
-          point.x = dragX;
-          point.y = dragY;
+          point.x = pointer.x;
+          point.y = pointer.y;
         }
       });
   
-      point.on('dragend', () => {
+      point.on('pointerup', () => {
         this.selectedPoint = null;
       });
     });
   }
+  
   
 }
