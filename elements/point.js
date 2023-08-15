@@ -8,6 +8,31 @@ export class Point {
     this.scene.input.on("pointerdown", (pointer) => {
         this.elementalpointer = pointer;
     });
+        // Configura el evento de arrastre para los puntos
+        this.points.setDepth(1); // Asegura que los puntos estén en primer plano
+        scene.input.setDraggable(this.points.getChildren());
+    
+        // Maneja el evento de inicio de arrastre
+        scene.input.on('dragstart', (pointer, gameObject) => {
+          this.selectedPoint = gameObject;
+          this.selectedPoint.setTint(0x00ff00); // Cambia el color del punto seleccionado
+        });
+    
+        // Maneja el evento de arrastre
+        scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+          if (this.selectedPoint) {
+            this.selectedPoint.x = dragX;
+            this.selectedPoint.y = dragY;
+          }
+        });
+    
+        // Maneja el evento de finalización de arrastre
+        scene.input.on('dragend', () => {
+          if (this.selectedPoint) {
+            this.selectedPoint.clearTint(); // Restaura el color original
+            this.selectedPoint = null;
+          }
+        });
   }
   addName() {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
@@ -27,36 +52,14 @@ export class Point {
   }
 
   mmovePoint() {
-    this.scene.input.on("pointerdown", (pointer) => {
-      // Comprobar si el modo movepoint está activo
-      if (this.scene.movepointActive) {
-        // Buscar si el puntero está sobre un punto existente
-        const pointUnderPointer = this.points.getChildren().find((point) => {
-          const bounds = point.getBounds();
-          return bounds.contains(pointer.x, pointer.y);
-        });
-  
-        if (pointUnderPointer) {
-          this.selectedPoint = pointUnderPointer;
-          this.selectedPoint.setDepth(1); // Colocar el punto seleccionado en la parte superior
-          this.offsetX = pointer.x - this.selectedPoint.x;
-          this.offsetY = pointer.y - this.selectedPoint.y;
-        }
-      }
-    });
-  
-    this.scene.input.on("pointermove", (pointer) => {
-      // Comprobar si hay un punto seleccionado para mover
-      if (this.selectedPoint) {
-        this.selectedPoint.x = pointer.x - this.offsetX;
-        this.selectedPoint.y = pointer.y - this.offsetY;
-      }
-    });
-  
-    this.scene.input.on("pointerup", () => {
-      // Limpiar el punto seleccionado
+    if (this.selectedPoint) {
+      // Already in drag mode, disable it
+      this.selectedPoint.clearTint();
       this.selectedPoint = null;
-    });
-  }
-  
+    } else {
+      // Enter drag mode
+      this.scene.isDrawingEnabled = false; // Disable drawing mode
+      this.textContainer.text = ''; // Clear textContainer
+      this.points.setAlpha(0.5); // Dim points for better visibility
+    }  
 }
