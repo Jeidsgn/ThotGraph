@@ -29,7 +29,6 @@ export class Point {
     console.log("movePoint");
     this.points.getChildren().forEach((point) => {
       point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto
-
       point.on("drag", (pointer, dragX, dragY) => {
         if (this.selectedPoint === point) {
           point.clear();
@@ -37,7 +36,6 @@ export class Point {
           point.fillCircle(dragX, dragY, 5); // Actualiza la posición mientras se arrastra
         }
       });
-
       point.on("dragend", () => {
         this.selectedPoint = null; // Al soltar, se desactiva la selección
       });
