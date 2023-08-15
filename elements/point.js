@@ -9,11 +9,9 @@ export class Point {
         this.elementalpointer = pointer;
     });
   }
-
   addName() {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
   }
-
   createPoint() {
     console.log("createpoint");
     if (this.elementalpointer) {
