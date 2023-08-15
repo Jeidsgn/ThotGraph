@@ -61,8 +61,9 @@ export class ToolBox {
         "Mover": () => this.scene.elements.point.movePoint,
         // Agrega más mapeos para otros botones y funciones
       };
-      // Define el callback para el botón activo
-      this.scene.activeButtonCallback = buttonToFunction[buttonName];      
+      /// Almacena el nombre de la función en una variable
+    const functionName = buttonToFunction[buttonName];
+    this.scene.activeButtonCallback = functionName;    
     }
   }
 }
