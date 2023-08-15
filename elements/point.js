@@ -27,26 +27,30 @@ export class Point {
   }
 
   movePoint() {
-    // Habilita la interacción para cada punto individual
     this.points.getChildren().forEach(point => {
       point.setInteractive();
   
-      point.on('pointerdown', (pointer) => {
+      this.scene.input.setDraggable(point);
+  
+      point.on('dragstart', (pointer) => {
         this.selectedPoint = point;
+        point.setTint(0x00ff00); // Cambia el color del punto mientras se arrastra
       });
   
-      point.on('pointermove', (pointer) => {
+      point.on('drag', (pointer, dragX, dragY) => {
         if (this.selectedPoint === point) {
-          point.x = pointer.x;
-          point.y = pointer.y;
+          point.x = dragX;
+          point.y = dragY;
         }
       });
   
-      point.on('pointerup', () => {
+      point.on('dragend', () => {
         this.selectedPoint = null;
+        point.clearTint(); // Restaura el color del punto después de arrastrarlo
       });
     });
   }
+  
   
   
 }
