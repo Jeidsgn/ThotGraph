@@ -11,9 +11,6 @@ const config = {
     parent: 'game-container',
     // Escenas del juego.
     scene: [Board],
-    add: {
-        graphics: true // Asegúrate de que esta configuración esté presente y sea verdadera
-      }
 };
 
 // Crea una nueva instancia de Phaser.Game pasando la configuración definida.
