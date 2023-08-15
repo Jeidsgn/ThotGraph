@@ -13,16 +13,13 @@ export class Point {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
   }
   createPoint() {
-    console.log("createpoint");
     if (this.elementalpointer) {
-      console.log("this.elementalpointer");
       const x = this.elementalpointer.x || 0;
       const y = this.elementalpointer.y || 0;
       const point = this.scene.add.graphics();
       point.fillStyle(0xff0000);
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
-      console.log("createpoint2");
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
     }
