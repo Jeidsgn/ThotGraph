@@ -62,7 +62,7 @@ export class ToolBox {
         // Agrega más mapeos para otros botones y funciones
       };
       // Define el callback para el botón activo
-      this.scene.activeButtonCallback = buttonToFunction[buttonName]();      
+      this.scene.activeButtonCallback = buttonToFunction[buttonName];      
     }
   }
 }
