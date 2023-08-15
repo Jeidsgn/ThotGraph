@@ -36,13 +36,16 @@ export class Board extends Phaser.Scene {
         this.pointer = pointer;
         this.BoardClic(); // Llamamos a BoardClic directamente aquí
       });
+    this.input.on("pointerup", () => {
+        this.pointer = null; // Clear the pointer when released
+    });
   }
 
   // Función de actualización que se ejecuta en cada frame
   update() {
-    if (this.activeButtonCallback) {
+    if (this.input.activePointer.isDown && this.activeButtonCallback) {
         this.activeButtonCallback();
-      }
+    }
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }

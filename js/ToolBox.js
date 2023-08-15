@@ -68,7 +68,7 @@ export class ToolBox {
       };
       /// Almacena el nombre de la función en una variable
     const functionName = buttonToFunction[buttonName];
-    this.scene.activeButtonCallback = functionName;    
+    this.scene.activeButtonCallback = functionName;   
     }
   }
 }
