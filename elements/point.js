@@ -29,6 +29,7 @@ export class Point {
   }
 
   movePoint() {
+    console.log("casi1");
     this.points.getChildren().forEach((point) => {
       point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto
 
