@@ -61,7 +61,6 @@ export class ToolBox {
         },
         "Mover": () => {
             this.scene.elements.point.movePoint();
-            console.log("ToolBox");
         },
         // Agrega más mapeos para otros botones y funciones
       };

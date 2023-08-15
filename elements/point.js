@@ -27,7 +27,6 @@ export class Point {
   }
 
   movePoint() {
-    console.log("movePoint");
 
     this.points.getChildren().forEach((point) => {
     console.log("points.getChildren()");
