@@ -14,7 +14,7 @@ export class Point {
   }
 
   createPoint() {
-    console.log("casi1");
+    console.log("createpoint");
     if (this.pointer) {
       const x = this.pointer.x || 0;
       const y = this.pointer.y || 0;
@@ -22,14 +22,14 @@ export class Point {
       point.fillStyle(0xff0000);
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
-      console.log("casi2");
+      console.log("createpoint2");
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
     }
   }
 
   movePoint() {
-    console.log("casi1");
+    console.log("movePoint");
     this.points.getChildren().forEach((point) => {
       point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto
 
