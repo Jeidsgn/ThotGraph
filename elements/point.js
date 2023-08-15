@@ -27,5 +27,23 @@ export class Point {
   }
 
   movePoint() {
+    // Habilita la interacción con los puntos
+    this.points.setInteractive({ draggable: true });
+  
+    // Configura el evento de arrastre para los puntos
+    this.points.on('dragstart', (pointer, gameObject) => {
+      this.selectedPoint = gameObject;
+    });
+  
+    this.points.on('drag', (pointer, gameObject, dragX, dragY) => {
+      if (this.selectedPoint === gameObject) {
+        gameObject.x = dragX;
+        gameObject.y = dragY;
+      }
+    });
+  
+    this.points.on('dragend', () => {
+      this.selectedPoint = null;
+    });
   }
 }
