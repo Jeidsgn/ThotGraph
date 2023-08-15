@@ -26,28 +26,37 @@ export class Point {
     }
   }
 
-  movePoint() {
-    this.points.getChildren().forEach((point) => {
-    console.log("points.getChildren()");
-      point.on("drag", (elementalpointer, dragX, dragY) => {
-        console.log("drag");
-        if (this.selectedPoint === point) {
-          console.log("drag");
-          point.setInteractive({ draggable: true }); // Habilita la interacción de arrastre para cada punto  
-          point.clear();
-          point.fillStyle(0xff0000);
-          point.fillCircle(dragX, dragY, 5); // Actualiza la posición mientras se arrastra
+  mmovePoint() {
+    this.scene.input.on("pointerdown", (pointer) => {
+      // Comprobar si el modo movepoint está activo
+      if (this.scene.movepointActive) {
+        // Buscar si el puntero está sobre un punto existente
+        const pointUnderPointer = this.points.getChildren().find((point) => {
+          const bounds = point.getBounds();
+          return bounds.contains(pointer.x, pointer.y);
+        });
+  
+        if (pointUnderPointer) {
+          this.selectedPoint = pointUnderPointer;
+          this.selectedPoint.setDepth(1); // Colocar el punto seleccionado en la parte superior
+          this.offsetX = pointer.x - this.selectedPoint.x;
+          this.offsetY = pointer.y - this.selectedPoint.y;
         }
-      });
-      point.on("dragend", () => {
-        console.log("dragend");
-        this.selectedPoint = null; // Al soltar, se desactiva la selección
-      });
-
-      point.on("dragstart", () => {
-        console.log("dragstart");
-        this.selectedPoint = point; // Al comenzar el arrastre, se selecciona el punto
-      });
+      }
+    });
+  
+    this.scene.input.on("pointermove", (pointer) => {
+      // Comprobar si hay un punto seleccionado para mover
+      if (this.selectedPoint) {
+        this.selectedPoint.x = pointer.x - this.offsetX;
+        this.selectedPoint.y = pointer.y - this.offsetY;
+      }
+    });
+  
+    this.scene.input.on("pointerup", () => {
+      // Limpiar el punto seleccionado
+      this.selectedPoint = null;
     });
   }
+  
 }
