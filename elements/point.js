@@ -5,7 +5,7 @@ export class Point {
     this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
     this.selectedPoint = null; // Punto seleccionado para mover
     // Configura el evento de clic en la escena para capturar el puntero
-    this.scene.input.on("pointerdown", (pointer) => {
+    this.input.on("pointerdown", (pointer) => {
         this.elementalpointer = pointer;
     });
         // Configura el evento de arrastre para los puntos
