@@ -3,8 +3,6 @@ import { Point } from "./point.js";
 export class Element {
   constructor(scene) {
     this.scene = scene;
-    // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
-    this.point = new Point(scene);
     // Inicializa los elementos
     this.init();
   }
