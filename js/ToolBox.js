@@ -58,11 +58,9 @@ export class ToolBox {
       const buttonToFunction = {
         "Point": () => {
             this.scene.elements.point.createPoint(); 
-            console.log("llamada createpoint");
         },
         "Mover": () => {
             this.scene.elements.point.movePoint();
-            console.log("llamada movePoint");
         },
         // Agrega más mapeos para otros botones y funciones
       };

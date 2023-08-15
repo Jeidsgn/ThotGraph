@@ -16,6 +16,7 @@ export class Point {
   createPoint() {
     console.log("createpoint");
     if (this.pointer) {
+      console.log("this.pointer");
       const x = this.pointer.x || 0;
       const y = this.pointer.y || 0;
       const point = this.scene.add.graphics();
