@@ -27,23 +27,25 @@ export class Point {
   }
 
   movePoint() {
-    // Habilita la interacción con los puntos
-    this.points.setInteractive({ draggable: true });
+    // Configura la interacción para cada punto individual
+    this.points.getChildren().forEach(point => {
+      point.setInteractive({ draggable: true });
   
-    // Configura el evento de arrastre para los puntos
-    this.points.on('dragstart', (pointer, gameObject) => {
-      this.selectedPoint = gameObject;
-    });
+      point.on('dragstart', (pointer) => {
+        this.selectedPoint = point;
+      });
   
-    this.points.on('drag', (pointer, gameObject, dragX, dragY) => {
-      if (this.selectedPoint === gameObject) {
-        gameObject.x = dragX;
-        gameObject.y = dragY;
-      }
-    });
+      point.on('drag', (pointer, dragX, dragY) => {
+        if (this.selectedPoint === point) {
+          point.x = dragX;
+          point.y = dragY;
+        }
+      });
   
-    this.points.on('dragend', () => {
-      this.selectedPoint = null;
+      point.on('dragend', () => {
+        this.selectedPoint = null;
+      });
     });
   }
+  
 }
