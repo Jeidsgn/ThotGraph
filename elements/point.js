@@ -63,3 +63,4 @@ export class Point {
       this.points.setAlpha(0.5); // Dim points for better visibility
     }  
 }
+}
