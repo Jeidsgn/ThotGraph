@@ -11,8 +11,7 @@ export class Element {
 
   // Inicialización de elementos
   init() {  
-    // Crea una instancia de la clase Point y la asigna a la propiedad "point" de la escena
-    this.scene.point = new Point(this.scene);
+    
   }
 
   // Agrega nombres a los elementos
