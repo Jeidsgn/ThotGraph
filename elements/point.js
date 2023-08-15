@@ -5,14 +5,15 @@ export class Point {
     this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
     this.selectedPoint = null; // Punto seleccionado para mover
     // Configura el evento de clic en la escena para capturar el puntero
-    this.scene.input.on("pointerdown", (pointer) => {
-        this.elementalpointer = pointer;
-    });
+    
   }
   addName() {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
   }
   createPoint() {
+    this.scene.input.on("pointerdown", (pointer) => {
+        this.elementalpointer = pointer;
+    });
     if (this.elementalpointer) {
       const x = this.elementalpointer.x || 0;
       const y = this.elementalpointer.y || 0;
@@ -27,7 +28,6 @@ export class Point {
   }
 
   movePoint() {
-
     this.points.getChildren().forEach((point) => {
     console.log("points.getChildren()");
       point.on("drag", (elementalpointer, dragX, dragY) => {
