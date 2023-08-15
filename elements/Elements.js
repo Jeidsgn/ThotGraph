@@ -5,14 +5,6 @@ export class Element {
     this.scene = scene;
     // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.point = new Point(scene);
-    // Inicializa los elementos
-    this.init();
-  }
-
-  // Inicialización de elementos
-  init() {  
-    // Crea una instancia de la clase Point y la asigna a la propiedad "point" de la escena
-    this.scene.point = new Point(this.scene);
   }
 
   // Agrega nombres a los elementos
