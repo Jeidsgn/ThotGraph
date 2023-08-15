@@ -3,7 +3,7 @@ import { Point } from "./point.js";
 export class Element {
   constructor(scene) {
     this.scene = scene;
-    // Crea una instancia de la clase Point
+    // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.point = new Point(scene);
     // Inicializa los elementos
     this.init();
@@ -11,7 +11,8 @@ export class Element {
 
   // Inicialización de elementos
   init() {  
-    
+    // Crea una instancia de la clase Point y la asigna a la propiedad "point" de la escena
+    this.scene.point = new Point(this.scene);
   }
 
   // Agrega nombres a los elementos
@@ -23,7 +24,7 @@ export class Element {
   // Crea un nuevo elemento
   createElement (){
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    this.scene.point.createPoint();
+    this.scene.point.createPoint(null);
   }
   
   // Puedes agregar métodos comunes a todos los elementos aquí
