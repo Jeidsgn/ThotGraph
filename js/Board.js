@@ -11,18 +11,18 @@ export class Board extends Phaser.Scene {
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
 
         // Configura el evento de clic en la escena para capturar el puntero
-        this.scene.input.on("pointerdown", (pointer) => {
-            this.scene.isClicking = true; // Se está haciendo clic
-            this.scene.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
+        this.input.on("pointerdown", (pointer) => {
+            this.isClicking = true; // Se está haciendo clic
+            this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
           });
           // Capturar el puntero en la escena
-          this.scene.input.on("pointermove", (pointer) => {
-            this.scene.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
+          this.input.on("pointermove", (pointer) => {
+            this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
           });
       
           // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
-          this.scene.input.on("pointerup", () => {
-            this.scene.isClicking = false; // No se está haciendo clic
+          this.input.on("pointerup", () => {
+            this.isClicking = false; // No se está haciendo clic
           });
 
   }
