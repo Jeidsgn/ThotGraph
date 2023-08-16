@@ -27,20 +27,7 @@ export class Board extends Phaser.Scene {
 
   // Función que se ejecuta al crearse la escena
   create() {
-            // Configura el evento de clic en la escena para capturar el puntero
-            this.input.on("pointerdown", (pointer) => {
-                this.isClicking = true; // Se está haciendo clic
-                this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-              });
-              // Capturar el puntero en la escena
-              this.input.on("pointermove", (pointer) => {
-                this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-              });
-          
-              // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
-              this.input.on("pointerup", () => {
-                this.isClicking = false; // No se está haciendo clic
-              });
+
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Configura el evento de clic en el contenedor (tablero)
@@ -49,6 +36,7 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    
     if (this.isDrawingEnabled && !this.waitingForClick) {
         // Llama a la función activa correspondiente
         if (this.activeButtonCallback) {  // Comprobamos si la función está definida
