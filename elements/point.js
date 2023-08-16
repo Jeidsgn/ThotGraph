@@ -21,6 +21,7 @@ export class Point {
   
       this.scene.input.on("pointerup", () => {
         this.selectedPoint = null;
+        this.elementalpointer = null;
       });
     }
   
