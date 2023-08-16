@@ -17,9 +17,14 @@ export class Point {
         this.isClicking = false; // No se está haciendo clic
       });
   
-      // Configura el evento para el movimiento del puntero sobre la escena
+      // Configura el evento de movimiento del puntero para cambiar el color del punto al pasar sobre él
       this.scene.input.on("pointermove", (pointer) => {
-        this.movePoint(pointer.x, pointer.y);
+        this.points.getChildren().forEach((point) => {
+          const hit = point.getBounds().contains(pointer.x, pointer.y);
+          point.fillStyle(hit ? 0x00ff00 : 0xff0000);
+          point.clear();
+          point.fillCircle(point.x, point.y, 5);
+        });
       });
     }
   
@@ -44,16 +49,10 @@ export class Point {
   
     movePoint(x, y) {
       this.points.getChildren().forEach((point) => {
-        const distance = Phaser.Math.Distance.Between(x, y, point.x, point.y);
-        if (distance <= 10) { // Cambiar el valor para ajustar la distancia de detección
-          point.clear();
-          point.fillStyle(0x00ff00); // Cambiar el color al pasar el cursor por encima
-          point.fillCircle(point.x, point.y, 5);
-        } else {
-          point.clear();
-          point.fillStyle(0xff0000);
-          point.fillCircle(point.x, point.y, 5);
-        }
+        const hit = point.getBounds().contains(x, y);
+        point.fillStyle(hit ? 0x00ff00 : 0xff0000);
+        point.clear();
+        point.fillCircle(point.x, point.y, 5);
       });
     }
   }
