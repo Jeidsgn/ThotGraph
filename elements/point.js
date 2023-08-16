@@ -4,24 +4,9 @@ export class Point {
     this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
     this.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
-    this.isClicking = false; // Variable para controlar si se está haciendo clic
-    this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del clic
-    this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
-
-    // Configura el evento de clic en la escena para capturar el puntero
-    this.scene.input.on("pointerdown", (pointer) => {
-      this.isClicking = true; // Se está haciendo clic
-      this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-    });
-    // Capturar el puntero en la escena
-    this.scene.input.on("pointermove", (pointer) => {
-      this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-    });
-
-    // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
-    this.scene.input.on("pointerup", () => {
-      this.isClicking = false; // No se está haciendo clic
-    });
+    this.isClicking = this.scene.isClicking; // Variable para controlar si se está haciendo clic
+    this.elementalpointer = this.scene.elementalpointer; // Almacena la posición del clic
+    this.pointermove = this.scene.pointermove; // Almacena la posición del puntero
   }
 
   addName() {
