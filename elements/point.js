@@ -8,7 +8,10 @@ export class Point {
   
       // Configura el evento de clic en la escena para capturar el puntero
       this.scene.input.on("pointerdown", (pointer) => {
-        if (this.movePointActive) {
+        if (!this.movePointActive) {
+          // Si movePoint no está activa, crea un nuevo punto
+          this.createPoint(pointer);
+        } else {
           // Verifica si movePoint está activa y selecciona el punto si corresponde
           this.selectPoint(pointer);
         }
@@ -30,21 +33,17 @@ export class Point {
       this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
   
-    createPoint() {
-        if (this.elementalpointer) {
-          const x = this.elementalpointer.x || 0;
-          const y = this.elementalpointer.y || 0;
-          
-          const point = this.scene.add.graphics();
-          point.fillStyle(0xff0000);
-          point.fillCircle(x, y, 5);
-          this.points.add(point); // Añade el punto al grupo
-      
-          const letter = String.fromCharCode(65 + this.points.getChildren().length - 1);
-          this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-        }
-      }
-      
+    createPoint(pointer) {
+      const x = pointer.x || 0;
+      const y = pointer.y || 0;
+      const point = this.scene.add.graphics();
+      point.fillStyle(0xff0000);
+      point.fillCircle(x, y, 5);
+      this.points.add(point); // Añade el punto al grupo
+  
+      const letter = String.fromCharCode(65 + this.points.getLength() - 1);
+      this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+    }
   
     movePoint() {
       this.movePointActive = !this.movePointActive; // Alterna el estado de la función movePoint
