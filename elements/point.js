@@ -1,26 +1,47 @@
 export class Point {
     constructor(scene) {
       this.scene = scene;
-      this.points = scene.add.group();
-      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" });
-      this.selectedPoint = null;
-      this.movePointActive = false; // Indicador de si movePoint está activo
-      this.elementalpointer = null;
+      this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
+      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
+      this.selectedPoint = null; // Punto seleccionado para mover
+      this.movePointActive = false; // Estado de la función movepoint
   
+      // Configura el evento de clic en la escena para capturar el puntero
       this.scene.input.on("pointerdown", (pointer) => {
         this.elementalpointer = pointer;
+  
+        if (this.movePointActive) {
+          this.points.getChildren().forEach((point) => {
+            const bounds = point.getBounds();
+            if (Phaser.Geom.Rectangle.ContainsPoint(bounds, pointer)) {
+              this.selectedPoint = point;
+              point.setTint(0x00ff00); // Cambia el color del punto cuando se selecciona
+            } else {
+              point.clearTint();
+            }
+          });
+        }
       });
   
+      // Configura el evento de movimiento del puntero
+      this.scene.input.on("pointermove", (pointer) => {
+        if (this.movePointActive && this.selectedPoint) {
+          this.selectedPoint.x = pointer.x;
+          this.selectedPoint.y = pointer.y;
+        }
+      });
+  
+      // Configura el evento de liberación del puntero
       this.scene.input.on("pointerup", () => {
         if (this.movePointActive && this.selectedPoint) {
-          this.selectedPoint.clearTint(); // Restaura el color original al soltar el punto
+          this.selectedPoint.clearTint();
           this.selectedPoint = null;
         }
       });
     }
   
     addName() {
-      this.scene.elementNames.push("Point");
+      this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
   
     createPoint() {
@@ -30,39 +51,15 @@ export class Point {
         const point = this.scene.add.graphics();
         point.fillStyle(0xff0000);
         point.fillCircle(x, y, 5);
-        this.points.add(point);
+        this.points.add(point); // Añade el punto al grupo
   
         const letter = String.fromCharCode(65 + this.points.getLength() - 1);
-        this.textContainer.text += letter + " ";
-        
-        // Agrega eventos para cambiar el color al pasar el cursor sobre el punto
-        point.setInteractive({ cursor: "pointer" });
-        point.on("pointerover", () => {
-          if (this.movePointActive) {
-            point.setTint(0x00ff00); // Cambia el color al pasar el cursor
-          }
-        });
-        point.on("pointerout", () => {
-          if (this.movePointActive && point !== this.selectedPoint) {
-            point.clearTint(); // Restaura el color original si no está seleccionado
-          }
-        });
-  
-        // Agrega evento para arrastrar el punto
-        point.on("pointerdown", () => {
-          if (this.movePointActive) {
-            this.selectedPoint = point;
-          }
-        });
+        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
       }
     }
   
-    movePoint() {
-      this.movePointActive = !this.movePointActive; // Activa/desactiva movePoint
-      if (!this.movePointActive && this.selectedPoint) {
-        this.selectedPoint.clearTint(); // Restaura el color si se desactiva movePoint mientras un punto está seleccionado
-        this.selectedPoint = null;
-      }
+    movePointActiveToggle(active) {
+      this.movePointActive = active;
     }
   }
   
