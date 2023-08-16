@@ -50,16 +50,23 @@ export class Point {
     }
   
     movePoint(x, y) { //aquí va la lógica del movimiento
-      console.log("movepoint") //verificación
+      //console.log("movepoint") //verificación
       for (const interactivePoint of this.interactivePoints) {
         if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
             console.log("punto overleado")
-          // El cursor está dentro del área de acción del punto interactivo, cambia el color del circulo que representa el punto, y si se hace clic y se arrastra,se mueve.
-          // ...
+            if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+                interactivePoint.point.clear();
+                interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
+                interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
         } else {
+            interactivePoint.point.clear();
+    interactivePoint.point.fillStyle(0xff0000); // Cambia el color de vuelta a rojo
+    interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+    
           // El cursor no está en el área de acción del punto interactivo
           // ...
         }
     }
     }
   }
+}
