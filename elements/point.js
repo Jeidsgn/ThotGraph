@@ -8,11 +8,15 @@ export class Point {
     this.scene.input.on("pointerdown", (pointer) => {
       this.elementalpointer = pointer;
     });
+    this.scene.input.on("pointerup", () => {
+        this.elementalpointer = null;
+    });
   }
   addName() {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
   }
   createPoint() {
+    if(this.elementalpointer){
       const x = this.elementalpointer.x || 0;
       const y = this.elementalpointer.y || 0;
       const point = this.scene.add.graphics();
@@ -22,6 +26,7 @@ export class Point {
 
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+    }
   }
 
   movePoint() {
