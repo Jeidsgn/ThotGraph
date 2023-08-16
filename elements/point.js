@@ -66,7 +66,6 @@ export class Point {
                     interactivePoint.y += dy;
                     interactivePoint.area.setPosition(interactivePoint.x - 10, interactivePoint.y - 8);
                     interactivePoint.point.clear();
-                    interactivePoint.point.fillStyle(0x00ff00); // Cambia el color mientras se arrastra
                     interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
                     this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
                   }
