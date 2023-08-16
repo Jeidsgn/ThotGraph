@@ -70,17 +70,11 @@ export class Point {
                     interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
                     this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
                   }
+                interactivePoint.point.fillStyle(0xff0000); // Cambia el color de vuelta a rojo
 
-                  
-            } else {            
-    interactivePoint.point.fillStyle(0xff0000); // Cambia el color de vuelta a rojo
-    interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-    interactivePoint.point.clear();
-    
-          // El cursor no está en el área de acción del punto interactivo
-          // ...
+
+            }
         }
-    }
     }
   }
 }
