@@ -1,17 +1,17 @@
+/* Resetear los márgenes y el relleno del cuerpo */
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffb65f;
-  }
-  
-  #game-container {
-    width: 100%; /* Cambio aquí para que ocupe todo el ancho */
-    max-width: 800px; /* Limitar el ancho máximo para una mejor visualización */
-    height: 600px;
-    background-color: #ffb65f;
-    border: 8px solid #723706;
-  }  
+  margin: 0;
+  padding: 0;
+  background-color: #ffb65f;
+}
+
+/* Establecer un ancho y alto del juego al 100% de la ventana */
+#game-container {
+  width: 100vw; /* Usar vw para el ancho */
+  height: 100vh; /* Usar vh para la altura */
+  background-color: #ffb65f;
+  border: 8px solid #723706;
+  display: flex; /* Utilizar flex para centrar contenido */
+  justify-content: center;
+  align-items: center;
+}
