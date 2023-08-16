@@ -47,7 +47,7 @@ export class Point {
     movePoint(x, y) { //aquí va la lógica del movimiento
       console.log("movepoint") //verificación
       for (const interactivePoint of this.interactivePoints) {
-        if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, pointer)) {
+        if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.elementalpointer)) {
             console.log("punto overleado")
           // El cursor está dentro del área de acción del punto interactivo
           // ...
