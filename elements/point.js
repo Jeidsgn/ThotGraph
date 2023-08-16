@@ -20,8 +20,13 @@ export class Point {
       // Configura el evento de movimiento del puntero para cambiar el color del punto al pasar sobre él
       this.scene.input.on("pointermove", (pointer) => {
         this.points.getChildren().forEach((point) => {
-          const hit = point.getBounds().contains(pointer.x, pointer.y);
-          point.fillStyle(hit ? 0x00ff00 : 0xff0000);
+          const distance = Phaser.Math.Distance.Between(
+            point.x,
+            point.y,
+            pointer.x,
+            pointer.y
+          );
+          point.fillStyle(distance < 10 ? 0x00ff00 : 0xff0000);
           point.clear();
           point.fillCircle(point.x, point.y, 5);
         });
@@ -49,8 +54,8 @@ export class Point {
   
     movePoint(x, y) {
       this.points.getChildren().forEach((point) => {
-        const hit = point.getBounds().contains(x, y);
-        point.fillStyle(hit ? 0x00ff00 : 0xff0000);
+        const distance = Phaser.Math.Distance.Between(point.x, point.y, x, y);
+        point.fillStyle(distance < 10 ? 0x00ff00 : 0xff0000);
         point.clear();
         point.fillCircle(point.x, point.y, 5);
       });
