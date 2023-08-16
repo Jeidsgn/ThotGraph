@@ -1,11 +1,10 @@
 export class Point {
     constructor(scene) {
       this.scene = scene;
-      this.points = []; // Almacena los puntos como objetos con sus propiedades
-      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
-      this.movePointActive = false; // Estado para indicar si la función movePoint está activa
+      this.points = [];
+      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" });
+      this.movePointActive = false;
   
-      // Configura el evento de clic en la escena para capturar el puntero
       this.scene.input.on("pointerdown", (pointer) => {
         this.elementalpointer = pointer;
         if (this.movePointActive) {
@@ -15,7 +14,7 @@ export class Point {
     }
   
     addName() {
-      this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
+      this.scene.elementNames.push("Point");
     }
   
     createPoint() {
@@ -26,7 +25,7 @@ export class Point {
         const point = this.scene.add.graphics();
         point.fillStyle(0xff0000);
         point.fillCircle(x, y, 5);
-        point.setInteractive({ useHandCursor: this.movePointActive }); // Hacer el punto interactivo solo si movePoint está activo
+        point.setInteractive({ useHandCursor: this.movePointActive });
   
         this.points.push({
           graphics: point,
@@ -35,14 +34,24 @@ export class Point {
         });
   
         const letter = String.fromCharCode(65 + this.points.length - 1);
-        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+        this.textContainer.text += letter + " ";
       }
     }
   
     movePoint() {
-      this.movePointActive = !this.movePointActive; // Cambiar el estado de movePoint
+      this.movePointActive = !this.movePointActive;
       this.points.forEach(point => {
-        point.graphics.setInteractive({ useHandCursor: this.movePointActive }); // Hacer los puntos interactivos o no según el estado de movePoint
+        point.graphics.setInteractive({ useHandCursor: this.movePointActive });
+        point.graphics.on("pointerover", () => {
+          if (this.movePointActive) {
+            point.graphics.fillColor = 0x00ff00;
+          }
+        });
+        point.graphics.on("pointerout", () => {
+          if (this.movePointActive) {
+            point.graphics.fillColor = 0xff0000;
+          }
+        });
       });
     }
   
@@ -54,9 +63,9 @@ export class Point {
   
       if (pointToMove) {
         this.selectedPoint = pointToMove;
-        this.scene.input.on("pointermove", this.moveSelectedPoint, this); // Agregar evento para mover el punto seleccionado
+        this.scene.input.on("pointermove", this.moveSelectedPoint, this);
         this.scene.input.once("pointerup", () => {
-          this.scene.input.off("pointermove", this.moveSelectedPoint, this); // Quitar evento de mover el punto al soltar el botón
+          this.scene.input.off("pointermove", this.moveSelectedPoint, this);
           this.selectedPoint = null;
         });
       }
