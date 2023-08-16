@@ -37,7 +37,7 @@ export class Point {
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
       // Crear un área cuadrada de acción
-      this.interactivePoints.push({ 
+      this.scene.interactivePoints.push({ 
         point: point, 
         x: x, 
         y: y, 
