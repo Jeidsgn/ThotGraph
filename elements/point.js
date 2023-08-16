@@ -1,40 +1,28 @@
 export class Point {
     constructor(scene) {
       this.scene = scene;
-      this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
-      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
-      this.isClicking = false; // Variable para controlar si se está haciendo clic
-      this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del puntero
+      this.points = scene.add.group();
+      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" });
+      this.isClicking = false;
+      this.elementalpointer = { x: 0, y: 0 };
+      this.interactivePoints = [];
   
-      // Configura el evento de clic en la escena para capturar el puntero
       this.scene.input.on("pointerdown", (pointer) => {
-        this.isClicking = true; // Se está haciendo clic
-        this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
+        this.isClicking = true;
+        this.elementalpointer = { x: pointer.x, y: pointer.y };
       });
   
-      // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
       this.scene.input.on("pointerup", () => {
-        this.isClicking = false; // No se está haciendo clic
+        this.isClicking = false;
       });
   
-      // Configura el evento de movimiento del puntero para cambiar el color del punto al pasar sobre él
       this.scene.input.on("pointermove", (pointer) => {
-        this.points.getChildren().forEach((point) => {
-          const distance = Phaser.Math.Distance.Between(
-            point.x,
-            point.y,
-            pointer.x,
-            pointer.y
-          );
-          point.fillStyle(distance < 10 ? 0x00ff00 : 0xff0000);
-          point.clear();
-          point.fillCircle(point.x, point.y, 5);
-        });
+        this.movePoint(pointer.x, pointer.y);
       });
     }
   
     addName() {
-      this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
+      this.scene.elementNames.push("Point");
     }
   
     createPoint() {
@@ -44,21 +32,41 @@ export class Point {
         const point = this.scene.add.graphics();
         point.fillStyle(0xff0000);
         point.fillCircle(x, y, 5);
-        this.points.add(point); // Añade el punto al grupo
+        this.points.add(point);
   
         const letter = String.fromCharCode(65 + this.points.getLength() - 1);
-        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-        this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
+        this.textContainer.text += letter + " ";
+  
+        this.interactivePoints.push({
+          circle: point,
+          isHovered: false
+        });
+  
+        this.isClicking = false;
       }
     }
   
     movePoint(x, y) {
-      this.points.getChildren().forEach((point) => {
-        const distance = Phaser.Math.Distance.Between(point.x, point.y, x, y);
-        point.fillStyle(distance < 10 ? 0x00ff00 : 0xff0000);
-        point.clear();
-        point.fillCircle(point.x, point.y, 5);
-      });
+      for (const interactivePoint of this.interactivePoints) {
+        const circle = interactivePoint.circle;
+        const distance = Phaser.Math.Distance.Between(x, y, circle.x, circle.y);
+  
+        if (distance <= 5) {
+          if (!interactivePoint.isHovered) {
+            interactivePoint.isHovered = true;
+            circle.clear();
+            circle.fillStyle(0x00ff00);
+            circle.fillCircle(circle.x, circle.y, 5);
+          }
+        } else {
+          if (interactivePoint.isHovered) {
+            interactivePoint.isHovered = false;
+            circle.clear();
+            circle.fillStyle(0xff0000);
+            circle.fillCircle(circle.x, circle.y, 5);
+          }
+        }
+      }
     }
   }
   
