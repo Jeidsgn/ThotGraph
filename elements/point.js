@@ -54,7 +54,7 @@ export class Point {
       for (const interactivePoint of this.interactivePoints) {
         if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
             console.log("punto overleado")
-          // El cursor está dentro del área de acción del punto interactivo
+          // El cursor está dentro del área de acción del punto interactivo, cambia el color del circulo que representa el punto, y si se hace clic y se arrastra,se mueve.
           // ...
         } else {
           // El cursor no está en el área de acción del punto interactivo
