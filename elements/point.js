@@ -26,29 +26,19 @@ export class Point {
     }
   }
 
-  movePoint() {
-    this.points.getChildren().forEach(point => {
-      point.setInteractive();
-  
-      point.on('pointerdown', (pointer) => {
-        this.selectedPoint = point;
-        this.offsetX = pointer.x - point.x;
-        this.offsetY = pointer.y - point.y;
-      });
-  
-      this.scene.input.on('pointermove', (pointer) => {
-        if (this.selectedPoint) {
-          this.selectedPoint.x = pointer.x - this.offsetX;
-          this.selectedPoint.y = pointer.y - this.offsetY;
-        }
-      });
-  
-      this.scene.input.on('pointerup', () => {
-        this.selectedPoint = null;
-      });
-    });
+  movePoint() {      
+    point.on("pointerover", () => this.onPointPointerOver(point));
+    point.on("pointerout", () => this.onPointPointerOut(point));
   }
-  
+  onPointPointerOver(point) {
+    point.fillStyle(0x00ff00); // Cambiar color al pasar el cursor por encima
+    point.fillCircle(point.x, point.y, 5);
+  }
+
+  onPointPointerOut(point) {
+    point.fillStyle(0xff0000); // Cambiar color al salir del cursor
+    point.fillCircle(point.x, point.y, 5);
+  }  
   
   
   
