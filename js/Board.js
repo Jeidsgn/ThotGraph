@@ -45,7 +45,10 @@ export class Board extends Phaser.Scene {
         }
       } else if (this.isDrawingEnabled && this.waitingForClick) {
         // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
-        this.waitingForClick = false;
+        this.input.on("pointerdown", () => {
+            this.waitingForClick = false;
+          });
+        
       }
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
