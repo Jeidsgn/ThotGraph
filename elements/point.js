@@ -62,7 +62,7 @@ export class Point {
         console.log("punto overleado");
         interactivePoint.point.clear();
         interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-        interactivePoint.point.fillCircle( interactivePoint.x, nteractivePoint.y, 5 );
+        interactivePoint.point.fillCircle( interactivePoint.x, interactivePoint.y, 5 );
         if (this.isClicking) {
           const dx = this.pointermove.x - this.elementalpointer.x;
           const dy = this.pointermove.y - this.elementalpointer.y;
