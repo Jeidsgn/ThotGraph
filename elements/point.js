@@ -2,6 +2,7 @@ export class Point {
     constructor(scene) {
       this.scene = scene;
       this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
+      this.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
       this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
       this.isClicking = false; // Variable para controlar si se está haciendo clic
       this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -30,6 +31,12 @@ export class Point {
         point.fillStyle(0xff0000);
         point.fillCircle(x, y, 5);
         this.points.add(point); // Añade el punto al grupo
+        this.interactivePoints.push({
+            point: point,
+            x: x,
+            y: y,
+            area: new Phaser.Geom.Rectangle(x - 10, y - 8, 20, 23) // Crear un área cuadrada de acción
+          });
   
         const letter = String.fromCharCode(65 + this.points.getLength() - 1);
         this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
@@ -39,5 +46,14 @@ export class Point {
   
     movePoint(x, y) { //aquí va la lógica del movimiento
       console.log("movepoint") //verificación
+      for (const interactivePoint of this.interactivePoints) {
+        if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, pointer)) {
+            console.log("punto overleado")
+          // El cursor está dentro del área de acción del punto interactivo
+          // ...
+        } else {
+          // El cursor no está en el área de acción del punto interactivo
+          // ...
+        }
     }
   }
