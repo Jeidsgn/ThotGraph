@@ -14,7 +14,9 @@ export class Point {
       });
   
       // Agregar evento para cambiar el color del punto al pasar el cursor por encima
-      this.points.setInteractive({ useHandCursor: true });
+      this.points.getChildren().forEach(point => {
+        point.setInteractive({ useHandCursor: this.movePointActive }); // Hacer los puntos interactivos o no según el estado de movePoint
+      });
       this.points.on("pointerover", (pointer, gameObject) => {
         if (this.movePointActive) {
           gameObject.fillColor = 0x00ff00; // Cambia el color del punto al pasar el cursor por encima
