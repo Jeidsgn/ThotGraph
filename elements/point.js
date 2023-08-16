@@ -8,9 +8,9 @@ export class Point {
       this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del puntero
   
       // Configura el evento de clic en la escena para capturar el puntero
-      this.scene.input.on("pointerdown", (pointer) => {
+      this.scene.input.on("pointermove", (pointer) => {
         this.isClicking = true; // Se está haciendo clic
-        this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
+        this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
       });
   
       // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
@@ -45,9 +45,9 @@ export class Point {
     }
   
     movePoint(x, y) { //aquí va la lógica del movimiento
-      console.log("movepoint") //verificación
+      //console.log("movepoint") //verificación
       for (const interactivePoint of this.interactivePoints) {
-        if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.elementalpointer)) {
+        if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
             console.log("punto overleado")
           // El cursor está dentro del área de acción del punto interactivo
           // ...
