@@ -58,7 +58,6 @@ export class Point {
                 interactivePoint.point.clear();
                 interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
                 interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-
                 if (this.isClicking) {
                     const dx = this.pointermove.x - this.elementalpointer.x;
                     const dy = this.pointermove.y - this.elementalpointer.y;
@@ -69,7 +68,7 @@ export class Point {
                     interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
                     this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
                   }
-                interactivePoint.point.fillStyle(0xff0000); // Cambia el color de vuelta a rojo
+                interactivePoint.point.clear(); // Cambia el color de vuelta a rojo
 
 
             }
