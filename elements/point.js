@@ -69,6 +69,7 @@ export class Point {
                     this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
                   }
                 interactivePoint.point.clear(); // Cambia el color de vuelta a rojo
+                interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
 
 
             }
