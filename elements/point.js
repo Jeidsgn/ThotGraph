@@ -58,10 +58,24 @@ export class Point {
                 interactivePoint.point.clear();
                 interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
                 interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-        } else {
-            interactivePoint.point.clear();
+
+                if (this.isClicking) {
+                    const dx = this.pointermove.x - this.elementalpointer.x;
+                    const dy = this.pointermove.y - this.elementalpointer.y;
+                    interactivePoint.x += dx;
+                    interactivePoint.y += dy;
+                    interactivePoint.area.setPosition(interactivePoint.x - 10, interactivePoint.y - 8);
+                    interactivePoint.point.clear();
+                    interactivePoint.point.fillStyle(0x00ff00); // Cambia el color mientras se arrastra
+                    interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+                    this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
+                  }
+
+                  
+            } else {            
     interactivePoint.point.fillStyle(0xff0000); // Cambia el color de vuelta a rojo
     interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+    interactivePoint.point.clear();
     
           // El cursor no está en el área de acción del punto interactivo
           // ...
