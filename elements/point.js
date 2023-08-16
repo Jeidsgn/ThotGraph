@@ -55,7 +55,7 @@ export class Point {
   
     selectPoint(pointer) {
       // Encuentra el punto más cercano al puntero y lo selecciona
-      const closestPoint = this.points.getClosest(pointer.x, pointer.y);
+      const closestPoint = this.getClosestPoint(pointer.x, pointer.y);
       if (closestPoint) {
         if (this.selectedPoint) {
           this.selectedPoint.clearTint(); // Limpia el tinte del punto previamente seleccionado
@@ -74,7 +74,7 @@ export class Point {
   
     highlightPointOnHover(pointer) {
       // Cambia el color del punto al pasar el cursor por encima
-      const hoveredPoint = this.points.getClosest(pointer.x, pointer.y);
+      const hoveredPoint = this.getClosestPoint(pointer.x, pointer.y);
       this.points.getChildren().forEach(point => {
         if (point === hoveredPoint) {
           point.setTint(0xffff00); // Aplica un tinte amarillo al punto sobre el cual está el cursor
@@ -82,6 +82,21 @@ export class Point {
           point.clearTint(); // Limpia el tinte de otros puntos
         }
       });
+    }
+  
+    getClosestPoint(x, y) {
+      let closestPoint = null;
+      let closestDistance = Number.MAX_VALUE;
+  
+      this.points.getChildren().forEach(point => {
+        const distance = Phaser.Math.Distance.Between(x, y, point.x, point.y);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestPoint = point;
+        }
+      });
+  
+      return closestPoint;
     }
   }
   
