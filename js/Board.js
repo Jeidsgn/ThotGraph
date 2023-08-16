@@ -31,13 +31,7 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Configura el evento de clic en el contenedor (tablero)
-    this.input.on("pointerdown", (pointer) => {
-        this.pointer = pointer;
-        this.BoardClic(); // Llamamos a BoardClic directamente aquí
-      });
-    this.input.on("pointerup", () => {
-        this.pointer = null; // Clear the pointer when released
-    });
+    this.BoardClic(); // Llamamos a BoardClic directamente aquí
   }
 
   // Función de actualización que se ejecuta en cada frame
