@@ -37,17 +37,7 @@ export class Point {
     }
   }
 
-  movePoint(index, x, y) {
-    point.setInteractive(); // Hacer el punto interactivo
-    point.on("pointerover", () => {
-      point.clear();
-      point.fillStyle(0x00ff00); // Cambiar color al pasar el cursor por encima
-      point.fillCircle(x, y, 5);
-    });
-    point.on("pointerout", () => {
-      point.clear();
-      point.fillStyle(0xff0000); // Restaurar color al sacar el cursor
-      point.fillCircle(x, y, 5);
-    });
+  movePoint(x, y) { //aquí va la lógica del movimiento
+    console.log("movepoint") //verificación
   }
 }
