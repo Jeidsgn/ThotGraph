@@ -31,34 +31,25 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Configura el evento de clic en el contenedor (tablero)
-    this.input.on("pointerdown", (pointer) => {
-        this.pointer = pointer;
-        this.BoardClic(); // Llamamos a BoardClic directamente aquí
-      });
-    this.input.on("pointerup", () => {
-        this.pointer = null; // Clear the pointer when released
-    });
+    
   }
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    if (this.isDrawingEnabled && !this.waitingForClick) {
+        // Llama a la función activa correspondiente
+        if (this.activeButtonCallback) {  // Comprobamos si la función está definida
+          this.activeButtonCallback();  // Ejecutamos la función activa
+        } else {
+          console.log("Error en activeButtonCallback");
+        }
+      } else if (this.isDrawingEnabled && this.waitingForClick) {
+        // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
+        this.waitingForClick = false;
+      }
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
 
-  // Función para manejar el clic en el tablero
-  BoardClic() {
-    if (this.isDrawingEnabled && !this.waitingForClick) {
-      // Llama a la función activa correspondiente
-      if (this.activeButtonCallback) {  // Comprobamos si la función está definida
-        this.activeButtonCallback();  // Ejecutamos la función activa
-      } else {
-        console.log("Error en activeButtonCallback");
-      }
-    } else if (this.isDrawingEnabled && this.waitingForClick) {
-      // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
-      this.waitingForClick = false;
-    }
-  }
   
 }
