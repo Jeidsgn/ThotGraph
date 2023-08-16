@@ -20,6 +20,7 @@ export class Point {
       // Configura el evento de liberación del puntero para dejar de mover el punto
       this.scene.input.on("pointerup", () => {
         this.selectedPoint = null;
+        this.elementalpointer = "null";
       });
     }
   
@@ -28,7 +29,7 @@ export class Point {
     }
   
     createPoint() {
-      if (this.elementalpointer) {
+      if (this.elementalpointer == "null") {
         const x = this.elementalpointer.x || 0;
         const y = this.elementalpointer.y || 0;
         const point = this.scene.add.graphics();
