@@ -31,18 +31,20 @@ export class Point {
     }
   
     createPoint() {
-      if (this.elementalpointer) {
-        const x = this.elementalpointer.x || 0;
-        const y = this.elementalpointer.y || 0;
-        const point = this.scene.add.graphics();
-        point.fillStyle(0xff0000);
-        point.fillCircle(x, y, 5);
-        this.points.add(point); // Añade el punto al grupo
-  
-        const letter = String.fromCharCode(65 + this.points.getLength() - 1);
-        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+        if (this.elementalpointer) {
+          const x = this.elementalpointer.x || 0;
+          const y = this.elementalpointer.y || 0;
+          
+          const point = this.scene.add.graphics();
+          point.fillStyle(0xff0000);
+          point.fillCircle(x, y, 5);
+          this.points.add(point); // Añade el punto al grupo
+      
+          const letter = String.fromCharCode(65 + this.points.getChildren().length - 1);
+          this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+        }
       }
-    }
+      
   
     movePoint() {
       this.movePointActive = !this.movePointActive; // Alterna el estado de la función movePoint
