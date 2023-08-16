@@ -3,10 +3,16 @@ export class Point {
       this.scene = scene;
       this.points = scene.add.group();
       this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" });
-      this.letterIndex = 0; // Inicializamos el índice para las letras
+  
+      this.isPointerDown = false;
+  
       this.scene.input.on("pointerdown", (pointer) => {
         this.elementalpointer = pointer;
-        this.createPoint();
+        this.isPointerDown = true;
+      });
+  
+      this.scene.input.on("pointerup", () => {
+        this.isPointerDown = false;
       });
     }
   
@@ -15,7 +21,7 @@ export class Point {
     }
   
     createPoint() {
-      if (this.elementalpointer) {
+      if (this.isPointerDown && this.elementalpointer) {
         const x = this.elementalpointer.x || 0;
         const y = this.elementalpointer.y || 0;
         const point = this.scene.add.graphics();
@@ -23,8 +29,7 @@ export class Point {
         point.fillCircle(x, y, 5);
         this.points.add(point);
   
-        const letter = String.fromCharCode(65 + this.letterIndex);
-        this.letterIndex++;
+        const letter = String.fromCharCode(65 + this.points.getLength() - 1);
         this.textContainer.text += letter + " ";
       }
     }
