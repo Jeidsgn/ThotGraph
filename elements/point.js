@@ -49,7 +49,7 @@ export class Point {
     }
   }
 
-  movePoint(x, y) {
+  movePoint() {
     // Esta función mueve los puntos interactivos en función de las interacciones del usuario
   
     // Itera a través de los puntos interactivos en la escena

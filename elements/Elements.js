@@ -15,7 +15,7 @@ export class Element {
           this.scene.elements.point.createPoint(); 
       },
       "Mover": () => {
-          this.scene.elements.point.movePoint();
+          this.scene.elements.point.moveElement();
       },
       "Segment": () => {
           this.scene.elements.point.createSegment();
@@ -32,9 +32,9 @@ export class Element {
   } 
 
   // Crea un nuevo elemento
-  createElement (){
+  moveElement (){
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    this.point.createPoint(null);
+    this.point.movePoint();
   }
   
   // Puedes agregar métodos comunes a todos los elementos aquí
