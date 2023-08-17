@@ -24,6 +24,7 @@ export class Segment {
         // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
+            this.draggingPoint = null;
         });
     }
 
@@ -62,7 +63,7 @@ export class Segment {
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
                         console.log("x inicial "+this.pointA.x);                        
                     }
-                }
+                
                 // Si se está arrastrando el punto actual, actualiza su posición
                 if (this.draggingPoint === interactivePoint) {
                     console.log("x entrando en el drag "+this.pointA.x);
@@ -88,6 +89,7 @@ export class Segment {
                     this.segment.strokeLineShape(this.line);
                     
                 }
+            }
                  
             }
             else {
