@@ -46,7 +46,7 @@ export class Segment {
                 );
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
-                    if (!this.draggingPoint) {
+                    if (this.draggingPoint == null) {
                         console.log("!this.draggingPoint");
                         this.pointA = interactivePoint;
                         this.pointA.point.fillStyle(0x732c02);
