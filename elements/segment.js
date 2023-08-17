@@ -33,72 +33,47 @@ export class Segment {
     }
 
     createSegment() {
-        // Itera a través de los puntos interactivos en la escena
-        for (const interactivePoint of this.scene.interactivePoints) {
-            if (this.draggingPoint == null){
-                this.pointA = interactivePoint;
-            };
-            
-            // Verifica si el puntero se encuentra dentro del área del punto interactivo
-            if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                // Cambia el aspecto visual del punto interactivo
-                interactivePoint.point.clear();
-                interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-                interactivePoint.point.fillCircle(
-                    interactivePoint.x,
-                    interactivePoint.y,
-                    5
-                );
-                // Verifica si el usuario está haciendo clic
-                if (this.isClicking) {
-                    if (this.draggingPoint == null) {                
-                        this.pointA.point.fillStyle(0x732c02);
-                        this.pointA.point.fillCircle(
-                            this.pointA.x,
-                            this.pointA.y,
-                            5
-                        );
-                        this.draggingPoint = interactivePoint;
-                        this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
-                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
-                        console.log("x inicial "+this.pointA.x);                        
+            if (this.isClicking && this.draggingPoint == null) {
+                for (const interactivePoint of this.scene.interactivePoints) {
+                    if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+                        this.pointA = interactivePoint;
+                        break; // Sal del bucle una vez que se haya encontrado el punto A
                     }
-                
-                // Si se está arrastrando el punto actual, actualiza su posición
-                if (this.draggingPoint === interactivePoint) {
-                    console.log("x entrando en el drag "+this.pointA.x);
-                    const newPointX = this.pointermove.x - this.draggingOffsetX;
-                    const newPointY = this.pointermove.y - this.draggingOffsetY;
-
-                    // Actualiza la posición del punto interactivo
-                    interactivePoint.x = newPointX;
-                    interactivePoint.y = newPointY;
-                    interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);                    
-
-                    // Actualiza el aspecto visual del punto mientras se mueve
-                    this.segment = this.scene.add.graphics();
-                    this.segment.clear();
-                    this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
-                    this.line = new Phaser.Geom.Line(
-                        newPointX,
-                        newPointY,
-                        this.pointA.x,
-                        this.pointA.y
-                    );
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
-                    this.segment.strokeLineShape(this.line);
-                    
                 }
             }
-                 
+    
+            if (this.pointA) {
+                if (this.draggingPoint == null) {
+                    this.pointA.point.fillStyle(0x732c02);
+                    this.pointA.point.fillCircle(this.pointA.x, this.pointA.y, 5);
+                }
+    
+                if (this.draggingPoint === this.pointA) {
+                    const newPointX = this.pointermove.x - this.draggingOffsetX;
+                    const newPointY = this.pointermove.y - this.draggingOffsetY;
+    
+                    // Actualiza la posición del punto B
+                    this.pointB = { x: newPointX, y: newPointY };
+    
+                    // Actualiza la línea con los nuevos puntos
+                    this.line.setTo(this.pointA.x, this.pointA.y, this.pointB.x, this.pointB.y);
+    
+                    // Limpia y dibuja la línea
+                    this.segment.clear();
+                    this.segment.strokeLineShape(this.line);
+    
+                    console.log(
+                        Phaser.Math.Distance.Between(
+                            this.pointA.x,
+                            this.pointA.y,
+                            this.pointB.x,
+                            this.pointB.y
+                        )
+                    );
+                }
             }
-            else {
-                // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
-                interactivePoint.point.clear();
-                interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
-                interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-            }
+    
+            // ... (resto de la lógica para actualizar la apariencia de los puntos interactivos)
         }
-
-    }
+    
 }
