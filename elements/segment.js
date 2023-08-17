@@ -33,7 +33,7 @@ export class Segment {
     }
 
     createSegment() {
-        if (this.isClicking && this.draggingPoint == null) {
+        if (this.isClicking && this.pointA == null) {
             for (const interactivePoint of this.scene.interactivePoints) {
                 if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                     this.pointA = interactivePoint;                                    
@@ -55,7 +55,6 @@ export class Segment {
         for (const interactivePoint of this.scene.interactivePoints) {            
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                if (this.pointA){ console.log("x entrando en el over "+this.pointA.x)};
                
                 // Cambia el aspecto visual del punto interactivo
                 interactivePoint.point.clear();
