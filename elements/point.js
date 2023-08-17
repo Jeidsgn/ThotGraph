@@ -55,7 +55,7 @@ export class Point {
     // Itera a través de los puntos interactivos en la escena
     for (const interactivePoint of this.scene.interactivePoints) {
       // Verifica si el puntero se encuentra dentro del área del punto interactivo
-      if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+      if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, pointer)) {
         // Si el puntero está sobre el punto interactivo
   
         // Cambia el aspecto visual del punto interactivo
@@ -68,15 +68,15 @@ export class Point {
           // Si no se está arrastrando ningún punto, comienza el proceso de arrastre
           if (!this.draggingPoint) {
             this.draggingPoint = interactivePoint;
-            this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
-            this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
+            this.draggingOffsetX = pointer.x - interactivePoint.x;
+            this.draggingOffsetY = pointer.y - interactivePoint.y;
           }
         }
   
         // Si se está arrastrando el punto actual, actualiza su posición
         if (this.draggingPoint === interactivePoint) {
-          const newPointX = this.pointermove.x - this.draggingOffsetX;
-          const newPointY = this.pointermove.y - this.draggingOffsetY;
+          const newPointX = pointer.x - this.draggingOffsetX;
+          const newPointY = pointer.y - this.draggingOffsetY;
   
           // Actualiza la posición del punto interactivo
           interactivePoint.x = newPointX;
@@ -90,8 +90,8 @@ export class Point {
   
           // Actualiza la posición del puntero elemental
           this.elementalpointer = {
-            x: this.pointermove.x,
-            y: this.pointermove.y,
+            x: pointer.x,
+            y: pointer.y,
           };
         }
       } else {
