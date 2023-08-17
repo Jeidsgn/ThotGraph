@@ -32,8 +32,28 @@ export class Segment {
         this.scene.elementNames.push("Segment"); // Agrega el nombre al array de nombres de elementos en la escena
     }
 
+    Startpoint(interactivePoint){
+        
+        if(this.PointB == null){
+            const pt = interactivePoint;
+        }else{
+            const pt = this.pointA;
+        }
+        return pt
+    }
+
+    Startpoint(interactivePoint){
+        
+        if(this.PointB == null){
+            const pt = interactivePoint;
+        }else{
+            const pt = this.pointA;
+        }
+        return pt
+    }
+
     createSegment() {
-        if (this.pointA == null) {
+        if (this.pointB == null) {
             for (const interactivePoint of this.scene.interactivePoints) {
                 if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                     this.pointA = interactivePoint;
