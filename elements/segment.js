@@ -71,8 +71,8 @@ export class Segment {
                         interactivePoint.point.fillRect(
                             newPointX,
                             newPointY,
-                            pointA.x,
-                            pointA.y
+                            this.pointA.x,
+                            this.pointA.y
                         );
 
                         // Actualiza la posición del puntero elemental
