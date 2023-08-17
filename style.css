@@ -7,8 +7,8 @@ body {
 
 /* Establecer un ancho y alto del juego al 100% de la ventana */
 #game-container {
-  width: 100vw; /* Usar vw para el ancho */
-  height: 100vh; /* Usar vh para la altura */
+  width: 100vw*0.9; /* Usar vw para el ancho */
+  height: 100vh*0.9; /* Usar vh para la altura */
   background-color: #ffb65f;
   border: 8px solid #723706;
   display: flex; /* Utilizar flex para centrar contenido */
