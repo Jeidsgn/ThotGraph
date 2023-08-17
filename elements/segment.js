@@ -66,6 +66,7 @@ export class Segment {
                         interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
 
                         // Actualiza el aspecto visual del punto mientras se mueve
+                        this.segment = this.scene.add.graphics();
                         this.segment.clear();
                         this.segment = this.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                         this.line = new Phaser.Geom.Line(
