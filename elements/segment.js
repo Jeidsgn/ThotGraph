@@ -50,7 +50,7 @@ export class Segment {
                         this.pointA = interactivePoint;
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
-                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
+                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;                        
                     }
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
@@ -64,9 +64,15 @@ export class Segment {
                     interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
 
                     // Actualiza el aspecto visual del punto mientras se mueve
-                    interactivePoint.point.clear();
-                    interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
-                    interactivePoint.point.fillCircle(newPointX, newPointY, 5);
+                    this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+                    this.line = new Phaser.Geom.Line(
+                        newPointX,
+                        newPointY,
+                        this.pointA.x,
+                        this.pointA.y
+                    );
+                    this.segment.strokeLineShape(this.line);
+                    this.segment.clear();
 
                     // Actualiza la posición del puntero elemental
                     this.elementalpointer = {
@@ -74,7 +80,7 @@ export class Segment {
                         y: this.pointermove.y,
                     };
                 }
-
+                 
             }
             else {
                 // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
