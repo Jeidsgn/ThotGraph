@@ -65,7 +65,8 @@ export class Segment {
                     5
                 );
                 // Verifica si el usuario está haciendo clic
-                if (this.isClicking && this.draggingPoint == interactivePoint) {                    
+                if (this.isClicking && this.draggingPoint == interactivePoint) {    
+                    console.log("x inicial "+this.pointA.x);                  
                     const newPointX = this.pointermove.x - this.draggingOffsetX;
                     const newPointY = this.pointermove.y - this.draggingOffsetY;
                     // Actualiza la posición del punto interactivo
