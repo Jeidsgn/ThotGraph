@@ -20,17 +20,16 @@ export class Board extends Phaser.Scene {
     this.elements.Names();
   }
 
-  // Precarga de recursos (imágenes, sprites, etc.)
   preload() {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
   }
 
   // Función que se ejecuta al crearse la escena
   create() {
-    this.game.backgroundColor = "#F2E18D";
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
-    // Configura el evento de clic en el contenedor (tablero)
+    // Establece el color de fondo
+    this.cameras.main.setBackgroundColor("#F2E18D");
     
   }
 
