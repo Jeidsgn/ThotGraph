@@ -13,29 +13,28 @@ export class ToolBox {
     this.createDependentButtons();
   }
 
-  // Crea los botones base y los agrega al cuadro de herramientas
   createBaseButtons() {
     const moveButton = this.scene.add
-      .text(10, 550, "Mover", { fill: "#000000", fontSize: "18px", fontWeight: "bold" })  // Aumenta el tamaño y aplica negrita
+      .text(10, 550, "Mover", { fill: "#000000", fontSize: "18px", fontWeight: "bold" })
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
-
-    this.scene.toolboxButtons.push(moveButton); // Agrega el botón al array en la escena
+  
+    this.scene.toolboxButtons.push(moveButton);
   }
-
-  // Crea los botones dependientes según los elementos disponibles y los agrega al cuadro de herramientas
+  
   createDependentButtons() {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       const button = this.scene.add
-        .text(100 + i * 100, 550, this.scene.elementNames[i], { fill: "#000000", fontSize: "16px", fontWeight: "bold" })
+        .text(100 + i * 100, 550, this.scene.elementNames[i], {  fill: "#000000",  fontSize: "18px",  fontWeight: "bold"})
         .setInteractive()
         .on("pointerdown", () =>
           this.activateButton(this.scene.elementNames[i])
         );
-
-      this.scene.toolboxButtons.push(button); // Agrega el botón al array en la escena
+  
+      this.scene.toolboxButtons.push(button);
     }
   }
+  
 
   activateButton(buttonName) {
     if (this.scene.activeButton) {

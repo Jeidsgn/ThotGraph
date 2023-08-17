@@ -96,7 +96,7 @@ export class Point {
       interactivePoint.point.clear();
       interactivePoint.point.fillStyle(0x732c02); // Cambia el color aL origial
       interactivePoint.point.fillCircle(
-        interactivePoint.x, interactivePoint.y, 5);
+      interactivePoint.x, interactivePoint.y, 5);
       }
     }
     if (!this.isClicking) {
