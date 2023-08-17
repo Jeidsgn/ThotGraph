@@ -2,7 +2,6 @@ export class Point {
   constructor(scene) {
     this.scene = scene;
     this.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
-    this.scene.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.textContainer = scene.add.text(10, 10, "", { fill: "#000000" }); // Contenedor de texto para las letras de los puntos
     this.isClicking = false; // Variable para controlar si se está haciendo clic
     this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del clic
