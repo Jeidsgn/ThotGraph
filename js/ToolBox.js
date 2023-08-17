@@ -16,7 +16,7 @@ export class ToolBox {
   // Crea los botones base y los agrega al cuadro de herramientas
   createBaseButtons() {
     const moveButton = this.scene.add
-      .text(10, 550, "Mover", { fill: "#ffffff" })
+      .text(10, 550, "Mover", { fill: "#000000" })
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
 
@@ -28,7 +28,7 @@ export class ToolBox {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       const button = this.scene.add
         .text(100 + i * 100, 550, this.scene.elementNames[i], {
-          fill: "#ffffff",
+          fill: "#000000",
         })
         .setInteractive()
         .on("pointerdown", () =>
@@ -41,7 +41,7 @@ export class ToolBox {
 
   activateButton(buttonName) {
     if (this.scene.activeButton) {
-      this.scene.activeButton.setStyle({ fill: "#ffffff" });
+      this.scene.activeButton.setStyle({ fill: "#f000000" });
     }
 
     this.scene.activeButton = this.scene.toolboxButtons.find(
