@@ -20,6 +20,29 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
+    addName() {
+        this.scene.elementNames.push("Segment"); // Agrega el nombre al array de nombres de elementos en la escena
+    }
+
+    Startpoint(interactivePoint) {
+
+        if (this.PointB == null) {
+            const pt = interactivePoint;
+        } else {
+            const pt = this.pointA;
+        }
+        return pt
+    }
+
+    Startpoint(interactivePoint) {
+
+        if (this.PointB == null) {
+            const pt = interactivePoint;
+        } else {
+            const pt = this.pointA;
+        }
+        return pt
+    }
 
     createSegment() {
         // Verifica si hay un punto almacenado como punto de inicio del segmento
