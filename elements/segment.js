@@ -48,7 +48,7 @@ export class Segment {
                 if (this.isClicking) {
                     if (!this.draggingPoint) {
                         console.log("!this.draggingPoint");
-                        this.pointA.x = interactivePoint.x;
+                        this.pointA = interactivePoint;
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;                        
