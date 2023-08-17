@@ -33,7 +33,7 @@ export class Segment {
     }
 
     createSegment() {
-        if (this.isClicking && this.pointA == null) {
+        if (this.pointA == null) {
             for (const interactivePoint of this.scene.interactivePoints) {
                 if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                     this.pointA = interactivePoint;                                    
