@@ -21,7 +21,7 @@ export class Element {
           this.scene.elements.point.createSegment();
       },
     };
-    this.functions[buttonName]
+    this.functions[buttonName];
   }
 
   // Agrega nombres a los elementos
