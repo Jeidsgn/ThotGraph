@@ -33,6 +33,7 @@ export class Segment {
     createSegment() {
         // Itera a través de los puntos interactivos en la escena
         for (const interactivePoint of this.scene.interactivePoints) {
+            const pointA = interactivePoint;
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                 // Cambia el aspecto visual del punto interactivo
@@ -45,9 +46,7 @@ export class Segment {
                 );
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
-                    if (this.draggingPoint == null) {
-                        
-                        const pointA = interactivePoint;
+                    if (this.draggingPoint == null) {                        
                         pointA.point.fillStyle(0x732c02);
                         pointA.point.fillCircle(
                             pointA.x,
