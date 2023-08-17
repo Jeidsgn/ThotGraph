@@ -59,29 +59,27 @@ export class Point {
           this.pointermove
         )
       ) {
-        interactivePoint.point.clear();
-        interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-        
         if (this.isClicking) {
           const dx = this.pointermove.x - this.elementalpointer.x;
           const dy = this.pointermove.y - this.elementalpointer.y;
           interactivePoint.x += dx;
           interactivePoint.y += dy;
           interactivePoint.area.setPosition(interactivePoint.x - 10, interactivePoint.y - 8);
-          interactivePoint.point.clear();
-          interactivePoint.point.fillStyle(0x00ff00); // Mantén el color en verde mientras se mueve
-          interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
           this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
         }
+  
+        interactivePoint.point.clear(); // Limpia el punto
+        interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
+        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
         
         this.selectedPoints.add(interactivePoint.point); // Agrega el punto al grupo de selección
       } else {
-        interactivePoint.point.clear();
+        interactivePoint.point.clear(); // Limpia el punto
         interactivePoint.point.fillStyle(0xff0000); // Cambia el color a rojo
         interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
       }
     }
   }
+  
   
 }
