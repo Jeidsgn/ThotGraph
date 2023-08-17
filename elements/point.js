@@ -60,14 +60,19 @@ export class Point {
           ) {
             if (this.isClicking) {
               if (!this.draggingPoint) {
-                this.draggingPoint = interactivePoint; // Almacenar el punto que estás moviendo
+                this.draggingPoint = interactivePoint;
                 this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                 this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
               }
             }
             
             interactivePoint.point.clear();
-            interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
+            if (this.draggingPoint === interactivePoint) {
+              // Cambiar el color solo del punto seleccionado mientras lo mueves
+              interactivePoint.point.fillStyle(0x00ff00);
+            } else {
+              interactivePoint.point.fillStyle(0xff0000);
+            }
             interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
       
             if (this.isClicking && this.draggingPoint === interactivePoint) {
@@ -79,20 +84,28 @@ export class Point {
               interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
               
               interactivePoint.point.clear();
+              interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
               interactivePoint.point.fillCircle(newPointX, newPointY, 5);
               
               this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
             }
           } else {
-            interactivePoint.point.clear(); // Cambia el color de vuelta a rojo
+            interactivePoint.point.clear();
+            interactivePoint.point.fillStyle(0xff0000);
             interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
           }
         }
         
-        // Si has soltado el mouse, restablece la información del punto en movimiento
+        // Restablecer la información del punto en movimiento si se suelta el clic del mouse
         if (!this.isClicking) {
           this.draggingPoint = null;
         }
       }
+
+      
+
+
+
+      
       
   }
