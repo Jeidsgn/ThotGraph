@@ -55,7 +55,6 @@ export class Segment {
         for (const interactivePoint of this.scene.interactivePoints) {            
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-               
                 // Cambia el aspecto visual del punto interactivo
                 interactivePoint.point.clear();
                 interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
