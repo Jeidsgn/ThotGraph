@@ -1,10 +1,13 @@
+import { Element } from "../elements/Elements.js";
+
 export class ToolBox {
   constructor(scene) {
     this.scene = scene;
+    this.elements = new Element(scene);
     this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
     this.scene.activeButton = null; // Referencia al botón activo en el cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
-    this.buttonToFunction = this.scene.buttonToFunction
+    this.buttonToFunction = this.scene.buttonToFunction;
   }
 
   // Crea los botones en el cuadro de herramientas
@@ -53,7 +56,7 @@ export class ToolBox {
       this.scene.waitingForClick = true;
 
       /// Almacena el nombre de la función en una variable
-      this.scene.activeButtonCallback = this.buttonToFunction[buttonName];
+      this.scene.activeButtonCallback = this.elements.buttonToFunction(buttonName);
     }
   }
 }

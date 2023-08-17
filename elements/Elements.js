@@ -7,8 +7,10 @@ export class Element {
     // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.point = new Point(scene);
     this.segment = new Segment(scene);
+  }
+  buttonToFunction(buttonName){
     // Define un objeto de mapeo entre nombres de botones y funciones
-    this.scene.buttonToFunction = {
+    this.functions = {
       "Point": () => {
           this.scene.elements.point.createPoint(); 
       },
@@ -18,8 +20,8 @@ export class Element {
       "Segment": () => {
           this.scene.elements.point.createSegment();
       },
-      // Agrega más mapeos para otros botones y funciones
     };
+    this.functions[buttonName]
   }
 
   // Agrega nombres a los elementos
