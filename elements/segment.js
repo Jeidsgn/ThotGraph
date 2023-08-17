@@ -31,6 +31,10 @@ export class Segment {
     }
 
     createSegment() {
+        if (this.isClicking == false) {
+            pointA = null;
+            this.pointB = null;
+    }
         // Itera a través de los puntos interactivos en la escena
         for (const interactivePoint of this.scene.interactivePoints) {
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
@@ -85,6 +89,11 @@ export class Segment {
                     this.segment.strokeLineShape(this.line);
                     
                 }
+                // Si el usuario no está haciendo clic, deja de arrastrar el punto
+                if (this.isClicking == false) {
+                pointA = null;
+                this.pointB = null;
+        }
                  
             }
             else {
@@ -94,10 +103,6 @@ export class Segment {
                 interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
             }
         }
-        // Si el usuario no está haciendo clic, deja de arrastrar el punto
-        if (this.isClicking == false) {
-            pointA = null;
-            this.pointB = null;
-        }
+
     }
 }
