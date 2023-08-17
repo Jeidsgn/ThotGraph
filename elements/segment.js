@@ -48,7 +48,7 @@ export class Segment {
                 );
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
-                    if (!this.pointB) {
+                    if (this.pointA == null) {
                         this.pointA = interactivePoint;
                         this.pointB = interactivePoint;
                         this.pointBOffsetX = this.pointermove.x - interactivePoint.x;
@@ -92,7 +92,7 @@ export class Segment {
             }
         }
         // Si el usuario no está haciendo clic, deja de arrastrar el punto
-        if (!this.isClicking) {
+        if (this.isClicking == false) {
             this.pointA = null;
             this.pointB = null;
         }
