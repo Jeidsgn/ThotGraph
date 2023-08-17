@@ -58,7 +58,7 @@ export class Segment {
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
-                        console.log(this.pointA.point);                        
+                        console.log("x inicial "+this.pointA.x);                        
                     }
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
@@ -83,6 +83,7 @@ export class Segment {
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
                     this.segment.strokeLineShape(this.line);
+                    console.log("x despues del drag "+this.pointA.x);
                 }
                  
             }
