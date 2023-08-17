@@ -7,6 +7,7 @@ export class Segment {
         this.point = new Point(scene);
         //this.scene.interactivePoints
         this.pointB = null;
+        this.pointA = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -34,7 +35,7 @@ export class Segment {
         // Itera a través de los puntos interactivos en la escena
         for (const interactivePoint of this.scene.interactivePoints) {
             if (this.draggingPoint == null){
-                const pointA = interactivePoint;
+                this.pointA = interactivePoint;
             };
             
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
@@ -50,21 +51,21 @@ export class Segment {
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
                     if (this.draggingPoint == null) {                
-                        pointA.point.fillStyle(0x732c02);
-                        pointA.point.fillCircle(
-                            pointA.x,
-                            pointA.y,
+                        this.pointA.point.fillStyle(0x732c02);
+                        this.pointA.point.fillCircle(
+                            this.pointA.x,
+                            this.pointA.y,
                             5
                         );
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
-                        console.log("x inicial "+pointA.x);                        
+                        console.log("x inicial "+this.pointA.x);                        
                     }
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
                 if (this.draggingPoint === interactivePoint) {
-                    console.log("x entrando en el drag "+pointA.x);
+                    console.log("x entrando en el drag "+this.pointA.x);
                     const newPointX = this.pointermove.x - this.draggingOffsetX;
                     const newPointY = this.pointermove.y - this.draggingOffsetY;
 
@@ -80,10 +81,10 @@ export class Segment {
                     this.line = new Phaser.Geom.Line(
                         newPointX,
                         newPointY,
-                        pointA.x,
-                        pointA.y
+                        this.pointA.x,
+                        this.pointA.y
                     );
-                    console.log(Phaser.Math.Distance.BetweenPoints(pointA.point,interactivePoint.point))
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
                     this.segment.strokeLineShape(this.line);
                     
                 }
