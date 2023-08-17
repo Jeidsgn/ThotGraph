@@ -57,6 +57,7 @@ export class Segment {
             for (const interactivePoint of this.scene.interactivePoints) {
                 if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                     this.pointA = interactivePoint;
+                    this.pointB = interactivePoint;
                     this.initialpointA = this.pointA;                                    
                     this.pointA.point.fillStyle(0x732c02);
                     this.pointA.point.fillCircle(
@@ -87,20 +88,22 @@ export class Segment {
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking && this.draggingPoint == interactivePoint) {    
                     console.log("x inicial "+this.pointA.x);                  
-                    const newPointX = this.pointermove.x - this.draggingOffsetX;
-                    const newPointY = this.pointermove.y - this.draggingOffsetY;
+                    this.pointB.x = this.pointermove.x - this.draggingOffsetX;
+                    this.pointB.y = this.pointermove.y - this.draggingOffsetY;
                     // Actualiza la posición del punto interactivo
-                    interactivePoint.x = newPointX;
-                    interactivePoint.y = newPointY;
-                    interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);                    
+                    interactivePoint.x = this.pointB.x;
+                    interactivePoint.x = this.pointB.point.x;
+                    interactivePoint.y = this.pointB.y;
+                    interactivePoint.y = this.pointB.point.y;
+                    interactivePoint.area.setPosition(this.pointB.x - 10, this.pointB.y - 8);                    
 
                     // Actualiza el aspecto visual del punto mientras se mueve
                     this.segment = this.scene.add.graphics();
                     this.segment.clear();
                     this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                     this.line = new Phaser.Geom.Line(
-                        newPointX,
-                        newPointY,
+                        this.pointB.x,
+                        this.pointB.y,
                         this.pointA.x,
                         this.pointA.y
                     );
