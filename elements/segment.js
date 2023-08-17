@@ -63,14 +63,14 @@ export class Segment {
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
                 if (this.draggingPoint === interactivePoint) {
+                    console.log("x entrando en el drag "+this.pointA.x);
                     const newPointX = this.pointermove.x - this.draggingOffsetX;
                     const newPointY = this.pointermove.y - this.draggingOffsetY;
 
                     // Actualiza la posición del punto interactivo
                     interactivePoint.x = newPointX;
                     interactivePoint.y = newPointY;
-                    interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
-                    console.log("x despues de actualizar el punto movido "+this.pointA.x);
+                    interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);                    
 
                     // Actualiza el aspecto visual del punto mientras se mueve
                     this.segment = this.scene.add.graphics();
