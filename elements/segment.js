@@ -70,6 +70,7 @@ export class Segment {
                     interactivePoint.x = newPointX;
                     interactivePoint.y = newPointY;
                     interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
+                    console.log("x despues de actualizar el punto movido "+this.pointA.x);
 
                     // Actualiza el aspecto visual del punto mientras se mueve
                     this.segment = this.scene.add.graphics();
@@ -83,7 +84,7 @@ export class Segment {
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
                     this.segment.strokeLineShape(this.line);
-                    console.log("x despues del drag "+this.pointA.x);
+                    
                 }
                  
             }
