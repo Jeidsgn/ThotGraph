@@ -15,7 +15,7 @@ export class Element {
           this.scene.elements.point.createPoint(); 
       },
       "Mover": () => {
-          this.scene.elements.point.moveElement();
+          this.scene.elements.moveElement();
       },
       "Segment": () => {
           this.scene.elements.point.createSegment();
