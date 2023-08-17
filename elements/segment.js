@@ -46,37 +46,35 @@ export class Segment {
                 );
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
-                    if (this.pointA == null) {
+                    if (!this.draggingPoint) {
                         this.pointA = interactivePoint;
-                        this.pointB = interactivePoint;
-                        this.pointBOffsetX = this.pointermove.x - interactivePoint.x;
-                        this.pointBOffsetY = this.pointermove.y - interactivePoint.y;
-                    }
-                    // Si se está arrastrando el punto actual, actualiza su posición
-                    if (this.pointB === interactivePoint) {
-                        console.log("this.pointB === interactivePoint");
-                        const newPointX = this.pointermove.x - this.pointBOffsetX;
-                        const newPointY = this.pointermove.y - this.pointBOffsetY;
-
-                        // Actualiza la posición del punto interactivo
-                        interactivePoint.x = newPointX;
-                        interactivePoint.y = newPointY;
-                        interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
-
-                        // Actualiza el aspecto visual del punto mientras se mueve
-                        
-                        this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
-                        this.line = new Phaser.Geom.Line(
-                            newPointX,
-                            newPointY,
-                            this.pointA.x,
-                            this.pointA.y
-                        );
-                        this.segment.strokeLineShape(this.line);
-                        this.segment.clear();
-
+                        this.draggingPoint = interactivePoint;
+                        this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
+                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
                     }
                 }
+                // Si se está arrastrando el punto actual, actualiza su posición
+                if (this.draggingPoint === interactivePoint) {
+                    const newPointX = this.pointermove.x - this.draggingOffsetX;
+                    const newPointY = this.pointermove.y - this.draggingOffsetY;
+
+                    // Actualiza la posición del punto interactivo
+                    interactivePoint.x = newPointX;
+                    interactivePoint.y = newPointY;
+                    interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
+
+                    // Actualiza el aspecto visual del punto mientras se mueve
+                    interactivePoint.point.clear();
+                    interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
+                    interactivePoint.point.fillCircle(newPointX, newPointY, 5);
+
+                    // Actualiza la posición del puntero elemental
+                    this.elementalpointer = {
+                        x: this.pointermove.x,
+                        y: this.pointermove.y,
+                    };
+                }
+
             }
             else {
                 // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
