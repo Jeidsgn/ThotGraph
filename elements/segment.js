@@ -38,7 +38,6 @@ export class Segment {
         for (const interactivePoint of this.scene.interactivePoints) {
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                console.log("if (over)");
                 // Cambia el aspecto visual del punto interactivo
                 interactivePoint.point.clear();
                 interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
@@ -49,9 +48,7 @@ export class Segment {
                 );
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
-                    console.log("if (this.isClicking)");
                     if (!this.pointA) {
-                        console.log("if (!this.pointA)");
                         this.pointA = interactivePoint;
                         this.pointB = interactivePoint;
                         this.pointBOffsetX = this.pointermove.x - interactivePoint.x;
@@ -59,6 +56,7 @@ export class Segment {
                     }
                     // Si se está arrastrando el punto actual, actualiza su posición
                     if (this.pointB === interactivePoint) {
+                        console.log("this.pointB === interactivePoint");
                         const newPointX = this.pointermove.x - this.pointBOffsetX;
                         const newPointY = this.pointermove.y - this.pointBOffsetY;
 
