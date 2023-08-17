@@ -53,7 +53,7 @@ export class ToolBox {
       this.scene.waitingForClick = true;
 
       /// Almacena el nombre de la función en una variable
-      this.scene.activeButtonCallback = this.scene.butToFunction[buttonName];
+      this.scene.activeButtonCallback = this.buttonToFunction[buttonName];
     }
   }
 }
