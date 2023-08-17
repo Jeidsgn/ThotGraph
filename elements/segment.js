@@ -71,6 +71,7 @@ export class Segment {
                         this.pointA.x,
                         this.pointA.y
                     );
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA,interactivePoint))
                     this.segment.strokeLineShape(this.line);
                     this.segment.clear();
 
