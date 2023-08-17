@@ -4,7 +4,7 @@ import { Element } from "../elements/Elements.js";
 export class Board extends Phaser.Scene {
   constructor() {
     super({ key: "scene" });
-    this.stage.backgroundColor = "#F2E18D";
+    
     // Propiedades para controlar el estado de la interacción en el tablero
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
@@ -27,7 +27,7 @@ export class Board extends Phaser.Scene {
 
   // Función que se ejecuta al crearse la escena
   create() {
-
+    this.game.backgroundColor = "#F2E18D";
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Configura el evento de clic en el contenedor (tablero)
