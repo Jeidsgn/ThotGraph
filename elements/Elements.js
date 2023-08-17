@@ -10,7 +10,7 @@ export class Element {
   }
   buttonToFunction(buttonName){
     // Define un objeto de mapeo entre nombres de botones y funciones
-    this.functions = {
+    const functions = {
       "Point": () => {
           this.scene.elements.point.createPoint(); 
       },
@@ -21,7 +21,7 @@ export class Element {
           this.scene.elements.point.createSegment();
       },
     };
-    this.functions[buttonName];
+    return functions[buttonName];
   }
 
   // Agrega nombres a los elementos
