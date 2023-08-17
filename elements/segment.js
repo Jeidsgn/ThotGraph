@@ -82,7 +82,6 @@ export class Segment {
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.pointA,interactivePoint))
                     this.segment.strokeLineShape(this.line);
-                    this.segment.clear();
                 }
                  
             }
