@@ -55,6 +55,7 @@ export class Segment {
         for (const interactivePoint of this.scene.interactivePoints) {            
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+                console.log("x entrando en el over "+this.pointA.x);
                 // Cambia el aspecto visual del punto interactivo
                 interactivePoint.point.clear();
                 interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
@@ -64,11 +65,9 @@ export class Segment {
                     5
                 );
                 // Verifica si el usuario está haciendo clic
-                if (this.isClicking && this.draggingPoint == interactivePoint) {
-                    console.log("x entrando en el drag "+this.pointA.x);
+                if (this.isClicking && this.draggingPoint == interactivePoint) {                    
                     const newPointX = this.pointermove.x - this.draggingOffsetX;
                     const newPointY = this.pointermove.y - this.draggingOffsetY;
-
                     // Actualiza la posición del punto interactivo
                     interactivePoint.x = newPointX;
                     interactivePoint.y = newPointY;
