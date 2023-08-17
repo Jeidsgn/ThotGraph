@@ -65,7 +65,7 @@ export class Segment {
 
                         // Actualiza el aspecto visual del punto mientras se mueve
                         
-                        this.segment = this.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+                        this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                         this.line = new Phaser.Geom.Line(
                             newPointX,
                             newPointY,
