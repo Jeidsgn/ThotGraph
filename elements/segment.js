@@ -6,7 +6,6 @@ export class Segment {
         this.segments = []; // Arreglo para almacenar los segmentos
         this.point = new Point(scene);
         //this.scene.interactivePoints
-        this.pointA = null;
         this.pointB = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -48,22 +47,22 @@ export class Segment {
                 if (this.isClicking) {
                     if (this.draggingPoint == null) {
                         
-                        this.pointA = interactivePoint;
-                        this.pointA.point.fillStyle(0x732c02);
-                        this.pointA.point.fillCircle(
-                            this.pointA.x,
-                            this.pointA.y,
+                        const pointA = interactivePoint;
+                        pointA.point.fillStyle(0x732c02);
+                        pointA.point.fillCircle(
+                            pointA.x,
+                            pointA.y,
                             5
                         );
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
-                        console.log("x inicial "+this.pointA.x);                        
+                        console.log("x inicial "+pointA.x);                        
                     }
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
                 if (this.draggingPoint === interactivePoint) {
-                    console.log("x entrando en el drag "+this.pointA.x);
+                    console.log("x entrando en el drag "+pointA.x);
                     const newPointX = this.pointermove.x - this.draggingOffsetX;
                     const newPointY = this.pointermove.y - this.draggingOffsetY;
 
@@ -79,10 +78,10 @@ export class Segment {
                     this.line = new Phaser.Geom.Line(
                         newPointX,
                         newPointY,
-                        this.pointA.x,
-                        this.pointA.y
+                        pointA.x,
+                        pointA.y
                     );
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
+                    console.log(Phaser.Math.Distance.BetweenPoints(pointA.point,interactivePoint.point))
                     this.segment.strokeLineShape(this.line);
                     
                 }
@@ -97,7 +96,7 @@ export class Segment {
         }
         // Si el usuario no está haciendo clic, deja de arrastrar el punto
         if (this.isClicking == false) {
-            this.pointA = null;
+            pointA = null;
             this.pointB = null;
         }
     }
