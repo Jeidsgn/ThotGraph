@@ -10,13 +10,11 @@ export class Segment {
         this.pointB = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
-        this.elementalpointer = { x: 0, y: 0 }; // Almacena la posición del clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
 
         // Configura el evento de clic en la escena para capturar el puntero
         this.scene.input.on("pointerdown", (pointer) => {
             this.isClicking = true; // Se está haciendo clic
-            this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
         });
         // Capturar el puntero en la escena
         this.scene.input.on("pointermove", (pointer) => {
@@ -66,8 +64,7 @@ export class Segment {
                         interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
 
                         // Actualiza el aspecto visual del punto mientras se mueve
-                        this.segment = this.scene.add.graphics();
-                        this.segment.clear();
+                        
                         this.segment = this.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                         this.line = new Phaser.Geom.Line(
                             newPointX,
@@ -76,12 +73,7 @@ export class Segment {
                             this.pointA.y
                         );
                         this.segment.strokeLineShape(this.line);
-
-                        // Actualiza la posición del puntero elemental
-                        this.elementalpointer = {
-                            x: this.pointermove.x,
-                            y: this.pointermove.y,
-                        };
+                        this.segment.clear();
 
                     }
                 }
