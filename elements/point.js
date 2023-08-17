@@ -35,7 +35,7 @@ export class Point {
       const x = this.elementalpointer.x;
       const y = this.elementalpointer.y;
       const point = this.scene.add.graphics();
-      point.fillStyle(0xff0000);
+      point.fillStyle(0x732C02);
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
       // Crear un área cuadrada de acción
@@ -75,7 +75,7 @@ export class Point {
         this.selectedPoints.add(interactivePoint.point); // Agrega el punto al grupo de selección
       } else {
         interactivePoint.point.clear(); // Limpia el punto
-        interactivePoint.point.fillStyle(0xff0000); // Cambia el color a rojo
+        interactivePoint.point.fillStyle(0x732C02); // Cambia el color al original
         interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
       }
     }
