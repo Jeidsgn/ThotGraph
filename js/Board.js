@@ -4,7 +4,7 @@ import { Element } from "../elements/Elements.js";
 export class Board extends Phaser.Scene {
   constructor() {
     super({ key: "scene" });
-
+    this.stage.backgroundColor = "#F2E18D";
     // Propiedades para controlar el estado de la interacción en el tablero
     this.waitingForClick = true;
     this.isDrawingEnabled = false;

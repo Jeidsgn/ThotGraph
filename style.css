@@ -10,7 +10,7 @@ body {
   width: 100vw*0.9; /* Usar vw para el ancho */
   height: 100vh*0.9; /* Usar vh para la altura */
   background-color: #ffb65f;
-  border: 8px solid #723706;
+  border: none;
   display: flex; /* Utilizar flex para centrar contenido */
   justify-content: center;
   align-items: center;
