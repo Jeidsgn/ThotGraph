@@ -80,20 +80,20 @@ export class Segment {
                             x: this.pointermove.x,
                             y: this.pointermove.y,
                         };
-                        
+
                     }
                 }
-                else {
-                    // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
-                    interactivePoint.point.clear();
-                    interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
-                    interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-                  }
-                }
-                // Si el usuario no está haciendo clic, deja de arrastrar el punto
-                if (!this.isClicking) {
-                    this.pointA = null;
             }
+            else {
+                // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
+                interactivePoint.point.clear();
+                interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
+                interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+            }
+        }
+        // Si el usuario no está haciendo clic, deja de arrastrar el punto
+        if (!this.isClicking) {
+            this.pointA = null;
         }
     }
 }
