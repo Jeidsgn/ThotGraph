@@ -49,6 +49,12 @@ export class Segment {
                     if (!this.draggingPoint) {
                         console.log("!this.draggingPoint");
                         this.pointA = interactivePoint;
+                        this.pointA.point.fillStyle(0x732c02);
+                        this.pointA.point.fillCircle(
+                            this.pointA.x,
+                            this.pointA.y,
+                            5
+                        );
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
                         this.draggingOffsetY = this.pointermove.y - interactivePoint.y;                        
@@ -75,12 +81,6 @@ export class Segment {
                     console.log(Phaser.Math.Distance.BetweenPoints(this.pointA,interactivePoint))
                     this.segment.strokeLineShape(this.line);
                     this.segment.clear();
-
-                    // Actualiza la posición del puntero elemental
-                    this.elementalpointer = {
-                        x: this.pointermove.x,
-                        y: this.pointermove.y,
-                    };
                 }
                  
             }
