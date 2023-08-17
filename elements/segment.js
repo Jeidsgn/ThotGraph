@@ -32,11 +32,9 @@ export class Segment {
     addName() {
       this.scene.elementNames.push("Segment"); // Agrega el nombre al array de nombres de elementos en la escena
     }
-    createSegment(){
-        for (const interactivePoint of this.scene.interactivePoints) {}
-    }
+
   
-    createSegmentsketch() {
+    createSegment() {
         // Itera a través de los puntos interactivos en la escena
         for (const interactivePoint of this.scene.interactivePoints) {
           // Verifica si el puntero se encuentra dentro del área del punto interactivo
