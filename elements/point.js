@@ -51,56 +51,62 @@ export class Point {
   }
 
   movePoint(x, y) {
-    //aquí va la lógica del movimiento
-    //console.log("movepoint") //verificación
+    // Esta función mueve los puntos interactivos en función de las interacciones del usuario
+  
+    // Itera a través de los puntos interactivos en la escena
     for (const interactivePoint of this.scene.interactivePoints) {
-      if (
-        Phaser.Geom.Rectangle.ContainsPoint(
-          interactivePoint.area,
-          this.pointermove
-        )
-      ) {
-        console.log("punto overleado");
+      // Verifica si el puntero se encuentra dentro del área del punto interactivo
+      if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+        // Si el puntero está sobre el punto interactivo
+  
+        // Cambia el aspecto visual del punto interactivo
         interactivePoint.point.clear();
         interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-        interactivePoint.point.fillCircle(
-          interactivePoint.x,
-          interactivePoint.y,
-          5
-        );
+        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+  
+        // Verifica si el usuario está haciendo clic
         if (this.isClicking) {
+          // Si no se está arrastrando ningún punto, comienza el proceso de arrastre
           if (!this.draggingPoint) {
             this.draggingPoint = interactivePoint;
             this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
             this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
           }
         }
+  
+        // Si se está arrastrando el punto actual, actualiza su posición
         if (this.draggingPoint === interactivePoint) {
           const newPointX = this.pointermove.x - this.draggingOffsetX;
           const newPointY = this.pointermove.y - this.draggingOffsetY;
-
+  
+          // Actualiza la posición del punto interactivo
           interactivePoint.x = newPointX;
           interactivePoint.y = newPointY;
           interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
-
+  
+          // Actualiza el aspecto visual del punto mientras se mueve
           interactivePoint.point.clear();
           interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
           interactivePoint.point.fillCircle(newPointX, newPointY, 5);
-
+  
+          // Actualiza la posición del puntero elemental
           this.elementalpointer = {
             x: this.pointermove.x,
             y: this.pointermove.y,
           };
         }
       } else {
-      interactivePoint.point.clear();
-      interactivePoint.point.fillStyle(0x732c02); // Cambia el color aL origial
-      interactivePoint.point.fillCircle(
-      interactivePoint.x, interactivePoint.y, 5);
+        // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
+        interactivePoint.point.clear();
+        interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
+        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
       }
     }
+  
+    // Si el usuario no está haciendo clic, deja de arrastrar el punto
     if (!this.isClicking) {
       this.draggingPoint = null;
     }
   }
+  
 }
