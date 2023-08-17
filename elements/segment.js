@@ -66,14 +66,15 @@ export class Segment {
                         interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
 
                         // Actualiza el aspecto visual del punto mientras se mueve
-                        interactivePoint.point.clear();
-                        interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
-                        interactivePoint.point.fillRect(
+                        this.segment.clear();
+                        this.segment = this.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+                        this.line = new Phaser.Geom.Line(
                             newPointX,
                             newPointY,
                             this.pointA.x,
                             this.pointA.y
                         );
+                        this.segment.strokeLineShape(this.line);
 
                         // Actualiza la posición del puntero elemental
                         this.elementalpointer = {
