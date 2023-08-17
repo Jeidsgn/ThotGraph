@@ -52,11 +52,7 @@ export class Segment {
             }
         }
         // Itera a través de los puntos interactivos en la escena
-        for (const interactivePoint of this.scene.interactivePoints) {
-            if (this.draggingPoint == null){
-                this.pointA = interactivePoint;
-            };
-            
+        for (const interactivePoint of this.scene.interactivePoints) {            
             // Verifica si el puntero se encuentra dentro del área del punto interactivo
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                 // Cambia el aspecto visual del punto interactivo
