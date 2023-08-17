@@ -47,7 +47,7 @@ export class Segment {
                 // Verifica si el usuario está haciendo clic
                 if (this.isClicking) {
                     if (this.draggingPoint == null) {
-                        console.log("!this.draggingPoint");
+                        
                         this.pointA = interactivePoint;
                         this.pointA.point.fillStyle(0x732c02);
                         this.pointA.point.fillCircle(
@@ -57,7 +57,8 @@ export class Segment {
                         );
                         this.draggingPoint = interactivePoint;
                         this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
-                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;                        
+                        this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
+                        console.log(this.pointA.point);                        
                     }
                 }
                 // Si se está arrastrando el punto actual, actualiza su posición
@@ -80,7 +81,7 @@ export class Segment {
                         this.pointA.x,
                         this.pointA.y
                     );
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA,interactivePoint))
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point,interactivePoint.point))
                     this.segment.strokeLineShape(this.line);
                 }
                  
