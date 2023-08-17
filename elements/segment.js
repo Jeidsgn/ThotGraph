@@ -1,30 +1,14 @@
-export class Point {
+import { Point } from "./point.js";
+
+export class Segment {
     constructor(scene) {
       this.scene = scene;
-      this.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
-      this.textContainer = scene.add.text(10, 10, "", { fill: "#ffffff" }); // Contenedor de texto para las letras de los puntos
-      this.isClicking = this.scene.isClicking; // Variable para controlar si se está haciendo clic
-      this.elementalpointer = this.scene.elementalpointer; // Almacena la posición del clic
-      this.pointermove = this.scene.pointermove; // Almacena la posición del puntero
-  
-      // Configura el evento de clic en la escena para capturar el puntero
-      this.scene.input.on("pointerdown", (pointer) => {
-        this.isClicking = true; // Se está haciendo clic
-        this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-      });
-      // Capturar el puntero en la escena
-      this.scene.input.on("pointermove", (pointer) => {
-        this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-      });
-  
-      // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
-      this.scene.input.on("pointerup", () => {
-        this.isClicking = false; // No se está haciendo clic
-      });
+      this.segments = []; // Arreglo para almacenar los segmentos
+      this.point = new Point(scene);
     }
   
     addName() {
-      this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
+      this.scene.elementNames.push("Segment"); // Agrega el nombre al array de nombres de elementos en la escena
     }
   
     createPoint() {
@@ -32,7 +16,7 @@ export class Point {
         const x = this.elementalpointer.x;
         const y = this.elementalpointer.y;
         const point = this.scene.add.graphics();
-        point.fillStyle(0xff0000);
+        point.fillStyle(0x732C02);
         point.fillCircle(x, y, 5);
         this.points.add(point); // Añade el punto al grupo
         // Crear un área cuadrada de acción
@@ -49,33 +33,63 @@ export class Point {
     }
   
     movePoint(x, y) {
-      //aquí va la lógica del movimiento
-      //console.log("movepoint") //verificación
-      for (const interactivePoint of this.interactivePoints) {
-        if (
-          Phaser.Geom.Rectangle.ContainsPoint(
-            interactivePoint.area,
-            this.pointermove
-          )
-        ) {
-          console.log("punto overleado");
-          interactivePoint.point.clear();
-          interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-          interactivePoint.point.fillCircle( interactivePoint.x, interactivePoint.y, 5 );
-          if (this.isClicking) {
-            const dx = this.pointermove.x - this.elementalpointer.x;
-            const dy = this.pointermove.y - this.elementalpointer.y;
-            interactivePoint.x += dx;
-            interactivePoint.y += dy;
-            interactivePoint.area.setPosition( interactivePoint.x - 10, interactivePoint.y - 8);
+        for (const interactivePoint of this.scene.interactivePoints) {
+          if (
+            Phaser.Geom.Rectangle.ContainsPoint(
+              interactivePoint.area,
+              this.pointermove
+            )
+          ) {
+            if (this.isClicking) {
+              if (!this.draggingPoint) {
+                this.draggingPoint = interactivePoint;
+                this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
+                this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
+              }
+            }
+            
             interactivePoint.point.clear();
-            interactivePoint.point.fillCircle( interactivePoint.x, interactivePoint.y, 5);
-            this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y,};
+            if (this.draggingPoint === interactivePoint) {
+              // Cambiar el color solo del punto seleccionado mientras lo mueves
+              interactivePoint.point.fillStyle(0x00ff00);
+            } else {
+              interactivePoint.point.fillStyle(0x732C02);
+            }
+            interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+      
+            if (this.isClicking && this.draggingPoint === interactivePoint) {
+              const newPointX = this.pointermove.x - this.draggingOffsetX;
+              const newPointY = this.pointermove.y - this.draggingOffsetY;
+              
+              interactivePoint.x = newPointX;
+              interactivePoint.y = newPointY;
+              interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
+              
+              interactivePoint.point.clear();
+              interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
+              interactivePoint.point.fillCircle(newPointX, newPointY, 5);
+              
+              this.elementalpointer = { x: this.pointermove.x, y: this.pointermove.y };
+            }
+          } else {
+            interactivePoint.point.clear();
+            interactivePoint.point.fillStyle(0x732C02);
+            interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
           }
-          interactivePoint.point.clear(); // Cambia el color de vuelta a rojo
-          interactivePoint.point.fillCircle( interactivePoint.x, interactivePoint.y, 5);
+        }
+        
+        // Restablecer la información del punto en movimiento si se suelta el clic del mouse
+        if (!this.isClicking) {
+          this.draggingPoint = null;
         }
       }
-    }
-  }
-  
+
+
+
+
+
+
+
+
+
+    }      
