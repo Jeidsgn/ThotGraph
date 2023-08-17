@@ -20,4 +20,5 @@ export class Segment {
 
     movePoint(x, y){
 
-    }      
+    }
+}      
