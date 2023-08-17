@@ -33,7 +33,7 @@ export class Segment {
     createSegment() {
         // Itera a través de los puntos interactivos en la escena
         for (const interactivePoint of this.scene.interactivePoints) {
-            if (pointA == null){
+            if (this.draggingPoint == null){
                 const pointA = interactivePoint;
             };
             
