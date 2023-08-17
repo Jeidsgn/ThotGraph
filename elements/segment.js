@@ -36,7 +36,8 @@ export class Segment {
         if (this.pointA == null) {
             for (const interactivePoint of this.scene.interactivePoints) {
                 if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                    this.pointA = interactivePoint;                                    
+                    this.pointA = interactivePoint;
+                    this.initialpointA = this.pointA;                                    
                     this.pointA.point.fillStyle(0x732c02);
                     this.pointA.point.fillCircle(
                         this.pointA.x,
@@ -96,7 +97,8 @@ export class Segment {
                 interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
                 interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
             }
-        }
+        }this.pointA = this.initialpointA;
 
     }
+    
 }
