@@ -53,13 +53,16 @@ export class Segment {
                     console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Actualiza el aspecto visual del punto mientras se mueve
-                    this.segment = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
-                    this.segment = new Phaser.Geom.Line(
+                    const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
+
+                    const graphics = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
+                    graphics.clear();
+                    graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
 
