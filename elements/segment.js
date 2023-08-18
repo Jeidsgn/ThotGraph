@@ -6,8 +6,8 @@ export class Segment {
         this.segments = []; // Arreglo para almacenar los segmentos
         this.point = new Point(scene);
         //this.scene.interactivePoints
-        this.pointB = null;
-        this.pointA = null;
+        this.scene.pointB = null;
+        this.scene.pointA = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -31,41 +31,41 @@ export class Segment {
         for (const interactivePoint of this.scene.interactivePoints) {
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                 console.log("over");
-                if (this.pointB == null) {
-                    //console.log("this.pointB == null");
-                    this.pointA = interactivePoint;
-                    this.pointB = interactivePoint;
-                    this.pointA.point.fillStyle(0x732c02);
-                    this.pointA.point.fillCircle(
-                        this.pointA.x,
-                        this.pointA.y,
+                if (this.scene.pointB == null) {
+                    //console.log("this.scene.pointB == null");
+                    this.scene.pointA = interactivePoint;
+                    this.scene.pointB = interactivePoint;
+                    this.scene.pointA.point.fillStyle(0x732c02);
+                    this.scene.pointA.point.fillCircle(
+                        this.scene.pointA.x,
+                        this.scene.pointA.y,
                         5
                     );
                 }
                 else {
-                    console.log("this.pointB =! null");
+                    console.log("this.scene.pointB =! null");
                     if (this.isClicking) {
                         console.log("isClicking");
-                        this.pointB.x = this.pointermove.x + interactivePoint.x;
-                        this.pointB.y = this.pointermove.y - interactivePoint.y;
+                        this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
+                        this.scene.pointB.y = this.pointermove.y - interactivePoint.y;
                     }
                 }
             } else {
-                if (this.isClicking && this.pointB != null) {
+                if (this.isClicking && this.scene.pointB != null) {
                     console.log("isClicking");
-                    this.pointB.x = this.pointermove.x + interactivePoint.x;
-                    this.pointB.y = this.pointermove.y - interactivePoint.y;
+                    this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
+                    this.scene.pointB.y = this.pointermove.y - interactivePoint.y;
                     // Actualiza el aspecto visual del punto mientras se mueve
                     this.segment = this.scene.add.graphics();
                     this.segment.clear();
                     this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                     this.line = new Phaser.Geom.Line(
-                        this.pointB.x,
-                        this.pointB.y,
-                        this.pointA.x,
-                        this.pointA.y
+                        this.scene.pointB.x,
+                        this.scene.pointB.y,
+                        this.scene.pointA.x,
+                        this.scene.pointA.y
                     );
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point));
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB.point));
                 }
 
             }
