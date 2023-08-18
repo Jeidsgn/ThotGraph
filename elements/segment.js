@@ -29,6 +29,7 @@ export class Segment {
         });
     }
     drawParabola(x1, y1, x2, y2, amplitude) {
+        if(x1!==x2){
         this.graphics.clear(); // Borra cualquier dibujo anterior
         
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
@@ -52,6 +53,7 @@ export class Segment {
         
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
+}
     
     
     
