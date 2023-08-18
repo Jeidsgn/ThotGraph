@@ -43,16 +43,14 @@ export class Segment {
                     );
                     console.log(this.scene.pointA.x);
                 }
-                else {
-                    console.log("this.scene.pointB =! null");
-                    if (this.isClicking) {
+                else if (this.isClicking) {
                         console.log("isClicking");
                         this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
                         this.scene.pointB.y = this.pointermove.y + interactivePoint.y;
                     }
                 }
-            } else {
-                if (this.isClicking && this.scene.pointB.x) {
+           else {
+                if (this.isClicking && this.scene.pointB !== null) {
                     console.log(this.scene.pointA.x);
                     this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
                     this.scene.pointB.y = this.pointermove.y + interactivePoint.y;
