@@ -59,7 +59,7 @@ export class Segment {
                             this.pointA.x,
                             this.pointA.y
                         );
-                        console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point))
+                        console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point));
                     }
                 }
             }
@@ -67,6 +67,6 @@ export class Segment {
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
-      }
+    }
 
 }
