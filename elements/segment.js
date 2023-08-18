@@ -28,6 +28,29 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
+    catenary(x1, y1, x2, y2) {
+        const a = 0.15; // Ajusta el valor de "a" para controlar la forma de la catenaria
+        const numSegments = 100; // Número de segmentos para aproximar la catenaria
+        
+        this.graphics.clear(); // Borra cualquier dibujo anterior
+        
+        this.graphics.lineStyle(5, 0x000000); // Estilo de línea
+        
+        const step = (x2 - x1) / numSegments; // Paso entre los segmentos
+        
+        this.graphics.moveTo(x1, y1); // Mueve el lápiz al primer punto
+        
+        // Dibuja la curva catenaria utilizando la ecuación y = a * cosh((x - x1) / a) + y1
+        for (let i = 0; i < numSegments; i++) {
+            const x = x1 + i * step;
+            const y = a * Math.cosh((x - x1) / a) + y1;
+            this.graphics.lineTo(x, y);
+        }
+        
+        this.graphics.lineTo(x2, y2); // Conecta el último punto
+        
+        this.graphics.strokePath(); // Dibuja la curva catenaria completa
+    }
 
     createSegment() {
         for (const interactivePoint of this.scene.interactivePoints) {
@@ -58,6 +81,12 @@ export class Segment {
                     this.graphics.clear();
                     // Actualiza el aspecto visual del punto mientras se mueve
                     const line = new Phaser.Geom.Line(
+                        this.scene.pointA.x,
+                        this.scene.pointA.y,
+                        this.scene.pointB.x,
+                        this.scene.pointB.y
+                    );
+                    catenary(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
                         this.scene.pointB.x,
