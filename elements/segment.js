@@ -37,8 +37,8 @@ export class Segment {
         
         // Calcula k, n y h
         const k = (y1 + y2) / 2;
-        const n = (a * Math.pow(x1, 2) - a * Math.pow(x2, 2) - y1 + y2) / (2 * a * x1 - 2 * a * x2);
-        const h = (a * Math.pow(x1, 2) - a * Math.pow(x2, 2) - y1 + y2) / (2 * a * x1 - 2 * a * x2);
+        const n = (a ** 2 * (x1 - x2) ** 4 + (y1 - y2) ** 2) / (4 * a * (x1 - x2) ** 2);
+        const h = (a * x1 ** 2 - a * x2 ** 2 - y1 + y2) / (2 * a * x1 - 2 * a * x2);
         
         const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
         
@@ -46,12 +46,13 @@ export class Segment {
         
         // Dibuja la parábola utilizando la ecuación y = a * (x - h)^2 + k
         for (let x = x1; x <= x2; x++) {
-            const y = a * Math.pow((x - h), 2) + k;
+            const y = a * (x - h) ** 2 + k;
             this.graphics.lineTo(x, y);
         }
         
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
+    
     
     
     
