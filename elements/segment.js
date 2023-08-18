@@ -33,7 +33,7 @@ export class Segment {
         
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
         
-        const a = amplitude; // Parámetro de amplitud
+        const a = amplitude / Math.pow((x2 - x1), 2); // Coeficiente de la parábola
         const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
         
         this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
@@ -46,6 +46,7 @@ export class Segment {
         
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
+    
     
     
 
