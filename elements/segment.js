@@ -28,7 +28,7 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
-    drawParabola(x1, y1, x2, y2, amplitude) {
+    drawParabola(x2, y2, x1, y1, amplitude) {
         if(x1!==x2){
         this.graphics.clear(); // Borra cualquier dibujo anterior
         
