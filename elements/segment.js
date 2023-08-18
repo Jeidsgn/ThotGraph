@@ -52,7 +52,7 @@ export class Segment {
                     }
                 }
             } else {
-                if (this.isClicking && this.scene.pointA != null) {
+                if (this.isClicking && this.scene.pointB.x !== undefined) {
                     console.log(this.scene.pointA.x);
                     this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
                     this.scene.pointB.y = this.pointermove.y + interactivePoint.y;
