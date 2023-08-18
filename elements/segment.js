@@ -8,6 +8,8 @@ export class Segment {
         //this.scene.interactivePoints
         this.scene.pointB = null;
         this.scene.pointA = null;
+        // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
+        this.graphics = this.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -52,6 +54,8 @@ export class Segment {
                     console.log(this.scene.pointA.x);
                     console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
+                    // Borrar la línea anterior
+                    this.graphics.clear();
                     // Actualiza el aspecto visual del punto mientras se mueve
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
@@ -59,9 +63,6 @@ export class Segment {
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
-
-                    const graphics = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
-                    graphics.clear();
                     graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
