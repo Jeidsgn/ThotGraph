@@ -35,19 +35,18 @@ export class Segment {
         
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
         
-        const a = Math.abs(y2 - y1) * 0.5; // Ajusta el valor de "a" basado en la distancia vertical
+        const a = Math.abs(y2 - y1); // Ajusta el valor de "a" basado en la distancia vertical
         const h = x2 - x1; // Ancho de la catenaria
+        const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
         
-        this.graphics.moveTo(x1, y1); // Mueve el lápiz al primer punto
+        this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
         
-        // Dibuja la curva catenaria utilizando la ecuación y = a * cosh(x / a) + y1
+        // Dibuja la curva catenaria utilizando la ecuación y = a * cosh(x / a) + startY
         for (let i = 0; i <= numSegments; i++) {
             const x = x1 + (i / numSegments) * h;
-            const y = y1 + a * Math.cosh((x - x1) / a);
+            const y = a * Math.cosh((x - x1) / a) + startY;
             this.graphics.lineTo(x, y);
         }
-        
-        this.graphics.lineTo(x2, y2); // Conecta el último punto
         
         this.graphics.strokePath(); // Dibuja la curva catenaria completa
     }
