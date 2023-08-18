@@ -35,6 +35,7 @@ export class Segment {
                 if (this.pointB == null) {
                     console.log("this.pointB == null");
                     this.pointA = interactivePoint;
+                    this.pointB = interactivePoint;
                     this.pointA.point.fillStyle(0x732c02);
                     this.pointA.point.fillCircle(
                         this.pointA.x,
