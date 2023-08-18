@@ -33,7 +33,7 @@ export class Segment {
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                 console.log("over");
                 if (this.pointB == null) {
-                    console.log("this.pointB == null");
+                    //console.log("this.pointB == null");
                     this.pointA = interactivePoint;
                     this.pointB = interactivePoint;
                     this.pointA.point.fillStyle(0x732c02);
