@@ -69,6 +69,10 @@ export class Segment {
 
             }
         }
+        if (!this.isClicking){
+            this.scene.pointB = null;
+            this.scene.pointA = null;
+        }
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
