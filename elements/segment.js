@@ -88,10 +88,10 @@ export class Segment {
                         this.scene.pointB.y
                     );
                     this.catenary(
-                        this.scene.pointA.x,
-                        this.scene.pointA.y,
                         this.scene.pointB.x,
-                        this.scene.pointB.y
+                        this.scene.pointB.y,
+                        this.scene.pointA.x,
+                        this.scene.pointA.y
                     );
                     this.graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
