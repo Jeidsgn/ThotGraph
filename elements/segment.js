@@ -40,7 +40,7 @@ export class Segment {
         
         // Dibuja la parábola utilizando la ecuación y = a * (x - x1)^2 + startY
         for (let x = x1; x <= x2; x++) {
-            const y = a * Math.pow((x - x1), 2) + startY;
+            const y = -a * Math.pow((x - x1), 2) - startY;
             this.graphics.lineTo(x, y);
         }
         
