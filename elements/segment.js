@@ -57,12 +57,11 @@ export class Segment {
                     this.segment = this.scene.add.graphics();
                     this.segment.clear();
                     this.segment = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
-                    
-                    this.line = new Phaser.Geom.Line(
-                        this.scene.pointB.x,
-                        this.scene.pointB.y,
+                    this.segment = new Phaser.Geom.Line(
                         this.scene.pointA.x,
-                        this.scene.pointA.y
+                        this.scene.pointA.y,
+                        this.scene.pointB.x,
+                        this.scene.pointB.y
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
