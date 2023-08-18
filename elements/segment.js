@@ -44,7 +44,6 @@ export class Segment {
                     console.log(this.scene.pointA.x);
                 }
                 else if (this.isClicking) {
-                        console.log("isClicking");
                         this.scene.pointB = this.pointermove;
                     }
                 }
