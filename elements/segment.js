@@ -58,8 +58,8 @@ export class Segment {
                     this.segment.clear();
                     this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
                     this.line = new Phaser.Geom.Line(
-                        this.scene.pointB.x,
-                        this.scene.pointB.y,
+                        this.scene.pointB.point.x,
+                        this.scene.pointB.point.y,
                         this.scene.pointA.x,
                         this.scene.pointA.y
                     );
