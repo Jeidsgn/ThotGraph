@@ -50,17 +50,19 @@ export class Segment {
                 }
            else {
                 if (this.isClicking && this.scene.pointB !== null) {
-                    console.log(this.scene.pointA.x);
+                    console.log(this.scene.pointA.x);                    
+                    console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Actualiza el aspecto visual del punto mientras se mueve
                     this.segment = this.scene.add.graphics();
                     this.segment.clear();
-                    this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+                    this.segment = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
+                    
                     this.line = new Phaser.Geom.Line(
                         this.scene.pointB.x,
                         this.scene.pointB.y,
-                        this.scene.pointA.point.x,
-                        this.scene.pointA.point.y
+                        this.scene.pointA.x,
+                        this.scene.pointA.y
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
