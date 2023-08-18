@@ -61,8 +61,8 @@ export class Segment {
                     this.line = new Phaser.Geom.Line(
                         this.scene.pointB.x,
                         this.scene.pointB.y,
-                        this.scene.pointA.x,
-                        this.scene.pointA.y
+                        this.scene.pointA.point.x,
+                        this.scene.pointA.point.y
                     );
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
