@@ -9,7 +9,7 @@ export class Segment {
         this.scene.pointB = null;
         this.scene.pointA = null;
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
-        this.graphics = this.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
+        this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
