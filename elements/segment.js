@@ -62,7 +62,7 @@ export class Segment {
         }
     }
     addName() {
-        this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
+        this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
       }
 
 }
