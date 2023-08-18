@@ -28,32 +28,35 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
-    catenary(x1, y1, x2, y2) {
+    drawParabola(x1, y1, x2, y2, amplitude) {
         this.graphics.clear(); // Borra cualquier dibujo anterior
         
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
         
-        const a = (y2 - y1) / Math.pow((x2 - x1), 2); // Coeficiente de la parábola
+        const a = amplitude; // Parámetro de amplitud
         const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
         
         this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
         
         // Dibuja la parábola utilizando la ecuación y = a * (x - x1)^2 + startY
         for (let x = x1; x <= x2; x++) {
-            const y = -a * Math.pow((x - x1), 2) - startY;
+            const y = a * Math.pow((x - x1), 2) + startY;
             this.graphics.lineTo(x, y);
         }
         
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
     
+    
 
     createSegment() {
+        //Se revisan todos los puntos hechos
         for (const interactivePoint of this.scene.interactivePoints) {
+            //Puntero sobre el area del puntos
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                console.log("over");
+                //Si no hay seleccionado
                 if (this.scene.pointA == null) {
-                    //console.log("this.scene.pointB == null");
+                    //se agrega el punto fijo A y se crea el puntoB
                     this.scene.pointA = interactivePoint;
                     this.scene.pointB = this.pointermove;
                     this.scene.pointA.point.fillStyle(0x732c02);
@@ -62,31 +65,29 @@ export class Segment {
                         this.scene.pointA.y,
                         5
                     );
-                    console.log(this.scene.pointA.x);
-                }
+                }//si hace clic se sigue el cursor
                 else if (this.isClicking) {
                     this.scene.pointB = this.pointermove;
                 }
             }
-            else {
+            else {//Si hay clic y hay B
                 if (this.isClicking && this.scene.pointB !== null) {
-                    console.log(this.scene.pointA.x);
-                    console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Borrar la línea anterior
                     this.graphics.clear();
-                    // Actualiza el aspecto visual del punto mientras se mueve
+                    // Actualiza el aspecto visual de la líne mientras se mueve
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
-                    this.catenary(
+                    this.drawParabola(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
                         this.scene.pointB.x,
-                        this.scene.pointB.y
+                        this.scene.pointB.y,
+                        0.15
                     );
                     this.graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
