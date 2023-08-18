@@ -63,7 +63,7 @@ export class Segment {
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
-                    graphics.strokeLineShape(line);
+                    this.graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
 
