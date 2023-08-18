@@ -9,7 +9,7 @@ export class Segment {
         this.scene.pointB = null;
         this.scene.pointA = null;
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
-        this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
+        this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -76,6 +76,7 @@ export class Segment {
                     // Borrar la línea anterior
                     this.graphics.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
+                    this.graphics.lineStyle(5, 0x000000, 0.5);
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
