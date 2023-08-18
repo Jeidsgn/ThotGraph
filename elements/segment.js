@@ -29,10 +29,11 @@ export class Segment {
     }
 
     createSegment() {
-
         for (const interactivePoint of this.scene.interactivePoints) {
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+                console.log("over");
                 if (this.pointB == null) {
+                    console.log("this.pointB == null");
                     this.pointA = interactivePoint;
                     this.pointA.point.fillStyle(0x732c02);
                     this.pointA.point.fillCircle(
@@ -42,7 +43,9 @@ export class Segment {
                     );
                 }
                 else {
+                    console.log("this.pointB =! null");
                     if (this.isClicking) {
+                        console.log("isClicking");
                         this.pointB.x = this.pointermove.x + interactivePoint.x;
                         this.pointB.y = this.pointermove.y - interactivePoint.y;
                         // Actualiza el aspecto visual del punto mientras se mueve
