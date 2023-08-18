@@ -86,7 +86,7 @@ export class Segment {
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
-                    catenary(
+                    this.catenary(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
                         this.scene.pointB.x,
