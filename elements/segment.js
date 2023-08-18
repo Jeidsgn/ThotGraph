@@ -24,7 +24,6 @@ export class Segment {
         // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
-            this.draggingPoint = null;
         });
     }
 
@@ -49,19 +48,26 @@ export class Segment {
                         console.log("isClicking");
                         this.pointB.x = this.pointermove.x + interactivePoint.x;
                         this.pointB.y = this.pointermove.y - interactivePoint.y;
-                        // Actualiza el aspecto visual del punto mientras se mueve
-                        this.segment = this.scene.add.graphics();
-                        this.segment.clear();
-                        this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
-                        this.line = new Phaser.Geom.Line(
-                            this.pointB.x,
-                            this.pointB.y,
-                            this.pointA.x,
-                            this.pointA.y
-                        );
-                        console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point));
                     }
                 }
+            } else {
+                if (this.isClicking && this.pointB != null) {
+                    console.log("isClicking");
+                    this.pointB.x = this.pointermove.x + interactivePoint.x;
+                    this.pointB.y = this.pointermove.y - interactivePoint.y;
+                    // Actualiza el aspecto visual del punto mientras se mueve
+                    this.segment = this.scene.add.graphics();
+                    this.segment.clear();
+                    this.segment = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+                    this.line = new Phaser.Geom.Line(
+                        this.pointB.x,
+                        this.pointB.y,
+                        this.pointA.x,
+                        this.pointA.y
+                    );
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point));
+                }
+
             }
         }
     }
