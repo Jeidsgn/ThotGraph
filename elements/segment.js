@@ -40,6 +40,8 @@ export class Segment {
                         this.pointA.y,
                         5
                     );
+                }
+                else {
                     if (this.isClicking) {
                         this.pointB.x = this.pointermove.x + interactivePoint.x;
                         this.pointB.y = this.pointermove.y - interactivePoint.y;
@@ -55,40 +57,9 @@ export class Segment {
                         );
                         console.log(Phaser.Math.Distance.BetweenPoints(this.pointA.point, interactivePoint.point))
                     }
-                    break; // Sal del bucle una vez que se haya encontrado el punto A
                 }
             }
         }
-        // Itera a través de los puntos interactivos en la escena
-        for (const interactivePoint of this.scene.interactivePoints) {
-            // Verifica si el puntero se encuentra dentro del área del punto interactivo
-            if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
-                // Verifica si el usuario está haciendo clic
-                if (this.isClicking && this.draggingPoint == interactivePoint) {
-                    console.log("x inicial " + this.pointA.x);
-                    this.pointB.x = this.pointermove.x - this.draggingOffsetX;
-                    this.pointB.point.x = this.pointB.x
-                    this.pointB.y = this.pointermove.y - this.draggingOffsetY;
-                    this.pointB.point.y = this.pointB.y
-                    // Actualiza la posición del punto interactivo
-                    interactivePoint.x = this.pointB.x;
-                    interactivePoint.y = this.pointB.y;
-                    interactivePoint.area.setPosition(this.pointB.x - 10, this.pointB.y - 8);
-
-
-
-                    this.segment.strokeLineShape(this.line);
-                }
-
-            }
-            else {
-                // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
-                interactivePoint.point.clear();
-                interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
-                interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
-            }
-        } this.pointA = this.initialpointA;
-
     }
 
 }
