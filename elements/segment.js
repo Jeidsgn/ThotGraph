@@ -32,7 +32,6 @@ export class Segment {
             if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
                 console.log("over");
                 if (this.scene.pointA == null) {
-                    //console.log("this.scene.pointB == null");
                     this.scene.pointA = interactivePoint;
                     this.scene.pointB = this.pointermove;
                     this.scene.pointA.point.fillStyle(0x732c02);
@@ -49,8 +48,6 @@ export class Segment {
             }
             else {
                 if (this.isClicking && this.scene.pointB !== null) {
-                    console.log(this.scene.pointA.x);
-                    console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Actualiza el aspecto visual del punto mientras se mueve
                     const line = new Phaser.Geom.Line(
@@ -62,7 +59,6 @@ export class Segment {
                     const graphics = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
                     graphics.strokeLineShape(line);
                     graphics.clear();
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
 
             }
