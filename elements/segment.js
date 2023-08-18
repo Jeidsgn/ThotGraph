@@ -64,7 +64,7 @@ export class Segment {
                         this.scene.pointA.x,
                         this.scene.pointA.y
                     );
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB.point));
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
 
             }
