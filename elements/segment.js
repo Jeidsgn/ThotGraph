@@ -34,18 +34,25 @@ export class Segment {
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
         
         const a = amplitude; // Coeficiente de la parábola
+        
+        // Calcula k, n y h
+        const k = (y1 + y2) / 2;
+        const n = (a * Math.pow(x1, 2) - a * Math.pow(x2, 2) - y1 + y2) / (2 * a * x1 - 2 * a * x2);
+        const h = (a * Math.pow(x1, 2) - a * Math.pow(x2, 2) - y1 + y2) / (2 * a * x1 - 2 * a * x2);
+        
         const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
         
         this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
         
-        // Dibuja la parábola utilizando la ecuación y = a * (x - x1)^2 + startY
+        // Dibuja la parábola utilizando la ecuación y = a * (x - h)^2 + k
         for (let x = x1; x <= x2; x++) {
-            const y = a * Math.pow((x - x1), 2) + startY;
+            const y = a * Math.pow((x - h), 2) + k;
             this.graphics.lineTo(x, y);
         }
         
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
+    
     
     
     
