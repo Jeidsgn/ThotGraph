@@ -3,7 +3,7 @@ import { Point } from "./point.js";
 export class Segment {
     constructor(scene) {
         this.scene = scene;
-        this.segments = []; // Arreglo para almacenar los segmentos
+        this.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.point = new Point(scene);
         //this.scene.interactivePoints
         this.scene.pointB = null;
@@ -29,21 +29,21 @@ export class Segment {
         });
     }
     catenary(x1, y1, x2, y2) {
-        const a = 1.5; // Ajusta el valor de "a" para controlar la forma de la catenaria
         const numSegments = 100; // Número de segmentos para aproximar la catenaria
         
         this.graphics.clear(); // Borra cualquier dibujo anterior
         
         this.graphics.lineStyle(5, 0x000000); // Estilo de línea
         
-        const step = (x2 - x1) / numSegments; // Paso entre los segmentos
+        const a = Math.abs(y2 - y1) * 0.5; // Ajusta el valor de "a" basado en la distancia vertical
+        const h = x2 - x1; // Ancho de la catenaria
         
         this.graphics.moveTo(x1, y1); // Mueve el lápiz al primer punto
         
-        // Dibuja la curva catenaria utilizando la ecuación y = a * cosh((x - x1) / a) + y1
-        for (let i = 0; i < numSegments; i++) {
-            const x = x1 + i * step;
-            const y = a * Math.cosh((x - x1) / a) + y1;
+        // Dibuja la curva catenaria utilizando la ecuación y = a * cosh(x / a) + y1
+        for (let i = 0; i <= numSegments; i++) {
+            const x = x1 + (i / numSegments) * h;
+            const y = y1 + a * Math.cosh((x - x1) / a);
             this.graphics.lineTo(x, y);
         }
         
@@ -51,6 +51,7 @@ export class Segment {
         
         this.graphics.strokePath(); // Dibuja la curva catenaria completa
     }
+    
 
     createSegment() {
         for (const interactivePoint of this.scene.interactivePoints) {
