@@ -44,12 +44,12 @@ export class Segment {
                     console.log(this.scene.pointA.x);
                 }
                 else if (this.isClicking) {
-                        this.scene.pointB = this.pointermove;
-                    }
+                    this.scene.pointB = this.pointermove;
                 }
-           else {
+            }
+            else {
                 if (this.isClicking && this.scene.pointB !== null) {
-                    console.log(this.scene.pointA.x);                    
+                    console.log(this.scene.pointA.x);
                     console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Actualiza el aspecto visual del punto mientras se mueve
@@ -65,7 +65,7 @@ export class Segment {
 
             }
         }
-        if (!this.isClicking){
+        if (!this.isClicking) {
             this.scene.pointB = null;
             this.scene.pointA = null;
         }
