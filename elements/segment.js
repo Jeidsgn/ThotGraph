@@ -59,10 +59,9 @@ export class Segment {
                         this.scene.pointB.x,
                         this.scene.pointB.y
                     );
-
                     const graphics = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
-                    graphics.clear();
                     graphics.strokeLineShape(line);
+                    graphics.clear();
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
                 }
 
