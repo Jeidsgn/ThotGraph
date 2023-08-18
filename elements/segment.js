@@ -54,8 +54,6 @@ export class Segment {
                     console.log(this.scene.pointB.x);
                     this.scene.pointB = this.pointermove;
                     // Actualiza el aspecto visual del punto mientras se mueve
-                    this.segment = this.scene.add.graphics();
-                    this.segment.clear();
                     this.segment = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x000000 } });
                     this.segment = new Phaser.Geom.Line(
                         this.scene.pointA.x,
