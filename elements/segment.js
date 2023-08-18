@@ -29,7 +29,7 @@ export class Segment {
         });
     }
     catenary(x1, y1, x2, y2) {
-        const a = 0.15; // Ajusta el valor de "a" para controlar la forma de la catenaria
+        const a = 1.5; // Ajusta el valor de "a" para controlar la forma de la catenaria
         const numSegments = 100; // Número de segmentos para aproximar la catenaria
         
         this.graphics.clear(); // Borra cualquier dibujo anterior
