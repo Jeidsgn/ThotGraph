@@ -41,6 +41,7 @@ export class Segment {
                         this.scene.pointA.y,
                         5
                     );
+                    console.log(this.scene.pointA.x);
                 }
                 else {
                     console.log("this.scene.pointB =! null");
@@ -52,7 +53,7 @@ export class Segment {
                 }
             } else {
                 if (this.isClicking && this.scene.pointB != null) {
-                    console.log("isClicking");
+                    console.log(this.scene.pointA.x);
                     this.scene.pointB.x = this.pointermove.x + interactivePoint.x;
                     this.scene.pointB.y = this.pointermove.y - interactivePoint.y;
                     // Actualiza el aspecto visual del punto mientras se mueve
