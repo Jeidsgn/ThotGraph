@@ -34,18 +34,17 @@ drawParabola(x2, y2, x1, y1, n) {
     if (x1 !== x2) {
         this.graphics.clear(); // Borra cualquier dibujo anterior
 
-        this.graphics.lineStyle(5, 0x000000, 0.5); // Estilo de línea
+        this.graphics.lineStyle(5, 0x000000, 0.8); // Estilo de línea
 
         const a = (4 * n) / Math.pow(x1 - x2, 2);
         const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / Math.pow(x1 - x2, 2);
         const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / Math.pow(x1 - x2, 2);
 
-        const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
-
-        this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
+        const minX = Math.min(x1, x2);
+        const maxX = Math.max(x1, x2);
 
         // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
-        for (let x = x1; x <= x2; x++) {
+        for (let x = minX; x <= maxX; x++) {
             const y = a * x * x + b * x + c;
             this.graphics.lineTo(x, y);
         }
@@ -53,6 +52,7 @@ drawParabola(x2, y2, x1, y1, n) {
         this.graphics.strokePath(); // Dibuja la parábola completa
     }
 }
+
 
     
     
@@ -88,7 +88,7 @@ drawParabola(x2, y2, x1, y1, n) {
                     // Borrar la línea anterior
                     this.graphics.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x000000, 0.5);
+                    this.graphics.lineStyle(5, 0x000000, 0.2);
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
