@@ -18,7 +18,7 @@ export class Point {
 
   createPoint() {
     if (this.isClicking) {
-      const letter = count;
+      const letter = this.count;
       count = count+1;
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
       // Crea la imagen del punto en las coordenadas del clic
