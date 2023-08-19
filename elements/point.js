@@ -10,7 +10,6 @@ export class Point {
     // Configura el evento de clic en la escena para capturar el puntero
     this.scene.input.on("pointerdown", (pointer) => {
       this.isClicking = true; // Se está haciendo clic
-      this.elementalpointer = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
     });
     // Capturar el puntero en la escena
     this.scene.input.on("pointermove", (pointer) => {
@@ -29,25 +28,13 @@ export class Point {
 
   createPoint() {
     if (this.isClicking) {
-      const x = this.elementalpointer.x;
-      const y = this.elementalpointer.y;
-  
-      // Crea la imagen del punto en las coordenadas del clic
-      const point = this.scene.add.image(x, y, 'point');
-      point.setOrigin(0.5, 0.89);
-      this.points.add(point); // Agrega el punto al grupo
-  
-      // Crear un área cuadrada de acción
-      this.scene.interactivePoints.push({
-        point: point,
-        x: x,
-        y: y,
-        area: new Phaser.Geom.Rectangle(x - 10, y - 8, 20, 23),
-      });
-  
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
       this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
+      // Crea la imagen del punto en las coordenadas del clic
+      const point = this.scene.add.sprite(x, y, 'point', 0).setOrigin(0.5, 0.89);
+      point.id = letter; // Agrega el nombre del punto
+      this.points.add(point); // Agrega el punto al grupo
     }
   }
   
@@ -81,12 +68,6 @@ export class Point {
           // Actualiza el aspecto visual del punto mientras se mueve
 
           interactivePoint.image = this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);
-  
-          // Actualiza la posición del puntero elemental
-          this.elementalpointer = {
-            x: this.pointermove.x,
-            y: this.pointermove.y,
-          };
         }
       } else {
         // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
