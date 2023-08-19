@@ -46,6 +46,9 @@ export class Point {
                 point.y = dragY;
             });
         }
+        for (const point of puntosInteractivos) {
+            point.disableInteractive(); // Desactiva la interactividad del punto
+        }
     }
 
 }
