@@ -28,36 +28,30 @@ export class Board extends Phaser.Scene {
   create() {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
-
-    // Establece el fondo con degradado vertical
-    const gradient = this.add.graphics();
-    gradient.fillStyle(0x082934, 1); // Color superior
-    gradient.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
-    gradient.fillStyle(0x081C34, 1); // Color medio
-    gradient.fillRect(0, 0.33 * this.cameras.main.height, this.cameras.main.width, 0.34 * this.cameras.main.height);
-    gradient.fillStyle(0x081A34, 1); // Color inferior
-    gradient.fillRect(0, 0.67 * this.cameras.main.height, this.cameras.main.width, 0.34 * this.cameras.main.height);
-
-    // Establece el color de fondo de la escena
-    this.cameras.main.transparent = true;
+    // Establece el color de fondo
+    this.cameras.main.setBackgroundColor("#081C34");    
   }
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    
     if (this.isDrawingEnabled && !this.waitingForClick) {
-      // Llama a la función activa correspondiente
-      if (this.activeButtonCallback) {  // Comprobamos si la función está definida
-        this.activeButtonCallback();  // Ejecutamos la función activa
-      } else {
-        console.log("Error en activeButtonCallback");
+        // Llama a la función activa correspondiente
+        if (this.activeButtonCallback) {  // Comprobamos si la función está definida
+          this.activeButtonCallback();  // Ejecutamos la función activa
+        } else {
+          console.log("Error en activeButtonCallback");
+        }
+      } else if (this.isDrawingEnabled && this.waitingForClick) {
+        // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
+        this.input.on("pointerdown", () => {
+            this.waitingForClick = false;
+          });
+        
       }
-    } else if (this.isDrawingEnabled && this.waitingForClick) {
-      // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
-      this.input.on("pointerdown", () => {
-        this.waitingForClick = false;
-      });
-    }
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
+
+  
 }
