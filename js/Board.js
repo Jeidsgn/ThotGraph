@@ -4,7 +4,7 @@ import { Element } from "../elements/Elements.js";
 export class Board extends Phaser.Scene {
   constructor() {
     super({ key: "scene" });
-
+    
     // Propiedades para controlar el estado de la interacción en el tablero
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
@@ -29,15 +29,17 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
 
-    // Crea el fondo degradado vertical
-    const gradientRect = this.add.rectangle(
-      this.cameras.main.width / 2,
-      this.cameras.main.height / 2,
-      this.cameras.main.width,
-      this.cameras.main.height,
-      [0x082934, 0x081C34, 0x081A34]
-    );
-    gradientRect.setDepth(-1); // Establece la profundidad para que el fondo esté detrás de otros elementos
+    // Establece el fondo con degradado vertical
+    const gradient = this.add.graphics();
+    gradient.fillStyle(0x082934, 1); // Color superior
+    gradient.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+    gradient.fillStyle(0x081C34, 1); // Color medio
+    gradient.fillRect(0, 0.33 * this.cameras.main.height, this.cameras.main.width, 0.34 * this.cameras.main.height);
+    gradient.fillStyle(0x081A34, 1); // Color inferior
+    gradient.fillRect(0, 0.67 * this.cameras.main.height, this.cameras.main.width, 0.34 * this.cameras.main.height);
+
+    // Establece el color de fondo de la escena
+    this.cameras.main.transparent = true;
   }
 
   // Función de actualización que se ejecuta en cada frame
