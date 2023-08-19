@@ -22,6 +22,8 @@ export class Board extends Phaser.Scene {
 
   preload() {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
+    this.load.image('point', 'assets\point\Point.svg');
+    this.load.image('Bg', 'assets\Bg.svg');
   }
 
   // Función que se ejecuta al crearse la escena
@@ -29,7 +31,11 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Establece el color de fondo
-    this.cameras.main.setBackgroundColor("#081C34");    
+    const backgroundImage = this.add.image(
+        this.cameras.main.width / 2,
+        this.cameras.main.height / 2,
+        'Bg'
+      );
   }
 
   // Función de actualización que se ejecuta en cada frame

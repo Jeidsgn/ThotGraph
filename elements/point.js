@@ -32,8 +32,8 @@ export class Point {
       const x = this.elementalpointer.x;
       const y = this.elementalpointer.y;
       const point = this.scene.add.graphics();
-      point.fillStyle(0xF2A950);
-      point.fillCircle(x, y, 5);
+      point = this.add.image(200, 150, 'point');
+      point.setOrigin(0.5, 0.87);
       this.points.add(point); // Añade el punto al grupo
       // Crear un área cuadrada de acción
       this.scene.interactivePoints.push({
