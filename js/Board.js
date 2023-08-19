@@ -30,9 +30,14 @@ export class Board extends Phaser.Scene {
     this.toolbox.createToolbox();
 
     // Crea el fondo degradado vertical
-    const gradient = this.add
-      .gradient(0, 0, 0, this.cameras.main.height, [0x082934, 0x081C34, 0x081A34]);
-    gradient.setScrollFactor(0); // Hace que el fondo no se desplace con la cámara
+    const gradientRect = this.add.rectangle(
+      this.cameras.main.width / 2,
+      this.cameras.main.height / 2,
+      this.cameras.main.width,
+      this.cameras.main.height,
+      [0x082934, 0x081C34, 0x081A34]
+    );
+    gradientRect.setDepth(-1); // Establece la profundidad para que el fondo esté detrás de otros elementos
   }
 
   // Función de actualización que se ejecuta en cada frame
