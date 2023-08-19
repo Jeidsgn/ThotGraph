@@ -34,7 +34,7 @@ export class Point {
   
       // Crea la imagen del punto en las coordenadas del clic
       const point = this.scene.add.image(x, y, 'point');
-      point.setOrigin(0.5, 0.67);
+      point.setOrigin(0.5, 0.89);
       this.points.add(point); // Agrega el punto al grupo
   
       // Crear un área cuadrada de acción
@@ -60,11 +60,8 @@ export class Point {
       // Verifica si el puntero se encuentra dentro del área del punto interactivo
       if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
         // Si el puntero está sobre el punto interactivo
-  
-        // Cambia el aspecto visual del punto interactivo
-        interactivePoint.point.clear();
-        interactivePoint.point.fillStyle(0x00ff00); // Cambia el color a verde
-        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+        
+        this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);;
   
         // Verifica si el usuario está haciendo clic
         if (this.isClicking) {
