@@ -22,8 +22,8 @@ export class Board extends Phaser.Scene {
 
   preload() {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
-    this.load.image('point', 'assets\point\Point.svg');
-    this.load.image('Bg', 'assets\Bg.svg');
+    this.load.image('point', '../assets/point/Point.svg');
+    this.load.image('Bg', '../assets/Bg.svg');
   }
 
   // Función que se ejecuta al crearse la escena
