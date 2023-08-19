@@ -34,7 +34,7 @@ export class Point {
   
       // Crea la imagen del punto en las coordenadas del clic
       const point = this.scene.add.image(x, y, 'point');
-      point.setOrigin(0.5, 0.87);
+      point.setOrigin(0.5, 0.67);
       this.points.add(point); // Agrega el punto al grupo
   
       // Crear un área cuadrada de acción
