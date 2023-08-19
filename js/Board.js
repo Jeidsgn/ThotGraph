@@ -29,6 +29,7 @@ export class Board extends Phaser.Scene {
   // Función que se ejecuta al crearse la escena
   create() {
     // Crea el cuadro de herramientas (toolbox)
+    this.input.setDefaultCursor('pointer');
     this.toolbox.createToolbox();
     // Establece el color de fondo
     const background = this.add.image(
