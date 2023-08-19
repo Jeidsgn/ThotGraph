@@ -60,8 +60,8 @@ export class Point {
       // Verifica si el puntero se encuentra dentro del área del punto interactivo
       if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
         // Si el puntero está sobre el punto interactivo
-        
-        this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);;
+
+        this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);
   
         // Verifica si el usuario está haciendo clic
         if (this.isClicking) {
@@ -84,9 +84,7 @@ export class Point {
           interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
   
           // Actualiza el aspecto visual del punto mientras se mueve
-          interactivePoint.point.clear();
-          interactivePoint.point.fillStyle(0x00ff00); // Mantener el color verde mientras se mueve
-          interactivePoint.point.fillCircle(newPointX, newPointY, 5);
+          this.scene.add.image(newPointX, newPointY, 'point').setOrigin(0.5, 0.89);
   
           // Actualiza la posición del puntero elemental
           this.elementalpointer = {
@@ -96,9 +94,7 @@ export class Point {
         }
       } else {
         // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
-        interactivePoint.point.clear();
-        interactivePoint.point.fillStyle(0xF2A950); // Cambia el color al original
-        interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
+        this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);
       }
     }
   
