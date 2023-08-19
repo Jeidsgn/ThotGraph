@@ -98,6 +98,7 @@ export class Segment {
                         this.graphics.strokeLineShape(line);
                     }else{
                         this.curve.clear();
+                        this.graphics.clear();
                         this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
                         const line = new Phaser.Geom.Line(
                             this.scene.pointA.x,
@@ -105,6 +106,7 @@ export class Segment {
                             this.scene.pointB.x,
                             this.scene.pointB.y
                         );
+                        this.graphics.strokeLineShape(line);
                         this.scene.pointB = null;
                         this.scene.pointA = null;
                     }
