@@ -61,30 +61,26 @@ export class Point {
       if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
         // Si el puntero está sobre el punto interactivo
 
-        this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);
+        interactivePoint.image = this.scene.add.image(this.pointermove.x, this.pointermove.y,'point').setOrigin(0.5, 0.89);
   
         // Verifica si el usuario está haciendo clic
         if (this.isClicking) {
           // Si no se está arrastrando ningún punto, comienza el proceso de arrastre
           if (!this.draggingPoint) {
             this.draggingPoint = interactivePoint;
-            this.draggingOffsetX = this.pointermove.x - interactivePoint.x;
-            this.draggingOffsetY = this.pointermove.y - interactivePoint.y;
           }
         }
   
         // Si se está arrastrando el punto actual, actualiza su posición
-        if (this.draggingPoint === interactivePoint) {
-          const newPointX = this.pointermove.x - this.draggingOffsetX;
-          const newPointY = this.pointermove.y - this.draggingOffsetY;
-  
+        if (this.draggingPoint === interactivePoint) {  
           // Actualiza la posición del punto interactivo
-          interactivePoint.x = newPointX;
-          interactivePoint.y = newPointY;
-          interactivePoint.area.setPosition(newPointX - 10, newPointY - 8);
+          interactivePoint.x = this.pointermove.x;
+          interactivePoint.y = this.pointermove.y;
+          interactivePoint.area.setPosition(this.pointermove.x - 10, this.pointermove.y - 8);
   
           // Actualiza el aspecto visual del punto mientras se mueve
-          this.scene.add.image(newPointX, newPointY, 'point').setOrigin(0.5, 0.89);
+
+          interactivePoint.image = this.scene.add.image(interactivePoint.x, interactivePoint.y, 'point').setOrigin(0.5, 0.89);
   
           // Actualiza la posición del puntero elemental
           this.elementalpointer = {
