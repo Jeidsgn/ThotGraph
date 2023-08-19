@@ -76,7 +76,7 @@ export class Segment {
             }
             else {//Si hay clic y hay B
                 if (this.scene.pointB !== null) {
-                    if (this.isClicking) {
+                    if (this.isClicking == true) {
                         this.scene.pointB = this.pointermove;
                         // Borrar la línea anterior
                         this.graphics.clear();
