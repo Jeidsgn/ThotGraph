@@ -4,8 +4,12 @@ export class Point {
     this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
     this.textContainer = scene.add.text(10, 10, "", { fill: "#000000" }); // Contenedor de texto para las letras de los puntos
     this.isClicking = false; // Variable para controlar si se está haciendo clic
-    this.scene.input.on("pointerdown", this.isClicking = true); // Se está haciendo clic
-    this.scene.input.on("pointerup", this.isClicking = false); // No se está haciendo clic
+    this.scene.input.on("pointerdown", () => {
+        this.isClicking = true; // Se está haciendo clic
+    });
+    this.scene.input.on("pointerup", () => {
+        this.isClicking = false; // No se está haciendo clic
+    });
   }
   addName() {
     this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
