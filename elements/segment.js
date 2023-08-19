@@ -100,7 +100,7 @@ drawParabola(x2, y2, x1, y1, n) {
                         this.scene.pointA.y,
                         this.scene.pointB.x,
                         this.scene.pointB.y,
-                        20
+                        -20 //Distancia de "caida"
                     );
                     this.graphics.strokeLineShape(line);
                     console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
