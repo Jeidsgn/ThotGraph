@@ -31,10 +31,12 @@ export class Point {
     if (this.isClicking) {
       const x = this.elementalpointer.x;
       const y = this.elementalpointer.y;
-      const point = this.scene.add.graphics();
-      point = this.add.image(200, 150, 'point');
+  
+      // Crea la imagen del punto en las coordenadas del clic
+      const point = this.scene.add.image(x, y, 'point');
       point.setOrigin(0.5, 0.87);
-      this.points.add(point); // Añade el punto al grupo
+      this.points.add(point); // Agrega el punto al grupo
+  
       // Crear un área cuadrada de acción
       this.scene.interactivePoints.push({
         point: point,
@@ -42,12 +44,13 @@ export class Point {
         y: y,
         area: new Phaser.Geom.Rectangle(x - 10, y - 8, 20, 23),
       });
-
+  
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
       this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
     }
   }
+  
 
   movePoint() {
     // Esta función mueve los puntos interactivos en función de las interacciones del usuario
