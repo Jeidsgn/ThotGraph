@@ -35,7 +35,7 @@ export class Segment {
     drawParabola(x2, y2, x1, y1, n) {
         if (x1 !== x2) {
             this.curve.clear(); // Borra cualquier dibujo anterior
-            this.curve.lineStyle(5, 0x2AA4BF, 0.8); // Estilo de línea
+            this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
 
             const a = (4 * n) / Math.pow(x1 - x2, 2);
             const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / Math.pow(x1 - x2, 2);
@@ -80,7 +80,7 @@ export class Segment {
                     // Borrar la línea anterior
                     this.graphics.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.2);
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
