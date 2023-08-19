@@ -32,7 +32,7 @@ export class Point {
       const x = this.elementalpointer.x;
       const y = this.elementalpointer.y;
       const point = this.scene.add.graphics();
-      point.fillStyle(0x732c02);
+      point.fillStyle(0xF2A950);
       point.fillCircle(x, y, 5);
       this.points.add(point); // Añade el punto al grupo
       // Crear un área cuadrada de acción
@@ -97,7 +97,7 @@ export class Point {
       } else {
         // Si el puntero no está sobre el punto interactivo, restaura su aspecto original
         interactivePoint.point.clear();
-        interactivePoint.point.fillStyle(0x732c02); // Cambia el color al original
+        interactivePoint.point.fillStyle(0xF2A950); // Cambia el color al original
         interactivePoint.point.fillCircle(interactivePoint.x, interactivePoint.y, 5);
       }
     }

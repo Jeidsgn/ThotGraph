@@ -2,14 +2,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #732C02;
+  background-color: #081C34;
 }
 
 /* Establecer un ancho y alto del juego al 100% de la ventana */
 #game-container {
   width: 100vw*0.9; /* Usar vw para el ancho */
   height: 100vh*0.9; /* Usar vh para la altura */
-  background-color: #F2E18D;
+  background-color: #081C34;
   border: none;
   display: flex; /* Utilizar flex para centrar contenido */
   justify-content: center;

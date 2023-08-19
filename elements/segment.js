@@ -8,6 +8,7 @@ export class Segment {
         //this.scene.interactivePoints
         this.scene.pointB = null;
         this.scene.pointA = null;
+
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
 
@@ -32,9 +33,9 @@ export class Segment {
 
 drawParabola(x2, y2, x1, y1, n) {
     if (x1 !== x2) {
-        this.graphics.clear(); // Borra cualquier dibujo anterior
-
-        this.graphics.lineStyle(5, 0x000000, 0.8); // Estilo de línea
+        this.curve = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x2AA4BF, alpha: 0.8 } });
+        this.curve.clear(); // Borra cualquier dibujo anterior
+        this.curve.lineStyle(5, 0x2AA4BF, 0.8); // Estilo de línea
 
         const a = (4 * n) / Math.pow(x1 - x2, 2);
         const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / Math.pow(x1 - x2, 2);
@@ -46,10 +47,10 @@ drawParabola(x2, y2, x1, y1, n) {
         // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
         for (let x = minX; x <= maxX; x++) {
             const y = a * x * x + b * x + c;
-            this.graphics.lineTo(x, y);
+            this.curve.lineTo(x, y);
         }
 
-        this.graphics.strokePath(); // Dibuja la parábola completa
+        this.curve.strokePath(); // Dibuja la parábola completa
     }
 }
 
@@ -71,7 +72,7 @@ drawParabola(x2, y2, x1, y1, n) {
                     //se agrega el punto fijo A y se crea el puntoB
                     this.scene.pointA = interactivePoint;
                     this.scene.pointB = this.pointermove;
-                    this.scene.pointA.point.fillStyle(0x732c02);
+                    this.scene.pointA.point.fillStyle(0xF2A950);
                     this.scene.pointA.point.fillCircle(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
@@ -88,7 +89,7 @@ drawParabola(x2, y2, x1, y1, n) {
                     // Borrar la línea anterior
                     this.graphics.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x000000, 0.2);
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.2);
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
