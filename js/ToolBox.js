@@ -4,7 +4,7 @@ export class ToolBox {
   constructor(scene) {
     this.scene = scene;
     this.elements = new Element(scene);
-    this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
+    this.scene.toolboxButtons = this.scene.add.group(); // Usamos un grupo para almacenar los botones
     this.scene.activeButton = null; // Referencia al botón activo en el cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
     this.buttonToFunction = this.scene.buttonToFunction;
@@ -20,7 +20,7 @@ export class ToolBox {
   createBaseButtons() {
     // Crea el botón Mover
     const moveButton = this.createButton(10, this.scene.sys.game.config.height - 50, "Mover");
-    this.scene.toolboxButtons.push(moveButton);
+    this.scene.toolboxButtons.add(moveButton); // Agregamos el botón al grupo
   }
 
   createDependentButtons() {
@@ -28,33 +28,37 @@ export class ToolBox {
       const x = 100 + i * 100;
       const y = this.scene.sys.game.config.height - 50;
       const button = this.createButton(x, y, this.scene.elementNames[i]);
-      this.scene.toolboxButtons.push(button);
+      this.scene.toolboxButtons.add(button); // Agregamos el botón al grupo
     }
   }
 
   createButton(x, y, text) {
     const button = this.scene.add.rectangle(x, y, 80, 80, 0xF2A950);
     button.setInteractive();
-    
+
     const buttonText = this.scene.add.text(x, y, text, { fill: "#ffffff" });
     buttonText.setOrigin(0.5);
-    
+
+    // Agregamos los elementos al grupo
+    const buttonGroup = this.scene.add.container(x, y, [button, buttonText]);
+    buttonGroup.setSize(80, 80); // Establecemos el tamaño del contenedor
+
     button.on("pointerdown", () => this.activateButton(text));
 
-    return button;
+    return buttonGroup; // Devolvemos el contenedor con los elementos
   }
 
   activateButton(buttonName) {
     if (this.scene.activeButton) {
-      this.scene.activeButton.setFillStyle(0xF2A950);
+      // Restauramos el estilo del botón activo previo
+      this.scene.activeButton.getAt(0).setFillStyle(0xF2A950);
     }
 
-    this.scene.activeButton = this.scene.toolboxButtons.find(
-      (button) => button.name === buttonName
-    );
+    this.scene.activeButton = this.scene.toolboxButtons.getMatching("name", buttonName)[0];
 
     if (this.scene.activeButton) {
-      this.scene.activeButton.setFillStyle(0x5ACEE8);
+      // Cambiamos el estilo del botón activo
+      this.scene.activeButton.getAt(0).setFillStyle(0x00ff00);
 
       this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
       this.scene.waitingForClick = true;
