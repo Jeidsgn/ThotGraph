@@ -110,11 +110,8 @@ export class Segment {
                         this.scene.pointB = null;
                         this.scene.pointA = null;
                     }
-                    
-
                 }
-
-            }
+            }    
         }
         if (!this.isClicking) {
             this.scene.pointB = null;
