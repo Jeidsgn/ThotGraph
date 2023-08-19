@@ -18,44 +18,48 @@ export class ToolBox {
   }
 
   createBaseButtons() {
-    const moveButton = this.scene.add
-      .text(10, 550, "Mover", { fill: "#ffffff"})
-      .setInteractive()
-      .on("pointerdown", () => this.activateButton("Mover"));
-  
+    // Crea el botón Mover
+    const moveButton = this.createButton(10, this.scene.sys.game.config.height - 50, "Mover");
     this.scene.toolboxButtons.push(moveButton);
   }
-  
+
   createDependentButtons() {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
-      const button = this.scene.add
-        .text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#ffffff"})
-        .setInteractive()
-        .on("pointerdown", () =>
-          this.activateButton(this.scene.elementNames[i])
-        );
-  
+      const x = 100 + i * 100;
+      const y = this.scene.sys.game.config.height - 50;
+      const button = this.createButton(x, y, this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
     }
   }
-  
+
+  createButton(x, y, text) {
+    const button = this.scene.add.rectangle(x, y, 80, 80, 0xF2A950);
+    button.setInteractive();
+    
+    const buttonText = this.scene.add.text(x, y, text, { fill: "#ffffff" });
+    buttonText.setOrigin(0.5);
+    
+    button.on("pointerdown", () => this.activateButton(text));
+
+    return button;
+  }
 
   activateButton(buttonName) {
     if (this.scene.activeButton) {
-      this.scene.activeButton.setStyle({ fill: "#ffffff" });
+      this.scene.activeButton.setFillStyle(0xF2A950);
     }
 
     this.scene.activeButton = this.scene.toolboxButtons.find(
-      (button) => button.text === buttonName
+      (button) => button.name === buttonName
     );
 
     if (this.scene.activeButton) {
-      this.scene.activeButton.setStyle({ fill: "#00ff00" });
+      this.scene.activeButton.setFillStyle(0x5ACEE8);
 
       this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
       this.scene.waitingForClick = true;
 
-      /// Almacena el nombre de la función en una variable
+      // Almacena el nombre de la función en una variable
       this.scene.activeButtonCallback = this.elements.buttonToFunction(buttonName);
     }
   }
