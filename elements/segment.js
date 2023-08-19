@@ -63,12 +63,6 @@ export class Segment {
                     //se agrega el punto fijo A y se crea el puntoB
                     this.scene.pointA = interactivePoint;
                     this.scene.pointB = this.pointermove;
-                    this.scene.pointA.point.fillStyle(0xF2A950);
-                    this.scene.pointA.point.fillCircle(
-                        this.scene.pointA.x,
-                        this.scene.pointA.y,
-                        5
-                    );
                 }//si hace clic se sigue el cursor
                 else if (this.isClicking) {
                     this.scene.pointB = this.pointermove;
