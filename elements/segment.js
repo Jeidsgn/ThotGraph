@@ -75,29 +75,29 @@ export class Segment {
                 }
             }
             else {//Si hay clic y hay B
-                if (this.isClicking && this.scene.pointB !== null) {
-                    this.scene.pointB = this.pointermove;
-                    // Borrar la línea anterior
-                    this.graphics.clear();
-                    // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
-                    const line = new Phaser.Geom.Line(
-                        this.scene.pointA.x,
-                        this.scene.pointA.y,
-                        this.scene.pointB.x,
-                        this.scene.pointB.y
-                    );
-                    this.drawParabola(
-                        this.scene.pointA.x,
-                        this.scene.pointA.y,
-                        this.scene.pointB.x,
-                        this.scene.pointB.y,
-                        -20 //Distancia de "caida"
-                    );
-                    this.graphics.strokeLineShape(line);
-                    // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
-                    this.scene.input.on("pointerup", () => {
-                        this.curve.clear(); // Borra cualquier dibujo anterior
+                if (this.scene.pointB !== null) {
+                    if (this.isClicking) {
+                        this.scene.pointB = this.pointermove;
+                        // Borrar la línea anterior
+                        this.graphics.clear();
+                        // Actualiza el aspecto visual de la líne mientras se mueve
+                        this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
+                        const line = new Phaser.Geom.Line(
+                            this.scene.pointA.x,
+                            this.scene.pointA.y,
+                            this.scene.pointB.x,
+                            this.scene.pointB.y
+                        );
+                        this.drawParabola(
+                            this.scene.pointA.x,
+                            this.scene.pointA.y,
+                            this.scene.pointB.x,
+                            this.scene.pointB.y,
+                            -20 //Distancia de "caida"
+                        );
+                        this.graphics.strokeLineShape(line);
+                    }else{
+                        this.curve.clear();
                         this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
                         const line = new Phaser.Geom.Line(
                             this.scene.pointA.x,
@@ -105,7 +105,11 @@ export class Segment {
                             this.scene.pointB.x,
                             this.scene.pointB.y
                         );
-                    });
+                        this.scene.pointB = null;
+                        this.scene.pointA = null;
+                    }
+                    
+
                 }
 
             }
