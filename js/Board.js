@@ -31,11 +31,12 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.toolbox.createToolbox();
     // Establece el color de fondo
-    const backgroundImage = this.add.image(
+    const background = this.add.image(
         this.cameras.main.width / 2,
         this.cameras.main.height / 2,
         'Bg'
       );
+    background.setDepth(-1);
   }
 
   // Función de actualización que se ejecuta en cada frame
