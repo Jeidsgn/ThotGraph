@@ -31,15 +31,16 @@ export class Board extends Phaser.Scene {
 
     // Crea el degradado vertical en el fondo
     this.createVerticalGradient();
+
+    // Establece el color de fondo del texto para que sea legible en el degradado
+    this.cameras.main.setBackgroundColor("#FFFFFF");
   }
 
   // Función para crear el degradado vertical en el fondo
   createVerticalGradient() {
-    const gradient = this.add.zone(
+    const gradient = this.add.container(
       this.cameras.main.width / 2,
-      this.cameras.main.height / 2,
-      this.cameras.main.width,
-      this.cameras.main.height
+      this.cameras.main.height / 2
     );
 
     gradient.setDepth(-1); // Coloca el degradado detrás de otros elementos
@@ -51,12 +52,12 @@ export class Board extends Phaser.Scene {
       { color: 0x081A34, offset: 1 }
     ];
 
-    // Crea un gráfico
+    // Crea un gráfico y aplica el degradado de relleno
     const graphics = this.make.graphics();
     graphics.fillStyle(colorStops);
     graphics.fillRect(
-      0,
-      0,
+      -this.cameras.main.width / 2,
+      -this.cameras.main.height / 2,
       this.cameras.main.width,
       this.cameras.main.height
     );

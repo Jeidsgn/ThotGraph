@@ -1,87 +1,121 @@
-import { ToolBox } from "./ToolBox.js";
-import { Element } from "../elements/Elements.js";
+import { Point } from "./point.js";
 
-export class Board extends Phaser.Scene {
-  constructor() {
-    super({ key: "scene" });
+export class Segment {
+    constructor(scene) {
+        this.scene = scene;
+        this.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
+        this.point = new Point(scene);
+        //this.scene.interactivePoints
+        this.scene.pointB = null;
+        this.scene.pointA = null;
 
-    // Propiedades para controlar el estado de la interacción en el tablero
-    this.waitingForClick = true;
-    this.isDrawingEnabled = false;
-    this.activeButtonCallback = null; // Agregar una propiedad para almacenar la función activa del botón
-  }
+        // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
+        this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
 
-  // Función de inicialización de la escena
-  init() {
-    // Crea instancias de las clases ToolBox y Element pasando "this" como referencia a la escena
-    this.toolbox = new ToolBox(this);
-    this.elements = new Element(this);
-    // Inicializa los nombres y elementos
-    this.elements.Names();
-  }
+        this.isClicking = false; // Variable para controlar si se está haciendo clic
+        this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
 
-  preload() {
-    // Cargar recursos como imágenes y sprites aquí, si es necesario
-  }
+        // Configura el evento de clic en la escena para capturar el puntero
+        this.scene.input.on("pointerdown", () => {
+            this.isClicking = true; // Se está haciendo clic
+        });
+        // Capturar el puntero en la escena
+        this.scene.input.on("pointermove", (pointer) => {
+            this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
+        });
 
-  // Función que se ejecuta al crearse la escena
-  create() {
-    // Crea el cuadro de herramientas (toolbox)
-    this.toolbox.createToolbox();
-
-    // Crea el degradado vertical en el fondo
-    this.createVerticalGradient();
-
-    // Establece el color de fondo del texto para que sea legible en el degradado
-    this.cameras.main.setBackgroundColor("#FFFFFF");
-  }
-
-  // Función para crear el degradado vertical en el fondo
-  createVerticalGradient() {
-    const gradient = this.add.container(
-      this.cameras.main.width / 2,
-      this.cameras.main.height / 2
-    );
-
-    gradient.setDepth(-1); // Coloca el degradado detrás de otros elementos
-
-    // Define los colores del degradado
-    const colorStops = [
-      { color: 0x082934, offset: 0 },
-      { color: 0x081C34, offset: 0.5 },
-      { color: 0x081A34, offset: 1 }
-    ];
-
-    // Crea un gráfico y aplica el degradado de relleno
-    const graphics = this.make.graphics();
-    graphics.fillStyle(colorStops);
-    graphics.fillRect(
-      -this.cameras.main.width / 2,
-      -this.cameras.main.height / 2,
-      this.cameras.main.width,
-      this.cameras.main.height
-    );
-
-    gradient.add(graphics);
-  }
-
-  // Función de actualización que se ejecuta en cada frame
-  update() {
-    if (this.isDrawingEnabled && !this.waitingForClick) {
-      // Llama a la función activa correspondiente
-      if (this.activeButtonCallback) {
-        // Comprobamos si la función está definida
-        this.activeButtonCallback(); // Ejecutamos la función activa
-      } else {
-        console.log("Error en activeButtonCallback");
-      }
-    } else if (this.isDrawingEnabled && this.waitingForClick) {
-      // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
-      this.input.on("pointerdown", () => {
-        this.waitingForClick = false;
-      });
+        // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
+        this.scene.input.on("pointerup", () => {
+            this.isClicking = false; // No se está haciendo clic
+        });
     }
-    // Configura la función de clic en el contenedor (tablero)
-    // Lógica de actualización común, si es necesario
-  }
+// Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
+
+drawParabola(x2, y2, x1, y1, n) {
+    if (x1 !== x2) {
+        this.curve = this.scene.add.graphics({ lineStyle: { width: 5, color: 0x2AA4BF, alpha: 0.8 } });
+        this.curve.clear(); // Borra cualquier dibujo anterior
+        this.curve.lineStyle(5, 0x2AA4BF, 0.8); // Estilo de línea
+
+        const a = (4 * n) / Math.pow(x1 - x2, 2);
+        const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / Math.pow(x1 - x2, 2);
+        const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / Math.pow(x1 - x2, 2);
+
+        const minX = Math.min(x1, x2);
+        const maxX = Math.max(x1, x2);
+
+        // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
+        for (let x = minX; x <= maxX; x++) {
+            const y = a * x * x + b * x + c;
+            this.curve.lineTo(x, y);
+        }
+
+        this.curve.strokePath(); // Dibuja la parábola completa
+    }
+}
+
+
+    
+    
+    
+    
+    
+    
+
+    createSegment() {
+        //Se revisan todos los puntos hechos
+        for (const interactivePoint of this.scene.interactivePoints) {
+            //Puntero sobre el area del puntos
+            if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+                //Si no hay seleccionado
+                if (this.scene.pointA == null) {
+                    //se agrega el punto fijo A y se crea el puntoB
+                    this.scene.pointA = interactivePoint;
+                    this.scene.pointB = this.pointermove;
+                    this.scene.pointA.point.fillStyle(0xF2A950);
+                    this.scene.pointA.point.fillCircle(
+                        this.scene.pointA.x,
+                        this.scene.pointA.y,
+                        5
+                    );
+                }//si hace clic se sigue el cursor
+                else if (this.isClicking) {
+                    this.scene.pointB = this.pointermove;
+                }
+            }
+            else {//Si hay clic y hay B
+                if (this.isClicking && this.scene.pointB !== null) {
+                    this.scene.pointB = this.pointermove;
+                    // Borrar la línea anterior
+                    this.graphics.clear();
+                    // Actualiza el aspecto visual de la líne mientras se mueve
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.2);
+                    const line = new Phaser.Geom.Line(
+                        this.scene.pointA.x,
+                        this.scene.pointA.y,
+                        this.scene.pointB.x,
+                        this.scene.pointB.y
+                    );
+                    this.drawParabola(
+                        this.scene.pointA.x,
+                        this.scene.pointA.y,
+                        this.scene.pointB.x,
+                        this.scene.pointB.y,
+                        -20 //Distancia de "caida"
+                    );
+                    this.graphics.strokeLineShape(line);
+                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
+                }
+
+            }
+        }
+        if (!this.isClicking) {
+            this.scene.pointB = null;
+            this.scene.pointA = null;
+        }
+    }
+    addName() {
+        this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
+    }
+
 }
