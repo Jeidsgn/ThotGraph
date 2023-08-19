@@ -31,9 +31,6 @@ export class Board extends Phaser.Scene {
 
     // Crea el degradado vertical en el fondo
     this.createVerticalGradient();
-
-    // Establece el color de fondo del texto para que sea legible en el degradado
-    this.cameras.main.setBackgroundColor("#FFFFFF");
   }
 
   // Función para crear el degradado vertical en el fondo
