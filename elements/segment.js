@@ -28,32 +28,31 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
-    drawParabola(x2, y2, x1, y1, amplitude) {
-        if(x1!==x2){
-        this.graphics.clear(); // Borra cualquier dibujo anterior
-        
-        this.graphics.lineStyle(5, 0x000000); // Estilo de línea
-        
-        const a = amplitude; // Coeficiente de la parábola
-        
-        // Calcula k, n y h
-        const k = (y1 + y2) / 2;
-        const n = (a ** 2 * (x1 - x2) ** 4 + (y1 - y2) ** 2) / (4 * a * (x1 - x2) ** 2);
-        const h = (a * x1 ** 2 - a * x2 ** 2 - y1 + y2) / (2 * a * x1 - 2 * a * x2);
-        
-        const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
-        
-        this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
-        
-        // Dibuja la parábola utilizando la ecuación y = a * (x - h)^2 + k
-        for (let x = x1; x <= x2; x++) {
-            const y = a * (x - h) ** 2 + k;
-            this.graphics.lineTo(x, y);
+    drawParabola(x1, y1, x2, y2, n) {
+        if (x1 !== x2) {
+            this.graphics.clear(); // Borra cualquier dibujo anterior
+            
+            this.graphics.lineStyle(5, 0x000000); // Estilo de línea
+            
+            // Calcula los coeficientes a, b y c según la fórmula dada
+            const a = (4 * n) / ((x1 - x2) ** 2);
+            const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / ((x1 - x2) ** 2);
+            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / ((x1 - x2) ** 2);
+            
+            const startY = Math.min(y1, y2); // Asegúrate de comenzar desde el punto más bajo
+            
+            this.graphics.moveTo(x1, startY); // Mueve el lápiz al primer punto
+            
+            // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
+            for (let x = x1; x <= x2; x++) {
+                const y = a * x ** 2 + b * x + c;
+                this.graphics.lineTo(x, y);
+            }
+            
+            this.graphics.strokePath(); // Dibuja la parábola completa
         }
-        
-        this.graphics.strokePath(); // Dibuja la parábola completa
     }
-}
+    
     
     
     
