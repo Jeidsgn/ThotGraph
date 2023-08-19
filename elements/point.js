@@ -30,11 +30,11 @@ export class Point {
     if (this.isClicking) {
       const letter = String.fromCharCode(65 + this.points.getLength() - 1);
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-      this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
       // Crea la imagen del punto en las coordenadas del clic
-      const point = this.scene.add.sprite(x, y, 'point', 0).setOrigin(0.5, 0.89);
+      const point = this.scene.add.sprite(pointer.x, pointer.y, 'point', 0).setOrigin(0.5, 0.89);
       point.id = letter; // Agrega el nombre del punto
       this.points.add(point); // Agrega el punto al grupo
+      this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
     }
   }
   
