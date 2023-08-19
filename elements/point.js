@@ -8,6 +8,9 @@ export class Point {
     this.scene.input.on("pointerdown", () => {
         this.isClicking = true; // Se está haciendo clic
     });
+    this.scene.input.on("pointermove", (pointer) => {
+        this.pointer = pointer; // No se está haciendo clic
+    });
     this.scene.input.on("pointerup", () => {
         this.isClicking = false; // No se está haciendo clic
     });
@@ -22,7 +25,7 @@ export class Point {
       this.count = this.count+1;
       this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
       // Crea la imagen del punto en las coordenadas del clic
-      const point = this.scene.add.sprite(pointer.x, pointer.y, 'point', 0).setOrigin(0.5, 0.89);
+      const point = this.scene.add.sprite(this.pointer.x, this.pointer.y, 'point', 0).setOrigin(0.5, 0.89);
       point.id = letter; // Agrega el nombre del punto
       this.scene.points.add(point); // Agrega el punto al grupo
       this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
