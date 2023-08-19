@@ -80,7 +80,7 @@ export class Segment {
                     // Borrar la línea anterior
                     this.graphics.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
                     const line = new Phaser.Geom.Line(
                         this.scene.pointA.x,
                         this.scene.pointA.y,
@@ -95,7 +95,17 @@ export class Segment {
                         -20 //Distancia de "caida"
                     );
                     this.graphics.strokeLineShape(line);
-                    console.log(Phaser.Math.Distance.BetweenPoints(this.scene.pointA.point, this.scene.pointB));
+                    // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
+                    this.scene.input.on("pointerup", () => {
+                        this.curve.clear(); // Borra cualquier dibujo anterior
+                        this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
+                        const line = new Phaser.Geom.Line(
+                            this.scene.pointA.x,
+                            this.scene.pointA.y,
+                            this.scene.pointB.x,
+                            this.scene.pointB.y
+                        );
+                    });
                 }
 
             }
