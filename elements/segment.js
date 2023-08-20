@@ -11,7 +11,7 @@ export class Segment {
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
-        
+        this.p3 = null;        
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -34,7 +34,13 @@ export class Segment {
         if (x1 !== x2) {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
-            const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
+            if(this.p3=null){
+                const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
+                this.p3 = p1
+            } else{
+                const p1 = this.p3;
+                this.p3 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
+            };
             const p2 = new Phaser.Math.Vector2(x2, y2);
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             //this.scene.parabolic.draw(this.scene.curvestyle, 64);
