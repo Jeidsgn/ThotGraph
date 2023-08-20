@@ -79,8 +79,8 @@ export class Segment {
             const line = new Phaser.Geom.Line(
                 this.scene.pointA.x,
                 this.scene.pointA.y,
-                gameObject.x,
-                gameObject.y,
+                dropZone.x,
+                dropZone.y,
                 this.parabolic != null
             );
             gameObject.input.enabled = false;
