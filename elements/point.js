@@ -50,7 +50,7 @@ export class Point {
         }
     }
     stopMovePoint() {
-        if (this.scene.pointdragable) {
+        if (this.scene.pointdraggable) {
             for (const point of this.scene.points.getChildren()) {
                 console.log("se están buscando para parar")
                 if (point.input.enabled) {

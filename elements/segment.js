@@ -15,7 +15,6 @@ export class Segment {
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
-
         // Configura el evento de clic en la escena para capturar el puntero
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
@@ -24,7 +23,6 @@ export class Segment {
         this.scene.input.on("pointermove", (pointer) => {
             this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
         });
-
         // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
@@ -54,6 +52,7 @@ export class Segment {
         }
     }
     createSegment() {
+        this.point.stopMovePoint();
         //Se revisan todos los puntos hechos
         for (const interactivePoint of this.scene.interactivePoints) {
             //Puntero sobre el area del puntos
