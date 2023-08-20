@@ -63,7 +63,7 @@ export class Board extends Phaser.Scene {
     if (this.parabolic != null) {
       console.log("this.parabolic != null")
       this.count += 0.3;
-      let points = this.parabolic.getSpacedPoints(20);
+      let points = this.parabolic.getSpacedPoints(10);
       this.curvestyle.clear(); // Limpia el dibujo anterior
       this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
       this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
@@ -73,6 +73,7 @@ export class Board extends Phaser.Scene {
         console.log(i * 2 + this.count)     
         this.path.lineTo(points[i].x, points[i].y);
       };
+      this.path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
       this.path.draw(this.curvestyle);
       console.log("acá lo dibuja");
     };
