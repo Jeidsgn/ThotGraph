@@ -75,8 +75,7 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
-            this.scene.pointA.x = gameObject.x;
-            this.scene.pointA.y = gameObject.y;
+            this.scene.pointA = new Phaser.Geom.Point(gameObject.x,gameObject.y);
         });
         this.scene.input.on('dragend', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
