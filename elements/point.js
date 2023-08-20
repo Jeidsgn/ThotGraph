@@ -21,6 +21,7 @@ export class Point {
     }
 
     createPoint() {
+        this.stopMovePoint();
         if (this.isClicking) {
             const letter = this.count;
             this.count = this.count + 1;
