@@ -69,7 +69,6 @@ export class Board extends Phaser.Scene {
       for (let i = 1; i < points.length - 1; i++) {
         console.log(points[i].x)
         points[i].y += Math.cos(i * 2 + this.count);   
-        console.log(i * 2 + this.count)     
         this.path.lineTo(points[i].x, points[i].y);
       };
       this.path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
