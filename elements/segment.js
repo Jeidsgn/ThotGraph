@@ -90,7 +90,6 @@ export class Segment {
                 dropZone.y,
                 this.parabolic != null
             );
-            gameObject.input.enabled = false;
         });
     }
     addName() {
