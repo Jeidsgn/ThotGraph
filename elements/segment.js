@@ -57,7 +57,6 @@ export class Segment {
         };
         // Habilita el arrastre para el punto
         this.scene.input.on('drag', (pointer, gameObject) => {
-
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
@@ -77,9 +76,9 @@ export class Segment {
             );
             this.graphics.strokeLineShape(line);
             this.scene.pointA.x = gameObject.x;
-            this.scene.pointA.x = gameObject.y;
+            this.scene.pointA.y = gameObject.y;
         });
-        this.scene.input.on('drop', (pointer, gameObject, dropZone) => {
+        this.scene.input.on('dragend', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
