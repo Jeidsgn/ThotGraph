@@ -59,6 +59,7 @@ export class Point {
                 }
             }
         }
+        this.scene.pointdraggable=false;
         console.log("se supone que ya pararon")
     }
 
