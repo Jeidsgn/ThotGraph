@@ -38,7 +38,7 @@ export class Segment {
             const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            this.scene.parabolic.draw(this.curve, 64);
+            //this.scene.parabolic.draw(this.curve, 64);
             }
              // Dibuja la parábola completa
         }

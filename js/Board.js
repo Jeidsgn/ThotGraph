@@ -58,17 +58,17 @@ export class Board extends Phaser.Scene {
           });
       }
       //cuerda vibrante
-  //  if (this.parabolic != null){
-   //   this.count +=0.3;
-   //   this.curve.clear(); // Borra cualquier dibujo anterior
-    //  this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
-   //       let points = parabolic.points;
-   //       for (let i = 1; i < points.length-1; i++){
-   //           points[i].x += Math.cos(i * 0.5 + this.count);
-   //           this.curve.lineTo((v+x), y);
-    //      }  
-     //     this.curve.strokePath();
-      //};
+    if (this.parabolic != null){
+      this.count +=0.3;
+      this.curvestyle.clear(); // Borra cualquier dibujo anterior
+      this.curvestyle.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
+      let points = curvestyle.getPoints(10);
+          for (let i = 1; i < points.length-1; i++){
+              points[i].x += Math.cos(i * 0.5 + this.count);
+              this.curvestyle.lineTo((v+x), y);
+          }  
+          this.curvestyle.strokePath();
+      };
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
