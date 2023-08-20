@@ -64,7 +64,7 @@ export class Board extends Phaser.Scene {
       this.count += 0.3;
       let points = this.parabolic.getSpacedPoints(3);
         //  Draw the points
-        this.add.graphics.fillStyle(0x00ff00, 1);
+        this.scene.add.graphics.fillStyle(0x00ff00, 1);
 
         for (let i = 0; i < points.length; i++)
         {
