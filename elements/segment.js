@@ -42,7 +42,7 @@ export class Segment {
             
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
-            console.log("coeficientes "+a+" "+b+" "+c);
+            console.log("coeficientes "+x2+" "+y2+" "+x1);
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {
                 const y = a * x * x + b * x + c;
@@ -74,7 +74,7 @@ export class Segment {
                 gameObject.y,
                 pointer.x,
                 pointer.y
-                - 20 //Distancia de "caida"
+                -20 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
         });
