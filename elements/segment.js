@@ -79,16 +79,19 @@ export class Segment {
         });
         this.scene.input.on('dragend', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
+            console.log("dragend");
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
             this.graphics.lineStyle(5, 0x2AA4BF);
             const line = new Phaser.Geom.Line(
-                this.scene.pointA.x,
-                this.scene.pointA.y,
+                gameObject.x,
+                gameObject.y,
                 dropZone.x,
                 dropZone.y,                
             );
+            console.log("segment");
             this.parabolic != null;
+            console.log("parabolic null");
         });
     }
     addName() {
