@@ -9,7 +9,7 @@ export class Board extends Phaser.Scene {
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
-    //this.parabolic.points = null;
+    this.parabolic = null;
   }
 
   // Función de inicialización de la escena
@@ -58,10 +58,10 @@ export class Board extends Phaser.Scene {
           });
       }
       //cuerda vibrante
-  //  if (this.parabolicrope != null){
+  //  if (this.parabolic != null){
    //   this.count +=0.3;
    //   this.curve.clear(); // Borra cualquier dibujo anterior
-   //  this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
+    //  this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
    //       let points = parabolic.points;
    //       for (let i = 1; i < points.length-1; i++){
    //           points[i].x += Math.cos(i * 0.5 + this.count);
