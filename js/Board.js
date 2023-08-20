@@ -64,9 +64,9 @@ export class Board extends Phaser.Scene {
       for (let i = 1; i < points.length - 1; i++) {
         points[i].x += Math.cos(i * 0.5 + this.count);
         if (i === 1) {
-          this.curve.moveTo(points[i].x, points[i].y);
+          this.curvestyle.moveTo(points[i].x, points[i].y);
         } else {
-          this.curve.lineTo(points[i].x, points[i].y);
+          this.curvestyle.lineTo(points[i].x, points[i].y);
         }
       }
       this.curvestyle.strokePath();
