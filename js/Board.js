@@ -9,7 +9,7 @@ export class Board extends Phaser.Scene {
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
-    this.parabolic.points = null;
+    //this.parabolic.points = null;
   }
 
   // Función de inicialización de la escena
