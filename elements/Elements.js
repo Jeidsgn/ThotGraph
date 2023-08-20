@@ -8,40 +8,41 @@ export class Element {
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
   }
-  buttonToFunction(buttonName){
+  buttonToFunction(buttonName) {
     // Define un objeto de mapeo entre nombres de botones y funciones
     const functions = {
       "Point": () => {
-          this.scene.elements.point.createPoint(); 
+        this.scene.elements.point.createPoint();
       },
       "Mover": () => {
-          this.scene.elements.moveElement();
+        this.scene.elements.moveElement();
       },
       "Segment": () => {
-          this.scene.elements.segment.createSegment();
+        this.scene.elements.segment.createSegment();
       },
     };
     return functions[buttonName];
   }
 
   // Agrega nombres a los elementos
-  Names(){
+  Names() {
     // Agrega nombres a los puntos utilizando el método "addName" de la instancia de Point en la escena
     this.point.addName();
     this.segment.addName();
-  } 
+  }
 
   // Crea un nuevo elemento
-  moveElement (){
+  moveElement() {
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
     this.point.movePoint();
 
     const interactive = this.scene.points.getChildren();
     // Itera a través de los puntos interactivos en la escena
     for (const point of interactive) {
-        point.setInteractive(false);
+      point.setInteractive(false);
+    }
+
+    // Puedes agregar métodos comunes a todos los elementos aquí
+    // Por ejemplo, para manejar restricciones y dependencias de movimiento
   }
-  
-  // Puedes agregar métodos comunes a todos los elementos aquí
-  // Por ejemplo, para manejar restricciones y dependencias de movimiento
 }
