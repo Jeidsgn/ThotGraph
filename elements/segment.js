@@ -35,7 +35,7 @@ export class Segment {
         if (x1 !== x2) {
             this.curve.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
-            const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)+n);
+            const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const curve = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             this.curve.lineStyle(1, 0xffffff, 1);
@@ -77,7 +77,7 @@ export class Segment {
                 gameObject.y,
                 pointer.x,
                 pointer.y,
-                -20 //Distancia de "caida"
+                40 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
         });
