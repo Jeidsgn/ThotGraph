@@ -56,20 +56,20 @@ export class Segment {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
-            point.on('drag', (pointer) => {
+            point.on('drag', (pointer, gameObject) => {
                 // Borrar la línea anterior
                 this.graphics.clear();
                 // Actualiza el aspecto visual de la líne mientras se mueve
                 this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
                 const line = new Phaser.Geom.Line(
-                    pointer.downX,
-                    pointer.downY,
+                    gameObject.x,
+                    gameObject.y,
                     pointer.x,
                     pointer.y
                 );
                 this.drawParabola(
-                    pointer.downX,
-                    pointer.downY,
+                    gameObject.x,
+                    gameObject.y,
                     pointer.x,
                     pointer.y
                     -20 //Distancia de "caida"
