@@ -78,14 +78,14 @@ export class Segment {
             this.graphics.strokeLineShape(this.scene.line);
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
-            console.log(gameObject);
-            console.log(dropZone.x);
+            console.log(gameObject.downX);
+            console.log(dropZone);
             this.graphics.clear();
             this.scene.parabolic != null;
             this.graphics.lineStyle(5, 0x2AA4BF,0.9);
             const line = new Phaser.Geom.Line(
-                gameObject.input.dragStartX,
-                gameObject.input.dragStartX,
+                gameObject.downX,
+                gameObject.downY,
                 dropZone.x,
                 dropZone.y,
             );
