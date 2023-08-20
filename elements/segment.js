@@ -36,8 +36,12 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
+            if(this.p3=null){
+                this.p3 = p1;
+            }
             // Calcula p1 usando el valor anterior si está disponible
-            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
+            this.p3 = p1;
         };
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
         // Dibuja la parábola completa
@@ -52,8 +56,7 @@ export class Segment {
         };
         // Habilita el arrastre para el punto
         this.scene.input.on('drag', (pointer, gameObject) => {
-            this.scene.pointA.x = gameObject.x;
-            this.scene.pointA.x = gameObject.y;
+
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
@@ -72,6 +75,8 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
+            this.scene.pointA.x = gameObject.x;
+            this.scene.pointA.x = gameObject.y;
         });
         this.scene.input.on('drop', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
