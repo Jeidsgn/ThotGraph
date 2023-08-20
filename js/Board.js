@@ -9,6 +9,8 @@ export class Board extends Phaser.Scene {
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
+    
+    this.curvestyle = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
     this.parabolic = null;
   }
 
