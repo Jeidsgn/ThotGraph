@@ -58,7 +58,7 @@ export class Segment {
             point.setInteractive({ draggable: true });
         };
         // Habilita el arrastre para el punto
-        this.input.on('drag', (pointer, gameObject) => {
+        this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
