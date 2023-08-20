@@ -33,20 +33,27 @@ export class Segment {
     drawParabola(x1, y1, x2, y2, n) {
         console.log("entra a la fución");
         if (x1 !== x2) {
-            const a = (4 * n) / ((x1 - x2) ** 2);
-            const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / (x1 - x2) ** 2;
-            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / (x1 - x2) ** 2;            
-            const minX = Math.min(x1, x2);
-            const maxX = Math.max(x1, x2);
+            const graphics = this.add.graphics();
+            const p0 = new Phaser.Math.Vector2(x1, y1);
+            const p1 = new Phaser.Math.Vector2(x2, y2);
+            const p2 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)+n);
+            const curve = new Phaser.Curves.CubicBezier(p0, p1, p2, p3);
+            graphics.lineStyle(1, 0xffffff, 1);
+            curve.draw(graphics, 64);
+
+            //const a = (4 * n) / ((x1 - x2) ** 2);
+            //const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / (x1 - x2) ** 2;
+            //const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / (x1 - x2) ** 2;            
+            //const minX = Math.min(x1, x2);
+            //const maxX = Math.max(x1, x2);
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
-            for (let x = minX; x <= maxX; x++) {                
-                const y = a * x * x + b * x + c;
-                this.scene.parabolic.points.x = x;
-                this.scene.parabolic.points.y = y;
+            //for (let x = minX; x <= maxX; x++) {                
+            //    const y = a * x * x + b * x + c;
+            //    this.curve.lineTo(x, y);
             }
              // Dibuja la parábola completa
         }
-    }
+    
     createSegment() {
         this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();

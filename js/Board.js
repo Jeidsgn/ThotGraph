@@ -9,6 +9,7 @@ export class Board extends Phaser.Scene {
     this.waitingForClick = true;
     this.isDrawingEnabled = false;
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
+    this.parabolic.points = null;
   }
 
   // Función de inicialización de la escena
@@ -55,8 +56,19 @@ export class Board extends Phaser.Scene {
         this.input.on("pointerdown", () => {
             this.waitingForClick = false;
           });
-        
       }
+      //cuerda vibrante
+  //  if (this.parabolicrope != null){
+   //   this.count +=0.3;
+   //   this.curve.clear(); // Borra cualquier dibujo anterior
+   //  this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
+   //       let points = parabolic.points;
+   //       for (let i = 1; i < points.length-1; i++){
+   //           points[i].x += Math.cos(i * 0.5 + this.count);
+   //           this.curve.lineTo((v+x), y);
+    //      }  
+     //     this.curve.strokePath();
+      //};
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
   }
