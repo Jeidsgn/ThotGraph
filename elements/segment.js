@@ -58,8 +58,6 @@ export class Segment {
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
             this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
-            this.scene.pointA.x = gameObject.x;
-            this.scene.pointA.y = gameObject.y;
             const line = new Phaser.Geom.Line(
                 gameObject.x,
                 gameObject.y,
