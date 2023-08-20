@@ -33,13 +33,13 @@ export class Segment {
     drawParabola(x1, y1, x2, y2, n) {
         console.log("entra a la fución");
         if (x1 !== x2) {
-            const graphics = this.scene.add.graphics();
+            this.curve.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)+n);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const curve = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            graphics.lineStyle(1, 0xffffff, 1);
-            curve.draw(graphics, 64);
+            this.curve.lineStyle(1, 0xffffff, 1);
+            curve.draw(this.curve, 64);
 
             //const a = (4 * n) / ((x1 - x2) ** 2);
             //const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / (x1 - x2) ** 2;
