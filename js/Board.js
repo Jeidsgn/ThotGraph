@@ -59,9 +59,7 @@ export class Board extends Phaser.Scene {
       }
       //cuerda vibrante
     if (this.parabolic != null){
-      this.count +=0.3;
-      this.curvestyle.clear(); // Borra cualquier dibujo anterior
-      this.curvestyle.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
+      this.count +=0.3; línea
       let points = this.scene.parabolic.getPoints(10);
           for (let i = 1; i < points.length-1; i++){
               points[i].x += Math.cos(i * 0.5 + this.count);
