@@ -81,6 +81,7 @@ export class Segment {
             console.log(gameObject.downX);
             console.log(dropZone);
             this.graphics.clear();
+            this.scene.curvestyle.clear();
             this.scene.parabolic != null;
             this.graphics.lineStyle(5, 0x2AA4BF,0.9);
             const line = new Phaser.Geom.Line(
@@ -89,12 +90,13 @@ export class Segment {
                 dropZone.x,
                 dropZone.y,
             );
-
+            this.graphics.strokeLineShape(this.scene.line);
         });
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
             console.log("dragend");
             if (!dropped) {
+                this.scene.curvestyle.clear();
                 this.graphics.clear();
                 this.scene.parabolic != null;
             }
