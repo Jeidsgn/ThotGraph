@@ -94,6 +94,7 @@ export class Segment {
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
             if (!dropped) {
+                console.log("!dropped")
                 this.scene.curvestyle.clear();
                 this.graphics.clear();
                 this.scene.parabolic = null;
