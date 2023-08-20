@@ -37,10 +37,11 @@ export class Segment {
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
             if(this.p3=null){
-                this.p3 = p1;
-            }
-            // Calcula p1 usando el valor anterior si está disponible
-            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+            }else{
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p3, p2);
+            }            // Calcula p1 usando el valor anterior si está disponible
+            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             this.p3 = p1;
         };
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
