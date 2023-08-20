@@ -79,8 +79,9 @@ export class Segment {
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
+            console.log(dropZone)
             this.scene.curvestyle.clear();
-            this.scene.parabolic != null;
+            this.scene.parabolic = null;
             this.graphics.lineStyle(5, 0x2AA4BF,0.9);
             const line = new Phaser.Geom.Line(
                 gameObject.downX,
@@ -95,7 +96,7 @@ export class Segment {
             if (!dropped) {
                 this.scene.curvestyle.clear();
                 this.graphics.clear();
-                this.scene.parabolic != null;
+                this.scene.parabolic = null;
             }
         });
     }
