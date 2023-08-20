@@ -35,6 +35,11 @@ export class Element {
   moveElement (){
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
     this.point.movePoint();
+
+    const interactive = this.scene.points.getChildren();
+    // Itera a través de los puntos interactivos en la escena
+    for (const point of interactive) {
+        point.setInteractive(false);
   }
   
   // Puedes agregar métodos comunes a todos los elementos aquí
