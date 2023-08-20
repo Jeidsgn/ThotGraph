@@ -36,9 +36,9 @@ export class Segment {
             this.curve.clear(); // Borra cualquier dibujo anterior
             this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
 
-            const a = (4 * n) / Math.pow(x1 - x2, 2);
-            const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / Math.pow(x1 - x2, 2);
-            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / Math.pow(x1 - x2, 2);
+            const a = (4 * n) / (x1 - x2) ** 2;
+            const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / (x1 - x2) ** 2;
+            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / (x1 - x2) ** 2;
             
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
