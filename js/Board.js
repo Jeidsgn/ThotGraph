@@ -67,7 +67,6 @@ export class Board extends Phaser.Scene {
       this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
       this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
       for (let i = 1; i < points.length - 1; i++) {
-        console.log(points[i].x)
         points[i].y += Math.cos(i * 2 + this.count);   
         this.path.lineTo(points[i].x, points[i].y);
       };
