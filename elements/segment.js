@@ -43,7 +43,11 @@ export class Segment {
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
             console.log("coeficientes "+x2+" "+y2+" "+x1);
+            console.log("x2-x1 = " + x2-x1);
+            console.log("(x1 - x2) ** 2 = "+(x1 - x2) ** 2);
+            console.log("Math.pow((x1 - x2),2) = " + Math.pow((x1 - x2),2));            
             console.log("coeficientes "+a+" "+b+" "+c);
+
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {
                 const y = a * x * x + b * x + c;
