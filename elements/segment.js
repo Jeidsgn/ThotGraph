@@ -39,7 +39,7 @@ export class Segment {
             if(this.p3=null){
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             }else{
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p3, p2);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
             }            // Calcula p1 usando el valor anterior si está disponible
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             this.p3 = p1;
