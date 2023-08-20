@@ -56,7 +56,6 @@ export class Segment {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
-
             point.on('drag', (pointer) => {
                 // Borrar la línea anterior
                 this.graphics.clear();
@@ -65,14 +64,14 @@ export class Segment {
                 const line = new Phaser.Geom.Line(
                     pointer.downX,
                     pointer.downY,
-                    dragX,
-                    dragY
+                    pointer.x,
+                    pointer.y
                 );
                 this.drawParabola(
                     pointer.downX,
                     pointer.downY,
-                    dragX,
-                    dragY
+                    pointer.x,
+                    pointer.y
                     -20 //Distancia de "caida"
                 );
                 this.graphics.strokeLineShape(line);
