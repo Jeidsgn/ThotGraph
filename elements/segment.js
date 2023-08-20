@@ -33,7 +33,6 @@ export class Segment {
     drawParabola(x2, y2, x1, y1, n) {
         console.log("entra a la fución");
         if (x1 !== x2) {
-            console.log("verifica las x");
             this.curve.clear(); // Borra cualquier dibujo anterior
             this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
 
@@ -43,13 +42,12 @@ export class Segment {
             
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
-            console.log("hace calculos");
+            console.log("coeficientes "+a+" "+b+" "+c);
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {
                 const y = a * x * x + b * x + c;
                 this.curve.lineTo(x, y);
             }
-            console.log("dibuja");
             this.curve.strokePath(); // Dibuja la parábola completa
         }
     }
