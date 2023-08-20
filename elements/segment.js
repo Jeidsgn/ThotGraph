@@ -5,7 +5,7 @@ export class Segment {
         this.scene = scene;
         this.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.point = new Point(scene);
-        //this.scene.interactivePoints
+        //this.scene.points
         this.scene.pointB = null;
         this.scene.pointA = null;
 
@@ -53,14 +53,15 @@ export class Segment {
     }
     createSegment() {
         this.point.stopMovePoint();
+        const interactive = this.scene.points.getChildren();
         //Se revisan todos los puntos hechos
-        for (const interactivePoint of this.scene.interactivePoints) {
+        for (const point of interactive){
             //Puntero sobre el area del puntos
-            if (Phaser.Geom.Rectangle.ContainsPoint(interactivePoint.area, this.pointermove)) {
+            if (Phaser.Geom.Rectangle.ContainsPoint(point.area, this.pointermove)) {
                 //Si no hay seleccionado
                 if (this.scene.pointA == null) {
                     //se agrega el punto fijo A y se crea el puntoB
-                    this.scene.pointA = interactivePoint;
+                    this.scene.pointA = point;
                     this.scene.pointB = this.pointermove;
                 }//si hace clic se sigue el cursor
                 else if (this.isClicking) {
