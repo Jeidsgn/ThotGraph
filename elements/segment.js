@@ -30,7 +30,7 @@ export class Segment {
     }
     // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
-    drawParabola(x2, y2, x1, y1, n) {
+    drawParabola(x1, y1, x2, y2, n) {
         console.log("entra a la fución");
         if (x1 !== x2) {
             this.curve.clear(); // Borra cualquier dibujo anterior
@@ -43,6 +43,7 @@ export class Segment {
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
             console.log("coeficientes "+x2+" "+y2+" "+x1);
+            console.log("coeficientes "+a+" "+b+" "+c);
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {
                 const y = a * x * x + b * x + c;
