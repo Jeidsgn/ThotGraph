@@ -2,7 +2,7 @@ export class Point {
     constructor(scene) {
         this.scene = scene;
         this.count = 1;
-        this.scene.pointdragable = false;
+        this.scene.pointdraggable = false;
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.textContainer = scene.add.text(10, 10, "", { fill: "#000000" }); // Contenedor de texto para las letras de los puntos
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -42,7 +42,7 @@ export class Point {
             point.setInteractive();
             // Habilita el arrastre para el punto
             this.scene.input.setDraggable(point);
-            this.scene.pointdragable = true;
+            this.scene.pointdraggable = true;
             point.on('drag', (pointer, dragX, dragY) => {
                 point.x = dragX;
                 point.y = dragY;
@@ -53,11 +53,13 @@ export class Point {
         if (this.scene.pointdragable) {
             for (const point of this.scene.points.getChildren()) {
                 console.log("se están buscando para parar")
-                point.disableInteractive();
-                this.scene.input.setDraggable(point, false);
+                if (point.input.enabled) {
+                    point.disableInteractive();
+                    this.scene.input.setDraggable(point, false);
+                }
             }
-            console.log("se supone que ya pararon")
         }
+        console.log("se supone que ya pararon")
     }
 
 }
