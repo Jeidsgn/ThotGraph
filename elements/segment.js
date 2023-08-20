@@ -71,7 +71,7 @@ export class Segment {
             );
             this.graphics.strokeLineShape(line);
         });
-        this.scene.input.on('drop', (pointer, gameObject, dropZone) => {
+        this.scene.points.input.on('drop', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
@@ -85,9 +85,6 @@ export class Segment {
             );
             gameObject.input.enabled = false;
         });
-
-
-
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
