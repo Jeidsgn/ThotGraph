@@ -65,7 +65,7 @@ export class Segment {
                 gameObject.y,
                 pointer.x,
                 pointer.y,
-                40 //Distancia de "caida"
+                -40 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
         });
