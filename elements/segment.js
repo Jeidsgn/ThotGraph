@@ -45,8 +45,8 @@ export class Segment {
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {                
                 const y = a * x * x + b * x + c;
-                const v = x + Math.cos(x * 0.5 + ((10*Math.random())+10));
-                this.curve.lineTo(v, y);
+                const v = 10* Math.cos(x * 0.5 + 10);
+                this.curve.lineTo((v+x), y);
             }
             this.curve.strokePath(); // Dibuja la parábola completa
         }
