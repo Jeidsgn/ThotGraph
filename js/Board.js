@@ -66,7 +66,7 @@ export class Board extends Phaser.Scene {
 
       this.curvestyle.clear(); // Limpia el dibujo anterior
       this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
-
+      console.log("hay "+points.length+" puntos")
       for (let i = 1; i < points.length - 1; i++) {
         points[i].x += Math.cos(i * 0.5 + this.count);
         if (i === 1) {
@@ -75,6 +75,7 @@ export class Board extends Phaser.Scene {
           this.curvestyle.lineTo(points[i].x, points[i].y);
         }
       } this.curvestyle.strokePath();
+      console.log("acá lo dibuja")
 
     };
     // Configura la función de clic en el contenedor (tablero)
