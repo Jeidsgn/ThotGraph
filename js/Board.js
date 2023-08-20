@@ -61,7 +61,6 @@ export class Board extends Phaser.Scene {
     }
     //cuerda vibrante
     if (this.parabolic != null) {
-      console.log("this.parabolic != null")
       this.count += 0.3;
       let points = this.parabolic.getSpacedPoints(10);
       this.curvestyle.clear(); // Limpia el dibujo anterior
@@ -75,7 +74,6 @@ export class Board extends Phaser.Scene {
       };
       this.path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
       this.path.draw(this.curvestyle);
-      console.log("acá lo dibuja");
     };
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
