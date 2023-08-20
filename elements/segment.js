@@ -35,10 +35,8 @@ export class Segment {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
+            const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
             // Calcula p1 usando el valor anterior si está disponible
-            const prevP1 = this.scene.parabolic ? this.scene.parabolic.getPoint(0.5) : null;
-            const p1 = prevP1 ? new Phaser.Math.Vector2(prevP1.x, prevP1.y) : new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
         };
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
@@ -83,6 +81,7 @@ export class Segment {
                 this.scene.pointA.y,
                 gameObject.x,
                 gameObject.y,
+                this.parabolic != null
             );
             gameObject.input.enabled = false;
         });
