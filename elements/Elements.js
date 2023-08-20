@@ -35,14 +35,18 @@ export class Element {
   moveElement() {
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
     this.point.movePoint();
-
-    const interactive = this.scene.points.getChildren();
-    // Itera a través de los puntos interactivos en la escena
-    for (const point of interactive) {
-      point.setInteractive(false);
-    }
-
+    this.scene.elements.stopMovePoint();
+    console.log("ya se llamó a parar")
+  }
+  stopMovePoint(){
+    for (const point of this.scene.points.getChildren()) {
+      console.log("se están buscando para parar")
+      point.disableInteractive();
+      this.scene.input.setDraggable(point, false);
+  }
+  console.log("se supone que ya pararon")
+  }
     // Puedes agregar métodos comunes a todos los elementos aquí
     // Por ejemplo, para manejar restricciones y dependencias de movimiento
-  }
+  
 }
