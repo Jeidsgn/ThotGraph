@@ -71,7 +71,7 @@ export class Segment {
             );
             this.graphics.strokeLineShape(line);
         });
-        this.scene.points.input.on('drop', (pointer, gameObject, dropZone) => {
+        this.scene.input.on('drop', (pointer, gameObject, dropZone) => {
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
