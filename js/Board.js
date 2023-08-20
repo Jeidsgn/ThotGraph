@@ -62,7 +62,16 @@ export class Board extends Phaser.Scene {
     if (this.parabolic != null) {
       console.log("this.parabolic != null")
       this.count += 0.3;
-      let points = this.parabolic.getSpacedPoints(10);
+      let points = this.parabolic.getSpacedPoints(3);
+        //  Draw the points
+        this.add.graphics.fillStyle(0x00ff00, 1);
+
+        for (let i = 0; i < points.length; i++)
+        {
+            graphics.fillCircle(points[i].x, points[i].y, 6);
+        }
+
+
 
       this.curvestyle.clear(); // Limpia el dibujo anterior
       this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
