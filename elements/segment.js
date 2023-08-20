@@ -33,22 +33,18 @@ export class Segment {
     drawParabola(x1, y1, x2, y2, n) {
         console.log("entra a la fución");
         if (x1 !== x2) {
-            this.curve.clear(); // Borra cualquier dibujo anterior
-            this.curve.lineStyle(5, 0x2AA4BF, 0.9); // Estilo de línea
-
             const a = (4 * n) / ((x1 - x2) ** 2);
             const b = (-4 * n * (x1 + x2) + (x1 - x2) * (y1 - y2)) / (x1 - x2) ** 2;
-            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / (x1 - x2) ** 2;
-            
+            const c = (4 * n * x1 * x2 + (x1 - x2) * (-x2 * y1 + x1 * y2)) / (x1 - x2) ** 2;            
             const minX = Math.min(x1, x2);
             const maxX = Math.max(x1, x2);
             // Dibuja la parábola utilizando la ecuación y = ax^2 + bx + c
             for (let x = minX; x <= maxX; x++) {                
                 const y = a * x * x + b * x + c;
-                const v = 10* Math.cos(x * 0.5 + 10);
-                this.curve.lineTo((v+x), y);
+                this.scene.parabolic.points.x = x;
+                this.scene.parabolic.points.y = y;
             }
-            this.curve.strokePath(); // Dibuja la parábola completa
+             // Dibuja la parábola completa
         }
     }
     createSegment() {
