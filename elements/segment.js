@@ -37,7 +37,7 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p1 = new Phaser.Math.Vector2(x2, y2);
             const p2 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)+n);
-            const curve = new Phaser.Curves.CubicBezier(p0, p1, p2, p3);
+            const curve = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             graphics.lineStyle(1, 0xffffff, 1);
             curve.draw(graphics, 64);
 
