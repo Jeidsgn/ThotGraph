@@ -3,7 +3,8 @@ import { Point } from "./point.js";
 export class Segment {
     constructor(scene) {
         this.scene = scene;
-        this.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
+        this.scene.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
+        this.scene.segment = null;
         this.point = new Point(scene);
         //this.scene.points
         this.scene.pointB = null;
@@ -36,9 +37,9 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-            if(this.p3=null){
+            if (this.p3 = null) {
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            }else{
+            } else {
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
             }            // Calcula p1 usando el valor anterior si está disponible
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
@@ -61,7 +62,7 @@ export class Segment {
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
             this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
-            const line = new Phaser.Geom.Line(
+            this.scene.line = new Phaser.Geom.Line(
                 gameObject.x,
                 gameObject.y,
                 pointer.x,
@@ -75,23 +76,27 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(line);
-            this.scene.pointA = new Phaser.Geom.Point(gameObject.x,gameObject.y);
+            this.scene.pointA = new Phaser.Geom.Point(gameObject.x, gameObject.y);
         });
-        this.scene.input.on('dragend', (pointer, gameObject, dropZone) => {
-            // Borrar la línea anterior
+        this.scene.input.on('drop', (gameObject, dropZone) => {
             console.log("dragend");
             this.graphics.clear();
-            // Actualiza el aspecto visual de la líne mientras se mueve
             this.graphics.lineStyle(5, 0x2AA4BF);
             const line = new Phaser.Geom.Line(
-                gameObject.x,
-                gameObject.y,
+                gameObject.input.dragStartX,
+                gameObject.input.dragStartX,
                 dropZone.x,
-                dropZone.y,                
+                dropZone.y,
             );
-            console.log("segment");
-            this.parabolic != null;
-            console.log("parabolic null");
+
+        });
+        this.scene.input.on('dragend', (dropped) => {
+            // Borrar la línea anterior
+            console.log("dragend");
+            if (!dropped) {
+                this.graphics.clear();
+                this.parabolic != null;
+            }
         });
     }
     addName() {
