@@ -55,28 +55,29 @@ export class Segment {
         this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
-            point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
-            point.on('drag', (pointer, gameObject) => {
-                // Borrar la línea anterior
-                this.graphics.clear();
-                // Actualiza el aspecto visual de la líne mientras se mueve
-                this.graphics.lineStyle(5, 0x2AA4BF, 0.5);
-                const line = new Phaser.Geom.Line(
-                    gameObject.x,
-                    gameObject.y,
-                    pointer.x,
-                    pointer.y
-                );
-                this.drawParabola(
-                    gameObject.x,
-                    gameObject.y,
-                    pointer.x,
-                    pointer.y
-                    -20 //Distancia de "caida"
-                );
-                this.graphics.strokeLineShape(line);
-            });
+            point.setInteractive({ draggable: true });
         };
+        // Habilita el arrastre para el punto
+        this.input.on('drag', (pointer, gameObject) => {
+            // Borrar la línea anterior
+            this.graphics.clear();
+            // Actualiza el aspecto visual de la líne mientras se mueve
+            this.graphics.lineStyle(5, 0x2AA4BF, 0.5);
+            const line = new Phaser.Geom.Line(
+                gameObject.x,
+                gameObject.y,
+                pointer.x,
+                pointer.y
+            );
+            this.drawParabola(
+                gameObject.x,
+                gameObject.y,
+                pointer.x,
+                pointer.y
+                - 20 //Distancia de "caida"
+            );
+            this.graphics.strokeLineShape(line);
+        });
 
     }
 
