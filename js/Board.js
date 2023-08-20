@@ -68,7 +68,8 @@ export class Board extends Phaser.Scene {
       this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
       for (let i = 1; i < points.length - 1; i++) {
         console.log(points[i].x)
-        points[i].x += Math.cos(i * 2 + this.count);        
+        points[i].x += Math.cos(i * 2 + this.count);   
+        console.log(points[i].x)     
         this.path.lineTo(points[i].x, points[i].y);
       };
       this.path.draw(this.curvestyle);
