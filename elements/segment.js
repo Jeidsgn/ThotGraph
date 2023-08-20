@@ -76,15 +76,15 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(this.scene.line);
-            this.scene.pointA = new Phaser.Geom.Point(gameObject.x, gameObject.y);
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
-            console.log("dragend");
+            console.log("drop");
             this.graphics.clear();
-            this.graphics.lineStyle(5, 0x2AA4BF);
+            this.scene.parabolic != null;
+            this.graphics.lineStyle(5, 0x2AA4BF,0.9);
             const line = new Phaser.Geom.Line(
-                gameObject.input.dragStartX,
-                gameObject.input.dragStartX,
+                gameObject.scene.input.dragStartX,
+                gameObject.scene.input.dragStartX,
                 dropZone.x,
                 dropZone.y,
             );
@@ -95,7 +95,7 @@ export class Segment {
             console.log("dragend");
             if (!dropped) {
                 this.graphics.clear();
-                this.parabolic != null;
+                this.scene.parabolic != null;
             }
         });
     }
