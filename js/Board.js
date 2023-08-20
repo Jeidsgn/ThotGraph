@@ -60,17 +60,18 @@ export class Board extends Phaser.Scene {
     }
     //cuerda vibrante
     if (this.parabolic != null) {
+      console.log("this.parabolic != null")
       this.count += 0.3;
       let points = this.parabolic.getSpacedPoints(10);
       for (let i = 1; i < points.length - 1; i++) {
         points[i].x += Math.cos(i * 0.5 + this.count);
         if (i === 1) {
-          this.curvestyle.moveTo(points[i].x, points[i].y);
+          this.parabolic.moveTo(points[i].x, points[i].y);
         } else {
-          this.curvestyle.lineTo(points[i].x, points[i].y);
+          this.parabolic.lineTo(points[i].x, points[i].y);
         }
-      }
-      this.curvestyle.strokePath();
+      }this.parabolic.draw(this.curvestyle);
+      
     };
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario

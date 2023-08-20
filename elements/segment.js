@@ -31,7 +31,6 @@ export class Segment {
     // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
     drawParabola(x1, y1, x2, y2, n) {
-        console.log("entra a la fución");
         if (x1 !== x2) {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
