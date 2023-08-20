@@ -52,6 +52,8 @@ export class Segment {
         };
         // Habilita el arrastre para el punto
         this.scene.input.on('drag', (pointer, gameObject) => {
+            this.scene.pointA.x = gameObject.x;
+            this.scene.pointA.x = gameObject.y;
             // Borrar la línea anterior
             this.graphics.clear();
             // Actualiza el aspecto visual de la líne mientras se mueve
