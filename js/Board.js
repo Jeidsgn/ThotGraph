@@ -73,7 +73,6 @@ export class Board extends Phaser.Scene {
         console.log(i * 0.5 + this.count)     
         this.path.lineTo(points[i].x, points[i].y);
       };
-      this.path.lineTo(points[points.length].x, points[points.length].y);
       this.path.draw(this.curvestyle);
       console.log("acá lo dibuja");
     };
