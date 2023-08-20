@@ -32,7 +32,7 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.input.setDefaultCursor('pointer');
     this.toolbox.createToolbox();
-    this.curvestyle = this.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
+    this.curvestyle = this.add.graphics({ lineStyle: { width: 5, color: 0x2AA4BF, alpha: 0.8 } });
     // Establece el color de fondo
     const background = this.add.image(
       this.cameras.main.width / 2,
