@@ -86,9 +86,9 @@ export class Segment {
                 this.scene.pointA.x,
                 this.scene.pointA.y,
                 dropZone.x,
-                dropZone.y,
-                this.parabolic != null
+                dropZone.y,                
             );
+            this.parabolic != null;
         });
     }
     addName() {
