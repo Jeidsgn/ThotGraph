@@ -54,8 +54,38 @@ export class Segment {
     createSegment() {
         this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();
+        for (const point of interactive) {
+            point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
+            point.on('drag', (pointer, dragStartX, dragStartY, dragX, dragY) => {
+                // Borrar la línea anterior
+                this.graphics.clear();
+                // Actualiza el aspecto visual de la líne mientras se mueve
+                this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
+                const line = new Phaser.Geom.Line(
+                    dragStartX,
+                    dragStartY,
+                    dragX,
+                    dragY
+                );
+                this.drawParabola(
+                    dragStartX,
+                    dragStartY,
+                    dragX,
+                    dragY
+                    -20 //Distancia de "caida"
+                );
+                this.graphics.strokeLineShape(line);
+            });
+        };
+
+    }
+
+
+    createSegment2() {
+        this.point.stopMovePoint();
+        const interactive = this.scene.points.getChildren();
         //Se revisan todos los puntos hechos
-        for (const point of interactive){
+        for (const point of interactive) {
             //Puntero sobre el area del puntos
             if (Phaser.Geom.Rectangle.ContainsPoint(point.area, this.pointermove)) {
                 //Si no hay seleccionado
@@ -90,7 +120,7 @@ export class Segment {
                             -20 //Distancia de "caida"
                         );
                         this.graphics.strokeLineShape(line);
-                    }else{
+                    } else {
                         this.curve.clear();
                         this.graphics.clear();
                         this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
@@ -105,7 +135,7 @@ export class Segment {
                         this.scene.pointA = null;
                     }
                 }
-            }    
+            }
         }
         if (!this.isClicking) {
             this.scene.pointB = null;

@@ -39,9 +39,7 @@ export class Point {
         const interactive = this.scene.points.getChildren();
         // Itera a través de los puntos interactivos en la escena
         for (const point of interactive) {
-            point.setInteractive();
-            // Habilita el arrastre para el punto
-            this.scene.input.setDraggable(point);
+            point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
             this.scene.pointdraggable = true;
             point.on('drag', (pointer, dragX, dragY) => {
                 point.x = dragX;
