@@ -78,8 +78,6 @@ export class Segment {
             this.graphics.strokeLineShape(this.scene.line);
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
-            console.log(gameObject.downX);
-            console.log(dropZone);
             this.graphics.clear();
             this.scene.curvestyle.clear();
             this.scene.parabolic != null;
@@ -94,7 +92,6 @@ export class Segment {
         });
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
-            console.log("dragend");
             if (!dropped) {
                 this.scene.curvestyle.clear();
                 this.graphics.clear();
