@@ -32,6 +32,7 @@ export class Board extends Phaser.Scene {
     // Crea el cuadro de herramientas (toolbox)
     this.input.setDefaultCursor('pointer');
     this.toolbox.createToolbox();
+    this.curvestyle = this.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
     // Establece el color de fondo
     const background = this.add.image(
       this.cameras.main.width / 2,
@@ -64,12 +65,12 @@ export class Board extends Phaser.Scene {
       for (let i = 1; i < points.length - 1; i++) {
         points[i].x += Math.cos(i * 0.5 + this.count);
         if (i === 1) {
-          this.scene.curvestyle.moveTo(points[i].x, points[i].y);
+          this.curvestyle.moveTo(points[i].x, points[i].y);
         } else {
-          this.scene.curvestyle.lineTo(points[i].x, points[i].y);
+          this.curvestyle.lineTo(points[i].x, points[i].y);
         }
       }
-      this.scene.curvestyle.strokePath();
+      this.curvestyle.strokePath();
     };
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario

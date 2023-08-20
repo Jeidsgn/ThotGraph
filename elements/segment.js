@@ -11,7 +11,7 @@ export class Segment {
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
-        this.curvestyle = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
+        
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
