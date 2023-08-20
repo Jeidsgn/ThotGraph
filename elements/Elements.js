@@ -35,7 +35,6 @@ export class Element {
   moveElement() {
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
     this.point.movePoint();
-    this.scene.elements.stopMovePoint();
   }
 
     // Puedes agregar métodos comunes a todos los elementos aquí
