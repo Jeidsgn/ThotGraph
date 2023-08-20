@@ -60,7 +60,7 @@ export class Segment {
                 // Borrar la línea anterior
                 this.graphics.clear();
                 // Actualiza el aspecto visual de la líne mientras se mueve
-                this.graphics.lineStyle(5, 0x2AA4BF, 0.05);
+                this.graphics.lineStyle(5, 0x2AA4BF, 0.5);
                 const line = new Phaser.Geom.Line(
                     gameObject.x,
                     gameObject.y,
