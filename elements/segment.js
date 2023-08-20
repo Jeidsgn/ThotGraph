@@ -35,10 +35,10 @@ export class Segment {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             if(this.p3=null){
-                const p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
-                this.p3 = p1
+                let p1 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
+                this.p3 = p1;
             } else{
-                const p1 = this.p3;
+                let p1 = this.p3;
                 this.p3 = new Phaser.Math.Vector2((x1+x2)/2, ((y1+y2)/2)-n);
             };
             const p2 = new Phaser.Math.Vector2(x2, y2);
