@@ -77,19 +77,21 @@ export class Segment {
             this.graphics.strokeLineShape(this.scene.line);
         });
         this.scene.input.on("pointerup", (gameObject, dropZone) => {
-            this.scene.input.on("pointerover",() => {});
             this.graphics.clear();
-            console.log(dropZone.x)
             this.scene.curvestyle.clear();
             this.scene.parabolic = null;
-            this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
-            this.scene.line = new Phaser.Geom.Line(
-                gameObject.downX,
-                gameObject.downY,
-                dropZone.x,
-                dropZone.y,
-            );
-            this.graphics.strokeLineShape(this.scene.line);
+            this.scene.input.on("pointerover", () => {                
+                console.log(dropZone.x)
+                this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
+                this.scene.line = new Phaser.Geom.Line(
+                    gameObject.downX,
+                    gameObject.downY,
+                    dropZone.x,
+                    dropZone.y,
+                );
+                this.graphics.strokeLineShape(this.scene.line);
+            });
+
         });
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
