@@ -28,6 +28,8 @@ export class Segment {
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
         });
+        this.p1History = []; // Historial de valores anteriores de p1
+        this.retraceFrames = 30; // Número de fotogramas a retrasar el vértice
     }
     // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
@@ -36,19 +38,26 @@ export class Segment {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
-            const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-            if (this.p3 = null) {
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            } else {
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
-            }            // Calcula p1 usando el valor anterior si está disponible
-            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            this.p3 = p1;
-        };
-        //this.scene.parabolic.draw(this.scene.curvestyle, 64);
-        // Dibuja la parábola completa
-    }
 
+            // Calcula p1 usando el valor anterior si está disponible
+            let p1;
+            if (this.p1History.length >= this.retraceFrames + 1) {
+                p1 = this.p1History[this.p1History.length - this.retraceFrames - 1];
+            } else {
+                p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
+            }
+
+            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+
+            // Guarda p1 en el historial
+            this.p1History.push(p1);
+
+            // Mantén el historial limitado a (retraceFrames + 1) elementos
+            if (this.p1History.length > this.retraceFrames + 1) {
+                this.p1History.shift();
+            }
+        }
+    }
     createSegment() {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
