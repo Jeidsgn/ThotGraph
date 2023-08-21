@@ -77,11 +77,11 @@ export class Segment {
             });
             point.on('drop', (pointer, dropZone) => {
                 if (draggingPoint !== point) {
+                    this.scene.parabolic = null;
                     this.graphics.clear();
                     console.log(point.x);
                     console.log(dropZone.x);
-                    this.scene.curvestyle.clear();
-                    this.scene.parabolic = null;
+                    this.scene.curvestyle.clear();                    
                     this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
                     this.scene.line = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
                     this.graphics.strokeLineShape(this.scene.line);
@@ -92,7 +92,7 @@ export class Segment {
                 if (draggingPoint === point) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
                     // Borrar la línea anterior
                     this.scene.curvestyle.clear();
-                    this.graphics.clear();
+                    //this.graphics.clear();
                     this.scene.parabolic = null;
                     draggingPoint = null; // Restablece el punto que se está arrastrando
                 }
