@@ -79,7 +79,7 @@ export class Segment {
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
-            console.log(dropZone)
+            console.log(dropZone.x)
             this.scene.curvestyle.clear();
             this.scene.parabolic = null;
             this.graphics.lineStyle(5, 0x2AA4BF,0.9);
