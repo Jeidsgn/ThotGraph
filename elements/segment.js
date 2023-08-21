@@ -76,6 +76,7 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(this.scene.line);
+            gameObject.input.dropZone = true;
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
