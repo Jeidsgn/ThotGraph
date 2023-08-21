@@ -50,16 +50,15 @@ export class Segment {
     }
 
     createSegment() {
-
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
         };
         // 
-        this.scene.input.on("pointerdown", (dropZone) => {
+        this.scene.input.on("pointerdown", (gameObject) => {
             console.log(dropZone);
-            dropZone = false;
+            gameObject.input.dropZone = false;
         });
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
@@ -86,7 +85,7 @@ export class Segment {
             console.log(dropZone.x)
             this.scene.curvestyle.clear();
             this.scene.parabolic = null;
-            this.graphics.lineStyle(5, 0x2AA4BF,0.9);
+            this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
             this.scene.line = new Phaser.Geom.Line(
                 gameObject.downX,
                 gameObject.downY,
@@ -105,7 +104,7 @@ export class Segment {
                 this.scene.parabolic.destroy();
             }
         });
-        if(this.isClicking == false){    
+        if (this.isClicking == false) {
             this.scene.parabolic = null;
         };
     }
