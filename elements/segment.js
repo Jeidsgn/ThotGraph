@@ -105,9 +105,7 @@ export class Segment {
                 this.scene.parabolic.destroy();
             }
         });
-        if(this.isClicking == false){
-            this.scene.curvestyle.clear();
-            this.graphics.clear();            
+        if(this.isClicking == false){    
             this.scene.parabolic = null;
         };
     }
