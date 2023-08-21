@@ -60,62 +60,78 @@ export class Segment {
     
     createSegment() {
         const interactive = this.scene.points.getChildren();
+        
+        let draggingPoint = null; // Punto que se está arrastrando
+        
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
+    
             point.on('pointerdown', () => {
+                draggingPoint = point; // Establece el punto que se está arrastrando
                 point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
-                console.log('dropZone:', point.input.dropZone);
             });
-        };
-        this.scene.input.on('drag', (pointer, gameObject) => {
-            // Borrar la línea anterior
-            this.graphics.clear();
-            // Actualiza el aspecto visual de la líne mientras se mueve
-            this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
-            this.scene.line = new Phaser.Geom.Line(
-                gameObject.x,
-                gameObject.y,
-                pointer.x,
-                pointer.y
-            );
-            this.drawParabola(
-                gameObject.x,
-                gameObject.y,
-                pointer.x,
-                pointer.y,
-                -60 //Distancia de "caida"
-            );
-            this.graphics.strokeLineShape(this.scene.line);
-        });
-        this.scene.input.on('drop', (gameObject, dropZone) => {
-            this.graphics.clear();
-            console.log(dropZone.x)
-            this.scene.curvestyle.clear();
-            this.scene.parabolic = null;
-            this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
-            this.scene.line = new Phaser.Geom.Line(
-                gameObject.downX,
-                gameObject.downY,
-                dropZone.x,
-                dropZone.y,
-            );
-            this.graphics.strokeLineShape(this.scene.line);
-        });
-        this.scene.input.on('dragend', (dropped) => {
-            // Borrar la línea anterior
-            if (!dropped) {
-                console.log("!dropped")
-                this.scene.curvestyle.clear();
-                this.graphics.clear();
-                this.scene.parabolic = null;
-                this.scene.parabolic.destroy();
-            }
-        });
+    
+            point.on('drag', (pointer, dragX, dragY) => {
+                if (draggingPoint === point) { // Asegura que solo estamos manipulando el punto que se está arrastrando
+                    // Borrar la línea anterior
+                    this.graphics.clear();
+                    
+                    // Actualiza el aspecto visual de la línea mientras se mueve
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
+                    this.scene.line = new Phaser.Geom.Line(
+                        point.x,
+                        point.y,
+                        pointer.x,
+                        pointer.y
+                    );
+                    
+                    this.drawParabola(
+                        point.x,
+                        point.y,
+                        pointer.x,
+                        pointer.y,
+                        -60 // Distancia de "caída"
+                    );
+                    
+                    this.graphics.strokeLineShape(this.scene.line);
+                }
+            });
+    
+            point.on('drop', (pointer, dropZone) => {
+                if (draggingPoint === point) { // Asegura que solo estamos manejando el evento de soltar para el punto correcto
+                    this.graphics.clear();
+                    this.scene.curvestyle.clear();
+                    this.scene.parabolic = null;
+                    
+                    this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
+                    this.scene.line = new Phaser.Geom.Line(
+                        point.x,
+                        point.y,
+                        dropZone.x,
+                        dropZone.y
+                    );
+                    
+                    this.graphics.strokeLineShape(this.scene.line);
+                }
+            });
+    
+            point.on('dragend', () => {
+                if (draggingPoint === point) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
+                    // Borrar la línea anterior
+                    this.scene.curvestyle.clear();
+                    this.graphics.clear();
+                    this.scene.parabolic = null;
+                    draggingPoint = null; // Restablece el punto que se está arrastrando
+                }
+            });
+        }
+    
         if (this.isClicking == false) {
             this.scene.parabolic = null;
-        };
+        }
     }
+    
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
