@@ -101,12 +101,12 @@ export class Segment {
                 this.scene.curvestyle.clear();
                 this.graphics.clear();
                 this.scene.parabolic = null;
+                this.scene.parabolic.destroy();
             }
         });
         if(this.isClicking == false){
             this.scene.curvestyle.clear();
-            this.graphics.clear();
-            this.scene.parabolic.destroy();
+            this.graphics.clear();            
             this.scene.parabolic = null;
         };
     }
