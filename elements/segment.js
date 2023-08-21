@@ -50,63 +50,66 @@ export class Segment {
     }
 
     createSegment() {
-        const interactivePoints = this.scene.points.getChildren();
-    
-        for (const point of interactivePoints) {
+
+        const interactive = this.scene.points.getChildren();
+        for (const point of interactive) {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
-        }
-    
-        let draggingPoint = null;
-    
-        this.scene.input.on('pointerdown', (pointer, gameObject) => {
-            if (gameObject && gameObject.input.draggable) {
-                draggingPoint = gameObject;
-                gameObject.input.dropZone = false;
-            }
+        };
+        // Habilita el arrastre para el punto
+        this.scene.input.on("pointerdown", (gameObject) => {
+            console.log(gameObject.input);
         });
-    
-        this.scene.input.on('drag', (pointer) => {
-            if (draggingPoint) {
+        this.scene.input.on('drag', (pointer, gameObject) => {
+            // Borrar la línea anterior
+            this.graphics.clear();
+            // Actualiza el aspecto visual de la líne mientras se mueve
+            this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
+            this.scene.line = new Phaser.Geom.Line(
+                gameObject.x,
+                gameObject.y,
+                pointer.x,
+                pointer.y
+            );
+            this.drawParabola(
+                gameObject.x,
+                gameObject.y,
+                pointer.x,
+                pointer.y,
+                -60 //Distancia de "caida"
+            );
+            this.graphics.strokeLineShape(this.scene.line);
+        });
+        this.scene.input.on('drop', (gameObject, dropZone) => {
+            this.graphics.clear();
+            console.log(dropZone.x)
+            this.scene.curvestyle.clear();
+            this.scene.parabolic = null;
+            this.graphics.lineStyle(5, 0x2AA4BF,0.9);
+            this.scene.line = new Phaser.Geom.Line(
+                gameObject.downX,
+                gameObject.downY,
+                dropZone.x,
+                dropZone.y,
+            );
+            this.graphics.strokeLineShape(this.scene.line);
+        });
+        this.scene.input.on('dragend', (dropped) => {
+            // Borrar la línea anterior
+            if (!dropped) {
+                console.log("!dropped")
+                this.scene.curvestyle.clear();
                 this.graphics.clear();
-                this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
-                this.scene.line = new Phaser.Geom.Line(
-                    draggingPoint.x,
-                    draggingPoint.y,
-                    pointer.x,
-                    pointer.y
-                );
-                this.drawParabola(
-                    draggingPoint.x,
-                    draggingPoint.y,
-                    pointer.x,
-                    pointer.y,
-                    -60 // Distancia de "caída"
-                );
-                this.graphics.strokeLineShape(this.scene.line);
+                this.scene.parabolic = null;
             }
         });
-    
-        this.scene.input.on('dragend', (pointer, gameObject, dropped) => {
-            if (draggingPoint) {
-                if (dropped) {
-                    // Ajustar la línea al punto de destino
-                    this.graphics.clear();
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
-                    this.scene.line.setTo(
-                        draggingPoint.x,
-                        draggingPoint.y,
-                        gameObject.x,
-                        gameObject.y
-                    );
-                    this.graphics.strokeLineShape(this.scene.line);
-                }
-                draggingPoint.input.dropZone = true;
-                draggingPoint = null;
-            }
-        });
+        if(this.isClicking == false){
+            this.scene.curvestyle.clear();
+            this.graphics.clear();
+            this.scene.parabolic.destroy();
+            this.scene.parabolic = null;
+        };
     }
-    
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
