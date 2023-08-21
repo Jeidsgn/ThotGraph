@@ -29,7 +29,7 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
         this.p1History = []; // Historial de valores anteriores de p1
-        this.retraceFrames = 30; // Número de fotogramas a retrasar el vértice
+        this.retraceFrames = 10; // Número de fotogramas a retrasar el vértice
     }
     // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
