@@ -57,8 +57,8 @@ export class Segment {
             point.input.dropZone = true;
         };
         // Habilita el arrastre para el punto
-        this.scene.input.on("pointerdown", (gameObject) => {
-            console.log(gameObject.input);
+        this.scene.input.on("pointerdown", (dropZone) => {
+            console.log(dropZone);
         });
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
