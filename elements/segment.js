@@ -57,6 +57,7 @@ export class Segment {
             point.input.dropZone = true;
         };
         // Habilita el arrastre para el punto
+
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
             this.graphics.clear();
@@ -76,7 +77,7 @@ export class Segment {
                 -60 //Distancia de "caida"
             );
             this.graphics.strokeLineShape(this.scene.line);
-            gameObject.input.dropZone = true;
+            gameObject.input.dropZone = false;
         });
         this.scene.input.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
