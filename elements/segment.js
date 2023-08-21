@@ -78,7 +78,7 @@ export class Segment {
             point.on('drop', (pointer, dropZone) => {
                 if (draggingPoint !== point) {
                     this.graphics.clear();
-                    console.log(dropZone.x)
+                    console.log(point.x)
                     this.scene.curvestyle.clear();
                     this.scene.parabolic = null;
                     this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
