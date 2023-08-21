@@ -91,7 +91,6 @@ export class Segment {
                 );
                 this.graphics.strokeLineShape(this.scene.line);
             });
-
         });
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
