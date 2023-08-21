@@ -50,6 +50,7 @@ export class Segment {
     }
 
     createSegment() {
+        let drop = false;
         let draggingPoint = null; // Punto que se está arrastrando
         this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();
@@ -77,6 +78,7 @@ export class Segment {
             });
             point.on('drop', (pointer, dropZone) => {
                 if (draggingPoint !== point) {
+                    drop = true;
                     this.scene.parabolic = null;
                     this.graphics.clear();
                     console.log(point.x);
@@ -89,7 +91,7 @@ export class Segment {
             });
             point.on('dragend', () => {
                 // Borrar la línea anterior
-                if (draggingPoint === point) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
+                if (drop == true) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
                     // Borrar la línea anterior
                     this.scene.curvestyle.clear();
                     //this.graphics.clear();
