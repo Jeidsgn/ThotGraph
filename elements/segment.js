@@ -38,25 +38,26 @@ export class Segment {
         }
     
         if (x1 !== x2) {
-            const i = 20;
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
-            
+    
             // Calcula p1 usando el valor anterior si está disponible
             const previousP1 = this.p3 ? this.p3.clone() : p0.clone();
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-            
+    
             // Aplica el efecto de "cola" retrocediendo i iteraciones anteriores
+            let tempP1 = p1.clone();
             for (let j = 0; j < i; j++) {
-                const tempP1 = this.p3 ? this.p3.clone() : p0.clone();
-                this.p3 = tempP1;
+                tempP1 = this.p3 ? this.p3.clone() : tempP1.clone();
             }
+            this.p3 = tempP1;
     
             // Crea la curva de Bezier cuadrática con los puntos calculados
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, previousP1, p2);
         }
     }
+    
     createSegment() {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
