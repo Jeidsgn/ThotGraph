@@ -50,6 +50,7 @@ export class Segment {
     }
 
     createSegment() {
+        this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
