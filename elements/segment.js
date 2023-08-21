@@ -54,12 +54,11 @@ export class Segment {
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
+            point.on('pointerdown', () => {
+                point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                console.log('dropZone:', point.input.dropZone);
+            });
         };
-        // 
-        this.scene.input.on("pointerdown", (gameObject) => {
-            console.log(dropZone);
-            gameObject.input.dropZone = false;
-        });
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
             this.graphics.clear();
