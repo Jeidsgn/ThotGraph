@@ -59,7 +59,7 @@ export class Segment {
         // 
         this.scene.input.on("pointerdown", (dropZone) => {
             console.log(dropZone);
-            gameObject.input.dropZone = false;
+            dropZone = false;
         });
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
