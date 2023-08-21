@@ -46,6 +46,7 @@ export class Segment {
             this.p3 = p1;
         };
     }
+
     createSegment() {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
@@ -76,21 +77,19 @@ export class Segment {
             );
             this.graphics.strokeLineShape(this.scene.line);
         });
-        this.scene.input.on("pointerup", (gameObject, dropZone) => {
+        this.scene.points.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
+            console.log(dropZone.x)
             this.scene.curvestyle.clear();
             this.scene.parabolic = null;
-            this.scene.input.on("pointerover", () => {                
-                console.log(dropZone.x)
-                this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
-                this.scene.line = new Phaser.Geom.Line(
-                    gameObject.downX,
-                    gameObject.downY,
-                    dropZone.x,
-                    dropZone.y,
-                );
-                this.graphics.strokeLineShape(this.scene.line);
-            });
+            this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
+            this.scene.line = new Phaser.Geom.Line(
+                gameObject.downX,
+                gameObject.downY,
+                dropZone.x,
+                dropZone.y,
+            );
+            this.graphics.strokeLineShape(this.scene.line);
         });
         this.scene.input.on('dragend', (dropped) => {
             // Borrar la línea anterior
@@ -102,6 +101,9 @@ export class Segment {
                 this.scene.parabolic.destroy();
             }
         });
+        if (this.isClicking == false) {
+            this.scene.parabolic = null;
+        };
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
