@@ -19,6 +19,7 @@ export class Point {
     addName() {
         this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
+
     createPoint() {
         this.stopMovePoint();
         if (this.isClicking) {
@@ -40,7 +41,7 @@ export class Point {
         for (const point of interactive) {
             point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
             this.scene.pointdraggable = true;
-            point.on('drag', (dragX, dragY) => {
+            point.on('drag', (pointer, dragX, dragY) => {
                 point.x = dragX;
                 point.y = dragY;
             });
