@@ -83,7 +83,7 @@ export class Segment {
             this.scene.curvestyle.clear();
             this.scene.parabolic = null;
             this.graphics.lineStyle(5, 0x2AA4BF,0.9);
-            const line = new Phaser.Geom.Line(
+            this.scene.line = new Phaser.Geom.Line(
                 gameObject.downX,
                 gameObject.downY,
                 dropZone.x,
