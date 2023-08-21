@@ -31,31 +31,20 @@ export class Segment {
     }
     // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
-    drawParabola(x1, y1, x2, y2, n, i) {
-        if (!this.scene.parabolic) {
-            this.scene.parabolic = null;
-            this.p3 = null;
-        }
-    
+    drawParabola(x1, y1, x2, y2, n) {
         if (x1 !== x2) {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
-    
-            // Calcula p1 usando el valor anterior si está disponible
-            const previousP1 = this.p3 ? this.p3.clone() : p0.clone();
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-    
-            // Aplica el efecto de "cola" retrocediendo i iteraciones anteriores
-            let tempP1 = p1.clone();
-            for (let j = 0; j < i; j++) {
-                tempP1 = this.p3 ? this.p3.clone() : tempP1.clone();
-            }
-            this.p3 = tempP1;
-    
-            // Crea la curva de Bezier cuadrática con los puntos calculados
-            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, previousP1, p2);
-        }
+            if (this.p3 = null) {
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+            } else {
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
+            }            // Calcula p1 usando el valor anterior si está disponible
+            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+            this.p3 = p1;
+        };
     }
     
     createSegment() {
