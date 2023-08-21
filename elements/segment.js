@@ -45,10 +45,7 @@ export class Segment {
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             this.p3 = p1;
         };
-        //this.scene.parabolic.draw(this.scene.curvestyle, 64);
-        // Dibuja la parábola completa
     }
-
     createSegment() {
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
@@ -79,7 +76,8 @@ export class Segment {
             );
             this.graphics.strokeLineShape(this.scene.line);
         });
-        this.scene.input.on('drop', (gameObject, dropZone) => {
+        this.scene.input.on("pointerup", (gameObject, dropZone) => {
+            this.scene.input.on("pointerover",() => {});
             this.graphics.clear();
             console.log(dropZone.x)
             this.scene.curvestyle.clear();
@@ -103,9 +101,6 @@ export class Segment {
                 this.scene.parabolic.destroy();
             }
         });
-        if (this.isClicking == false) {
-            this.scene.parabolic = null;
-        };
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
