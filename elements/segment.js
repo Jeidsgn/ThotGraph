@@ -45,6 +45,8 @@ export class Segment {
             this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             this.p3 = p1;
         };
+        //this.scene.parabolic.draw(this.scene.curvestyle, 64);
+        // Dibuja la parábola completa
     }
 
     createSegment() {
@@ -52,7 +54,7 @@ export class Segment {
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
-            point.on('pointerdown', (point) => {
+            point.on('pointerdown', () => {
                 point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
                 console.log('dropZone:', point.input.dropZone);
             });
@@ -77,12 +79,11 @@ export class Segment {
             );
             this.graphics.strokeLineShape(this.scene.line);
         });
-        this.scene.points.on('drop', (gameObject, dropZone) => {
+        this.scene.input.on('drop', (gameObject, dropZone) => {
             this.graphics.clear();
             console.log(dropZone.x)
             this.scene.curvestyle.clear();
-            this.scene.parabolic.destroy();
-            this.scene.parabolic = null;            
+            this.scene.parabolic = null;
             this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
             this.scene.line = new Phaser.Geom.Line(
                 gameObject.downX,
@@ -96,11 +97,11 @@ export class Segment {
             // Borrar la línea anterior
             if (!dropped) {
                 console.log("!dropped")
+                this.scene.curvestyle.clear();
                 this.graphics.clear();
+                this.scene.parabolic = null;
+                this.scene.parabolic.destroy();
             }
-            this.scene.curvestyle.clear();
-            this.scene.parabolic.destroy();
-            this.scene.parabolic = null;
         });
         if (this.isClicking == false) {
             this.scene.parabolic = null;
