@@ -56,10 +56,10 @@ export class Segment {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
         };
-        // Habilita el arrastre para el punto
+        // 
         this.scene.input.on("pointerdown", (dropZone) => {
             console.log(dropZone);
-            dropZone({active : false});
+            gameObject.input.dropZone = false;
         });
         this.scene.input.on('drag', (pointer, gameObject) => {
             // Borrar la línea anterior
