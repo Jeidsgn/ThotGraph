@@ -50,7 +50,7 @@ export class Segment {
     }
 
     createSegment() {
-        this.point.stopMovePoint();
+
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
@@ -100,6 +100,12 @@ export class Segment {
                 this.scene.parabolic = null;
             }
         });
+        if(this.isClicking = false){
+            this.scene.curvestyle.clear();
+            this.graphics.clear();
+            this.scene.parabolic.destroy();
+            this.scene.parabolic = null;
+        };
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
