@@ -11,6 +11,7 @@ export class Segment {
         this.scene.pointA = null;
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
+        this.shadow = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
         this.p3 = null;
 
@@ -66,12 +67,12 @@ export class Segment {
             point.on('drag', (pointer, dragX, dragY) => {
                 if (draggingPoint === point) {
                     // Borrar la línea anterior
-                    this.graphics.clear();
+                    this.shadow.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.1);
+                    this.shadow.lineStyle(5, 0x2AA4BF, 0.1);
                     // Define la línea
                     this.scene.line = new Phaser.Geom.Line(point.x, point.y, pointer.x, pointer.y);
-                    this.graphics.strokeLineShape(this.scene.line);
+                    this.shadow.strokeLineShape(this.scene.line);
                     // Dibuja parábola
                     this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
                 };
@@ -80,6 +81,7 @@ export class Segment {
                 if (draggingPoint !== point) {
                     drop = true;
                     this.scene.parabolic = null;
+                    this.shadow.clear();
                     this.graphics.clear();
                     console.log(point.x);
                     console.log(dropZone.x);
@@ -93,6 +95,7 @@ export class Segment {
                 // Borrar la línea anterior
                 if (drop == true) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
                     // Borrar la línea anterior
+                    this.shadow.clear();
                     this.scene.curvestyle.clear();
                     //this.graphics.clear();
                     this.scene.parabolic = null;
@@ -102,6 +105,7 @@ export class Segment {
         };
         if (this.isClicking == false) {
             this.scene.parabolic = null;
+            this.shadow.clear();
         };
     }
     addName() {
