@@ -92,22 +92,36 @@ export class Segment {
                 };
             });
             point.on('dragend', (pointer) => {
-                // Borrar la línea anterior
-                if (drop == true) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
-                    // Borrar la línea anterior
-                    this.drawParabola(point.x, point.y, (pointer.x+point.x/2), (pointer.y+point.y/2), -60);
-                    this.drawParabola(point.x, point.y, (pointer.x+point.x/4), (pointer.y+point.y/4), -60);
-                    this.drawParabola(point.x, point.y, (pointer.x+point.x/8), (pointer.y+point.y/8), -60);
-                    this.drawParabola(point.x, point.y, (pointer.x+point.x/16), (pointer.y+point.y/16), -60);
-                    this.shadow.clear();
-                    this.scene.curvestyle.clear();
-                    //this.graphics.clear();
-                    this.scene.parabolic = null;
-                    draggingPoint = null;
-                    
-                     // Restablece el punto que se está arrastrando
+                if (drop == true) {
+                    const steps = 30; // Número de pasos en la animación
+                    let stepCount = 0;
+            
+                    // Función para realizar un paso de la animación
+                    const animateReduction = () => {
+                        if (stepCount <= steps) {
+                            const t = stepCount / steps;
+                            const newOriginX = point.x + (pointer.x - point.x) * t;
+                            const newOriginY = point.y + (pointer.y - point.y) * t;
+            
+                            this.drawParabola(newOriginX, newOriginY, newOriginX + (pointer.x - newOriginX) / 2, newOriginY + (pointer.y - newOriginY) / 2, -60);
+                            this.shadow.clear();
+                            this.scene.curvestyle.clear();
+            
+                            stepCount++;
+            
+                            requestAnimationFrame(animateReduction);
+                        } else {
+                            // Animación completa, limpiar y actualizar valores
+                            this.scene.parabolic = null;
+                            draggingPoint = null;
+                        }
+                    };
+            
+                    // Inicia la animación
+                    animateReduction();
                 }
             });
+            
         };
         if (this.isClicking == false) {
             this.scene.parabolic = null;
