@@ -20,7 +20,7 @@ export class ToolBox {
   createBaseButtons() {
     
     const moveButton = this.scene.add
-      .sprite(100, 550, 'Button')
+      .sprite(10, 550, 'Button')
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
     moveButton.setData('text',"Mover");
