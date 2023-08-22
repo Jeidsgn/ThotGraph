@@ -13,6 +13,7 @@ export class Segment {
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.shadow = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
+        this.segment = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
         this.p3 = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -82,9 +83,10 @@ export class Segment {
                     this.shadow.clear();
                     this.graphics.clear();
                     this.scene.curvestyle.clear();                    
-                    this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
+                    this.segment.lineStyle(5, 0x2AA4BF, 0.9);
                     this.scene.line = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
-                    this.graphics.strokeLineShape(this.scene.line);
+                    this.segment.strokeLineShape(this.scene.line);
+                    this.scene.segment.add(this.scene.line);
                 };
             });
             point.on('dragend', (pointer) => {
