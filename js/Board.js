@@ -47,6 +47,20 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    if (this.isDrawingEnabled && !this.waitingForClick) {
+      // Llama a la función activa correspondiente
+      if (this.activeButtonCallback) {  // Comprobamos si la función está definida
+          this.activeButtonCallback();  // Ejecutamos la función activa
+      } else {
+          console.log("Error en activeButtonCallback");
+      }
+  } else if (this.isDrawingEnabled && this.waitingForClick) {
+      // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
+      this.input.on("pointerdown", () => {
+          this.waitingForClick = false;
+      });
+  }
+  
     this.anim.vibration();
 
   }
