@@ -49,10 +49,6 @@ export class Segment {
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
         // Dibuja la parábola completa
     }
-    Animatedcollect(){
-        const i = 1;
-        this.drawParabola(point.x, point.y, (pointer.x+point.x/2), (pointer.y+point.y/2), -60);
-    }
 
     createSegment() {
         let drop = false;
@@ -86,7 +82,6 @@ export class Segment {
                     this.scene.parabolic = null;
                     this.shadow.clear();
                     this.graphics.clear();
-                
                     this.scene.curvestyle.clear();                    
                     this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
                     this.scene.line = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
