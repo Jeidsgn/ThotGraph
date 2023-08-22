@@ -25,7 +25,7 @@ export class ToolBox {
       .on("pointerdown", () => this.activateButton("Mover"));
     moveButton.setData('text',"Mover");
     this.scene.toolboxButtons.push(moveButton);
-    const text = this.scene.add.text(10, 550, "Mover", { fill: "#0000"});
+    this.scene.add.text(10, 550, "Mover", { fill: "#0000"});
   }
   
   createDependentButtons() {
@@ -39,7 +39,7 @@ export class ToolBox {
         );
       button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
-      const texti = this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
+      this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
     }
   }
   
