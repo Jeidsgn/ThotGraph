@@ -50,10 +50,7 @@ export class Point {
     stopMovePoint() {
         if (this.scene.pointdraggable==true) {
             for (const point of this.scene.points.getChildren()) {
-                if (point.input.enabled) {
-                    point.disableInteractive();
-                    this.scene.input.setDraggable(point, false);
-                }
+                point.setInteractive({ draggable: false });
             }
         }
         this.scene.pointdraggable=false;
