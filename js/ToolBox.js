@@ -18,9 +18,9 @@ export class ToolBox {
   }
 
   createBaseButtons() {
-    
+    const center = (this.scene.cameras.main.width)/2
     const moveButton = this.scene.add
-      .sprite(10, 550, 'Button')
+      .sprite(center, 400, 'Button')
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
     moveButton.setData('text',"Mover");
@@ -32,7 +32,8 @@ export class ToolBox {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       
       const button = this.scene.add
-        .sprite(100 + i * 100, 550, 'Button')
+      const center = (this.scene.cameras.main.width)/2
+        .sprite(center - (this.scene.elementNames.length - 1) * 100 / 2 + i * 100, 600, 'Button')
         .setInteractive()
         .on("pointerdown", () =>
           this.activateButton(this.scene.elementNames[i])
