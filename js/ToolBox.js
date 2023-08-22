@@ -22,7 +22,13 @@ export class ToolBox {
     const moveButton = this.scene.add
       .sprite(center, 400, 'Button')
       .setInteractive()
-      .on("pointerdown", () => this.activateButton("Mover"));
+      .on("pointerdown", () => {
+        this.activateButton("Mover")
+        moveButton.setFrame(3)      })
+      .on("pointerover", () => {
+        button.setFrame(1)}      );
+
+
     moveButton.setData('text',"Mover");
     this.scene.toolboxButtons.push(moveButton);
     this.scene.add.text(10, 550, "Mover", { fill: "#0000"});
@@ -34,9 +40,12 @@ export class ToolBox {
       const button = this.scene.add      
         .sprite(center - (this.scene.elementNames.length - 1) * 100 / 2 + i * 100, 600, this.scene.elementNames[i])
         .setInteractive()
-        .on("pointerdown", () =>
+        .on("pointerdown", () => {
           this.activateButton(this.scene.elementNames[i])
-        );
+          button.setFrame(3)
+        } )
+        .on("pointerover", () => {
+        button.setFrame(1)}      );
       button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
       this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
