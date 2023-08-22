@@ -4,7 +4,6 @@ export class Segment {
     constructor(scene) {
         this.scene = scene;
         this.scene.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
-        this.scene.segment = null;
         this.point = new Point(scene);
         //this.scene.points
         this.scene.pointB = null;
@@ -84,9 +83,9 @@ export class Segment {
                     this.graphics.clear();
                     this.scene.curvestyle.clear();                    
                     this.segment.lineStyle(5, 0x2AA4BF, 0.9);
-                    this.scene.line = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
-                    this.segment.strokeLineShape(this.scene.line);
-                    this.scene.segments.add(this.scene.line);
+                    const newSegment = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
+                    this.scene.segments.add(newSegment);
+                    this.segment.strokeLineShape(newSegment);                    
                 };
             });
             point.on('dragend', (pointer) => {
