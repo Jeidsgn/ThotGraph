@@ -38,7 +38,7 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, ((y1 + y2) / 2) - n);
-            if (this.p3 = null) {
+            if (this.p3 == null) {
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
             } else {
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.p3, p2);
