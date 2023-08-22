@@ -46,7 +46,7 @@ export class ToolBox {
 
   activateButton(buttonName) {
     if (this.scene.activeButton) {
-      this.scene.activeButton.setStyle({ fill: "#ffffff" });
+      this.scene.activeButton;
     }
 
     this.scene.activeButton = this.scene.toolboxButtons.find(
@@ -54,7 +54,7 @@ export class ToolBox {
     );
 
     if (this.scene.activeButton) {
-      this.scene.activeButton.setStyle({ fill: "#00ff00" });
+      this.scene.activeButton;
 
       this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
       this.scene.waitingForClick = true;
