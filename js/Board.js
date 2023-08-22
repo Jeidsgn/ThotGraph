@@ -10,6 +10,7 @@ export class Board extends Phaser.Scene {
     this.isDrawingEnabled = false;
     this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
     this.parabolic = null;
+    this.reductionparabole=false;
   }
 
   // Función de inicialización de la escena
@@ -65,7 +66,6 @@ export class Board extends Phaser.Scene {
     if (this.parabolic != null) {
         this.count += 0.15;
         let points = this.parabolic.getSpacedPoints(12);
-        console.log(points);
         this.curvestyle.clear(); // Limpia el dibujo anterior
         this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
         this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
@@ -82,7 +82,7 @@ export class Board extends Phaser.Scene {
 };
 reduction() {
   //cuerda vibrante
-  if (reductionparabole==true) {
+  if (this.reductionparabole==true) {
       let p0 = this.parabolic.p0
       let p1 = this.parabolic.p1
       let p2 = this.parabolic.p2
