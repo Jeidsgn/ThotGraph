@@ -69,7 +69,7 @@ export class Segment {
                     // Actualiza el aspecto visual de la líne mientras se mueve
                     this.shadow.lineStyle(5, 0x2AA4BF, 0.1);
                     // Define la línea
-                    this.scene.line = new Phaser.Geom.Line(point.x, point.y, pointer.x, pointer.y);
+                    this.scene.line = new Phaser.Geom.Line(point.input.dragStartX, point.input.dragStartY, pointer.x, pointer.y);
                     this.shadow.strokeLineShape(this.scene.line);
                     // Dibuja parábola
                     this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
