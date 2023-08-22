@@ -81,11 +81,11 @@ export class Segment {
                     this.scene.parabolic = null;
                     this.shadow.clear();
                     this.graphics.clear();
-                    this.scene.curvestyle.clear();                    
+                    this.scene.curvestyle.clear();
                     this.segment.lineStyle(5, 0x2AA4BF, 0.9);
-                    const newSegment = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
-                    this.segment.strokeLineShape(newSegment);   
-                    this.scene.segments.add(newSegment);                 
+                    const newSegment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
+                    this.segment.strokeLineShape(newSegment);
+                    this.scene.segments.add(newSegment);
                 };
             });
             point.on('dragend', (pointer) => {
@@ -97,8 +97,8 @@ export class Segment {
                     //this.graphics.clear();
                     this.scene.parabolic = null;
                     draggingPoint = null;
-                    this.reductionparabole==true;
-                     // Restablece el punto que se está arrastrando
+                    this.reductionparabole == true;
+                    // Restablece el punto que se está arrastrando
                 };
             });
         };
