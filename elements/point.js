@@ -4,7 +4,7 @@ export class Point {
         this.count = 1;
         this.scene.pointdraggable = false;
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
-        this.textContainer = scene.add.text(10, 10, "", { fill: "#000000" }); // Contenedor de texto para las letras de los puntos
+         // Contenedor de texto para las letras de los puntos
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
@@ -25,6 +25,7 @@ export class Point {
         if (this.isClicking) {
             const letter = this.count;
             this.count = this.count + 1;
+            this.textContainer = scene.add.text(this.pointer.x, this.pointer.y+26, "", { fill: "#000000" });
             this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
             // Crea la imagen del punto en las coordenadas del clic
             const point = this.scene.add.sprite(this.pointer.x, this.pointer.y, 'point', 0).setOrigin(0.5, 0.80);
