@@ -1,4 +1,7 @@
 export class Animations {
+    constructor() {
+        super({ key: "scene" });
+          }
 
     vibration() {
         //cuerda vibrante
@@ -18,7 +21,7 @@ export class Animations {
         };
         // Configura la función de clic en el contenedor (tablero)
         // Lógica de actualización común, si es necesario
-    };
+    }
     reduction() {
         //cuerda vibrante
         if (reductionparabole==true) {
