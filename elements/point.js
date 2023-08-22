@@ -49,13 +49,5 @@ export class Point {
             point.setInteractive({ draggable: false});
         }
     }
-    stopMovePoint() {
-        if (this.scene.pointdraggable==true) {
-            for (const point of this.scene.points.getChildren()) {
-                point.setInteractive({ draggable: false });
-            }
-        }
-        this.scene.pointdraggable=false;
-    }
 
 }

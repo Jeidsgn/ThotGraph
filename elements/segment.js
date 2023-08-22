@@ -53,7 +53,6 @@ export class Segment {
     createSegment() {
         let drop = false;
         let draggingPoint = null; // Punto que se está arrastrando
-        this.point.stopMovePoint();
         const interactive = this.scene.points.getChildren();
         for (const point of interactive) {
             point.setInteractive({ draggable: true });
