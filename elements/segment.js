@@ -91,15 +91,21 @@ export class Segment {
                     this.graphics.strokeLineShape(this.scene.line);
                 };
             });
-            point.on('dragend', () => {
+            point.on('dragend', (pointer) => {
                 // Borrar la línea anterior
                 if (drop == true) { // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
                     // Borrar la línea anterior
+                    this.drawParabola(point.x, point.y, (pointer.x+point.x/2), (pointer.y+point.y/2), -60);
+                    this.drawParabola(point.x, point.y, (pointer.x+point.x/4), (pointer.y+point.y/4), -60);
+                    this.drawParabola(point.x, point.y, (pointer.x+point.x/8), (pointer.y+point.y/8), -60);
+                    this.drawParabola(point.x, point.y, (pointer.x+point.x/16), (pointer.y+point.y/16), -60);
                     this.shadow.clear();
                     this.scene.curvestyle.clear();
                     //this.graphics.clear();
                     this.scene.parabolic = null;
-                    draggingPoint = null; // Restablece el punto que se está arrastrando
+                    draggingPoint = null;
+                    
+                     // Restablece el punto que se está arrastrando
                 }
             });
         };
