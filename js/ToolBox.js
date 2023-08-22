@@ -23,7 +23,7 @@ export class ToolBox {
       .sprite(100, 550, 'Button')
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
-    moveButton.data.set('text',"Mover");
+    moveButton.setData('text',"Mover");
     this.scene.toolboxButtons.push(moveButton);
     const text = this.scene.add.text(10, 550, "Mover", { fill: "#0000"});
   }
@@ -37,7 +37,7 @@ export class ToolBox {
         .on("pointerdown", () =>
           this.activateButton(this.scene.elementNames[i])
         );
-      button.data.set('text',this.scene.elementNames[i]);
+      button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
       const texti = this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
     }
@@ -50,7 +50,7 @@ export class ToolBox {
     }
 
     this.scene.activeButton = this.scene.toolboxButtons.find(
-      (button) => button.data.text === buttonName
+      (button) => button.data.values.text === buttonName
     );
 
     if (this.scene.activeButton) {
