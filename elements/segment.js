@@ -84,8 +84,8 @@ export class Segment {
                     this.scene.curvestyle.clear();                    
                     this.segment.lineStyle(5, 0x2AA4BF, 0.9);
                     const newSegment = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
-                    this.scene.segments.add(newSegment);
-                    this.segment.strokeLineShape(newSegment);                    
+                    this.segment.strokeLineShape(newSegment);   
+                    this.scene.segments.add(newSegment);                 
                 };
             });
             point.on('dragend', (pointer) => {
