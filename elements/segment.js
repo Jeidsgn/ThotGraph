@@ -97,7 +97,7 @@ export class Segment {
                     //this.graphics.clear();
                     this.scene.parabolic = null;
                     draggingPoint = null;
-                    reductionparabole==true
+                    this.reductionparabole==true;
                      // Restablece el punto que se está arrastrando
                 };
             });
