@@ -19,7 +19,7 @@ export class ToolBox {
 
   createBaseButtons() {
     const moveButton = this.scene.add
-      .image(x, y, 'Button')
+      .image(10, 550, 'Button')
       .text(10, 550, "Mover", { fill: "#ffffff"})
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
