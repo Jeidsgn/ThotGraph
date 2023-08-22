@@ -20,7 +20,7 @@ export class ToolBox {
   createBaseButtons() {
     const center = (this.scene.cameras.main.width)/2;
     const moveButton = this.scene.add
-      .sprite(center, 400, 'Button')
+      .sprite(center, 400, 'Mover')
       .setInteractive()
       .on("pointerdown", () => {
         this.activateButton("Mover")
