@@ -25,10 +25,10 @@ export class Point {
         if (this.isClicking) {
             const letter = this.count;
             this.count = this.count + 1;
-            this.textContainer = this.scene.add.text(this.pointer.x, this.pointer.y+26, "", { fill: "#000000" });
-            this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
             // Crea la imagen del punto en las coordenadas del clic
             const point = this.scene.add.sprite(this.pointer.x, this.pointer.y, 'point', 0).setOrigin(0.5, 0.80);
+            this.textContainer = this.scene.add.text(this.pointer.x, this.pointer.y+26, "", { fill: "#000000" });
+            this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
             point.id = letter; // Agrega el nombre del punto
             this.scene.points.add(point); // Agrega el punto al grupo
             this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
@@ -46,8 +46,8 @@ export class Point {
                 point.x = dragX;
                 point.y = dragY;
             });
+            point.setInteractive({ draggable: false});
         }
-        point.setInteractive({ draggable: false});
     }
     stopMovePoint() {
         if (this.scene.pointdraggable==true) {
