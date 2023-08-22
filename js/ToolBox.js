@@ -32,7 +32,7 @@ export class ToolBox {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       const center = (this.scene.cameras.main.width)/2;
       const button = this.scene.add      
-        .sprite(center - (this.scene.elementNames.length - 1) * 100 / 2 + i * 100, 600, 'Button')
+        .sprite(center - (this.scene.elementNames.length - 1) * 100 / 2 + i * 100, 600, this.scene.elementNames[i])
         .setInteractive()
         .on("pointerdown", () =>
           this.activateButton(this.scene.elementNames[i])
