@@ -1,6 +1,6 @@
 import { ToolBox } from "./ToolBox.js";
 import { Element } from "../elements/Elements.js";
-import { Animations } from "../elements/Animations.js";
+import { Animations } from "./Animations.js";
 
 export class Board extends Phaser.Scene {
   constructor() {
@@ -60,7 +60,7 @@ export class Board extends Phaser.Scene {
           this.waitingForClick = false;
       });
   }
-  
+
     this.anim.vibration();
 
   }
