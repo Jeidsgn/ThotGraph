@@ -18,7 +18,7 @@ export class Board extends Phaser.Scene {
     // Crea instancias de las clases ToolBox y Element pasando "this" como referencia a la escena
     this.toolbox = new ToolBox(this);
     this.elements = new Element(this);
-    this.anim = new Element(this);
+    this.anim = new Animations(this);
     // Inicializa los nombres y elementos
     this.elements.Names();
   }
