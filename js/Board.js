@@ -58,14 +58,11 @@ export class Board extends Phaser.Scene {
           this.waitingForClick = false;
       });
   }
-
     this.vibration();
-
   }
   vibration() {
     //cuerda vibrante
     if (this.parabolic != null) {
-        console.log(this.parabolic);
         this.count += 0.15;
         let points = this.parabolic.getSpacedPoints(12);
         console.log(points);
@@ -86,8 +83,13 @@ export class Board extends Phaser.Scene {
 reduction() {
   //cuerda vibrante
   if (reductionparabole==true) {
-      this.count += 0.15;
-      let points = this.parabolic.getSpacedPoints(12);
+      let p0 = this.parabolic.p0
+      let p1 = this.parabolic.p1
+      let p2 = this.parabolic.p2
+      this.parabolic.p1.x = (p1.x/2)+p0
+      this.parabolic.p1.x = (p1.x/2)+p0
+      this.parabolic.p2.x = (p2.x/2)+p0
+      this.parabolic.p2.x = (p2.x/2)+p0
       this.curvestyle.clear(); // Limpia el dibujo anterior
       this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
       this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
@@ -98,6 +100,9 @@ reduction() {
       };
       this.path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
       this.path.draw(this.curvestyle);
+      if(Phaser.Math.Distance.Between(p0.x, p0.y, p2.x, p2.y)<5){
+        reductionparabole=false;
+      }
   };
   // Configura la función de clic en el contenedor (tablero)
   // Lógica de actualización común, si es necesario
