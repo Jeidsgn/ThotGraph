@@ -1,11 +1,17 @@
+import { Element } from "../elements/Elements.js";
+
 export class Animations {
-    
+    constructor(scene) {
+        this.elements = new Element(this);
+    }
 
     vibration() {
         //cuerda vibrante
         if (this.parabolic != null) {
+            console.log(this.parabolic);
             this.count += 0.15;
             let points = this.parabolic.getSpacedPoints(12);
+            console.log(points);
             this.curvestyle.clear(); // Limpia el dibujo anterior
             this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
             this.path = new Phaser.Curves.Path(points[0].x, points[0].y);

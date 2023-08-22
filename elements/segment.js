@@ -65,7 +65,6 @@ export class Segment {
             point.on('pointerdown', () => {
                 draggingPoint = point; // Establece el punto que se está arrastrando
                 point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
-                console.log('dropZone:', point.input.dropZone);
             });
 
             point.on('drag', (pointer, dragX, dragY) => {
@@ -87,8 +86,7 @@ export class Segment {
                     this.scene.parabolic = null;
                     this.shadow.clear();
                     this.graphics.clear();
-                    console.log(point.x);
-                    console.log(dropZone.x);
+                
                     this.scene.curvestyle.clear();                    
                     this.graphics.lineStyle(5, 0x2AA4BF, 0.9);
                     this.scene.line = new Phaser.Geom.Line( point.x, point.y, dropZone.x, dropZone.y);
