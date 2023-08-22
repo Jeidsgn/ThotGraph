@@ -18,20 +18,19 @@ export class ToolBox {
   }
 
   createBaseButtons() {
+    const text = this.scene.add.text(10, 550, "Mover", { fill: "#ffffff"});
     const moveButton = this.scene.add
       .image(10, 550, 'Button')
-      .text(10, 550, "Mover", { fill: "#ffffff"})
       .setInteractive()
       .on("pointerdown", () => this.activateButton("Mover"));
-  
     this.scene.toolboxButtons.push(moveButton);
   }
   
   createDependentButtons() {
     for (let i = 0; i < this.scene.elementNames.length; i++) {
+      const texti = this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#ffffff"});
       const button = this.scene.add
         .image(100 + i * 100, 550, 'Button')
-        .text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#ffffff"})
         .setInteractive()
         .on("pointerdown", () =>
           this.activateButton(this.scene.elementNames[i])
