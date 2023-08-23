@@ -125,6 +125,7 @@ export class Segment {
                 console.log("hola");
                 segment.x1 = this.scene.pointdraggable.x;
                 segment.y1 = this.scene.pointdraggable.y;
+                this.segment_gr.lineStyle(5, 0x2AA4BF, 0.9);
                 this.segment_gr.strokeLineShape(segment);
             } else if (segment.x2 == this.scene.pointdraggable.x) {
                 this.segment_gr.clear();
