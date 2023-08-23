@@ -3,7 +3,7 @@ export class Point {
         this.scene = scene;
         this.count = 1;
         this.scene.pointdraggable = false;
-        this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
+        this.scene.points = this.scene.add.group(); // Grupo para almacenar los puntos en la escena
          // Contenedor de texto para las letras de los puntos
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.scene.input.on("pointerdown", () => {
