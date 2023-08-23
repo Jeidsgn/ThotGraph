@@ -47,7 +47,7 @@ export class Point {
             point.on('drag', (pointer, dragX, dragY) => {
                 point.x = dragX;
                 point.y = dragY;
-                point.data.get('vector').set(dragX, dragY);
+                point.data.set('vector',(dragX, dragY));
             });
             point.setInteractive({ draggable: false});
         }
