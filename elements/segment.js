@@ -62,7 +62,7 @@ export class Segment {
                 point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
             });
 
-            point.on('drag', (pointer, dragX, dragY) => {
+            point.on('drag', (pointer) => {
                 if (draggingPoint === point) {
                     point.x=point.input.dragStartX;
                     point.y=point.input.dragStartY;
