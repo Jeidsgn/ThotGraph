@@ -12,13 +12,13 @@ export class Element {
     // Define un objeto de mapeo entre nombres de botones y funciones
     const functions = {
       "Point": () => {
-        this.elements.point.createPoint();
+        this.point.createPoint();
       },
       "Mover": () => {
         this.elements.moveElement();
       },
       "Segment": () => {
-        this.elements.segment.createSegment();
+        this.segment.createSegment();
       },
     };
     return functions[buttonName];
