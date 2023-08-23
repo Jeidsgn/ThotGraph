@@ -18,7 +18,7 @@ export class ToolBox {
     this.createDependentButtons();
     this.scene.input.on("pointerup", () => {
       this.elements.buttonToFunction()
-      for (const button of this.scene.toolboxButton) {
+      for (const button of this.scene.toolboxButtons) {
       if(this.activatebutton==button.data.values.text){
         this.elements.buttonToFunction(button.data.values.text)
         button.setFrame(3);
