@@ -15,7 +15,7 @@ export class Element {
         this.point.createPoint();
       },
       "Mover": () => {
-        this.elements.moveElement();
+        this.moveElement();
       },
       "Segment": () => {
         this.segment.createSegment();
