@@ -3,7 +3,7 @@ import { Point } from "./point.js";
 export class Segment {
     constructor(scene) {
         this.scene = scene;
-        this.scene.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
+        this.scene.segments = []; // Grupo para almacenar los puntos en la escena
         this.point = new Point(scene);
         //this.scene.points
         this.scene.pointB = null;
@@ -90,7 +90,7 @@ export class Segment {
                     this.segment_gr.strokeLineShape(this.segment);
                     point.data.set('vector', this.segment.p0);
                     dropZone.data.set('vector', this.segment.p1);
-                    this.scene.segments.add(this.segment_gr);
+                    this.scene.segments.push(this.segment);
                 };
             });
             point.on('dragend', (pointer) => {
@@ -119,6 +119,7 @@ export class Segment {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
+
     }
 
 }
