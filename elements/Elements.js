@@ -41,10 +41,13 @@ export class Element {
     // Puedes agregar métodos comunes a todos los elementos aquí
     // Por ejemplo, para manejar restricciones y dependencias de movimiento
   BaseElement(){
-    const point1 = this.scene.add.sprite(this.scene.cameras.main.height/3, this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
-    const point2 = this.scene.add.sprite(this.scene.cameras.main.height/(3/2), this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
+    const point1 = this.scene.add.sprite(this.scene.cameras.main.width/3, this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
+    const point2 = this.scene.add.sprite(this.scene.cameras.main.width/(3/2), this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
+    point1.setData('vector', (point1.x, point1.y));
+    point2.setData('vector', (point2.x, point2.y));
     this.scene.points.add(point1); 
     this.scene.points.add(point2); // Agrega el punto al grupo 
+
   }
   
 }
