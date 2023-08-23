@@ -65,8 +65,8 @@ export class Segment {
 
             point.on('drag', (pointer) => {
                 if (draggingPoint === point) {
-                    point.x=point.input.dragStartX;
-                    point.y=point.input.dragStartY;
+                    point.x = point.input.dragStartX;
+                    point.y = point.input.dragStartY;
                     // Borrar la línea anterior
                     this.shadow.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
@@ -115,11 +115,28 @@ export class Segment {
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
-    moveSegment(){
+    moveSegment() {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
+        let draggingPoint = null; // Punto que se está arrastrando
+        const interactive = this.scene.points.getChildren();
+        for (const point of interactive) {
+            point.on('pointerdown', () => {
+                draggingPoint = point; // Establece el punto que se está arrastrando
+            });
+            point.on('drag', (pointer) => {
+                if (draggingPoint === point) {
+                    for (const segment of this.scene.segments){
+                        if (segment.pointA.x==point.x){
+                            this.segment.pointA = point;
+                            this.segment_gr.strokeLineShape(this.segment);
+                        }
+                    }                    
+                };
+            });
+
+        }
 
     }
-
 }
