@@ -46,7 +46,7 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
-    console.log(this.activeButton);
+    console.log(this.activatebutton);
     if(this.activatebutton!==null){
       for (const button of this.toolboxButtons){
         if(this.activatebutton===button.data.values.text){
