@@ -10,7 +10,7 @@ export class Segment {
         this.scene.pointA = null;
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
-        this.scene.scene.shadow = scene.add.graphics({
+        this.scene.shadow = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
         this.graphics = scene.add.graphics({
