@@ -33,27 +33,32 @@ export class Element {
 
   // Crea un nuevo elemento
   moveElement() {
-    // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    // Obtiene la lista de puntos interactivos en la escena
-    const interactive = this.scene.points.getChildren();
-    // Itera a través de los puntos interactivos en la escena
-    for (const point of interactive) {
-      point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
-      //console.log(this.scene.pointdraggable)
-      point.on('drag', (pointer, dragX, dragY) => {
-        this.scene.pointdraggable = point;
-        point.x = dragX;
-        point.y = dragY;
-        point.data.set('vector', (dragX, dragY));
-        for (const segment of this.scene.segments){
-          this.scene.segment_gr.clear();
-          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-          this.scene.segment_gr.strokeLineShape(segment);
-        }
-      });
+    const interactivePoints = this.scene.points.getChildren();
+
+    for (const point of interactivePoints) {
+        point.setInteractive({ draggable: true });
+
+        point.on('drag', (pointer, dragX, dragY) => {
+            point.x = dragX;
+            point.y = dragY;
+            point.data.set('vector', new Phaser.Math.Vector2(dragX, dragY));
+
+            // Actualizar los segmentos que contienen este punto
+            for (const segment of this.scene.segments) {
+                if (segment.pointA === point || segment.pointB === point) {
+                    this.scene.segment_gr.clear();
+                    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                    this.scene.segment_gr.strokeLineShape(segment);
+
+                    // Actualizar la posición de los puntos de inicio y fin de los segmentos
+                    segment.pointA = new Phaser.Math.Vector2(point.x, point.y);
+                    segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
+                }
+            }
+        });
     }
-    //this.segment.moveSegment();
-  }
+}
+
 
   // Puedes agregar métodos comunes a todos los elementos aquí
   // Por ejemplo, para manejar restricciones y dependencias de movimiento

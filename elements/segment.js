@@ -139,26 +139,4 @@ export class Segment {
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
-    moveSegment() {
-        this.scene.parabolic = null;
-        this.shadow.clear();
-        const interactive = this.scene.points.getChildren();
-        for (const point of interactive) {
-            point.on("drag", (pointer) => {
-                for (const segment of this.scene.segments) {
-                    if (segment.x1 == point.x) {
-                        console.log("hola");
-                        segment.x1 = point.x;
-                        segment.y1 = point.y;
-                        this.segment_gr.strokeLineShape(segment);
-                    } else if (segment.x2 == point.x) {
-                        console.log("hola");
-                        segment.x2 = point.x;
-                        segment.y2 = point.y;
-                        this.segment_gr.strokeLineShape(segment);
-                    }
-                }
-            });
-        }
-    }
 }
