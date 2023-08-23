@@ -111,8 +111,8 @@ export class Segment {
                         end.y
                     );
                     this.segment_gr.strokeLineShape(this.segment);
-                    point.data.set("vector", this.segment.p0);
-                    dropZone.data.set("vector", this.segment.p1);
+                    point.data.set("vector", this.segment.pointA);
+                    dropZone.data.set("vector", this.segment.pointB);
                     this.scene.segments.push(this.segment);
                 }
             });
