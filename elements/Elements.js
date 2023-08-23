@@ -48,8 +48,8 @@ export class Element {
             this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
             for (const segment of this.scene.segments) {
-                this.scene.segment_gr.strokeLineShape(segment);
                 
+                console.log(segment)
                 // Actualizar la posición de los puntos de inicio y fin de los segmentos
                 if (segment.pointA === point) {
                     segment.pointA = new Phaser.Math.Vector2(dragX, dragY);
@@ -58,6 +58,7 @@ export class Element {
                     segment.pointA = segment.pointA;
                     segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
                 }
+                this.scene.segment_gr.strokeLineShape(segment);
             }
         });
     }
