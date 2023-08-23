@@ -147,12 +147,12 @@ export class Segment {
                         console.log("hola");
                         segment.x1 = pointer.x;
                         segment.y1 = pointer.y;
-                        this.segment_gr.strokeLineShape(this.segment);
+                        this.segment_gr.strokeLineShape(segment);
                     } else if (segment.x2 == point.x) {
                         console.log("hola");
                         segment.x2 = pointer.x;
                         segment.y2 = pointer.y;
-                        this.segment_gr.strokeLineShape(this.segment);
+                        this.segment_gr.strokeLineShape(segment);
                     }
                 }
             });
