@@ -112,5 +112,10 @@ export class Segment {
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
+    moveSegment(){
+        this.shadow.clear();
+        this.scene.curvestyle.clear();
+        this.scene.parabolic = null;
+    }
 
 }
