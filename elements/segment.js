@@ -116,23 +116,24 @@ export class Segment {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
     moveSegment() {
-        this.scene.parabolic = null;
-        this.shadow.clear();
         //this.scene.pointdraggable
-        for (const segment of this.scene.segments) {
-            if (segment.x1 == this.scene.pointdraggable.x) {
-                console.log("hola");
-                segment = new Phaser.Geom.Line(this.scene.input.pointer.x, this.scene.input.pointer.y, segment.x2, segment.y2);
-                this.segment_gr.lineStyle(5, 0x2AA4BF, 0.9);
-                this.segment_gr.strokeLineShape(segment);
-            } else if (segment.x2 == this.scene.pointdraggable.x) {
-                this.segment_gr.clear();
-                console.log("hola")
-                segment = new Phaser.Geom.Line( segment.x1, segment.y1, this.scene.input.pointer.x, this.scene.input.pointer.y,);
-                this.segment_gr.lineStyle(5, 0x2AA4BF, 0.9);
-                this.segment_gr.strokeLineShape(segment);
-            }
-        }
-    }
-}
+        point.on('drag', (pointer) => {
+            if (this.scene.pointdraggable === point) {
+                for (const segment of this.scene.segments) {
+                    if (segment.x1 == point.x) {
+                        console.log("hola")
+                        segment = new Phaser.Geom.Line(this.scene.input.pointer.x, this.scene.input.pointer.y, segment.x2, segment.y2);
+                        this.segment_gr.strokeLineShape(this.segment);
+                    } else if (segment.x2 == point.x) {
+                        console.log("hola")
+                        segment = new Phaser.Geom.Line(segment.x1, segment.y1, this.scene.input.pointer.x, this.scene.input.pointer.y);
+                        this.segment_gr.strokeLineShape(this.segment);
+                    }
+                }
+            };
+        });
 
+    }
+
+}
+}
