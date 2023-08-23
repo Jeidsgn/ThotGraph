@@ -128,7 +128,7 @@ export class Segment {
             point.on('drag', (pointer) => {
                 if (draggingPoint === point) {
                     for (const segment of this.scene.segments){
-                        if (segment.pointA.x==point.x){
+                        if (segment.x1==point.x  || segment.x2==point.x){
                             this.segment.pointA = point;
                             this.segment_gr.strokeLineShape(this.segment);
                         }
