@@ -8,8 +8,14 @@ export class Board extends Phaser.Scene {
     this.parabolic = null;
     this.activatebutton = null;
     this.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
+  }
+
+  // Función de inicialización de la escena
+  init() {
+    // Crea instancias de las clases ToolBox y Element pasando "this" como referencia a la escena
     this.toolbox = new ToolBox(this);
     this.elements = new Element(this);
+    // Inicializa los nombres y elementos
     this.elements.Names();
   }
 
