@@ -34,20 +34,37 @@ export class Element {
   // Crea un nuevo elemento
   moveElement() {
     // Crea un nuevo punto utilizando el método "createPoint" de la instancia de Point en la escena
-    this.point.movePoint();
+    // Obtiene la lista de puntos interactivos en la escena
+    const interactive = this.scene.points.getChildren();
+    // Itera a través de los puntos interactivos en la escena
+    for (const point of interactive) {
+      point.setInteractive({ draggable: true });// Habilita el arrastre para el punto
+      //console.log(this.scene.pointdraggable)
+      point.on('drag', (pointer, dragX, dragY) => {
+        this.scene.pointdraggable = point;
+        point.x = dragX;
+        point.y = dragY;
+        point.data.set('vector', (dragX, dragY));
+        for (const segment of this.scene.segments){
+          this.segment_gr.clear();
+          this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+          this.segment_gr.strokeLineShape(segment);
+        }
+      });
+    }
     this.segment.moveSegment();
   }
 
-    // Puedes agregar métodos comunes a todos los elementos aquí
-    // Por ejemplo, para manejar restricciones y dependencias de movimiento
-  BaseElement(){
-    const point1 = this.scene.add.sprite(this.scene.cameras.main.width/3, this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
-    const point2 = this.scene.add.sprite(this.scene.cameras.main.width/(3/2), this.scene.cameras.main.height/2, 'point', 0).setOrigin(0.5, 0.80);
+  // Puedes agregar métodos comunes a todos los elementos aquí
+  // Por ejemplo, para manejar restricciones y dependencias de movimiento
+  BaseElement() {
+    const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
     point1.setData('vector', (point1.x, point1.y));
     point2.setData('vector', (point2.x, point2.y));
-    this.scene.points.add(point1); 
+    this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo 
 
   }
-  
+
 }
