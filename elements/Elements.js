@@ -33,6 +33,8 @@ export class Element {
 
   // Crea un nuevo elemento
   moveElement() {
+    this.scene.parabolic = null;
+    this.shadow.clear();
     const interactivePoints = this.scene.points.getChildren();
 
     for (const point of interactivePoints) {
