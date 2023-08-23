@@ -35,6 +35,7 @@ export class ToolBox {
   }
   
   createDependentButtons() {
+    const activate = false;
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       const center = (this.scene.cameras.main.width)/2;
       const button = this.scene.add      
@@ -42,10 +43,18 @@ export class ToolBox {
         .setInteractive()
         .on("pointerdown", () => {
           this.elements.buttonToFunction(this.scene.elementNames[i])
-          button.setFrame(3)
+          button.setFrame(2)
+          activate = true;
         } )
         .on("pointerover", () => {
-        button.setFrame(1)}      );
+        button.setFrame(1)}      )
+        .on("pointerout",() =>{
+          if (activate==true){
+            button.setFrame(3)
+          } else { 
+            button.setFrame(0)
+          }
+        })
       button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
       this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
