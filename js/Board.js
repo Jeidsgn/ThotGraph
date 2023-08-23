@@ -40,6 +40,7 @@ export class Board extends Phaser.Scene {
       'Bg'
     );
     background.setDepth(-1);
+    this.elements.BaseElement();
   }
 
   // Función de actualización que se ejecuta en cada frame
