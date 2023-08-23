@@ -4,7 +4,6 @@ export class Segment {
     constructor(scene) {
         this.scene = scene;
         this.scene.segments = scene.add.group(); // Grupo para almacenar los puntos en la escena
-        this.segments = [];
         this.point = new Point(scene);
         //this.scene.points
         this.scene.pointB = null;
@@ -88,8 +87,9 @@ export class Segment {
                     this.segment.lineStyle(5, 0x2AA4BF, 0.9);
                     const newSegment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
                     this.segment.strokeLineShape(newSegment);
+                    point.data.set('vector', newSegment.p0);
+                    dropZone.data.set('vector', newSegment.p1);
                     this.scene.segments.add(this.segment);
-                    this.segments.push(newSegment);
                 };
             });
             point.on('dragend', (pointer) => {
@@ -118,7 +118,8 @@ export class Segment {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
-        for (const segment of this.segments) {
+        const segments = this.scene.segments.getChildren();
+        for (const segment of segments) {
             segment.setInteractive();// Habilita el arrastre para el punto
             console.log(segment);
             segment.input.draggable = true;
