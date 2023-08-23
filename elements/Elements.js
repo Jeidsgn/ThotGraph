@@ -46,7 +46,7 @@ export class Element {
             // Actualizar los segmentos que contienen este punto
             for (const segment of this.scene.segments) {
                 if (segment.pointA === point || segment.pointB === point) {
-                    segment.pointA = new Phaser.Math.Vector2(point.x, point.y);
+                    segment.pointA = new Phaser.Math.Vector2(segment.x1, segment.y1);
                     segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
                 }
             }
