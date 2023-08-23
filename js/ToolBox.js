@@ -27,7 +27,7 @@ export class ToolBox {
         this.elements.buttonToFunction("Mover")
         moveButton.setFrame(3)      })
       .on("pointerover", () => {
-        button.setFrame(1)}      );
+        moveButton.setFrame(1)}      );
 
 
     moveButton.setData('text',"Mover");
