@@ -48,8 +48,9 @@ export class Board extends Phaser.Scene {
   update() {
     if(this.activeButton!==null){
       for (const button of this.scene.toolboxButtons){
-        this.elements.buttonToFunction(button.data.values.text)
-        
+        if(this.activeButton===button.data.values.text){
+          this.elements.buttonToFunction(button.data.values.text)}
+
       }
       
     }
