@@ -88,6 +88,7 @@ export class Segment {
                     const newSegment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
                     this.segment.strokeLineShape(newSegment);
                     this.scene.segments.add(this.segment);
+                    newSegment.setInteractive({ draggable: true });
                 };
             });
             point.on('dragend', (pointer) => {
@@ -116,6 +117,7 @@ export class Segment {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
+
     }
 
 }
