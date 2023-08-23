@@ -46,18 +46,21 @@ export class Element {
             // Actualizar los segmentos que contienen este punto
             for (const segment of this.scene.segments) {
                 if (segment.pointA === point || segment.pointB === point) {
-                    this.scene.segment_gr.clear();
-                    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                    this.scene.segment_gr.strokeLineShape(segment);
-
-                    // Actualizar la posición de los puntos de inicio y fin de los segmentos
                     segment.pointA = new Phaser.Math.Vector2(point.x, point.y);
                     segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
                 }
             }
+
+            // Luego de actualizar los segmentos, redibujar todos los segmentos
+            this.scene.segment_gr.clear();
+            this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+            for (const segment of this.scene.segments) {
+                this.scene.segment_gr.strokeLineShape(segment);
+            }
         });
     }
 }
+
 
 
   // Puedes agregar métodos comunes a todos los elementos aquí
