@@ -4,9 +4,7 @@ export class ToolBox {
   constructor(scene) {
     this.scene = scene;
     this.elements = new Element(scene);
-    this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
-    this.buttonToFunction = this.scene.buttonToFunction;
   }
 
   // Crea los botones en el cuadro de herramientas

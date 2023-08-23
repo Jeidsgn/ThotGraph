@@ -7,6 +7,7 @@ export class Board extends Phaser.Scene {
     // Propiedades para controlar el estado de la interacción en el tablero
     this.parabolic = null;
     this.activatebutton = null;
+    this.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
   }
 
   // Función de inicialización de la escena
@@ -46,7 +47,6 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
-    console.log(this.activatebutton);
     if(this.activatebutton!==null){
       for (const button of this.toolboxButtons){
         if(this.activatebutton===button.data.values.text){
