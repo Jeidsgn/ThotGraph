@@ -12,7 +12,7 @@ export class Board extends Phaser.Scene {
     this.elements = new Element(this);
     this.elements.Names();
   }
-  s
+
   preload() {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
     this.load.spritesheet('point', './assets/point/Point.svg', { frameWidth: 28, frameHeight: 36 });
