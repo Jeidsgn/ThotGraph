@@ -145,21 +145,13 @@ export class Segment {
                 for (const segment of this.scene.segments) {
                     if (segment.x1 == point.x) {
                         console.log("hola");
-                        segment = new Phaser.Geom.Line(
-                            pointer.x,
-                            pointer.y,
-                            segment.x2,
-                            segment.y2
-                        );
+                        segment.x1 = pointer.x;
+                        segment.y1 = pointer.y;
                         this.segment_gr.strokeLineShape(this.segment);
                     } else if (segment.x2 == point.x) {
                         console.log("hola");
-                        segment = new Phaser.Geom.Line(
-                            segment.x1,
-                            segment.y1,
-                            pointer.x,
-                            pointer.y
-                        );
+                        segment.x2 = pointer.x;
+                        segment.y2 = pointer.y;
                         this.segment_gr.strokeLineShape(this.segment);
                     }
                 }
