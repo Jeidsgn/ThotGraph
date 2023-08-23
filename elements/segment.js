@@ -122,6 +122,7 @@ export class Segment {
         const segments = this.scene.segments.getChildren();
         for (const segment of segments) {
             segment.setInteractive();// Habilita el arrastre para el punto
+            console.log(segment);
             segment.input.draggable = true;
             segment.on('drag', (pointer, dragX, dragY) => {
                 segment.x = dragX;
