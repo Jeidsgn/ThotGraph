@@ -23,7 +23,7 @@ export class ToolBox {
       .sprite(center, this.scene.cameras.main.height - 180, 'Mover')
       .setInteractive()
       .on("pointerdown", () => {
-        this.activateButton("Mover")
+        this.elements.buttonToFunction("Mover")
         moveButton.setFrame(3)      })
       .on("pointerover", () => {
         button.setFrame(1)}      );
@@ -41,7 +41,7 @@ export class ToolBox {
         .sprite(center - (this.scene.elementNames.length - 1) * 90 / 2 + i * 90, this.scene.cameras.main.height - 90 , this.scene.elementNames[i])
         .setInteractive()
         .on("pointerdown", () => {
-          this.activateButton(this.scene.elementNames[i])
+          this.elements.buttonToFunction(this.scene.elementNames[i])
           button.setFrame(3)
         } )
         .on("pointerover", () => {
@@ -49,27 +49,6 @@ export class ToolBox {
       button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
       this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
-    }
-  }
-  
-
-  activateButton(buttonName) {
-    if (this.scene.activeButton) {
-      this.scene.activeButton;
-    }
-
-    this.scene.activeButton = this.scene.toolboxButtons.find(
-      (button) => button.data.values.text === buttonName
-    );
-
-    if (this.scene.activeButton) {
-      this.scene.activeButton;
-
-      this.scene.isDrawingEnabled = !this.scene.isDrawingEnabled;
-      this.scene.waitingForClick = true;
-
-      /// Almacena el nombre de la función en una variable
-      this.scene.activeButtonCallback = this.elements.buttonToFunction(buttonName);
     }
   }
 }

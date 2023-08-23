@@ -4,11 +4,7 @@ import { Element } from "../elements/Elements.js";
 export class Board extends Phaser.Scene {
   constructor() {
     super({ key: "scene" });
-
     // Propiedades para controlar el estado de la interacción en el tablero
-    this.waitingForClick = true;
-    this.isDrawingEnabled = false;
-    this.activeButtonCallback = null;  // Agregar una propiedad para almacenar la función activa del botón
     this.parabolic = null;
     this.reductionparabole=false;
   }
@@ -50,21 +46,12 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
-    if (this.isDrawingEnabled && !this.waitingForClick) {
-      // Llama a la función activa correspondiente
-      if (this.activeButtonCallback) {  // Comprobamos si la función está definida
-          this.activeButtonCallback();  // Ejecutamos la función activa
-      } else {
-          console.log("Error en activeButtonCallback");
-      }
-  } else if (this.isDrawingEnabled && this.waitingForClick) {
-      // Si el dibujo está habilitado y se espera un clic, marca que ya no se espera más
-      this.input.on("pointerdown", () => {
-          this.waitingForClick = false;
-      });
-  }
     this.vibration();
   }
+  
+  
+  
+  
   vibration() {
     //cuerda vibrante
     if (this.parabolic != null) {
