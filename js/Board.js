@@ -50,8 +50,8 @@ export class Board extends Phaser.Scene {
       for (const button of this.scene.toolboxButtons){
         if(this.activeButton===button.data.values.text){
           this.elements.buttonToFunction(button.data.values.text)
+          console.log(button.data.values.text)
         }else{
-          this.elements.buttonToFunction(button.data.values.text).disable();
         }
       }
       
