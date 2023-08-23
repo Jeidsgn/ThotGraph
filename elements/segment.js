@@ -64,6 +64,8 @@ export class Segment {
 
             point.on('drag', (pointer, dragX, dragY) => {
                 if (draggingPoint === point) {
+                    point.x=point.input.dragStartX;
+                    point.y=point.input.dragStartY;
                     // Borrar la línea anterior
                     this.shadow.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
