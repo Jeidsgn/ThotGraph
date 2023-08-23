@@ -34,7 +34,7 @@ export class ToolBox {
       .setInteractive()
       .on("pointerdown", () => {
         this.elements.buttonToFunction("Mover")
-        moveButton.setFrame(3)
+        moveButton.setFrame(2)
         this.activatebutton = "Mover"})
       .on("pointerover", () => {
         moveButton.setFrame(1)})
