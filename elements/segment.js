@@ -102,11 +102,13 @@ export class Segment {
                     this.graphics.clear();
                     this.scene.curvestyle.clear();
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                    const start = point;
+                    const end = dropZone
                     this.segment = new Phaser.Geom.Line(
-                        point.x,
-                        point.y,
-                        dropZone.x,
-                        dropZone.y
+                        start.x,
+                        start.y,
+                        end.x,
+                        end.y
                     );
                     this.segment_gr.strokeLineShape(this.segment);
                     point.data.set("vector", this.segment.p0);
