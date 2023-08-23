@@ -8,6 +8,7 @@ const config = {
     parent: 'game-container',   
     scene: [Board],
     add: {
+      group: true,
       graphics: true
     }
 };
