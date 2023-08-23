@@ -112,7 +112,7 @@ export class Segment {
                     );
                     this.segment_gr.strokeLineShape(this.segment);
                     point.data.set("vector", this.segment.getPointA());
-                    console.log(this.segment.getPointA())
+                    //console.log(this.segment.getPointA())
                     dropZone.data.set("vector", this.segment.getPointB());
                     this.scene.segments.push(this.segment);
                 }
