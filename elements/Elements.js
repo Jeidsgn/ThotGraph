@@ -49,11 +49,13 @@ export class Element {
 
             for (const segment of this.scene.segments) {
                 this.scene.segment_gr.strokeLineShape(segment);
-
+                
                 // Actualizar la posición de los puntos de inicio y fin de los segmentos
                 if (segment.pointA === point) {
                     segment.pointA = new Phaser.Math.Vector2(dragX, dragY);
+                    segment.pointB = segment.pointB;
                 } else if (segment.pointB === point) {
+                    segment.pointA = segment.pointA;
                     segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
                 }
             }
