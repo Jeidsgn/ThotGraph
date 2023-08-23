@@ -7,7 +7,6 @@ export class ToolBox {
     this.scene.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
     this.buttonToFunction = this.scene.buttonToFunction;
-    this.activatebutton=this.scene.activatebutton;
   }
 
   // Crea los botones en el cuadro de herramientas
@@ -18,7 +17,7 @@ export class ToolBox {
     this.scene.input.on("pointerup", () => {
       this.elements.buttonToFunction()
       for (const button of this.scene.toolboxButtons) {
-      if(this.activatebutton==button.data.values.text){
+      if(this.scene.activatebutton==button.data.values.text){
         this.elements.buttonToFunction(button.data.values.text)
         button.setFrame(3);
       }else{
@@ -35,11 +34,11 @@ export class ToolBox {
       .on("pointerdown", () => {
         this.elements.buttonToFunction("Mover")
         moveButton.setFrame(2)
-        this.activatebutton = "Mover"})
+        this.scene.activatebutton = "Mover"})
       .on("pointerover", () => {
         moveButton.setFrame(1)})
       .on("pointerout",() =>{
-          if (this.activatebutton =="Mover"){
+          if (this.scene.activatebutton =="Mover"){
             moveButton.setFrame(3)
           } else { 
             moveButton.setFrame(0)
@@ -57,12 +56,12 @@ export class ToolBox {
         .on("pointerdown", () => {
           this.elements.buttonToFunction(this.scene.elementNames[i])
           button.setFrame(2)
-          this.activatebutton = this.scene.elementNames[i];
+          this.scene.activatebutton = this.scene.elementNames[i];
         } )
         .on("pointerover", () => {
         button.setFrame(1)}      )
         .on("pointerout",() =>{
-          if (this.activatebutton ==this.scene.elementNames[i]){
+          if (this.scene.activatebutton ==this.scene.elementNames[i]){
             button.setFrame(3)
           } else { 
             button.setFrame(0)
