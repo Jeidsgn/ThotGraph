@@ -10,7 +10,7 @@ export class Segment {
         this.scene.pointA = null;
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
-        this.shadow = scene.add.graphics({
+        this.scene.scene.shadow = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
         this.graphics = scene.add.graphics({
@@ -79,9 +79,9 @@ export class Segment {
                     point.x = point.input.dragStartX;
                     point.y = point.input.dragStartY;
                     // Borrar la línea anterior
-                    this.shadow.clear();
+                    this.scene.shadow.clear();
                     // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.shadow.lineStyle(5, 0x2aa4bf, 0.1);
+                    this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
                     // Define la línea
                     this.scene.line = new Phaser.Geom.Line(
                         point.input.dragStartX,
@@ -89,7 +89,7 @@ export class Segment {
                         pointer.x,
                         pointer.y
                     );
-                    this.shadow.strokeLineShape(this.scene.line);
+                    this.scene.shadow.strokeLineShape(this.scene.line);
                     // Dibuja parábola
                     this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
                 }
@@ -98,7 +98,7 @@ export class Segment {
                 if (draggingPoint !== point) {
                     drop = true;
                     this.scene.parabolic = null;
-                    this.shadow.clear();
+                    this.scene.shadow.clear();
                     this.graphics.clear();
                     this.scene.curvestyle.clear();
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
@@ -122,7 +122,7 @@ export class Segment {
                 if (drop == true) {
                     // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
                     // Borrar la línea anterior
-                    this.shadow.clear();
+                    this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
                     //this.graphics.clear();
                     this.scene.parabolic = null;
@@ -134,7 +134,7 @@ export class Segment {
         }
         if (this.isClicking == false) {
             this.scene.parabolic = null;
-            this.shadow.clear();
+            this.scene.shadow.clear();
         }
     }
     addName() {
