@@ -4,6 +4,7 @@ import { Segment } from "./segment.js";
 export class Element {
   constructor(scene) {
     this.scene = scene;
+    this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
     this.scene.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
