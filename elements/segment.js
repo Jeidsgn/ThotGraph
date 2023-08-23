@@ -129,10 +129,12 @@ export class Segment {
                 if (draggingPoint === point) {
                     for (const segment of this.scene.segments){
                         if (segment.x1==point.x){
+                            console.log("hola")
                             segment.x1 = point.x;
                             segment.y1 = point.y;
                             this.segment_gr.strokeLineShape(this.segment);
                         } else if (segment.x2==point.x){
+                            console.log("hola")
                             segment.x2 = point.x;
                             segment.y2 = point.y;
                             this.segment_gr.strokeLineShape(this.segment);
