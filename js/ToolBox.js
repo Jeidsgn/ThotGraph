@@ -8,6 +8,7 @@ export class ToolBox {
     this.scene.activeButton = null; // Referencia al botón activo en el cuadro de herramientas
     this.scene.elementNames = []; // Array para almacenar los nombres de los elementos.
     this.buttonToFunction = this.scene.buttonToFunction;
+    this.activatebutton=false;
   }
 
   // Crea los botones en el cuadro de herramientas
@@ -35,7 +36,6 @@ export class ToolBox {
   }
   
   createDependentButtons() {
-    const activate = false;
     for (let i = 0; i < this.scene.elementNames.length; i++) {
       const center = (this.scene.cameras.main.width)/2;
       const button = this.scene.add      
@@ -44,12 +44,12 @@ export class ToolBox {
         .on("pointerdown", () => {
           this.elements.buttonToFunction(this.scene.elementNames[i])
           button.setFrame(2)
-          activate = true;
+          this.activatebutton = true;
         } )
         .on("pointerover", () => {
         button.setFrame(1)}      )
         .on("pointerout",() =>{
-          if (activate==true){
+          if (this.activatebutton ==true){
             button.setFrame(3)
           } else { 
             button.setFrame(0)
