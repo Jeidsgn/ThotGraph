@@ -16,6 +16,16 @@ export class ToolBox {
     // Crea los botones base y los botones dependientes (según elementos en elements/)
     this.createBaseButtons();
     this.createDependentButtons();
+    this.scene.input.on("pointerup", () => {
+      this.elements.buttonToFunction()
+      for (const button of this.scene.toolboxButton) {
+      if(this.activatebutton==button.data.values.text){
+        this.elements.buttonToFunction(button.data.values.text)
+        button.setFrame(3);
+      }else{
+        button.setFrame(0);
+      }}
+    })
   }
 
   createBaseButtons() {
@@ -35,11 +45,8 @@ export class ToolBox {
           } else { 
             moveButton.setFrame(0)
           }});
-
-
     moveButton.setData('text',"Mover");
     this.scene.toolboxButtons.push(moveButton);
-    this.scene.add.text(10, 550, "Mover", { fill: "#0000"});
   }
   
   createDependentButtons() {
@@ -61,14 +68,9 @@ export class ToolBox {
           } else { 
             button.setFrame(0)
           }})
-      if(this.activatebutton==this.scene.elementNames[i]){
-        button.setFrame(3);
-      }else{
-        button.setFrame(0);
-      }
+
       button.setData('text',this.scene.elementNames[i]);
       this.scene.toolboxButtons.push(button);
-      this.scene.add.text(100 + i * 100, 550, this.scene.elementNames[i], {fill:"#0000"});
     }
   }
 }
