@@ -87,9 +87,7 @@ export class Segment {
                     this.segment.lineStyle(5, 0x2AA4BF, 0.9);
                     const newSegment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
                     this.segment.strokeLineShape(newSegment);
-                    point.data.set('vector', newSegment.p0);
-                    dropZone.data.set('vector', newSegment.p1);
-                    this.scene.segments.add(this.segment);
+                    this.scene.segments.add(newSegment);
 
                 };
             });

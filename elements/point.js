@@ -29,7 +29,6 @@ export class Point {
             this.textContainer = this.scene.add.text(point.x, point.y-26, "", { fill: "#000000" });
             this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
             point.id = letter; // Agrega el nombre del punto
-            point.setData('vector', (point.x, point.y));
             this.scene.points.add(point); // Agrega el punto al grupo
             this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
             
