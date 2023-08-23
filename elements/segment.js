@@ -116,34 +116,22 @@ export class Segment {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
     moveSegment() {
-        this.shadow.clear();
-        this.scene.curvestyle.clear();
-        this.scene.parabolic = null;
-        let draggingPoint = null; // Punto que se está arrastrando
-        const interactive = this.scene.points.getChildren();
-        for (const point of interactive) {
-            point.on('pointerdown', () => {
-                draggingPoint = point; // Establece el punto que se está arrastrando
-            });
-            point.on('drag', (pointer) => {
-                if (draggingPoint === point) {
-                    for (const segment of this.scene.segments){
-                        if (segment.x1==point.x){
-                            console.log("hola")
-                            segment.x1 = point.x;
-                            segment.y1 = point.y;
-                            this.segment_gr.strokeLineShape(this.segment);
-                        } else if (segment.x2==point.x){
-                            console.log("hola")
-                            segment.x2 = point.x;
-                            segment.y2 = point.y;
-                            this.segment_gr.strokeLineShape(this.segment);
-                        }
-                    }                    
-                };
-            });
-
+        //this.scene.pointdraggable
+        for (const segment of this.scene.segments) {
+            if (segment.x1 == this.scene.pointdraggable.x) {
+                this.segment_gr.clear();
+                console.log("hola");
+                segment.x1 = this.scene.pointdraggable.x;
+                segment.y1 = this.scene.pointdraggable.y;
+                this.segment_gr.strokeLineShape(this.segment);
+            } else if (segment.x2 == this.scene.pointdraggable.x) {
+                this.segment_gr.clear();
+                console.log("hola")
+                segment.x2 = this.scene.pointdraggable.x;
+                segment.y2 = this.scene.pointdraggable.y;
+                this.segment_gr.strokeLineShape(this.segment);
+            }
         }
-
     }
 }
+
