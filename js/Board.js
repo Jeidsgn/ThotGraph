@@ -49,7 +49,6 @@ export class Board extends Phaser.Scene {
         if(this.activatebutton===button.data.values.text){
           this.callbackfunction();
         }else{
-          this.callbackfunction().off;
         }
       }
     }
