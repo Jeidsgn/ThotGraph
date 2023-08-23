@@ -43,23 +43,24 @@ export class Element {
             point.y = dragY;
             point.data.set('vector', new Phaser.Math.Vector2(dragX, dragY));
 
-            // Actualizar los segmentos que contienen este punto
-            for (const segment of this.scene.segments) {
-                if (segment.pointA === point || segment.pointB === point) {
-                    segment.pointA = new Phaser.Math.Vector2(segment.x1, segment.y1);
-                    segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
-                }
-            }
-
-            // Luego de actualizar los segmentos, redibujar todos los segmentos
+            // Actualizar y redibujar los segmentos existentes
             this.scene.segment_gr.clear();
             this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+
             for (const segment of this.scene.segments) {
                 this.scene.segment_gr.strokeLineShape(segment);
+
+                // Actualizar la posición de los puntos de inicio y fin de los segmentos
+                if (segment.pointA === point) {
+                    segment.pointA = new Phaser.Math.Vector2(dragX, dragY);
+                } else if (segment.pointB === point) {
+                    segment.pointB = new Phaser.Math.Vector2(dragX, dragY);
+                }
             }
         });
     }
 }
+
 
 
 
