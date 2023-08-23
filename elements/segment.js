@@ -117,20 +117,18 @@ export class Segment {
     }
     moveSegment() {
         //this.scene.pointdraggable
-        const segment_gr = this.segment_gr.getChildren();
-
-        for (let i = 0; i < this.scene.segments.length; i++) {
-            if (this.scene.segments[i].x1 == this.scene.pointdraggable.x) {
+        for (const segment of this.scene.segments) {
+            if (segment.x1 == this.scene.pointdraggable.x) {
                 this.segment_gr.clear();
                 console.log("hola");
-                this.scene.segments[i].x1 = this.scene.pointdraggable.x;
-                this.scene.segments[i].y1 = this.scene.pointdraggable.y;
+                segment.x1 = this.scene.pointdraggable.x;
+                segment.y1 = this.scene.pointdraggable.y;
                 this.segment_gr.strokeLineShape(this.segment);
-            } else if (this.scene.segments[i].x2 == this.scene.pointdraggable.x) {
+            } else if (segment.x2 == this.scene.pointdraggable.x) {
                 this.segment_gr.clear();
                 console.log("hola")
-                this.scene.segments[i].x2 = this.scene.pointdraggable.x;
-                this.scene.segments[i].y2 = this.scene.pointdraggable.y;
+                segment.x2 = this.scene.pointdraggable.x;
+                segment.y2 = this.scene.pointdraggable.y;
                 this.segment_gr.strokeLineShape(this.segment);
             }
         }
