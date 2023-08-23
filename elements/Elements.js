@@ -52,7 +52,7 @@ export class Element {
         }
       });
     }
-    this.segment.moveSegment();
+    //this.segment.moveSegment();
   }
 
   // Puedes agregar métodos comunes a todos los elementos aquí
