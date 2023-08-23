@@ -119,8 +119,6 @@ export class Segment {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
-        this.segment_gr.clear();
-        this.segment_gr.strokeLineShape(this.segment);
     }
 
 }
