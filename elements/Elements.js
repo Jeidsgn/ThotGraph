@@ -46,9 +46,9 @@ export class Element {
         point.y = dragY;
         point.data.set('vector', (dragX, dragY));
         for (const segment of this.scene.segments){
-          this.segment_gr.clear();
-          this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-          this.segment_gr.strokeLineShape(segment);
+          this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+          this.scene.segment_gr.strokeLineShape(segment);
         }
       });
     }
