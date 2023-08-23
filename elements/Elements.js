@@ -51,12 +51,12 @@ export class Element {
                 
                 console.log(segment)
                 // Actualizar la posición de los puntos de inicio y fin de los segmentos
-                if (segment.getpointA() === point) {
-                    segment.getpointA() = new Phaser.Math.Vector2(dragX, dragY);
-                    segment.getpointB() = segment.getpointB();
-                } else if (segment.getpointB() === point) {
-                    segment.getpointA() = segment.getpointA();
-                    segment.getpointB() = new Phaser.Math.Vector2(dragX, dragY);
+                if (segment.getpointA === point) {
+                    segment.getpointA = new Phaser.Math.Vector2(dragX, dragY);
+                    segment.getpointB = segment.getpointB();
+                } else if (segment.getpointB === point) {
+                    segment.getpointA = segment.getpointA();
+                    segment.getpointB = new Phaser.Math.Vector2(dragX, dragY);
                 }
                 this.scene.segment_gr.strokeLineShape(segment);
             }
