@@ -16,7 +16,7 @@ export class ToolBox {
       this.elements.buttonToFunction()
       for (const button of this.scene.toolboxButtons) {
       if(this.scene.activatebutton==button.data.values.text){
-        this.elements.buttonToFunction(button.data.values.text)
+        this.scene.callbackfunction = this.elements.buttonToFunction(button.data.values.text)
         button.setFrame(3);
       }else{
         button.setFrame(0);
@@ -30,7 +30,7 @@ export class ToolBox {
       .sprite(center, this.scene.cameras.main.height - 180, 'Mover')
       .setInteractive()
       .on("pointerdown", () => {
-        this.elements.buttonToFunction("Mover")
+        this.scene.callbackfunction = this.elements.buttonToFunction("Mover")
         moveButton.setFrame(2)
         this.scene.activatebutton = "Mover"})
       .on("pointerover", () => {
@@ -52,7 +52,7 @@ export class ToolBox {
         .sprite(center - (this.scene.elementNames.length - 1) * 90 / 2 + i * 90, this.scene.cameras.main.height - 90 , this.scene.elementNames[i])
         .setInteractive()
         .on("pointerdown", () => {
-          this.elements.buttonToFunction(this.scene.elementNames[i])
+          this.scene.callbackfunction = this.elements.buttonToFunction(this.scene.elementNames[i])
           button.setFrame(2)
           this.scene.activatebutton = this.scene.elementNames[i];
         } )

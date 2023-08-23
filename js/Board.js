@@ -8,6 +8,7 @@ export class Board extends Phaser.Scene {
     this.parabolic = null;
     this.activatebutton = null;
     this.toolboxButtons = []; // Inicializa el array para almacenar los botones del cuadro de herramientas
+    this.callbackfunction = null;
   }
 
 
@@ -46,12 +47,11 @@ export class Board extends Phaser.Scene {
     if(this.activatebutton!==null){
       for (const button of this.toolboxButtons){
         if(this.activatebutton===button.data.values.text){
-          this.elements.buttonToFunction(button.data.values.text);
+          this.callbackfunction();
           console.log(this.elements.buttonToFunction(button.data.values.text));
         }else{
         }
       }
-      
     }
     this.vibration();
   }
