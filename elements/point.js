@@ -49,7 +49,6 @@ export class Point {
                 point.y = dragY;
                 point.data.set('vector',(dragX, dragY));
             });
-            point.setInteractive({ draggable: false});
         }
     }
 

@@ -12,7 +12,8 @@ export class Segment {
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.shadow = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
         this.graphics = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
-        this.segment = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
+        this.segment_gr = scene.add.graphics({ lineStyle: { width: 5, color: 0x000000, alpha: 0.8 } });
+        this.segment = null;
         this.p3 = null;
 
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -84,12 +85,12 @@ export class Segment {
                     this.shadow.clear();
                     this.graphics.clear();
                     this.scene.curvestyle.clear();
-                    this.segment.lineStyle(5, 0x2AA4BF, 0.9);
-                    const newSegment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
-                    this.segment.strokeLineShape(newSegment);
-                    point.data.set('vector', newSegment.p0);
-                    dropZone.data.set('vector', newSegment.p1);
-                    this.scene.segments.add(this.segment);
+                    this.segment_gr.lineStyle(5, 0x2AA4BF, 0.9);
+                    this.segment = new Phaser.Geom.Line(point.x, point.y, dropZone.x, dropZone.y);
+                    this.segment_gr.strokeLineShape(this.segment);
+                    point.data.set('vector', this.segment.p0);
+                    dropZone.data.set('vector', this.segment.p1);
+                    this.scene.segments.add(this.segment_gr);
                 };
             });
             point.on('dragend', (pointer) => {
@@ -118,17 +119,7 @@ export class Segment {
         this.shadow.clear();
         this.scene.curvestyle.clear();
         this.scene.parabolic = null;
-        const segments = this.scene.segments.getChildren();
-        for (const segment of segments) {
-            segment.setInteractive();// Habilita el arrastre para el punto
-            console.log(segment);
-            segment.input.draggable = true;
-            segment.on('drag', (pointer, dragX, dragY) => {
-                segment.x = dragX;
-                segment.y = dragY;
-                segment.data.set('vector',(dragX, dragY));
-            });
-        };
+        this.segment.draw(this.segment_gr)
 
     }
 
