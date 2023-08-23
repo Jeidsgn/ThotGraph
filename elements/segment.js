@@ -121,7 +121,8 @@ export class Segment {
         this.scene.parabolic = null;
         const segments = this.scene.segments.getChildren();
         for (const segment of segments) {
-            segment.setInteractive({ draggable: true });// Habilita el arrastre para el punto
+            segment.setInteractive();// Habilita el arrastre para el punto
+            segment.input.draggable = true;
             segment.on('drag', (pointer, dragX, dragY) => {
                 segment.x = dragX;
                 segment.y = dragY;
