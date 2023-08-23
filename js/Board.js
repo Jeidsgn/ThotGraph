@@ -6,7 +6,7 @@ export class Board extends Phaser.Scene {
     super({ key: "scene" });
     // Propiedades para controlar el estado de la interacción en el tablero
     this.parabolic = null;
-    this.reductionparabole=false;
+    this.activeButton = null;
   }
 
   // Función de inicialización de la escena
@@ -46,6 +46,13 @@ export class Board extends Phaser.Scene {
 
   // Función de actualización que se ejecuta en cada frame
   update() {
+    if(this.activeButton!==null){
+      for (const button of this.scene.toolboxButtons){
+        this.elements.buttonToFunction(button.data.values.text)
+        
+      }
+      
+    }
     this.vibration();
   }
   
@@ -70,33 +77,6 @@ export class Board extends Phaser.Scene {
     };
     // Configura la función de clic en el contenedor (tablero)
     // Lógica de actualización común, si es necesario
-};
-reduction() {
-  //cuerda vibrante
-  if (this.reductionparabole==true) {
-      let p0 = this.parabolic.p0
-      let p1 = this.parabolic.p1
-      let p2 = this.parabolic.p2
-      this.parabolic.p1.x = (p1.x/2)+p0
-      this.parabolic.p1.x = (p1.x/2)+p0
-      this.parabolic.p2.x = (p2.x/2)+p0
-      this.parabolic.p2.x = (p2.x/2)+p0
-      this.curvestyle.clear(); // Limpia el dibujo anterior
-      this.curvestyle.lineStyle(5, 0x2AA4BF, 0.8); // Configura el estilo de línea
-      this.path = new Phaser.Curves.Path(points[0].x, points[0].y);
-      for (let i = 1; i < points.length - 1; i++) {
-          points[i].y += Math.cos(i * 2 + this.count);
-          points[i].x += Math.cos(i * 2 + this.count);
-          this.path.lineTo(points[i].x, points[i].y);
-      };
-      this.path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-      this.path.draw(this.curvestyle);
-      if(Phaser.Math.Distance.Between(p0.x, p0.y, p2.x, p2.y)<5){
-        reductionparabole=false;
-      }
-  };
-  // Configura la función de clic en el contenedor (tablero)
-  // Lógica de actualización común, si es necesario
 };
 
 }
