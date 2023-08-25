@@ -35,7 +35,7 @@ export class Element {
   moveElement() {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
-    this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+    this.scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
       gameObject.y = dragY;
       gameObject.data.get('vector').set(dragX, dragY);
