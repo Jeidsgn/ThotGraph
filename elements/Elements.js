@@ -38,30 +38,27 @@ export class Element {
     this.scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
       gameObject.y = dragY;
-      gameObject.setData('vector',(dragX, dragY));
+      gameObject.data.values.vector = (dragX, dragY);
+      // Actualizar y redibujar los segmentos existentes
+      this.scene.segment_gr.clear();
+      this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
-      
+      for (const segment of this.scene.segments) {
+        console.log(segment);
+        segment.draw(this.scene.segment_gr);  
+      }
     });
-
-    // Actualizar y redibujar los segmentos existentes
-    this.scene.segment_gr.clear();
-    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-
-    for (const segment of this.scene.segments) {
-      console.log(segment);
-      segment.draw(this.scene.segment_gr);
-    }
   }
 
 
-// Puedes agregar métodos comunes a todos los elementos aquí
-// Por ejemplo, para manejar restricciones y dependencias de movimiento
-BaseElement() {
-  const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-  const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-  point1.setData('vector', (point1.x, point1.y));
-  point2.setData('vector', (point2.x, point2.y));
-  this.scene.points.add(point1);
-  this.scene.points.add(point2); // Agrega el punto al grupo 
-}
+  // Puedes agregar métodos comunes a todos los elementos aquí
+  // Por ejemplo, para manejar restricciones y dependencias de movimiento
+  BaseElement() {
+    const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    point1.setData('vector', (point1.x, point1.y));
+    point2.setData('vector', (point2.x, point2.y));
+    this.scene.points.add(point1);
+    this.scene.points.add(point2); // Agrega el punto al grupo 
+  }
 }
