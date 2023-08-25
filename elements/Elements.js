@@ -38,7 +38,7 @@ export class Element {
     this.scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
       gameObject.y = dragY;
-      gameObject.data.get('vector').set(dragX, dragY);
+      gameObject.setData('vector',(dragX, dragY));
 
     });
 
@@ -48,6 +48,7 @@ export class Element {
 
     for (const segment of this.scene.segments) {
       this.scene.segment_gr.strokeLineShape(segment);
+      console.log(segment)
     }
   }
 
