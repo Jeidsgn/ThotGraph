@@ -35,40 +35,37 @@ export class Element {
   moveElement() {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
-    const interactivePoints = this.scene.points.getChildren();
+    this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+      gameObject.data.get('vector').set(dragX, dragY);
 
-    for (const point of interactivePoints) {
-        point.setInteractive({ draggable: true });
+    });
 
-        point.on('drag', (pointer, dragX, dragY) => {
-            point.x = dragX;
-            point.y = dragY;
-            point.data.set('vector', new Phaser.Math.Vector2(dragX, dragY));
+    // Actualizar y redibujar los segmentos existentes
+    this.scene.segment_gr.clear();
+    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
-            // Actualizar y redibujar los segmentos existentes
-            this.scene.segment_gr.clear();
-            this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-
-            for (const segment of this.scene.segments) {
-                this.scene.segment_gr.strokeLineShape(segment);
-            }
-        });
+    for (const segment of this.scene.segments) {
+      this.scene.segment_gr.strokeLineShape(segment);
     }
+  }
 }
 
 
 
 
-  // Puedes agregar métodos comunes a todos los elementos aquí
-  // Por ejemplo, para manejar restricciones y dependencias de movimiento
-  BaseElement() {
-    const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-    const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-    point1.setData('vector', (point1.x, point1.y));
-    point2.setData('vector', (point2.x, point2.y));
-    this.scene.points.add(point1);
-    this.scene.points.add(point2); // Agrega el punto al grupo 
 
-  }
+// Puedes agregar métodos comunes a todos los elementos aquí
+// Por ejemplo, para manejar restricciones y dependencias de movimiento
+BaseElement() {
+  const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+  const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+  point1.setData('vector', (point1.x, point1.y));
+  point2.setData('vector', (point2.x, point2.y));
+  this.scene.points.add(point1);
+  this.scene.points.add(point2); // Agrega el punto al grupo 
+
+}
 
 }
