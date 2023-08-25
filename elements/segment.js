@@ -110,9 +110,9 @@ export class Segment {
                     );
                     this.segment.draw(this.segment_gr);
                     console.log(this.segment);
-                    point.data.get("vector").set(this.segment.p0);
+                    point.data.values.vector = this.segment.p0;
                     //console.log(this.segment.getPointA())
-                    dropZone.data.get("vector").set(this.segment.p1);
+                    dropZone.data.values.vector = this.segment.p1;
                     this.scene.segments.push(this.segment);
                 }
             });
