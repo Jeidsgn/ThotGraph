@@ -43,13 +43,13 @@ export class Element {
       });
       point.on("drag", (pointer, dragX, dragY) => {
         if (draggingPoint === point) {
-          this.scene.segment_gr.clear();
-          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+          
           point.x = dragX;
           point.y = dragY;
           point.data.values.vector = (dragX, dragY);
           for (const segment of this.scene.segments){
-            console.log(segment);
+            this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
             if (point == segment.p0){
               segment.p0.x=dragX
               segment.p0.y=dragY
