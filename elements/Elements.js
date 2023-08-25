@@ -35,31 +35,40 @@ export class Element {
   moveElement() {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
-    this.scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-      gameObject.x = dragX;
-      gameObject.y = dragY;
-      gameObject.data.values.vector = (dragX, dragY);
-      console.log(gameObject);
-      // Actualizar y redibujar los segmentos existentes
-      for (const segment of this.scene.segments) {
+    let draggingPoint = null; // Punto que se está arrastrando
+    const interactive = this.scene.points.getChildren();
+    for (const point of interactive) {
+      point.setInteractive({ draggable: true });
+      point.on("pointerdown", () => {
+        draggingPoint = point; // Establece el punto que se está arrastrando
+      });
 
-        if (gameObject.Contains(segment.p2)) {
-          console.log(segment);
-          this.scene.segment_gr.clear();
-          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-          segment.p0.x = dragX;
-          segment.p0.y = dragY;
-          segment.draw(this.scene.segment_gr);
-        } else if (gameObject.contains(segment.p1)) {
-          console.log(segment);
-          this.scene.segment_gr.clear();
-          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-          segment.p1.x = dragX;
-          segment.p1.y = dragY;
-          segment.draw(this.scene.segment_gr);
-        };
-      }
-    })
+      point.on("drag", (pointer) => {
+        if (draggingPoint === point) {
+          point.x = pointer.x;
+          point.y = pointer.y;
+          // Borrar la línea anterior
+          
+          // Actualiza el aspecto visual de la líne mientras se mueve
+          
+          // Define la línea
+          for (const segment of this.scene.segments) {
+            if (segment.p0 === draggingPoint) {
+              this.scene.segment_gr.clear();
+              segment.p0 = point;
+              this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+              segment.draw(this.scene.segment_gr);
+            } else if(segment.p1 === draggingPoint){
+              this.scene.segment_gr.clear();
+              segment.p1 = point;
+              this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+              segment.draw(this.scene.segment_gr);
+            }
+          }
+        }
+      });
+    }
+
   }
 
 
