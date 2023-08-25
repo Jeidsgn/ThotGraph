@@ -39,7 +39,7 @@ export class Element {
       gameObject.x = dragX;
       gameObject.y = dragY;
       gameObject.setData('vector',(dragX, dragY));
-      
+
       console.log(gameObject);
     });
 
@@ -48,7 +48,7 @@ export class Element {
     this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
     for (const segment of this.scene.segments) {
-      this.scene.segment.draw(this.segment_gr);
+      segment.draw(this.segment_gr);
     }
   }
 
