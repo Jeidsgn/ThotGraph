@@ -114,8 +114,8 @@ export class Segment {
                     point.y=this.segment.p0.y;
                     point.data.values.vector = this.segment.p0;                    
                     //console.log(this.segment.getPointA())
-                    dropZone.x=this.segment.p0.x;
-                    dropZone.y=this.segment.p0.y;
+                    dropZone.x=this.segment.p1.x;
+                    dropZone.y=this.segment.p1.y;
                     dropZone.data.values.vector = this.segment.p1;
                     this.scene.segments.push(this.segment);
                 }
