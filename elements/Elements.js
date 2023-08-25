@@ -39,16 +39,19 @@ export class Element {
       gameObject.x = dragX;
       gameObject.y = dragY;
       gameObject.data.values.vector = (dragX, dragY);
+      console.log(gameObject);
       // Actualizar y redibujar los segmentos existentes
       for (const segment of this.scene.segments) {
-        console.log(segment);
+        
         if (gameObject == segment.p0) {
+          console.log(segment);
           this.scene.segment_gr.clear();
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
           segment.p0.x = dragX;
           segment.p0.y = dragY;
           segment.draw(this.scene.segment_gr);
         } else if (gameObject == segment.p1) {
+          console.log(segment);
           this.scene.segment_gr.clear();
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
           segment.p1.x = dragX;
