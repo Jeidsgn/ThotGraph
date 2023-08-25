@@ -50,10 +50,6 @@ export class Element {
       this.scene.segment_gr.strokeLineShape(segment);
     }
   }
-}
-
-
-
 
 
 // Puedes agregar métodos comunes a todos los elementos aquí
@@ -65,7 +61,5 @@ BaseElement() {
   point2.setData('vector', (point2.x, point2.y));
   this.scene.points.add(point1);
   this.scene.points.add(point2); // Agrega el punto al grupo 
-
 }
-
 }
