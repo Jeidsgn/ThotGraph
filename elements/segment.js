@@ -105,15 +105,13 @@ export class Segment {
                     const start = point;
                     const end = dropZone
                     this.segment = new Phaser.Geom.Line(
-                        start.x,
-                        start.y,
-                        end.x,
-                        end.y
+                        new Phaser.Math.Vector2(start.x, start.y),
+                        new Phaser.Math.Vector2(end.x, end.y)
                     );
                     this.segment_gr.strokeLineShape(this.segment);
-                    point.setData("vector", (this.segment.getPointA()));
+                    point.setData("vector", this.segment.getPointA());
                     //console.log(this.segment.getPointA())
-                    dropZone.setData("vector", (this.segment.getPointB()));
+                    dropZone.setData("vector", this.segment.getPointB());
                     this.scene.segments.push(this.segment);
                 }
             });
