@@ -104,7 +104,7 @@ export class Segment {
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
                     const start = point;
                     const end = dropZone
-                    this.segment = new Phaser.Geom.Line(
+                    this.segment = new Phaser.Curves.Line(
                         new Phaser.Math.Vector2(start.x, start.y),
                         new Phaser.Math.Vector2(end.x, end.y)
                     );
