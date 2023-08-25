@@ -109,9 +109,9 @@ export class Segment {
                         new Phaser.Math.Vector2(end.x, end.y)
                     );
                     this.segment_gr.strokeLineShape(this.segment);
-                    point.setData("vector", this.segment.getPointA());
+                    point.setData("vector", this.segment.p0);
                     //console.log(this.segment.getPointA())
-                    dropZone.setData("vector", this.segment.getPointB());
+                    dropZone.setData("vector", this.segment.p1);
                     this.scene.segments.push(this.segment);
                 }
             });
