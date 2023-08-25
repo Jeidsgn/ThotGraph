@@ -40,14 +40,23 @@ export class Element {
       gameObject.y = dragY;
       gameObject.data.values.vector = (dragX, dragY);
       // Actualizar y redibujar los segmentos existentes
-      this.scene.segment_gr.clear();
-      this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-
       for (const segment of this.scene.segments) {
         console.log(segment);
-        segment.draw(this.scene.segment_gr);  
+        if (gameObject == segment.p0) {
+          this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+          segment.p0.x = dragX;
+          segment.p0.y = dragY;
+          segment.draw(this.scene.segment_gr);
+        } else if (gameObject == segment.p1) {
+          this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+          segment.p1.x = dragX;
+          segment.p1.y = dragY;
+          segment.draw(this.scene.segment_gr);
+        };
       }
-    });
+    })
   }
 
 
