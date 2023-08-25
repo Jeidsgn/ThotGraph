@@ -49,7 +49,7 @@ export class Element {
 
     for (const segment of this.scene.segments) {
       console.log(segment);
-      segment.draw(this.segment_gr);
+      segment.draw(this.scene.segment_gr);
     }
   }
 
