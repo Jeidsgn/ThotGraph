@@ -52,16 +52,6 @@ export class Element {
     const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
     point1.setData('vector', (point1.x, point1.y));
     point2.setData('vector', (point2.x, point2.y));
-    point1.setInteractive({ 
-                hitArea: new Phaser.Geom.Rectangle(
-                28,
-                60,
-                point1.width + 28 * 2,
-                point1.height + 60 * 2 ),
-            //Check hitarea
-            hitAreaCallback: function(hitArea, x, y){
-                return Phaser.Geom.Rectangle.Contains(hitArea, x, y);
-            }});
     this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo 
   }
