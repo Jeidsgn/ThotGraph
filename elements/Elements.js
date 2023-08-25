@@ -7,8 +7,6 @@ export class Element {
     this.scene.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
-    this.scene.isCreatingSegment = false; // Bandera para crear segmento
-    this.scene.isMovingElement = false; // Bandera para mover elemento
   }
   buttonToFunction(buttonName) {
     // Define un objeto de mapeo entre nombres de botones y funciones
@@ -20,9 +18,7 @@ export class Element {
         this.moveElement();
       },
       "Segment": () => {
-        this.scene.isCreatingSegment == true;
         this.segment.createSegment();
-        
       },
     };
     return functions[buttonName];
@@ -37,40 +33,36 @@ export class Element {
 
   // Crea un nuevo elemento
   moveElement() {
-    if (this.scene.isMovingElement == true) {
-      this.scene.isCreatingSegment = false;
-      this.scene.isMovingElement = true;
-      this.scene.parabolic = null;
-      this.scene.shadow.clear();
-      let draggingPoint = null; // Punto que se está arrastrando
-      const interactive = this.scene.points.getChildren();
-      for (const point of interactive) {
-        point.on("pointerdown", () => {
-          draggingPoint = point; // Establece el punto que se está arrastrando
-        });
-        point.on("drag", (pointer, dragX, dragY) => {
-          if (draggingPoint === point) {
-
-            point.x = dragX;
-            point.y = dragY;
-            point.data.values.vector = (dragX, dragY);
-            for (const segment of this.scene.segments) {
-              this.scene.segment_gr.clear();
-              this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-              if (point == segment.p0) {
-                segment.p0.x = dragX
-                segment.p0.y = dragY
-              } else if (point == segment.p1) {
-                segment.p1.x = dragX
-                segment.p1.y = dragY
-              }
-              segment.draw(this.scene.segment_gr);
+    this.scene.parabolic = null;
+    this.scene.shadow.clear();
+    let draggingPoint = null; // Punto que se está arrastrando
+    const interactive = this.scene.points.getChildren();
+    for (const point of interactive) {
+      point.on("pointerdown", () => {
+        draggingPoint = point; // Establece el punto que se está arrastrando
+      });
+      point.on("drag", (pointer, dragX, dragY) => {
+        if (draggingPoint === point) {
+          
+          point.x = dragX;
+          point.y = dragY;
+          point.data.values.vector = (dragX, dragY);
+          for (const segment of this.scene.segments){
+            this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+            if (point == segment.p0){
+              segment.p0.x=dragX
+              segment.p0.y=dragY
+            } else if (point == segment.p1){
+              segment.p1.x=dragX
+              segment.p1.y=dragY
             }
-          };
-        })
-      }
+            segment.draw(this.scene.segment_gr);}
+        };
+      })
     }
   }
+
   // Puedes agregar métodos comunes a todos los elementos aquí
   // Por ejemplo, para manejar restricciones y dependencias de movimiento
   BaseElement() {
