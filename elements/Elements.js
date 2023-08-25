@@ -50,11 +50,13 @@ export class Element {
           point.data.values.vector = (dragX, dragY);
           for (const segment of this.scene.segments){
             if (point == segment.p0){
-              segment.p0.x=dragX
-              segment.p0.y=dragY
+              segment.p0.x=dragX;
+              segment.p0.y=dragY;
+              console.log(segment);
             } else if (point == segment.p1){
-              segment.p1.x=dragX
-              segment.p1.y=dragY
+              segment.p1.x=dragX;
+              segment.p1.y=dragY;
+              console.log(segment);
             }
             segment.draw(this.scene.segment_gr);}
         };
