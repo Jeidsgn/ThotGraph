@@ -63,7 +63,7 @@ export class Element {
             this.scene.segment_gr.lineTo(segment.p1.x, segment.p1.y);
             this.scene.segment_gr.stroke();  // Dibuja la línea
         };
-      })
+      }})
     }
   }
 
