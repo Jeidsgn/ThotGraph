@@ -30,17 +30,6 @@ export class Point {
             this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
             point.id = letter; // Agrega el nombre del punto
             point.setData('vector', (this.pointer.x, this.pointer.y));
-            point.setInteractive({ 
-                hitArea: new Phaser.Geom.Rectangle(
-                28,
-                60,
-                point.width + 28 * 2,
-                point.height + 60 * 2 ),
-            //Check hitarea
-            hitAreaCallback: function(hitArea, x, y){
-                return Phaser.Geom.Rectangle.Contains(hitArea, x, y);
-            }});
-           
             this.scene.points.add(point); // Agrega el punto al grupo
             this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
             
