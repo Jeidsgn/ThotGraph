@@ -46,8 +46,9 @@ export class Element {
           point.x = dragX;
           point.y = dragY;
           point.data.values.vector = (dragX, dragY);
+          this.scene.segment_gr.clear();
           for (const segment of this.scene.segments){
-            this.scene.segment_gr.clear();
+            
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
             if (point == segment.p0){
               segment.p0.x=dragX
