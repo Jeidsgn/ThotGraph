@@ -48,7 +48,7 @@ export class Element {
           point.x = dragX;
           point.y = dragY;
           point.data.values.vector = (dragX, dragY);
-          console.log(gameObject);
+          console.log(this.scene.segment);
           this.scene.segment.draw(this.scene.segment_gr);
         };
       })
