@@ -58,7 +58,10 @@ export class Element {
               segment.p1.y=dragY;
               console.log(segment);
             }
-            segment.draw(this.scene.segment_gr);}
+            this.scene.segment_gr.beginPath();  // Inicia un nuevo camino
+            this.scene.segment_gr.moveTo(segment.p0.x, segment.p0.y);
+            this.scene.segment_gr.lineTo(segment.p1.x, segment.p1.y);
+            this.scene.segment_gr.stroke();  // Dibuja la línea
         };
       })
     }
