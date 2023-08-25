@@ -42,7 +42,7 @@ export class Element {
       console.log(gameObject);
       // Actualizar y redibujar los segmentos existentes
       for (const segment of this.scene.segments) {
-        
+
         if (gameObject.Contains(segment.p2)) {
           console.log(segment);
           this.scene.segment_gr.clear();
@@ -50,7 +50,7 @@ export class Element {
           segment.p0.x = dragX;
           segment.p0.y = dragY;
           segment.draw(this.scene.segment_gr);
-        } else if (gameObject.Contains(segment.p1)) {
+        } else if (gameObject.contains(segment.p1)) {
           console.log(segment);
           this.scene.segment_gr.clear();
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
@@ -70,6 +70,28 @@ export class Element {
     const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
     point1.setData('vector', (point1.x, point1.y));
     point2.setData('vector', (point2.x, point2.y));
+    point1.setInteractive({
+      hitArea: new Phaser.Geom.Rectangle(
+        28,
+        60,
+        point1.width + 28 * 2,
+        point1.height + 60 * 2),
+      //Check hitarea
+      hitAreaCallback: function (hitArea, x, y) {
+        return Phaser.Geom.Rectangle.Contains(hitArea, x, y);
+      }
+    });
+    point2.setInteractive({
+      hitArea: new Phaser.Geom.Rectangle(
+        28,
+        60,
+        point2.width + 28 * 2,
+        point2.height + 60 * 2),
+      //Check hitarea
+      hitAreaCallback: function (hitArea, x, y) {
+        return Phaser.Geom.Rectangle.Contains(hitArea, x, y);
+      }
+    });
     this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo 
   }

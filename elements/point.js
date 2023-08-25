@@ -34,8 +34,8 @@ export class Point {
                 hitArea: new Phaser.Geom.Rectangle(
                 28,
                 60,
-                button.width + 28 * 2,
-                button.height + 60 * 2 ),
+                point.width + 28 * 2,
+                point.height + 60 * 2 ),
             //Check hitarea
             hitAreaCallback: function(hitArea, x, y){
                 return Phaser.Geom.Rectangle.Contains(hitArea, x, y);
