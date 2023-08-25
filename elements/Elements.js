@@ -43,10 +43,13 @@ export class Element {
       });
       point.on("drag", (pointer, dragX, dragY) => {
         if (draggingPoint === point) {
+          this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
           point.x = dragX;
           point.y = dragY;
-          gameObject.data.values.vector = (dragX, dragY);
+          point.data.values.vector = (dragX, dragY);
           console.log(gameObject);
+          this.scene.segment.draw(this.scene.segment_gr);
         };
       })
     }
@@ -55,11 +58,11 @@ export class Element {
   // Puedes agregar métodos comunes a todos los elementos aquí
   // Por ejemplo, para manejar restricciones y dependencias de movimiento
   BaseElement() {
-        const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-        const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-        point1.setData('vector', (point1.x, point1.y));
-        point2.setData('vector', (point2.x, point2.y));
-        this.scene.points.add(point1);
-        this.scene.points.add(point2); // Agrega el punto al grupo 
-      }
+    const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    point1.setData('vector', (point1.x, point1.y));
+    point2.setData('vector', (point2.x, point2.y));
+    this.scene.points.add(point1);
+    this.scene.points.add(point2); // Agrega el punto al grupo 
+  }
 }
