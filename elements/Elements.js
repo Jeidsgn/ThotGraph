@@ -40,7 +40,7 @@ export class Element {
       gameObject.y = dragY;
       gameObject.setData('vector',(dragX, dragY));
 
-      console.log(gameObject);
+      
     });
 
     // Actualizar y redibujar los segmentos existentes
@@ -48,6 +48,7 @@ export class Element {
     this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
     for (const segment of this.scene.segments) {
+      console.log(segment);
       segment.draw(this.segment_gr);
     }
   }
