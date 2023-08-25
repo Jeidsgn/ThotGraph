@@ -103,14 +103,12 @@ export class Segment {
                     this.scene.curvestyle.clear();
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
                     this.segment = new Phaser.Curves.Line(
-                        new Phaser.Math.Vector2(point.x, point.y),
-                        new Phaser.Math.Vector2(dropZone.x, dropZone.y)
+                        point,
+                        dropZone
                     );
                     this.segment.draw(this.segment_gr);
-                    point=this.segment.p0;
                     point.data.values.vector = this.segment.p0;                    
                     //console.log(this.segment.getPointA())
-                    dropZone=this.segment.p1;
                     dropZone.data.values.vector = this.segment.p1;
                     this.scene.segments.push(this.segment);
                 }
