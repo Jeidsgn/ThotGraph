@@ -35,21 +35,20 @@ export class Element {
   moveElement() {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
-    let draggingPoint = null; // Punto que se está arrastrando
+    let draggingPoint = null;
+    this.scene.segment_gr.clear();
+    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
     const interactive = this.scene.points.getChildren();
     for (const point of interactive) {
       point.on("pointerdown", () => {
         draggingPoint = point; // Establece el punto que se está arrastrando
       });
       point.on("drag", (pointer, dragX, dragY) => {
-        if (draggingPoint === point) {
-          
+        if (draggingPoint === point) {          
           point.x = dragX;
           point.y = dragY;
           point.data.values.vector = (dragX, dragY);
           for (const segment of this.scene.segments){
-            this.scene.segment_gr.clear();
-          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
             if (point == segment.p0){
               segment.p0.x=dragX
               segment.p0.y=dragY
