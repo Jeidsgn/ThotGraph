@@ -43,14 +43,14 @@ export class Element {
       // Actualizar y redibujar los segmentos existentes
       for (const segment of this.scene.segments) {
         
-        if (gameObject == segment.p0) {
+        if (gameObject.Contains(segment.p2)) {
           console.log(segment);
           this.scene.segment_gr.clear();
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
           segment.p0.x = dragX;
           segment.p0.y = dragY;
           segment.draw(this.scene.segment_gr);
-        } else if (gameObject == segment.p1) {
+        } else if (gameObject.Contains(segment.p1)) {
           console.log(segment);
           this.scene.segment_gr.clear();
           this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
