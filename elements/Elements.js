@@ -47,7 +47,7 @@ export class Element {
     this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
 
     for (const segment of this.scene.segments) {
-      this.scene.segment_gr.strokeLineShape(segment);
+      segment.draw(this.scene.segment_gr);
     }
   }
 
