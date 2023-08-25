@@ -35,9 +35,7 @@ export class Element {
   moveElement() {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
-    let draggingPoint = null;
-    this.scene.segment_gr.clear();
-    this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+    let draggingPoint = null; // Punto que se está arrastrando
     const interactive = this.scene.points.getChildren();
     for (const point of interactive) {
       point.on("pointerdown", () => {
@@ -49,21 +47,18 @@ export class Element {
           point.y = dragY;
           point.data.values.vector = (dragX, dragY);
           for (const segment of this.scene.segments){
+            this.scene.segment_gr.clear();
+          this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
             if (point == segment.p0){
-              segment.p0.x=dragX;
-              segment.p0.y=dragY;
-              console.log(segment);
+              segment.p0.x=dragX
+              segment.p0.y=dragY
             } else if (point == segment.p1){
-              segment.p1.x=dragX;
-              segment.p1.y=dragY;
-              console.log(segment);
+              segment.p1.x=dragX
+              segment.p1.y=dragY
             }
-            this.scene.segment_gr.beginPath();  // Inicia un nuevo camino
-            this.scene.segment_gr.moveTo(segment.p0.x, segment.p0.y);
-            this.scene.segment_gr.lineTo(segment.p1.x, segment.p1.y);
-            this.scene.segment_gr.stroke();  // Dibuja la línea
+            segment.draw(this.scene.segment_gr);}
         };
-      }})
+      })
     }
   }
 
