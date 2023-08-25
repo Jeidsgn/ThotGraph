@@ -107,10 +107,12 @@ export class Segment {
                         new Phaser.Math.Vector2(dropZone.x, dropZone.y)
                     );
                     this.segment.draw(this.segment_gr);
-                    point=this.segment.p0;
+                    point.x=this.segment.p0.x;
+                    point.y=this.segment.p0.y;
                     point.data.values.vector = this.segment.p0;                    
                     //console.log(this.segment.getPointA())
-                    dropZone=this.segment.p1;
+                    dropZone.x=this.segment.p1.x;
+                    dropZone.y=this.segment.p1.y;
                     dropZone.data.values.vector = this.segment.p1;
                     this.scene.segments.push(this.segment);
                 }
