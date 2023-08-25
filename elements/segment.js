@@ -102,11 +102,9 @@ export class Segment {
                     this.graphics.clear();
                     this.scene.curvestyle.clear();
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                    const start = point;
-                    const end = dropZone
                     this.segment = new Phaser.Curves.Line(
-                        new Phaser.Math.Vector2(start.x, start.y),
-                        new Phaser.Math.Vector2(end.x, end.y)
+                        new Phaser.Math.Vector2(point.x, point.y),
+                        new Phaser.Math.Vector2(dropZone.x, dropZone.y)
                     );
                     this.segment.draw(this.segment_gr);
                     point.x=this.segment.p0.x;
