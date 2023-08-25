@@ -110,8 +110,8 @@ export class Segment {
                     );
                     this.segment.draw(this.segment_gr);
                     console.log(this.segment);
-                    point.x=segment.p0.x;
-                    point.y=segment.p0.y;
+                    point.x=this.segment.p0.x;
+                    point.y=this.segment.p0.y;
                     point.data.values.vector = this.segment.p0;                    
                     //console.log(this.segment.getPointA())
                     dropZone.x=segment.p0.x;
