@@ -39,7 +39,7 @@ export class Element {
       gameObject.x = dragX;
       gameObject.y = dragY;
       gameObject.setData('vector',(dragX, dragY));
-
+      console.log(gameObject);
     });
 
     // Actualizar y redibujar los segmentos existentes
@@ -48,7 +48,6 @@ export class Element {
 
     for (const segment of this.scene.segments) {
       this.scene.segment_gr.strokeLineShape(segment);
-      console.log(segment)
     }
   }
 
