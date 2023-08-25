@@ -21,6 +21,7 @@ export class Element {
       },
       "Segment": () => {
         this.segment.createSegment();
+        this.scene.isCreatingSegment == true;
       },
     };
     return functions[buttonName];
