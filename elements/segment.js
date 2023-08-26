@@ -105,9 +105,6 @@ export class Segment {
                         dropZone
                     );
                     this.segment.draw(this.segment_gr);
-                    point.data.values.vector = this.segment.p0;                    
-                    //console.log(this.segment.getPointA())
-                    dropZone.data.values.vector = this.segment.p1;
                     this.scene.segments.push(this.segment);
                 }
             });
