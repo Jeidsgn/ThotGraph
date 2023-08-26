@@ -16,9 +16,7 @@ export class Segment {
         this.graphics = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
-        this.scene.segment_gr = scene.add.graphics({
-            lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
-        });
+        this.scene.segment_gr = null;
         this.segment_gr = this.scene.segment_gr;
         this.segment = null;
         this.p3 = null;
