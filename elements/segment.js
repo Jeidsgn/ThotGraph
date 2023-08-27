@@ -39,7 +39,8 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
-            let delay = 400;
+            let delay = 500;            
+            console.log(this.vertex.length)
             if (this.vertex.length < delay) {
                 this.vertex.push(p1);
                 this.scene.counter=0
@@ -118,7 +119,6 @@ export class Segment {
                 this.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
-                console.log(this.vertex.length)
             }
         }
     }
