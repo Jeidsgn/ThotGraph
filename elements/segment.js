@@ -41,15 +41,23 @@ export class Segment {
             let delay = 600;
             if (this.scene.vertex.length < delay + 1) {
                 this.scene.vertex.push(p1);
-                this.scene.counter = 0
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
+                this.scene.counter = 0;
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
+                    p0,
+                    this.scene.vertex[this.scene.counter],
+                    p2
+                );
             } else {
-                if (this.scene.counter < (delay)) {
-                    this.scene.counter++
+                if (this.scene.counter < delay) {
+                    this.scene.counter++;
                 } else {
-                    this.scene.counter = this.scene.counter - (delay);
+                    this.scene.counter = this.scene.counter - delay;
                 }
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
+                    p0,
+                    this.scene.vertex[this.scene.counter],
+                    p2
+                );
                 this.scene.vertex[this.scene.counter] = p1;
             }
             console.log(this.scene.vertex.length);
@@ -128,7 +136,6 @@ export class Segment {
                 this.scene.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
-
             }
         }
     }
@@ -136,30 +143,29 @@ export class Segment {
         if (this.scene.activatebutton == "Move") {
             this.scene.parabolic = null;
             this.scene.shadow.clear();
-            const interactive = this.scene.points.getChildren();//
+            const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
-                    if (draggingPoint === point) {                        
+                        if (draggingPoint === point) {
                             for (let i = 0; i < this.scene.segments.length; i++) {
                                 if (point == this.scene.segments[i].p0) {
                                     this.scene.segments_gr[i].clear();
                                     this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                    this.scene.segments[i].p0.x = dragX
-                                    this.scene.segments[i].p0.y = dragY
+                                    this.scene.segments[i].p0.x = dragX;
+                                    this.scene.segments[i].p0.y = dragY;
                                     this.scene.segments[i].draw(this.scene.segments_gr[i]);
                                 } else if (point == this.scene.segments[i].p1) {
                                     this.scene.segments_gr[i].clear();
                                     this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                    this.scene.segments[i].p1.x = dragX
-                                    this.scene.segments[i].p1.y = dragY
+                                    this.scene.segments[i].p1.x = dragX;
+                                    this.scene.segments[i].p1.y = dragY;
                                     this.scene.segments[i].draw(this.scene.segments_gr[i]);
                                 }
                             }
                         }
-                    };
-                }
-                )
+                    }
+                });
             }
         }
     }
