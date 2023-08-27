@@ -109,17 +109,16 @@ export class Segment {
                     }
                 });
                 point.on("dragend", (pointer) => {
-                    this.scene.counter = 0;
-                    this.vertex = [];
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
-
                     draggingPoint = null;
                     this.reductionparabole == true;
                 });
             }
             if (this.isClicking == false) {
+                this.scene.counter = 0;
+                this.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
             }
