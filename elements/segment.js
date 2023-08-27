@@ -39,7 +39,7 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
-            let delay = 400;
+            let delay = 600;
             if (this.vertex.length < delay) {
                 this.vertex.push(p1);
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[0], p2);
@@ -87,7 +87,7 @@ export class Segment {
                         );
                         this.scene.shadow.strokeLineShape(this.scene.line);
                         // Dibuja parábola
-                        this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
+                        this.drawParabola(point.x, point.y, pointer.x, pointer.y, -30);
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
