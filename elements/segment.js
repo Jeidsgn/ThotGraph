@@ -44,10 +44,10 @@ export class Segment {
                     p2
                 );
             } else {
-                if (this.scene.counter < delay++) {
+                if (this.scene.counter < delay) {
                     this.scene.counter++;
                 } else {
-                    this.scene.counter = this.scene.counter - (delay);
+                    this.scene.counter = 0;
                 }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
                     p0,
@@ -74,7 +74,7 @@ export class Segment {
                 });
 
                 point.on("drag", (pointer) => {
-                    if (this.scene.activatebutton == "Segment" && this.scene.segments.length>0) {
+                    if (this.scene.activatebutton == "Segment" && this.scene.segments.length > 0) {
                         point.x = point.input.dragStartX;
                         point.y = point.input.dragStartY;
                         // Borrar la línea anterior
