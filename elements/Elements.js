@@ -54,13 +54,16 @@ export class Element {
           for (const segment of this.scene.segments) {
             this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
             if (point == segment.p0) {
+              this.scene.segment_gr.clear();
               segment.p0.x = dragX
               segment.p0.y = dragY
+              segment.draw(this.scene.segment_gr);
             } else if (point == segment.p1) {
+              this.scene.segment_gr.clear();
               segment.p1.x = dragX
               segment.p1.y = dragY
+              segment.draw(this.scene.segment_gr);
             }
-            segment.draw(this.scene.segment_gr);
           }
         };
       })
