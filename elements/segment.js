@@ -44,10 +44,10 @@ export class Segment {
                     p2
                 );
             } else {
-                if (this.scene.counter < delay+1) {
+                if (this.scene.counter < delay) {
                     this.scene.counter++;
                 } else {
-                    this.scene.counter = this.scene.counter - delay;
+                    this.scene.counter = this.scene.counter - (delay+1);
                 }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
                     p0,
