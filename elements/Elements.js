@@ -44,45 +44,46 @@ export class Element {
       for (const point of interactive) {
         point.on("pointerdown", () => {
           if (this.scene.activatebutton == "Move") {
-          draggingPoint = point;
+            draggingPoint = point;
           }
         });
         point.on("drag", (pointer, dragX, dragY) => {
           if (draggingPoint === point) {
             if (this.scene.activatebutton == "Move") {
-            this.scene.segment_gr.clear();
-            point.x = dragX;
-            point.y = dragY;
-            point.data.values.vector = (dragX, dragY);
-            for (const segment of this.scene.segments) {
-              this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-              if (point == segment.p0) {
-                this.scene.segment_gr.clear();
-                segment.p0.x = dragX
-                segment.p0.y = dragY
-                segment.draw(this.scene.segment_gr);
-              } else if (point == segment.p1) {
-                this.scene.segment_gr.clear();
-                segment.p1.x = dragX
-                segment.p1.y = dragY
-                segment.draw(this.scene.segment_gr);
+              this.scene.segment_gr.clear();
+              point.x = dragX;
+              point.y = dragY;
+              point.data.values.vector = (dragX, dragY);
+              for (const segment of this.scene.segments) {
+                this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                if (point == segment.p0) {
+                  this.scene.segment_gr.clear();
+                  segment.p0.x = dragX
+                  segment.p0.y = dragY
+                  segment.draw(this.scene.segment_gr);
+                } else if (point == segment.p1) {
+                  this.scene.segment_gr.clear();
+                  segment.p1.x = dragX
+                  segment.p1.y = dragY
+                  segment.draw(this.scene.segment_gr);
+                }
               }
             }
-          }
           };
         }
         )
       }
-    }}
-
-    // Puedes agregar métodos comunes a todos los elementos aquí
-    // Por ejemplo, para manejar restricciones y dependencias de movimiento
-    BaseElement() {
-      const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-      const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
-      point1.setData('vector', (point1.x, point1.y));
-      point2.setData('vector', (point2.x, point2.y));
-      this.scene.points.add(point1);
-      this.scene.points.add(point2); // Agrega el punto al grupo 
     }
   }
+
+  // Puedes agregar métodos comunes a todos los elementos aquí
+  // Por ejemplo, para manejar restricciones y dependencias de movimiento
+  BaseElement() {
+    const point1 = this.scene.add.sprite(this.scene.cameras.main.width / 3, this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    const point2 = this.scene.add.sprite(this.scene.cameras.main.width / (3 / 2), this.scene.cameras.main.height / 2, 'point', 0).setOrigin(0.5, 0.80);
+    point1.setData('vector', (point1.x, point1.y));
+    point2.setData('vector', (point2.x, point2.y));
+    this.scene.points.add(point1);
+    this.scene.points.add(point2); // Agrega el punto al grupo 
+  }
+}

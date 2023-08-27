@@ -40,7 +40,7 @@ export class Segment {
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 500;
             console.log(this.scene.counter)
-            if (this.scene.vertex.length < delay+1) {
+            if (this.scene.vertex.length < delay + 1) {
                 this.scene.vertex.push(p1);
                 this.scene.counter = 0
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
@@ -60,74 +60,75 @@ export class Segment {
 
     createSegment() {
         if (this.scene.activatebutton == "Segment") {
-        let drop = false;
-        let draggingPoint = null; // Punto que se está arrastrando
-        const interactive = this.scene.points.getChildren();
-        for (const point of interactive) {
-            point.setInteractive({ draggable: true });
-            point.input.dropZone = true;
-            point.on("pointerdown", () => {
-                if (this.scene.activatebutton == "Segment") {
-                    draggingPoint = point; // Establece el punto que se está arrastrando
-                    point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
-                }
-            });
-
-            point.on("drag", (pointer) => {
-                if (this.scene.activatebutton == "Segment") {
-                    if (draggingPoint === point) {
-                        point.x = point.input.dragStartX;
-                        point.y = point.input.dragStartY;
-                        // Borrar la línea anterior
-                        this.scene.shadow.clear();
-                        // Actualiza el aspecto visual de la líne mientras se mueve
-                        this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
-                        // Define la línea
-                        this.scene.line = new Phaser.Geom.Line(
-                            point.input.dragStartX,
-                            point.input.dragStartY,
-                            pointer.x,
-                            pointer.y
-                        );
-                        this.scene.shadow.strokeLineShape(this.scene.line);
-                        // Dibuja parábola
-                        this.drawParabola(point.x, point.y, pointer.x, pointer.y, -30);
+            let drop = false;
+            let draggingPoint = null; // Punto que se está arrastrando
+            const interactive = this.scene.points.getChildren();
+            for (const point of interactive) {
+                point.setInteractive({ draggable: true });
+                point.input.dropZone = true;
+                point.on("pointerdown", () => {
+                    if (this.scene.activatebutton == "Segment") {
+                        draggingPoint = point; // Establece el punto que se está arrastrando
+                        point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
                     }
-                }
-            });
-            point.on("drop", (pointer, dropZone) => {
-                if (this.scene.activatebutton == "Segment") {
-                    if (draggingPoint !== point) {
+                });
+
+                point.on("drag", (pointer) => {
+                    if (this.scene.activatebutton == "Segment") {
+                        if (draggingPoint === point) {
+                            point.x = point.input.dragStartX;
+                            point.y = point.input.dragStartY;
+                            // Borrar la línea anterior
+                            this.scene.shadow.clear();
+                            // Actualiza el aspecto visual de la líne mientras se mueve
+                            this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
+                            // Define la línea
+                            this.scene.line = new Phaser.Geom.Line(
+                                point.input.dragStartX,
+                                point.input.dragStartY,
+                                pointer.x,
+                                pointer.y
+                            );
+                            this.scene.shadow.strokeLineShape(this.scene.line);
+                            // Dibuja parábola
+                            this.drawParabola(point.x, point.y, pointer.x, pointer.y, -30);
+                        }
+                    }
+                });
+                point.on("drop", (pointer, dropZone) => {
+                    if (this.scene.activatebutton == "Segment") {
+                        if (draggingPoint !== point) {
+                            this.scene.vertex = [];
+                            drop = true;
+                            this.scene.parabolic = null;
+                            this.scene.shadow.clear();
+                            this.scene.curvestyle.clear();
+                            //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                            this.segment = new Phaser.Curves.Line(point, dropZone);
+                            this.segment.draw(this.scene.segment_gr);
+                            this.scene.segments.push(this.segment);
+                        }
+                    }
+                });
+                point.on("dragend", (pointer) => {
+                    if (this.scene.activatebutton == "Segment") {
                         this.scene.vertex = [];
-                        drop = true;
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
                         this.scene.curvestyle.clear();
-                        //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                        this.segment = new Phaser.Curves.Line(point, dropZone);
-                        this.segment.draw(this.scene.segment_gr);
-                        this.scene.segments.push(this.segment);
+                        draggingPoint = null;
+                        this.reductionparabole == true;
                     }
-                }
-            });
-            point.on("dragend", (pointer) => {
-                if (this.scene.activatebutton == "Segment") {
+                });
+            }
+            if (this.isClicking == false) {
                 this.scene.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
-                this.scene.curvestyle.clear();
-                draggingPoint = null;
-                this.reductionparabole == true;
-                }
-            });
-        }
-        if (this.isClicking == false) {
-            this.scene.vertex = [];
-            this.scene.parabolic = null;
-            this.scene.shadow.clear();
 
+            }
         }
-    }}
+    }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
