@@ -40,15 +40,15 @@ export class Segment {
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 500;
             console.log(this.scene.counter)
-            if (this.scene.vertex.length < delay) {
+            if (this.scene.vertex.length < delay+1) {
                 this.scene.vertex.push(p1);
                 this.scene.counter = 0
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
             } else {
-                if (this.scene.counter < (delay + 1)) {
+                if (this.scene.counter < (delay)) {
                     this.scene.counter++
                 } else {
-                    this.scene.counter = this.scene.counter - (delay + 1);
+                    this.scene.counter = this.scene.counter - (delay);
                 }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
                 this.scene.vertex[this.scene.counter] = p1;
