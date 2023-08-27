@@ -60,6 +60,7 @@ export class Segment {
     }
 
     createSegment() {
+        if(!this.scene.moveActivate){
         let drop = false;
         let draggingPoint = null; // Punto que se está arrastrando
         const interactive = this.scene.points.getChildren();
@@ -123,7 +124,7 @@ export class Segment {
         if (this.isClicking == false) {
             this.scene.parabolic = null;
             this.scene.shadow.clear();
-        }
+        }}
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena

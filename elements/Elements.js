@@ -7,17 +7,21 @@ export class Element {
     this.scene.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
+    this.scene.moveActivate = false
   }
   buttonToFunction(buttonName) {
     // Define un objeto de mapeo entre nombres de botones y funciones
     const functions = {
       "Point": () => {
+        this.scene.moveActivate = false;
         this.point.createPoint();
       },
       "Mover": () => {
+        this.scene.moveActivate = true;
         this.moveElement();
       },
       "Segment": () => {
+        this.scene.moveActivate = false;
         this.segment.createSegment();
       },
     };
