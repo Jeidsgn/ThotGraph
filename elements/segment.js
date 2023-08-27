@@ -42,13 +42,21 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
-            if (this.vertex.length < 100) {
+            let delay = 30;
+            if (this.vertex.length < delay) {
                 this.vertex.push(p1);
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[1], p2);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[0], p2);
                 this.scene.counter++;
             } else {
-                if (this.scene.counter < 100){ this.scene.counter++}else{this.scene.counter=this.scene.counter-100;}
+                if (this.scene.counter < delay){ 
+                    this.scene.counter++
+                    console.log(this.scene.counter);
+                } else{
+                    console.log(this.scene.counter);
+                    this.scene.counter = this.scene.counter-delay; }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
+                console.log(this.vertex[this.scene.counter])
+                this.scene.counter++;
             }
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
