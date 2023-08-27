@@ -43,6 +43,7 @@ export class Segment {
                     this.scene.vertex[this.scene.counter],
                     p2
                 );
+                console.log(this.scene.vertex[this.scene.counter]);
             } else {
                 if (this.scene.counter < delay) {
                     this.scene.counter++;
@@ -54,7 +55,7 @@ export class Segment {
                     this.scene.vertex[this.scene.counter],
                     p2
                 );
-                console.log(this.scene.vertex[this.scene.counter]);
+                
                 this.scene.vertex[this.scene.counter] = p1;
 
             }
