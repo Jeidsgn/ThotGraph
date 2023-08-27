@@ -27,21 +27,21 @@ export class ToolBox {
   createBaseButtons() {
     const center = (this.scene.cameras.main.width)/2;
     const moveButton = this.scene.add
-      .sprite(center, this.scene.cameras.main.height - 180, 'Mover')
+      .sprite(center, this.scene.cameras.main.height - 180, 'Move')
       .setInteractive()
       .on("pointerdown", () => {
-        this.scene.callbackfunction = this.elements.buttonToFunction("Mover")
+        this.scene.callbackfunction = this.elements.buttonToFunction("Move")
         moveButton.setFrame(2)
-        this.scene.activatebutton = "Mover"})
+        this.scene.activatebutton = "Move"})
       .on("pointerover", () => {
         moveButton.setFrame(1)})
       .on("pointerout",() =>{
-          if (this.scene.activatebutton =="Mover"){
+          if (this.scene.activatebutton =="Move"){
             moveButton.setFrame(3)
           } else { 
             moveButton.setFrame(0)
           }});
-    moveButton.setData('text',"Mover");
+    moveButton.setData('text',"Move");
     this.scene.toolboxButtons.push(moveButton);
   }
   

@@ -17,7 +17,7 @@ export class Element {
       "Point": () => {
         this.point.createPoint();
       },
-      "Mover": () => {
+      "Move": () => {
           this.moveElement();
       },
       "Segment": () => {
@@ -36,6 +36,7 @@ export class Element {
 
   // Crea un nuevo elemento
   moveElement() {
+    if (this.scene.activatebutton == "Move") {
     this.scene.parabolic = null;
     this.scene.shadow.clear();
     let draggingPoint = null; // Punto que se está arrastrando
@@ -64,6 +65,7 @@ export class Element {
               segment.draw(this.scene.segment_gr);
             }
           }
+        }
         };
       })
     }

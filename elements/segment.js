@@ -66,8 +66,10 @@ export class Segment {
             point.setInteractive({ draggable: true });
             point.input.dropZone = true;
             point.on("pointerdown", () => {
-                draggingPoint = point; // Establece el punto que se está arrastrando
-                point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                if (this.scene.activatebutton == "Segment") {
+                    draggingPoint = point; // Establece el punto que se está arrastrando
+                    point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                }
             });
 
             point.on("drag", (pointer) => {
@@ -93,28 +95,29 @@ export class Segment {
                 }
             });
             point.on("drop", (pointer, dropZone) => {
-                if (draggingPoint !== point) {
-                    this.scene.vertex = [];
-                    drop = true;
-                    this.scene.parabolic = null;
-                    this.scene.shadow.clear();
-                    this.scene.curvestyle.clear();
-                    //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                    this.segment = new Phaser.Curves.Line(
-                        point,
-                        dropZone
-                    );
-                    this.segment.draw(this.scene.segment_gr);
-                    this.scene.segments.push(this.segment);
+                if (this.scene.activatebutton == "Segment") {
+                    if (draggingPoint !== point) {
+                        this.scene.vertex = [];
+                        drop = true;
+                        this.scene.parabolic = null;
+                        this.scene.shadow.clear();
+                        this.scene.curvestyle.clear();
+                        //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                        this.segment = new Phaser.Curves.Line(point, dropZone);
+                        this.segment.draw(this.scene.segment_gr);
+                        this.scene.segments.push(this.segment);
+                    }
                 }
             });
             point.on("dragend", (pointer) => {
+                if (this.scene.activatebutton == "Segment") {
                 this.scene.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
                 this.scene.curvestyle.clear();
                 draggingPoint = null;
                 this.reductionparabole == true;
+                }
             });
         }
         if (this.isClicking == false) {
