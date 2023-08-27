@@ -14,7 +14,6 @@ export class Segment {
         this.scene.shadow = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
-.segment_gr = this.segment_gr;
         this.segment = null;
         this.scene.vertex = []; //vertices en el tiempo
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -104,7 +103,9 @@ export class Segment {
                             this.scene.parabolic = null;
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
-                            //this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                            this.segment_gr = scene.add.graphics({
+                                lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
+                            });
                             this.segment = new Phaser.Curves.Line(point, dropZone);
                             this.segment.draw(this.segment_gr);
                             this.scene.segments.push(this.segment);
