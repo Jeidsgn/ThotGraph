@@ -40,7 +40,7 @@ export class Segment {
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 500;            
-            console.log(this.vertex.length)
+            console.log(this.scene.counter)
             if (this.vertex.length < delay) {
                 this.vertex.push(p1);
                 this.scene.counter=0
