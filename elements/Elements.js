@@ -9,7 +9,7 @@ export class Element {
     this.segment = new Segment(scene);
     this.scene.moveActivate = false;
     this.scene.segment_gr = scene.add.graphics({
-      lineStyle: { width: 5, color: 0x000000, alpha: 0.8 }
+      lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 }
   });
   }
   buttonToFunction(buttonName) {

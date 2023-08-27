@@ -96,12 +96,12 @@ export class Segment {
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
                         this.scene.curvestyle.clear();
-                        this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                        //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
                         this.segment = new Phaser.Curves.Line(
                             point,
                             dropZone
                         );
-                        this.segment.draw(this.segment_gr);
+                        this.segment.draw(this.scene.segment_gr);
                         this.scene.segments.push(this.segment);
                     }
                 });
