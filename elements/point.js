@@ -41,7 +41,6 @@ export class Point {
     }
     movePoint() {
         if (this.scene.activatebutton == "Move") {
-            let draggingPoint = null;
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
