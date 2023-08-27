@@ -15,7 +15,7 @@ export class Segment {
         });
         this.segment_gr = this.scene.segment_gr;
         this.segment = null;
-        this.vertex = []; //vertices en el tiempo
+        this.scene.vertex = []; //vertices en el tiempo
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
         // Configura el evento de clic en la escena para capturar el puntero
@@ -40,18 +40,18 @@ export class Segment {
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 500;            
             console.log(this.scene.counter)
-            if (this.vertex.length < delay) {
-                this.vertex.push(p1);
+            if (this.scene.vertex.length < delay) {
+                this.scene.vertex.push(p1);
                 this.scene.counter=0
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
             } else {
                 if (this.scene.counter < (delay+1)) {
                     this.scene.counter++
                 } else {
                     this.scene.counter = this.scene.counter - (delay+1);
                 }
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
-                this.vertex[this.scene.counter] = p1;
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
+                this.scene.vertex[this.scene.counter] = p1;
             }
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
@@ -94,7 +94,7 @@ export class Segment {
                 });
                 point.on("drop", (pointer, dropZone) => {
                     if (draggingPoint !== point) {
-                        this.vertex = [];
+                        this.scene.vertex = [];
                         drop = true;
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
@@ -109,7 +109,7 @@ export class Segment {
                     }
                 });
                 point.on("dragend", (pointer) => {
-                    this.vertex = [];
+                    this.scene.vertex = [];
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
@@ -118,7 +118,7 @@ export class Segment {
                 });
             }
             if (this.isClicking == false) {
-                this.vertex = [];
+                this.scene.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
             
