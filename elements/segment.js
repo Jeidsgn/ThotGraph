@@ -132,7 +132,6 @@ export class Segment {
         if (this.scene.activatebutton == "Move") {
             this.scene.parabolic = null;
             this.scene.shadow.clear();
-            let
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
