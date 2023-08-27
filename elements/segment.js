@@ -133,13 +133,13 @@ export class Segment {
         }
     }
     moveSegment() {
-        if (this.scene.activatebutton == "Move") {
+        if (this.scene.activatebutton == "Move" && this.scene.segments.length > 0) {
             this.scene.parabolic = null;
             this.scene.shadow.clear();
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
-                    if (this.scene.activatebutton == "Move"&& this.scene.segments.length > 0) {
+                    if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.segments.length; i++) {
                             if (point == this.scene.segments[i].p0) {
                                 this.scene.segments_gr[i].clear();
