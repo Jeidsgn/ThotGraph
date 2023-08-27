@@ -38,17 +38,17 @@ export class Segment {
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
-            let delay = 500;            
+            let delay = 500;
             console.log(this.scene.counter)
             if (this.scene.vertex.length < delay) {
                 this.scene.vertex.push(p1);
-                this.scene.counter=0
+                this.scene.counter = 0
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
             } else {
-                if (this.scene.counter < (delay+1)) {
+                if (this.scene.counter < (delay + 1)) {
                     this.scene.counter++
                 } else {
-                    this.scene.counter = this.scene.counter - (delay+1);
+                    this.scene.counter = this.scene.counter - (delay + 1);
                 }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.scene.vertex[this.scene.counter], p2);
                 this.scene.vertex[this.scene.counter] = p1;
@@ -59,20 +59,19 @@ export class Segment {
     }
 
     createSegment() {
-        
-            let drop = false;
-            let draggingPoint = null; // Punto que se está arrastrando
-            const interactive = this.scene.points.getChildren();
-            for (const point of interactive) {
-                point.setInteractive({ draggable: true });
-                point.input.dropZone = true;
-                point.on("pointerdown", () => {
-                    draggingPoint = point; // Establece el punto que se está arrastrando
-                    point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
-                });
+        let drop = false;
+        let draggingPoint = null; // Punto que se está arrastrando
+        const interactive = this.scene.points.getChildren();
+        for (const point of interactive) {
+            point.setInteractive({ draggable: true });
+            point.input.dropZone = true;
+            point.on("pointerdown", () => {
+                draggingPoint = point; // Establece el punto que se está arrastrando
+                point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+            });
 
-                point.on("drag", (pointer) => {
-                    if (!this.scene.moveActivate) {
+            point.on("drag", (pointer) => {
+                if (this.scene.activatebutton == "Segment") {
                     if (draggingPoint === point) {
                         point.x = point.input.dragStartX;
                         point.y = point.input.dragStartY;
@@ -90,38 +89,39 @@ export class Segment {
                         this.scene.shadow.strokeLineShape(this.scene.line);
                         // Dibuja parábola
                         this.drawParabola(point.x, point.y, pointer.x, pointer.y, -30);
-                    }}
-                });
-                point.on("drop", (pointer, dropZone) => {
-                    if (draggingPoint !== point) {
-                        this.scene.vertex = [];
-                        drop = true;
-                        this.scene.parabolic = null;
-                        this.scene.shadow.clear();
-                        this.scene.curvestyle.clear();
-                        //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                        this.segment = new Phaser.Curves.Line(
-                            point,
-                            dropZone
-                        );
-                        this.segment.draw(this.scene.segment_gr);
-                        this.scene.segments.push(this.segment);
                     }
-                });
-                point.on("dragend", (pointer) => {
+                }
+            });
+            point.on("drop", (pointer, dropZone) => {
+                if (draggingPoint !== point) {
                     this.scene.vertex = [];
+                    drop = true;
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
-                    draggingPoint = null;
-                    this.reductionparabole == true;
-                });
-            }
-            if (this.isClicking == false) {
+                    //this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                    this.segment = new Phaser.Curves.Line(
+                        point,
+                        dropZone
+                    );
+                    this.segment.draw(this.scene.segment_gr);
+                    this.scene.segments.push(this.segment);
+                }
+            });
+            point.on("dragend", (pointer) => {
                 this.scene.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
-            
+                this.scene.curvestyle.clear();
+                draggingPoint = null;
+                this.reductionparabole == true;
+            });
+        }
+        if (this.isClicking == false) {
+            this.scene.vertex = [];
+            this.scene.parabolic = null;
+            this.scene.shadow.clear();
+
         }
     }
     addName() {
