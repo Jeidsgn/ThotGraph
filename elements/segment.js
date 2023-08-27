@@ -13,9 +13,6 @@ export class Segment {
         this.scene.shadow = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
-        this.graphics = scene.add.graphics({
-            lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
-        });
         this.scene.segment_gr = scene.add.graphics({
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 }});
         this.segment_gr = this.scene.segment_gr;
@@ -37,7 +34,6 @@ export class Segment {
             this.isClicking = false; // No se está haciendo clic
         });
     }
-    // Supongamos que ya tienes una escena de Phaser configurada y has inicializado this.graphics adecuadamente.
 
     drawParabola(x1, y1, x2, y2, n) {
         if (x1 !== x2) {
@@ -98,7 +94,6 @@ export class Segment {
                     drop = true;
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
-                    this.graphics.clear();
                     this.scene.curvestyle.clear();
                     this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
                     this.segment = new Phaser.Curves.Line(
@@ -116,7 +111,6 @@ export class Segment {
                     // Borrar la línea anterior
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
-                    //this.graphics.clear();
                     this.scene.parabolic = null;
                     draggingPoint = null;
                     this.reductionparabole == true;

@@ -43,7 +43,6 @@ export class Element {
       });
       point.on("drag", (pointer, dragX, dragY) => {
         if (draggingPoint === point) {
-          this.scene.graphics.clear();
           this.scene.segment_gr.clear();
           point.x = dragX;
           point.y = dragY;
