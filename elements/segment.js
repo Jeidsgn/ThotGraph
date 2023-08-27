@@ -44,7 +44,7 @@ export class Segment {
                     p2
                 );
             } else {
-                if (this.scene.counter < delay) {
+                if (this.scene.counter < delay++) {
                     this.scene.counter++;
                 } else {
                     this.scene.counter = this.scene.counter - (delay);
