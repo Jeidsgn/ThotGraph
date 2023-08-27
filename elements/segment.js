@@ -78,7 +78,7 @@ export class Segment {
                 });
 
                 point.on("drag", (pointer) => {
-                    if (this.scene.activatebutton == "Segment" && this.scene.segments.length > 0) {
+                    if (this.scene.activatebutton == "Segment") {
                         point.x = point.input.dragStartX;
                         point.y = point.input.dragStartY;
                         // Borrar la línea anterior
@@ -94,7 +94,6 @@ export class Segment {
                         );
                         this.scene.shadow.strokeLineShape(this.scene.line);
                         // Dibuja parábola
-                        console.log(point);
                         this.drawParabola(point.x, point.y, pointer.x, pointer.y, -45);
                     }
                 });
@@ -140,7 +139,7 @@ export class Segment {
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
-                    if (this.scene.activatebutton == "Move") {
+                    if (this.scene.activatebutton == "Move"&& this.scene.segments.length > 0) {
                         for (let i = 0; i < this.scene.segments.length; i++) {
                             if (point == this.scene.segments[i].p0) {
                                 this.scene.segments_gr[i].clear();
