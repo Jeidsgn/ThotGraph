@@ -15,7 +15,6 @@ export class Segment {
         });
         this.segment_gr = this.scene.segment_gr;
         this.segment = null;
-        this.p3 = null;
         this.vertex = []; //vertices en el tiempo
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
@@ -46,10 +45,10 @@ export class Segment {
                 this.scene.counter=0
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
             } else {
-                if (this.scene.counter < delay) {
+                if (this.scene.counter < (delay+1)) {
                     this.scene.counter++
                 } else {
-                    this.scene.counter = this.scene.counter - delay;
+                    this.scene.counter = this.scene.counter - (delay+1);
                 }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
                 this.vertex[this.scene.counter] = p1;
