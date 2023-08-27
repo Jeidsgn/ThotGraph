@@ -132,6 +132,37 @@ export class Segment {
             }
         }
     }
+    moveSegment() {
+        if (this.scene.activatebutton == "Move") {
+            this.scene.parabolic = null;
+            this.scene.shadow.clear();
+            const interactive = this.scene.points.getChildren();//
+            for (const point of interactive) {
+                point.on("drag", (pointer, dragX, dragY) => {
+                    if (this.scene.activatebutton == "Move") {
+                    if (draggingPoint === point) {                        
+                            for (let i = 0; i < this.scene.segments.length; i++) {
+                                if (point == this.scene.segments[i].p0) {
+                                    this.scene.segments_gr[i].clear();
+                                    this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                    this.scene.segments[i].p0.x = dragX
+                                    this.scene.segments[i].p0.y = dragY
+                                    this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                                } else if (point == this.scene.segments[i].p1) {
+                                    this.scene.segments_gr[i].clear();
+                                    this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                    this.scene.segments[i].p1.x = dragX
+                                    this.scene.segments[i].p1.y = dragY
+                                    this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                                }
+                            }
+                        }
+                    };
+                }
+                )
+            }
+        }
+    }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }

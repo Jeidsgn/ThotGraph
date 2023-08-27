@@ -32,7 +32,24 @@ export class Point {
             point.setData('vector', (this.pointer.x, this.pointer.y));
             this.scene.points.add(point); // Agrega el punto al grupo
             this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
-            
+        }
+    }
+    movePoint(){
+        if (this.scene.activatebutton == "Move") {
+            let draggingPoint = null; 
+            const interactive = this.scene.points.getChildren();//
+            for (const point of interactive) {
+              point.on("pointerdown", () => {
+                if (this.scene.activatebutton == "Move") {
+                  draggingPoint = point;
+                }
+              });
+              point.on("drag", (pointer, dragX, dragY) => {
+                if (draggingPoint === point) {
+                  if (this.scene.activatebutton == "Move") {
+                    this.scene.segment_gr.clear();
+                    point.x = dragX;
+                    point.y = dragY;}}})
         }
     }
 
