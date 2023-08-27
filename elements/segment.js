@@ -103,7 +103,7 @@ export class Segment {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.segment_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
+                                lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
                             });
                             this.segment = new Phaser.Curves.Line(point, dropZone);
                             this.segment.draw(this.segment_gr);
