@@ -94,6 +94,7 @@ export class Segment {
                 });
                 point.on("drop", (pointer, dropZone) => {
                     if (draggingPoint !== point) {
+                        this.vertex = [];
                         drop = true;
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
@@ -108,6 +109,7 @@ export class Segment {
                     }
                 });
                 point.on("dragend", (pointer) => {
+                    this.vertex = [];
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
