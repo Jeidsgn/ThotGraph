@@ -14,11 +14,12 @@ export class Segment {
             lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
         });
         this.scene.segment_gr = scene.add.graphics({
-            lineStyle: { width: 5, color: 0x000000, alpha: 0.8 }});
+            lineStyle: { width: 5, color: 0x000000, alpha: 0.8 }
+        });
         this.segment_gr = this.scene.segment_gr;
         this.segment = null;
         this.p3 = null;
-
+        this.vertex = []; //vertices en el tiempo
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.pointermove = { x: 0, y: 0 }; // Almacena la posición del puntero
         // Configura el evento de clic en la escena para capturar el puntero
@@ -40,18 +41,15 @@ export class Segment {
             this.scene.curvestyle.clear();
             const p0 = new Phaser.Math.Vector2(x1, y1);
             const p2 = new Phaser.Math.Vector2(x2, y2);
-            const p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
-            if (this.p3 == null) {
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
+            let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
+            if (this.vertex.length < 100) {
+                this.vertex.push(p1);
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[1], p2);
+                this.scene.counter++;
             } else {
-                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
-                    p0,
-                    this.p3,
-                    p2
-                );
-            } // Calcula p1 usando el valor anterior si está disponible
-            this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, p1, p2);
-            this.p3 = p1;
+                if (this.scene.counter < 100){ this.scene.counter++}else{this.scene.counter=this.scene.counter-100;}
+                this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
+            }
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
         // Dibuja la parábola completa

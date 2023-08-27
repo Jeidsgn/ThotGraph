@@ -28,6 +28,7 @@ export class Board extends Phaser.Scene {
     this.toolbox = new ToolBox(this);
     this.elements = new Element(this);
     this.elements.Names();
+    this.counter = 0;
     // Crea el cuadro de herramientas (toolbox)
     this.input.setDefaultCursor('pointer');
     this.toolbox.createToolbox();
