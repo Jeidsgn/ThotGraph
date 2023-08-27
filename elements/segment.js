@@ -60,7 +60,6 @@ export class Segment {
                 );
                 this.scene.vertex[this.scene.counter] = p1;
             }
-            console.log(this.scene.vertex.length);
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
         // Dibuja la parábola completa
