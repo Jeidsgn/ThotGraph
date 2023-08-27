@@ -35,7 +35,7 @@ export class Segment {
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 600;
-            if (this.scene.vertex.length < delay + 1) {
+            if (this.scene.vertex.length < delay) {
                 this.scene.vertex.push(p1);
                 this.scene.counter = 0;
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
@@ -44,7 +44,7 @@ export class Segment {
                     p2
                 );
             } else {
-                if (this.scene.counter < delay) {
+                if (this.scene.counter < delay+1) {
                     this.scene.counter++;
                 } else {
                     this.scene.counter = this.scene.counter - delay;
