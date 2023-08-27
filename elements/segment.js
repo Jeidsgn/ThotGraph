@@ -59,7 +59,7 @@ export class Segment {
     }
 
     createSegment() {
-        if (!this.scene.moveActivate) {
+        
             let drop = false;
             let draggingPoint = null; // Punto que se está arrastrando
             const interactive = this.scene.points.getChildren();
@@ -72,6 +72,7 @@ export class Segment {
                 });
 
                 point.on("drag", (pointer) => {
+                    if (!this.scene.moveActivate) {
                     if (draggingPoint === point) {
                         point.x = point.input.dragStartX;
                         point.y = point.input.dragStartY;
@@ -89,7 +90,7 @@ export class Segment {
                         this.scene.shadow.strokeLineShape(this.scene.line);
                         // Dibuja parábola
                         this.drawParabola(point.x, point.y, pointer.x, pointer.y, -30);
-                    }
+                    }}
                 });
                 point.on("drop", (pointer, dropZone) => {
                     if (draggingPoint !== point) {
@@ -120,7 +121,7 @@ export class Segment {
                 this.vertex = [];
                 this.scene.parabolic = null;
                 this.scene.shadow.clear();
-            }
+            
         }
     }
     addName() {
