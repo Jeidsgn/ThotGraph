@@ -108,6 +108,8 @@ export class Segment {
                 }
             });
             point.on("dragend", (pointer) => {
+                this.scene.counter =0;
+                this.vertex = [];
                 // Borrar la línea anterior
                 if (drop == true) {
                     // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
