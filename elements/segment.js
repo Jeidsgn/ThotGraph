@@ -68,21 +68,21 @@ export class Segment {
     createSegment() {
         if (this.scene.activatebutton == "Segment") {
             let drop = false;
-            this.scene.draggingPoint = null; // Punto que se está arrastrando
+            let draggingPoint = null; // Punto que se está arrastrando
             const interactive = this.scene.points.getChildren();
             for (const point of interactive) {
                 point.setInteractive({ draggable: true });
                 point.input.dropZone = true;
                 point.on("pointerdown", () => {
                     if (this.scene.activatebutton == "Segment") {
-                        this.scene.draggingPoint = point; // Establece el punto que se está arrastrando
+                        draggingPoint = point; // Establece el punto que se está arrastrando
                         point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
                     }
                 });
 
                 point.on("drag", (pointer) => {
                     if (this.scene.activatebutton == "Segment") {
-                        if (this.scene.draggingPoint === point) {
+                        if (draggingPoint === point) {
                             point.x = point.input.dragStartX;
                             point.y = point.input.dragStartY;
                             // Borrar la línea anterior
@@ -104,7 +104,7 @@ export class Segment {
                 });
                 point.on("drop", (pointer, dropZone) => {
                     if (this.scene.activatebutton == "Segment") {
-                        if (this.scene.draggingPoint !== point) {
+                        if (draggingPoint !== point) {
                             this.scene.vertex = [];
                             drop = true;
                             this.scene.parabolic = null;
@@ -126,7 +126,7 @@ export class Segment {
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
                         this.scene.curvestyle.clear();
-                        this.scene.draggingPoint = null;
+                        draggingPoint = null;
                         this.reductionparabole == true;
                     }
                 });
@@ -142,11 +142,12 @@ export class Segment {
         if (this.scene.activatebutton == "Move") {
             this.scene.parabolic = null;
             this.scene.shadow.clear();
+            let draggingPoint = null;
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
-                        if (this.scene.draggingPoint === point) {
+                        if (draggingPoint === point) {
                             for (let i = 0; i < this.scene.segments.length; i++) {
                                 if (point == this.scene.segments[i].p0) {
                                     this.scene.segments_gr[i].clear();
