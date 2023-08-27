@@ -54,18 +54,19 @@ export class Element {
               point.x = dragX;
               point.y = dragY;
               point.data.values.vector = (dragX, dragY);
-              for (const segment of this.scene.segments) {
-                this.scene.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                if (point == segment.p0) {
-                  this.scene.segment_gr.clear();
-                  segment.p0.x = dragX
-                  segment.p0.y = dragY
-                  segment.draw(this.scene.segment_gr);
-                } else if (point == segment.p1) {
-                  this.scene.segment_gr.clear();
-                  segment.p1.x = dragX
-                  segment.p1.y = dragY
-                  segment.draw(this.scene.segment_gr);
+              for (let i = 0; i < this.scene.segments.length; i++) {
+                if (point == this.scene.segments[i].p0) {
+                  this.scene.segments_gr[i].clear();
+                  this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                  this.scene.segments[i].p0.x = dragX
+                  this.scene.segments[i].p0.y = dragY
+                  this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                } else if (point == this.scene.segments[i].p1) {
+                  this.scene.segments_gr[i].clear();
+                  this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                  this.scene.segments[i].p1.x = dragX
+                  this.scene.segments[i].p1.y = dragY
+                  this.scene.segments[i].draw(this.scene.segments_gr[i]);
                 }
               }
             }
