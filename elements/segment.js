@@ -102,7 +102,7 @@ export class Segment {
                             this.scene.parabolic = null;
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
-                            this.segment_gr = scene.add.graphics({
+                            this.segment_gr = this.scene.add.graphics({
                                 lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
                             });
                             this.segment = new Phaser.Curves.Line(point, dropZone);
