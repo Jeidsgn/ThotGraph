@@ -22,10 +22,6 @@ export class Segment {
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
         });
-        // Capturar el puntero en la escena
-        this.scene.input.on("pointermove", (pointer) => {
-            this.pointermove = { x: pointer.x, y: pointer.y }; // Almacena la posición del puntero
-        });
         // Configura el evento de liberación del clic para controlar cuando se deja de hacer clic
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
@@ -67,7 +63,6 @@ export class Segment {
 
     createSegment() {
         if (this.scene.activatebutton == "Segment") {
-            let drop = false;
             const interactive = this.scene.points.getChildren();
             for (const point of interactive) {
                 point.setInteractive({ draggable: true });
@@ -80,29 +75,28 @@ export class Segment {
 
                 point.on("drag", (pointer) => {
                     if (this.scene.activatebutton == "Segment") {
-                            point.x = point.input.dragStartX;
-                            point.y = point.input.dragStartY;
-                            // Borrar la línea anterior
-                            this.scene.shadow.clear();
-                            // Actualiza el aspecto visual de la líne mientras se mueve
-                            this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
-                            // Define la línea
-                            this.scene.line = new Phaser.Geom.Line(
-                                point.input.dragStartX,
-                                point.input.dragStartY,
-                                pointer.x,
-                                pointer.y
-                            );
-                            this.scene.shadow.strokeLineShape(this.scene.line);
-                            // Dibuja parábola
-                            this.drawParabola(point.x, point.y, pointer.x, pointer.y, -45);
+                        point.x = point.input.dragStartX;
+                        point.y = point.input.dragStartY;
+                        // Borrar la línea anterior
+                        this.scene.shadow.clear();
+                        // Actualiza el aspecto visual de la líne mientras se mueve
+                        this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
+                        // Define la línea
+                        this.scene.line = new Phaser.Geom.Line(
+                            point.input.dragStartX,
+                            point.input.dragStartY,
+                            pointer.x,
+                            pointer.y
+                        );
+                        this.scene.shadow.strokeLineShape(this.scene.line);
+                        // Dibuja parábola
+                        this.drawParabola(point.x, point.y, pointer.x, pointer.y, -45);
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
                     if (this.scene.activatebutton == "Segment") {
                         if (dropZone != point) {
                             this.scene.vertex = [];
-                            drop = true;
                             this.scene.parabolic = null;
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
@@ -122,7 +116,7 @@ export class Segment {
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
                         this.scene.curvestyle.clear();
-                    
+
                         this.reductionparabole == true;
                     }
                 });
@@ -143,21 +137,21 @@ export class Segment {
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
-                            for (let i = 0; i < this.scene.segments.length; i++) {
-                                if (point == this.scene.segments[i].p0) {
-                                    this.scene.segments_gr[i].clear();
-                                    this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                    this.scene.segments[i].p0.x = dragX;
-                                    this.scene.segments[i].p0.y = dragY;
-                                    this.scene.segments[i].draw(this.scene.segments_gr[i]);
-                                } else if (point == this.scene.segments[i].p1) {
-                                    this.scene.segments_gr[i].clear();
-                                    this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                    this.scene.segments[i].p1.x = dragX;
-                                    this.scene.segments[i].p1.y = dragY;
-                                    this.scene.segments[i].draw(this.scene.segments_gr[i]);
-                                }
-                            
+                        for (let i = 0; i < this.scene.segments.length; i++) {
+                            if (point == this.scene.segments[i].p0) {
+                                this.scene.segments_gr[i].clear();
+                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.segments[i].p0.x = dragX;
+                                this.scene.segments[i].p0.y = dragY;
+                                this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                            } else if (point == this.scene.segments[i].p1) {
+                                this.scene.segments_gr[i].clear();
+                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.segments[i].p1.x = dragX;
+                                this.scene.segments[i].p1.y = dragY;
+                                this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                            }
+
                         }
                     }
                 });

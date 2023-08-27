@@ -45,10 +45,10 @@ export class Point {
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
-                        if (this.scene.activatebutton == "Move") {
-                            point.x = dragX;
-                            point.y = dragY;
-                        }
+                    if (this.scene.activatebutton == "Move") {
+                        point.x = dragX;
+                        point.y = dragY;
+                    }
                 });
             }
         }
