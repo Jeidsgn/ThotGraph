@@ -54,7 +54,9 @@ export class Segment {
                     this.scene.vertex[this.scene.counter],
                     p2
                 );
+                console.log(this.scene.vertex[this.scene.counter]);
                 this.scene.vertex[this.scene.counter] = p1;
+
             }
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
