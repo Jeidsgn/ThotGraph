@@ -35,7 +35,7 @@ export class Segment {
             const p2 = new Phaser.Math.Vector2(x2, y2);
             let p1 = new Phaser.Math.Vector2((x1 + x2) / 2, (y1 + y2) / 2 - n);
             let delay = 600;
-            console.log(p1);
+            
             if (this.scene.vertex.length < delay) {
                 this.scene.vertex.push(p1);
                 this.scene.counter = 0;
@@ -94,6 +94,7 @@ export class Segment {
                         );
                         this.scene.shadow.strokeLineShape(this.scene.line);
                         // Dibuja parábola
+                        console.log(point);
                         this.drawParabola(point.x, point.y, pointer.x, pointer.y, -45);
                     }
                 });
