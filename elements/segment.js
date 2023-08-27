@@ -47,12 +47,13 @@ export class Segment {
                 this.vertex.push(p1);
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[0], p2);
             } else {
-                if (this.scene.counter < delay){ 
+                if (this.scene.counter < delay) {
                     this.scene.counter++
-                } else{
-                    this.scene.counter = this.scene.counter-delay; }
+                } else {
+                    this.scene.counter = this.scene.counter - delay;
+                }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(p0, this.vertex[this.scene.counter], p2);
-                this.vertex[this.scene.counter]=p1;
+                this.vertex[this.scene.counter] = p1;
             }
         }
         //this.scene.parabolic.draw(this.scene.curvestyle, 64);
@@ -60,73 +61,69 @@ export class Segment {
     }
 
     createSegment() {
-        if(!this.scene.moveActivate){
-        let drop = false;
-        let draggingPoint = null; // Punto que se está arrastrando
-        const interactive = this.scene.points.getChildren();
-        for (const point of interactive) {
-            point.setInteractive({ draggable: true });
-            point.input.dropZone = true;
-            point.on("pointerdown", () => {
-                draggingPoint = point; // Establece el punto que se está arrastrando
-                point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
-            });
+        if (!this.scene.moveActivate) {
+            let drop = false;
+            let draggingPoint = null; // Punto que se está arrastrando
+            const interactive = this.scene.points.getChildren();
+            for (const point of interactive) {
+                point.setInteractive({ draggable: true });
+                point.input.dropZone = true;
+                point.on("pointerdown", () => {
+                    draggingPoint = point; // Establece el punto que se está arrastrando
+                    point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                });
 
-            point.on("drag", (pointer) => {
-                if (draggingPoint === point) {
-                    point.x = point.input.dragStartX;
-                    point.y = point.input.dragStartY;
-                    // Borrar la línea anterior
-                    this.scene.shadow.clear();
-                    // Actualiza el aspecto visual de la líne mientras se mueve
-                    this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
-                    // Define la línea
-                    this.scene.line = new Phaser.Geom.Line(
-                        point.input.dragStartX,
-                        point.input.dragStartY,
-                        pointer.x,
-                        pointer.y
-                    );
-                    this.scene.shadow.strokeLineShape(this.scene.line);
-                    // Dibuja parábola
-                    this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
-                }
-            });
-            point.on("drop", (pointer, dropZone) => {
-                if (draggingPoint !== point) {
-                    drop = true;
+                point.on("drag", (pointer) => {
+                    if (draggingPoint === point) {
+                        point.x = point.input.dragStartX;
+                        point.y = point.input.dragStartY;
+                        // Borrar la línea anterior
+                        this.scene.shadow.clear();
+                        // Actualiza el aspecto visual de la líne mientras se mueve
+                        this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
+                        // Define la línea
+                        this.scene.line = new Phaser.Geom.Line(
+                            point.input.dragStartX,
+                            point.input.dragStartY,
+                            pointer.x,
+                            pointer.y
+                        );
+                        this.scene.shadow.strokeLineShape(this.scene.line);
+                        // Dibuja parábola
+                        this.drawParabola(point.x, point.y, pointer.x, pointer.y, -60);
+                    }
+                });
+                point.on("drop", (pointer, dropZone) => {
+                    if (draggingPoint !== point) {
+                        drop = true;
+                        this.scene.parabolic = null;
+                        this.scene.shadow.clear();
+                        this.scene.curvestyle.clear();
+                        this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
+                        this.segment = new Phaser.Curves.Line(
+                            point,
+                            dropZone
+                        );
+                        this.segment.draw(this.segment_gr);
+                        this.scene.segments.push(this.segment);
+                    }
+                });
+                point.on("dragend", (pointer) => {
+                    this.scene.counter = 0;
+                    this.vertex = [];
                     this.scene.parabolic = null;
                     this.scene.shadow.clear();
                     this.scene.curvestyle.clear();
-                    this.segment_gr.lineStyle(5, 0x2aa4bf, 0.9);
-                    this.segment = new Phaser.Curves.Line(
-                        point,
-                        dropZone
-                    );
-                    this.segment.draw(this.segment_gr);
-                    this.scene.segments.push(this.segment);
-                }
-            });
-            point.on("dragend", (pointer) => {
-                this.scene.counter =0;
-                this.vertex = [];
-                // Borrar la línea anterior
-                if (drop == true) {
-                    // Asegura que solo estamos manejando el evento de finalización de arrastre para el punto correcto
-                    // Borrar la línea anterior
-                    this.scene.shadow.clear();
-                    this.scene.curvestyle.clear();
-                    this.scene.parabolic = null;
+
                     draggingPoint = null;
                     this.reductionparabole == true;
-                    // Restablece el punto que se está arrastrando
-                }
-            });
+                });
+            }
+            if (this.isClicking == false) {
+                this.scene.parabolic = null;
+                this.scene.shadow.clear();
+            }
         }
-        if (this.isClicking == false) {
-            this.scene.parabolic = null;
-            this.scene.shadow.clear();
-        }}
     }
     addName() {
         this.scene.elementNames.push("Segment"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
