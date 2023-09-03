@@ -37,7 +37,7 @@ export class Element {
   // Crea un nuevo elemento
   moveElement() {
     this.point.movePoint();
-    //this.segment.moveSegment();
+    this.segment.moveSegment();
   }
 
   // Puedes agregar métodos comunes a todos los elementos aquí
