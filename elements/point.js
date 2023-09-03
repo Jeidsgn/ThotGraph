@@ -5,7 +5,6 @@ export class Point {
         this.scene.pointdraggable = [];
         this.scene.draggingPoint = null;
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
-        // Contenedor de texto para las letras de los puntos
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
@@ -43,6 +42,7 @@ export class Point {
         if (this.scene.activatebutton == "Move") {
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
+                point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
                         point.x = dragX;
