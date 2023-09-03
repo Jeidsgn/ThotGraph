@@ -24,18 +24,45 @@ export class Point {
         if (this.isClicking) {
             const letter = this.count;
             this.count = this.count + 1;
-            // Crea la imagen del punto en las coordenadas del clic
-            const point = this.scene.add
-                .sprite(this.pointer.x, this.pointer.y, "point", 0)
-                .setOrigin(0.5, 0.8);
-            this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                fill: "#000000",
-            });
-            this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-            point.id = letter; // Agrega el nombre del punto
-            point.setData("vector", (this.pointer.x, this.pointer.y));
-            this.scene.points.add(point); // Agrega el punto al grupo
-            this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
+            // Inicializa variables para rastrear la línea y el punto más cercano
+            let nearsegment = null;
+            let nearpoint = null;
+            let neardistance = Number.MAX_VALUE;
+
+            // Itera a través de las líneas y encuentra la más cercana
+            for (let i = 0; i < this.scene.segments.length; i++) {
+                let segment = this.scene.segments[i];
+                let pointsegment = segment.getNearestPoint(
+                    new Phaser.Math.Vector2(segment.p0, segment.p1)
+                );
+                let distance = Phaser.Math.Distance.Between(
+                    segment.p0,
+                    segment.p1,
+                    pointsegment.x,
+                    pointsegment.y
+                );
+
+                if (distance < neardistance) {
+                    neardistance = distance;
+                    nearsegment = segment;
+                    nearpoint = pointsegment;
+                }
+            }
+
+            // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
+            if (neardistance < 15) {
+                const point = this.scene.add
+                    .sprite(nearpoint.x, nearpoint.y, "point", 0)
+                    .setOrigin(0.5, 0.8);
+                this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                    fill: "#000000",
+                });
+                this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                point.id = letter; // Agrega el nombre del punto
+                point.setData("vector", { x: nearpoint.x, y: nearpoint.y });
+                this.scene.points.add(point); // Agrega el punto al grupo
+                this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
+            }
         }
     }
     movePoint() {
