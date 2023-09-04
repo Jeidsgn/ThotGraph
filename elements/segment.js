@@ -144,14 +144,14 @@ export class Segment {
                             if (point == this.scene.segments[i].p0) {
                                 this.scene.segments_gr[i].clear();
                                 this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                this.scene.segments[i].p0.x = dragX;
-                                this.scene.segments[i].p0.y = dragY;
+                                this.scene.segments[i].p0.x = point.x;
+                                this.scene.segments[i].p0.y = point.y;
                                 this.scene.segments[i].draw(this.scene.segments_gr[i]);
                             } else if (point == this.scene.segments[i].p1) {
                                 this.scene.segments_gr[i].clear();
                                 this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                this.scene.segments[i].p1.x = dragX;
-                                this.scene.segments[i].p1.y = dragY;
+                                this.scene.segments[i].p1.x = point.x;
+                                this.scene.segments[i].p1.y = point.y;
                                 this.scene.segments[i].draw(this.scene.segments_gr[i]);
                             }
 

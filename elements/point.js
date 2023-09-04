@@ -66,6 +66,8 @@ export class Point {
                 this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                     fill: "#000000",
                 });
+                // Asigna el segmento al punto
+                point.segment = nearsegment;
                 this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                 point.id = letter; // Agrega el nombre del punto
                 point.setData("vector", { x: nearpoint.x, y: nearpoint.y });
