@@ -89,7 +89,7 @@ export class Point {
                         if (segment) {
                             // Calcula la posición relativa 't' dentro del segmento
                             const distance = Phaser.Math.Distance.Between(segment.p0.x, segment.p0.y, segment.p1.x, segment.p1.y);
-                            const t = (dragX-segment.p0.x)/(segment.p1.x-segment.p0.x);
+                            let t = (dragX-segment.p0.x)/(segment.p1.x-segment.p0.x);
                             t = Phaser.Math.Clamp(t,0,1);
                             
                             // Calcula las coordenadas del punto en el segmento
