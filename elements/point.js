@@ -19,7 +19,18 @@ export class Point {
     addName() {
         this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
-
+    getNearestPointOnSegment(pointX, pointY, segment) {
+        const { x1, y1, x2, y2 } = segment;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const t = ((pointX - x1) * dx + (pointY - y1) * dy) / (dx * dx + dy * dy);
+        
+        const nearestX = Phaser.Math.Clamp(x1 + t * dx, Math.min(x1, x2), Math.max(x1, x2));
+        const nearestY = Phaser.Math.Clamp(y1 + t * dy, Math.min(y1, y2), Math.max(y1, y2));
+        
+        return new Phaser.Math.Vector2(nearestX, nearestY);
+    }
+    
     createPoint() {
         if (this.isClicking) {
             const letter = this.count;
@@ -32,9 +43,7 @@ export class Point {
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
                 let segment = this.scene.segments[i];
-                let pointsegment = segment.getNearestPoint(
-                    new Phaser.Math.Vector2(segment.p0, segment.p1)
-                );
+                let pointsegment = getNearestPointOnSegment(segment.p0, segment.p1, segment);
                 let distance = Phaser.Math.Distance.Between(
                     segment.p0,
                     segment.p1,
