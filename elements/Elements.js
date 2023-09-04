@@ -1,5 +1,6 @@
 import { Point } from "./point.js";
 import { Segment } from "./segment.js";
+import { Circle} from "./circle.js";
 
 export class Element {
   constructor(scene) {
@@ -7,6 +8,7 @@ export class Element {
     this.scene.interactivePoints = []; // Arreglo para almacenar los puntos interactivos y sus áreas de acción
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
+    this.circle = new Circle(scene);
     this.scene.segment_gr = scene.add.graphics({
       lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
     });
@@ -22,6 +24,9 @@ export class Element {
       },
       Segment: () => {
         this.segment.createSegment();
+      },
+      Circle: () => {
+        this.circle.createCircle();
       },
     };
     return functions[buttonName];
