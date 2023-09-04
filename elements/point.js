@@ -23,8 +23,6 @@ export class Point {
     getNearestPointOnSegment(p0, p1, p) {
         let line = new Phaser.Geom.Line(p0.x,p0.y,p1.x,p1.y);
         let np = Phaser.Geom.Line.GetNearestPoint(line, new Phaser.Geom.Point(p.x, p.y));
-
-        console.log((np));
         return np;
         
     }
