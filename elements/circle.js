@@ -62,7 +62,7 @@ export class Circle {
                             this.circle_gr = this.scene.add.graphics({
                                 lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
                             });
-                            ratio = Phaser.Math.Distance.Between(point.x, point.y, dropZone.x, dropZone.y);
+                            let ratio = Phaser.Math.Distance.Between(point.x, point.y, dropZone.x, dropZone.y);
                             this.circle = new Phaser.Curves.Ellipse(point.x,point.y,ratio);
                             this.circle.draw(this.circle_gr);
                             this.circle.innerpoint = []
