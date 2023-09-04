@@ -37,6 +37,7 @@ export class Element {
     // Agrega nombres a los puntos utilizando el método "addName" de la instancia de Point en la escena
     this.point.addName();
     this.segment.addName();
+    this.circle.addName();
   }
 
   // Crea un nuevo elemento
