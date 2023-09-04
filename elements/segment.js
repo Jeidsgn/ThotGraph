@@ -108,7 +108,7 @@ export class Segment {
                             });
                             this.segment = new Phaser.Curves.Line(point, dropZone);
                             this.segment.draw(this.segment_gr);
-                            this.segment.innerpoint = []
+                            this.segment.innerpoint = [];
                             this.scene.segments.push(this.segment);
                             this.scene.segments_gr.push(this.segment_gr);
                         }
