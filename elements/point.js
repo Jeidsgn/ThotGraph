@@ -53,13 +53,13 @@ export class Point {
                     nearsegment = segment;
                     nearpoint = pointsegment;
                 }
-                console.log(nearpoint)
-                console.log(neardistance)
+                let proportion = (nearpoint.x-segment.p0.x)/(segment.p1.x-segment.p0.x) ;
             }
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
             if (neardistance < 15) {
+
                 const point = this.scene.add
-                    .sprite(nearpoint.x, nearpoint.y, "point", 0)
+                    .sprite(curve.getPointAt(proportion).x, curve.getPointAt(proportion).y, "point", 0)
                     .setOrigin(0.5, 0.8);
                 this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                     fill: "#000000",
