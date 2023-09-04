@@ -142,18 +142,34 @@ export class Segment {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.segments.length; i++) {
-                            if (point == this.scene.segments[i].p0) {
+                            let segment = this.scene.segments[i];
+                            if (point == segment.p0) {
                                 this.scene.segments_gr[i].clear();
                                 this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                this.scene.segments[i].p0.x = point.x;
-                                this.scene.segments[i].p0.y = point.y;
-                                this.scene.segments[i].draw(this.scene.segments_gr[i]);
-                            } else if (point == this.scene.segments[i].p1) {
+                                segment.p0.x = point.x;
+                                segment.p0.y = point.y;
+                                segment.draw(this.scene.segments_gr[i]);
+                                                            // Actualiza los puntos internos asociados al segmento
+                            for (const innerPoint of segment.innerPoint) {
+                                const t = innerPoint.getData("t"); // Obtiene la posición relativa t
+                                const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
+                                innerPoint.x = x;
+                                innerPoint.y = y;
+                            }
+                            } else if (point == segment.p1) {
                                 this.scene.segments_gr[i].clear();
                                 this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
-                                this.scene.segments[i].p1.x = point.x;
-                                this.scene.segments[i].p1.y = point.y;
-                                this.scene.segments[i].draw(this.scene.segments_gr[i]);
+                                segment.p1.x = point.x;
+                                segment.p1.y = point.y;
+                                segment.draw(this.scene.segments_gr[i]);
+
+                                                            // Actualiza los puntos internos asociados al segmento
+                            for (const innerPoint of segment.innerPoint) {
+                                const t = innerPoint.getData("t"); // Obtiene la posición relativa t
+                                const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
+                                innerPoint.x = x;
+                                innerPoint.y = y;
+                            }
                             }
 
                         }
