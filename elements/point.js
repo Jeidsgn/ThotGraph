@@ -19,19 +19,12 @@ export class Point {
     addName() {
         this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
-    getNearestPointOnSegment(pointX, pointY, segment) {
-        const x1 = segment.p0.x;
-        const y1 = segment.p0.y;
-        const x2 = segment.p1.x;
-        const y2 = segment.p1.y;
-        const dx = x2 - x1;
-        const dy = y2 - y1;
-        const t = ((pointX - x1) * dx + (pointY - y1) * dy) / (dx * dx + dy * dy);
-        
-        const nearestX = Phaser.Math.Clamp(x1 + t * dx, Math.min(x1, x2), Math.max(x1, x2));
-        const nearestY = Phaser.Math.Clamp(y1 + t * dy, Math.min(y1, y2), Math.max(y1, y2));
-        console.log((nearestX,nearestY));
-        return new Phaser.Math.Vector2(nearestX, nearestY);
+    getNearestPointOnSegment(p0, p1, p) {
+        let line = new Phaser.Geom.Line(p0.x,p0.y,p1.x,p1.y);
+        let np = Phaser.Geom.Line.GetNearestPoint(line, new Phaser.Geom.Point(p.x, p.y));
+
+        console.log((np));
+        return np;
         
     }
     
@@ -49,8 +42,8 @@ export class Point {
                 let segment = this.scene.segments[i];
                 let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, segment);
                 let distance = Phaser.Math.Distance.Between(
-                    segment.p0,
-                    segment.p1,
+                    this.scene.pointer.x,
+                    this.scene.pointer.y,
                     pointsegment.x,
                     pointsegment.y
                 );
