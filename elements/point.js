@@ -27,11 +27,12 @@ export class Point {
         const dx = x2 - x1;
         const dy = y2 - y1;
         const t = ((pointX - x1) * dx + (pointY - y1) * dy) / (dx * dx + dy * dy);
-        
+        console.log((nearestX,nearestY));
         const nearestX = Phaser.Math.Clamp(x1 + t * dx, Math.min(x1, x2), Math.max(x1, x2));
         const nearestY = Phaser.Math.Clamp(y1 + t * dy, Math.min(y1, y2), Math.max(y1, y2));
         
         return new Phaser.Math.Vector2(nearestX, nearestY);
+        
     }
     
     createPoint() {
