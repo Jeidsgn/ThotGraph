@@ -51,8 +51,8 @@ export class Circle {
                         let ratio = Phaser.Math.Distance.Between(point.x, point.y, pointer.x, pointer.y);
                         this.scene.circle.add(new Phaser.Curves.Ellipse(point.x, point.y, ratio))
                         this.scene.circle.draw(this.scene.shadow);
-                        this.graphics.fillStyle(0xF250DA, 0.1);
-                        this.graphics.fillCircle(point.x, point.y, ratio);
+                        this.scene.shadow.fillStyle(0xF250DA, 0.1);
+                        this.scene.shadow.fillCircle(point.x, point.y, ratio);
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
