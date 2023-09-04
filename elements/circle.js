@@ -5,7 +5,7 @@ export class Circle {
         this.scene = scene;
         this.scene.circles = []; // Grupo para almacenar los puntos en la escena
         this.scene.circles_gr = [];
-        this.point = new Point(scene);
+        this.segment = new Segment(scene);
         //this.scene.points
         this.scene.pointB = null;
         this.scene.pointA = null;
