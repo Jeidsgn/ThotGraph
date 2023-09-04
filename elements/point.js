@@ -42,8 +42,8 @@ export class Point {
                 let segment = this.scene.segments[i];
                 let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, segment);
                 let distance = Phaser.Math.Distance.Between(
-                    this.scene.pointer.x,
-                    this.scene.pointer.y,
+                    this.pointer.x,
+                    this.pointer.y,
                     pointsegment.x,
                     pointsegment.y
                 );
@@ -56,7 +56,6 @@ export class Point {
                 console.log(nearpoint)
                 console.log(neardistance)
             }
-
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
             if (neardistance < 15) {
                 const point = this.scene.add
