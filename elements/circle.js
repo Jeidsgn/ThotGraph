@@ -45,7 +45,7 @@ export class Circle {
                         this.scene.shadow.clear();
                         // Actualiza el aspecto visual de la líne mientras se mueve
                         this.scene.circle= new Phaser.Curves.Path();
-                        this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.5);
+                        this.scene.shadow.lineStyle(5, 0xF250DA, 0.5);
 
                         // Define la línea
                         let ratio = Phaser.Math.Distance.Between(point.x, point.y, pointer.x, pointer.y);
@@ -60,7 +60,7 @@ export class Circle {
                         if (dropZone != point) {
                             this.scene.shadow.clear();
                             this.circle_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
+                                lineStyle: { width: 5, color: 0xF250DA, alpha: 0.9 },
                             });
                             let ratio = Phaser.Math.Distance.Between(point.x, point.y, dropZone.x, dropZone.y);
                             this.circle = new Phaser.Curves.Ellipse(point.x,point.y,ratio);
@@ -95,7 +95,7 @@ export class Circle {
                             let segment = this.scene.circles[i];
                             if (point == segment.p0) {
                                 this.scene.circles_gr[i].clear();
-                                this.scene.circles_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 segment.p0.x = point.x;
                                 segment.p0.y = point.y;
                                 segment.draw(this.scene.circles_gr[i]);
@@ -108,7 +108,7 @@ export class Circle {
                             }
                             } else if (point == segment.p1) {
                                 this.scene.circles_gr[i].clear();
-                                this.scene.circles_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 segment.p1.x = point.x;
                                 segment.p1.y = point.y;
                                 segment.draw(this.scene.circles_gr[i]);
