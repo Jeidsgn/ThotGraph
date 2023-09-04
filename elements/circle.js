@@ -100,8 +100,10 @@ export class Circle {
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 circle.p0.x = point.x;
                                 circle.p0.y = point.y;
-                                circle.xRadius = circle.p1.x
-                                circle.yRadius = circle.p1.y
+                                let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, circle.p1.x, circle.p1.y)
+                                circle.x = circle.p0.x
+                                circle.y = circle.p0.y
+                                circle.xRadius = ratio;
                                 circle.draw(this.scene.circles_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
                             for (const innerpoint of circle.innerpoint) {
@@ -113,8 +115,8 @@ export class Circle {
                             } else if (point == circle.p1) {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
-                                circle.xRadius = point.x;
-                                circle.yRadius = point.y;
+                                let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, point.x, point.y)
+                                circle.xRadius = ratio;
                                 circle.draw(this.scene.circles_gr[i]);
 
                                                             // Actualiza los puntos internos asociados al segmento
