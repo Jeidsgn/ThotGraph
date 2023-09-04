@@ -103,7 +103,7 @@ export class Circle {
                                 let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, circle.p1.x, circle.p1.y)
                                 circle.x = circle.p0.x
                                 circle.y = circle.p0.y
-                                console-log(ratio)
+                                console.log(ratio)
                                 circle.width = ratio;
                                 circle.draw(this.scene.circles_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
@@ -117,7 +117,7 @@ export class Circle {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, point.x, point.y)
-                                console-log(ratio)
+                                console.log(ratio)
                                 circle.width = ratio;
                                 circle.draw(this.scene.circles_gr[i]);
 
