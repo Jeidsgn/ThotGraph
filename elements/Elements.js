@@ -59,8 +59,8 @@ export class Element {
         0
       )
       .setOrigin(0.5, 0.8);
-    point1.setData("vector", (point1.x, point1.y));
-    point2.setData("vector", (point2.x, point2.y));
+    point1.setInteractive({ draggable: true });
+    point2.setInteractive({ draggable: true });
     this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo
   }
