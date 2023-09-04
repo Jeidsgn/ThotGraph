@@ -66,7 +66,7 @@ export class Point {
                 });
                 // Asigna el segmento al punto
                 point.segment = nearsegment;
-                segment.innerpoint.push(point);
+                nearsegment.innerpoint.push(point);
                 this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                 point.id = letter; // Agrega el nombre del punto
                 point.setData("vector", { x: nearpoint.x, y: nearpoint.y });
