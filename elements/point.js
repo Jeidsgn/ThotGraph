@@ -6,6 +6,7 @@ export class Point {
         this.scene.draggingPoint = null;
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
+        this.coordenates = null;
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
         });
@@ -54,13 +55,13 @@ export class Point {
                     nearpoint = pointsegment;
                 }
                 let proportion = (nearpoint.x-segment.p0.x)/(segment.p1.x-segment.p0.x);
-                let coordenates = segment.getPointAt(proportion);
+                this.coordenates = segment.getPointAt(proportion);
             }
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
             if (neardistance < 15) {
 
                 const point = this.scene.add
-                    .sprite(coordenates.x, coordenates.y, "point", 0)
+                    .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                     .setOrigin(0.5, 0.8);
                 this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                     fill: "#000000",
