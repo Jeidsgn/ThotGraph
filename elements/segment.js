@@ -150,11 +150,11 @@ export class Segment {
                                 segment.p0.y = point.y;
                                 segment.draw(this.scene.segments_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
-                            for (const innerPoint of segment.innerPoint) {
-                                const t = innerPoint.getData("t"); // Obtiene la posición relativa t
+                            for (const innerpoint of segment.innerpoint) {
+                                const t = innerpoint.getData("t"); // Obtiene la posición relativa t
                                 const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
-                                innerPoint.x = x;
-                                innerPoint.y = y;
+                                innerpoint.x = x;
+                                innerpoint.y = y;
                             }
                             } else if (point == segment.p1) {
                                 this.scene.segments_gr[i].clear();
@@ -164,11 +164,11 @@ export class Segment {
                                 segment.draw(this.scene.segments_gr[i]);
 
                                                             // Actualiza los puntos internos asociados al segmento
-                            for (const innerPoint of segment.innerPoint) {
-                                const t = innerPoint.getData("t"); // Obtiene la posición relativa t
+                            for (const innerpoint of segment.innerpoint) {
+                                const t = innerpoint.getData("t"); // Obtiene la posición relativa t
                                 const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
-                                innerPoint.x = x;
-                                innerPoint.y = y;
+                                innerpoint.x = x;
+                                innerpoint.y = y;
                             }
                             }
 
