@@ -148,7 +148,7 @@ export class Segment {
                                 segment.p0.x = point.x;
                                 segment.p0.y = point.y;
                                 segment.draw(this.scene.segments_gr[i]);
-                                                            // Actualiza los puntos internos asociados al segmento
+                            // Actualiza los puntos internos asociados al segmento
                             for (const innerpoint of segment.innerpoint) {
                                 const t = innerpoint.getData("t"); // Obtiene la posición relativa t
                                 const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
@@ -162,7 +162,7 @@ export class Segment {
                                 segment.p1.y = point.y;
                                 segment.draw(this.scene.segments_gr[i]);
 
-                                                            // Actualiza los puntos internos asociados al segmento
+                            // Actualiza los puntos internos asociados al segmento
                             for (const innerpoint of segment.innerpoint) {
                                 const t = innerpoint.getData("t"); // Obtiene la posición relativa t
                                 const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas

@@ -62,10 +62,10 @@ export class Circle {
                             this.circle_gr = this.scene.add.graphics({
                                 lineStyle: { width: 5, color: 0xF250DA, alpha: 0.9 },
                             });
-                            this.circle.p0 = point;
-                            this.circle.p1 = dropZone;
-                            let ratio = Phaser.Math.Distance.Between(this.circle.p0.x, this.circle.p0.y, this.circle.p1.x, this.circle.p1.y);
-                            this.circle = new Phaser.Curves.Ellipse(this.circle.p0.x,this.circle.p0.y,ratio);
+                            this.circle.setData("p0", point);
+                            this.circle.setData("p1", dropZone);
+                            let ratio = Phaser.Math.Distance.Between(this.circle.getData("p0").x, this.circle.getData("p0").y, this.circle.getData("p1").x, this.circle.getData("p1").y);
+                            this.circle = new Phaser.Curves.Ellipse(this.circle.getData("p0").x,this.circle.getData("p0").y,ratio);
                             this.circle.draw(this.circle_gr);
                             this.circle.innerpoint = [];
 
@@ -95,13 +95,13 @@ export class Circle {
                     if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.circles.length; i++) {
                             let circle = this.scene.circles[i];
-                            if (point == circle.p0) {
+                            if (point == circle.getData("p0")) {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
-                                circle.p0.x = point.x;
-                                circle.p0.y = point.y;
-                                circle.x = circle.p0.x
-                                circle.y = circle.p0.y
+                                circle.getData("p0").x = point.x;
+                                circle.getData("p0").y = point.y;
+                                circle.x = circle.getData("p0").x
+                                circle.y = circle.getData("p0").y
                                 circle.draw(this.scene.circles_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
                             for (const innerpoint of circle.innerpoint) {
@@ -110,7 +110,7 @@ export class Circle {
                                 innerpoint.x = x;
                                 innerpoint.y = y;
                             }
-                            } else if (point == circle.p1) {
+                            } else if (point == circle.getData("p1")) {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, point.x, point.y)
