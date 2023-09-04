@@ -100,8 +100,8 @@ export class Circle {
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
                                 circle.p0.x = point.x;
                                 circle.p0.y = point.y;
-                                circle.xRadius = circle.p0.x
-                                circle.yRadius = circle.p0.y
+                                circle.xRadius = circle.p1.x
+                                circle.yRadius = circle.p1.y
                                 circle.draw(this.scene.circles_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
                             for (const innerpoint of circle.innerpoint) {
