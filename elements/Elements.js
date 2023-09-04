@@ -44,6 +44,7 @@ export class Element {
   moveElement() {
     this.point.movePoint();
     this.segment.moveSegment();
+    this.segment.moveCircle();
   }
 
   // Puedes agregar métodos comunes a todos los elementos aquí
