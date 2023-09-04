@@ -35,6 +35,7 @@ export class Point {
             let nearsegment = null;
             let nearpoint = null;
             let neardistance = Number.MAX_VALUE;
+            let proportion = null;
 
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
@@ -52,7 +53,7 @@ export class Point {
                     nearsegment = segment;
                     nearpoint = pointsegment;
                 }
-                let proportion = (nearpoint.x-segment.p0.x)/(segment.p1.x-segment.p0.x);
+                proportion = (nearpoint.x-segment.p0.x)/(segment.p1.x-segment.p0.x);
                 this.coordenates = segment.getPointAt(proportion);
             }
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
