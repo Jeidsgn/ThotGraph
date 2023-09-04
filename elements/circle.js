@@ -62,10 +62,13 @@ export class Circle {
                             this.circle_gr = this.scene.add.graphics({
                                 lineStyle: { width: 5, color: 0xF250DA, alpha: 0.9 },
                             });
-                            let ratio = Phaser.Math.Distance.Between(point.x, point.y, dropZone.x, dropZone.y);
-                            this.circle = new Phaser.Curves.Ellipse(point.x,point.y,ratio);
+                            this.circle.p0 = point;
+                            this.circle.p1 = dropZone;
+                            let ratio = Phaser.Math.Distance.Between(this.circle.p0.x, this.circle.p0.y, this.circle.p1.x, this.circle.p1.y);
+                            this.circle = new Phaser.Curves.Ellipse(this.circle.p0.x,this.circle.p0.y,ratio);
                             this.circle.draw(this.circle_gr);
-                            this.circle.innerpoint = []
+                            this.circle.innerpoint = [];
+
                             this.scene.circles.push(this.circle);
                             this.scene.circles_gr.push(this.circle_gr);
                         }
@@ -85,38 +88,39 @@ export class Circle {
     }
     moveCircle() {
         if (this.scene.activatebutton == "Move" && this.scene.circles.length > 0) {
-            this.scene.parabolic = null;
             this.scene.shadow.clear();
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.circles.length; i++) {
-                            let segment = this.scene.circles[i];
-                            if (point == segment.p0) {
+                            let circle = this.scene.circles[i];
+                            if (point == circle.p0) {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
-                                segment.p0.x = point.x;
-                                segment.p0.y = point.y;
-                                segment.draw(this.scene.circles_gr[i]);
+                                circle.p0.x = point.x;
+                                circle.p0.y = point.y;
+                                circle.x = circle.p0.x
+                                circle.y = circle.p0.y
+                                circle.draw(this.scene.circles_gr[i]);
                                                             // Actualiza los puntos internos asociados al segmento
-                            for (const innerpoint of segment.innerpoint) {
+                            for (const innerpoint of circle.innerpoint) {
                                 const t = innerpoint.getData("t"); // Obtiene la posición relativa t
-                                const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
+                                const { x, y } = circle.getPoint(t); // Calcula las nuevas coordenadas
                                 innerpoint.x = x;
                                 innerpoint.y = y;
                             }
-                            } else if (point == segment.p1) {
+                            } else if (point == circle.p1) {
                                 this.scene.circles_gr[i].clear();
                                 this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
-                                segment.p1.x = point.x;
-                                segment.p1.y = point.y;
-                                segment.draw(this.scene.circles_gr[i]);
+                                let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, point.x, point.y)
+                                circle.width = ratio;
+                                circle.draw(this.scene.circles_gr[i]);
 
                                                             // Actualiza los puntos internos asociados al segmento
-                            for (const innerpoint of segment.innerpoint) {
+                            for (const innerpoint of circle.innerpoint) {
                                 const t = innerpoint.getData("t"); // Obtiene la posición relativa t
-                                const { x, y } = segment.getPoint(t); // Calcula las nuevas coordenadas
+                                const { x, y } = circle.getPoint(t); // Calcula las nuevas coordenadas
                                 innerpoint.x = x;
                                 innerpoint.y = y;
                             }
