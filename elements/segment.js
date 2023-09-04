@@ -46,18 +46,17 @@ export class Segment {
                 );
                 
             } else {
-                if (this.scene.counter < delay) {
-                    this.scene.counter++;
-                } else {
-                    this.scene.counter = 0;
-                }
                 this.scene.parabolic = new Phaser.Curves.QuadraticBezier(
                     p0,
                     this.scene.vertex[this.scene.counter],
                     p2
                 );
-                
                 this.scene.vertex[this.scene.counter] = p1;
+                if (this.scene.counter < delay) {
+                    this.scene.counter++;
+                } else {
+                    this.scene.counter = 0;
+                }
 
             }
         }
