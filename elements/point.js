@@ -98,7 +98,6 @@ export class Point {
                             // Actualiza la posición del punto solo dentro del segmento
                             point.x = x;
                             point.y = y;
-                            console.log(point);
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                     }
