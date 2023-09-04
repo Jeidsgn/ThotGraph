@@ -20,7 +20,10 @@ export class Point {
         this.scene.elementNames.push("Point"); // Agrega el nombre "Point" al array de nombres de elementos en la escena
     }
     getNearestPointOnSegment(pointX, pointY, segment) {
-        const { x1, y1, x2, y2 } = segment;
+        const x1 = segment.p0.x;
+        const y1 = segment.p0.y;
+        const x2 = segment.p1.x;
+        const y2 = segment.p1.y;
         const dx = x2 - x1;
         const dy = y2 - y1;
         const t = ((pointX - x1) * dx + (pointY - y1) * dy) / (dx * dx + dy * dy);
