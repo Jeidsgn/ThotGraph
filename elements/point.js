@@ -56,6 +56,8 @@ export class Point {
                     nearsegment = segment;
                     nearpoint = pointsegment;
                 }
+                console.log(nearpoint)
+                console.log(neardistance)
             }
 
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
