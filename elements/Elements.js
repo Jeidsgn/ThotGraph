@@ -61,6 +61,18 @@ export class Element {
       .setOrigin(0.5, 0.8);
     point1.setInteractive({ draggable: true });
     point2.setInteractive({ draggable: true });
+    point1.on("drag", (pointer, dragX, dragY) => {
+      if (this.scene.activatebutton === "Move") {
+        point1.x = dragX;
+        point1.y = dragY;
+      }
+    });
+    point2.on("drag", (pointer, dragX, dragY) => {
+      if (this.scene.activatebutton === "Move") {
+        point2.x = dragX;
+        point2.y = dragY;
+      }
+    });
     this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo
   }
