@@ -77,17 +77,32 @@ export class Point {
         }
     }
     movePoint() {
-        if (this.scene.activatebutton == "Move") {
-            const interactive = this.scene.points.getChildren(); //
+        if (this.scene.activatebutton === "Move") {
+            const interactive = this.scene.points.getChildren();
             for (const point of interactive) {
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
-                    if (this.scene.activatebutton == "Move") {
-                        point.x = dragX;
-                        point.y = dragY;
+                    if (this.scene.activatebutton === "Move") {
+                        // Obtén el segmento al que pertenece el punto
+                        const segment = point.segment;
+                        
+                        if (segment) {
+                            // Calcula la posición relativa 't' dentro del segmento
+                            const distance = Phaser.Math.Distance.Between(segment.p0.x, segment.p0.y, segment.p1.x, segment.p1.y);
+                            const t = Phaser.Math.Clamp(segment.getTAt(dragX, dragY), 0, 1);
+                            
+                            // Calcula las coordenadas del punto en el segmento
+                            const { x, y } = segment.getPointAt(t);
+                            
+                            // Actualiza la posición del punto solo dentro del segmento
+                            point.x = x;
+                            point.y = y;
+                            point.setData("t", t); // Actualiza la propiedad 't'
+                        }
                     }
                 });
             }
         }
     }
+    
 }
