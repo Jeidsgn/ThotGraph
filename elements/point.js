@@ -43,7 +43,7 @@ export class Point {
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
                 let segment = this.scene.segments[i];
-                let pointsegment = getNearestPointOnSegment(segment.p0, segment.p1, segment);
+                let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, segment);
                 let distance = Phaser.Math.Distance.Between(
                     segment.p0,
                     segment.p1,
