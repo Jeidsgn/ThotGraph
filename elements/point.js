@@ -114,7 +114,6 @@ export class Point {
                 };
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (NearDistanceCircle < 15) {
-
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                         .setOrigin(0.5, 0.52);
