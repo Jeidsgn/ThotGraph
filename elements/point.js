@@ -159,7 +159,7 @@ export class Point {
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                         // Obtén el circulo al que pertenece el punto
-                        const circle = point.circle;
+                        let circle = point.circle;
                         if (circle) {
                             point = this.getNearestPointOnCircle(circle, pointer);
                             point.setData("t", t); // Actualiza la propiedad 't'
