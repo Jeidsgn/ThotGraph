@@ -77,6 +77,7 @@ export class Point {
                     });
                     // Asigna el segmento al punto
                     point.segment = nearsegment;
+                    point.circle = null;
                     nearsegment.innerpoint.push(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
@@ -117,6 +118,7 @@ export class Point {
                     });
                     // Asigna el segmento al punto
                     point.circle = nearcircle;
+                    point.segment = null;
                     nearcircle.innerpoint.push(point);
                     //console.log(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
@@ -139,7 +141,7 @@ export class Point {
                         // Obtén el segmento al que pertenece el punto
                         const segment = point.segment;
 
-                        if (segment) {
+                        if (segment !== null) {
                             // Calcula la posición relativa 't' dentro del segmento
                             let t = (dragX - segment.p0.x) / (segment.p1.x - segment.p0.x);
                             t = Phaser.Math.Clamp(t, 0, 1);
@@ -154,7 +156,7 @@ export class Point {
                         }
                         // Obtén el circulo al que pertenece el punto
                         let circle = point.circle;
-                        if (circle) {
+                        if (circle !== null) {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
