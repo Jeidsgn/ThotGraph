@@ -7,10 +7,10 @@ export class Point {
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
-        this.pointCreated = false;
+        this.canCreatePoint = true;
             // Agrega un evento "pointerup" para restablecer la bandera cuando se libera el clic
     this.scene.input.on("pointerup", () => {
-        this.isClicking = false; // Restablece la bandera cuando se libera el clic
+        this.canCreatePoint = true; // Restablece la bandera cuando se libera el clic
     });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
@@ -39,10 +39,10 @@ export class Point {
     }
 
     createPoint() {
-        this.scene.input.once("pointerup", () => {
+        this.scene.input.once("pointerdown", () => {
         // Verifica si ya se ha creado un punto en este clic
-        if (this.scene.activatebutton === "Point") {
-            this.isClicking = true; // Establece la bandera para indicar que se está haciendo clic
+        if (this.scene.activatebutton === "Point" && this.canCreatePoint) {
+            this.canCreatePoint = false; // Establece la bandera para indicar que se está haciendo clic
             const letter = this.count;
             this.count = this.count + 1;
             // Inicializa variables para rastrear la línea y el punto más cercano
@@ -88,7 +88,7 @@ export class Point {
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", proportion);
                     this.scene.points.add(point); // Agrega el punto al grupo
-                    this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
+                     // Establece la bandera para indicar que se ha creado un punto
                 }
             }
     
@@ -130,7 +130,7 @@ export class Point {
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", nearpoint.t);
                     this.scene.points.add(point); // Agrega el punto al grupo
-                    this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
+                     // Establece la bandera para indicar que se ha creado un punto
                 }
             }
         }
