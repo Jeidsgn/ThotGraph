@@ -158,15 +158,10 @@ export class Point {
                             point.y = y;
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
-                        // Obtén el segmento al que pertenece el punto
+                        // Obtén el circulo al que pertenece el punto
                         const circle = point.circle;
-
                         if (circle) {
-                            // Calcula la posición relativa 't' dentro del circulo
-                            let drag = null;
-                            drag.x = dragX;
-                            drag.y = dragY;
-                            point = this.getNearestPointOnCircle(circle, drag);
+                            point = this.getNearestPointOnCircle(circle, pointer);
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                     }
