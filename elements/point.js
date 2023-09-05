@@ -87,6 +87,7 @@ export class Point {
             // Itera a través de los circulos y encuentra el más cercana
             for (let i = 0; i < this.scene.circles.length; i++) {
                 let circle = this.scene.circles[i];
+                console.log(circle);
                 let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);//El punto más cercano dentro de los circulos
                 let distance = Phaser.Math.Distance.Between(
                     this.pointer.x,
