@@ -164,7 +164,6 @@ export class Point {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
-                            point.setData("t", t); // Actualiza la propiedad 't'
                         }
                     }
                 });
