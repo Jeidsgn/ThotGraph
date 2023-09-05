@@ -30,16 +30,14 @@ export class Point {
     getNearestPointOnCircle(circle, p) {
         let angle = (Phaser.Math.Angle.Between(circle.x,circle.y,p.x,p.y));
         let np = null;
-        console.log(angle);
         if (angle>0){
             np = circle.getPointAt((0.18*angle));
-            console.log((0.18*angle));
         }else{
-            np = circle.getPointAt((0.16*angle)+1.01);
-            console.log((0.16*angle)+1.01);
+            np = circle.getPointAt((0.16*angle)+1);
         };
-        
+        console.log(np)
         return np;
+
     }
 
     createPoint() {
@@ -96,7 +94,6 @@ export class Point {
             // Itera a través de los circulos y encuentra el más cercana
             for (let i = 0; i < this.scene.circles.length; i++) {
                 let circle = this.scene.circles[i];
-                //console.log(circle);
                 let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);//El punto más cercano dentro de los circulos
                 let distance = Phaser.Math.Distance.Between(
                     this.pointer.x,
@@ -104,8 +101,7 @@ export class Point {
                     pointcircle.x,
                     pointcircle.y
                 );
-                //distance = distance-circle.xRadius;
-                //console.log(pointcircle);    
+                distance = distance-circle.xRadius;
                 if (distance < NearDistanceCircle) {
                     NearDistanceCircle = distance;
                     nearcircle = circle;
