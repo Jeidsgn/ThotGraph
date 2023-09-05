@@ -60,7 +60,7 @@ export class Point {
 
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                        .setOrigin(0.5, 0.8);
+                        .setOrigin(0.5, 0.58);
                     this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                         fill: "#000000",
                     });

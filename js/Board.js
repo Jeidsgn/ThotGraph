@@ -15,7 +15,7 @@ export class Board extends Phaser.Scene {
 
   preload() {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
-    this.load.spritesheet('point', './assets/point/Point.svg', { frameWidth: 28, frameHeight: 36 });
+    this.load.spritesheet('point', './assets/point/Point.svg', { frameWidth: 50, frameHeight: 50 });
     this.load.spritesheet('Button', './assets/point/Button.svg', { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet('Point', './assets/toolbox/createpoint.svg', { frameWidth: 80, frameHeight: 85 });
     this.load.spritesheet('Move', './assets/toolbox/movepoint.svg', { frameWidth: 80, frameHeight: 85 });
