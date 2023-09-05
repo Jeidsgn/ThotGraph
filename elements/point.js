@@ -8,15 +8,8 @@ export class Point {
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
         this.pointCreated = false;
-        this.scene.input.on("pointerdown", () => {
-            this.isClicking = true; // Se está haciendo clic
-        });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
-        });
-        this.scene.input.on("pointerup", () => {
-            this.isClicking = false; // No se está haciendo clic
-            this.pointCreated = true;
         });
     }
     addName() {
@@ -42,6 +35,7 @@ export class Point {
     }
 
     createPoint() {
+        this.scene.input.on("pointerup", () => {
         // Verifica si ya se ha creado un punto en este clic
         if (this.scene.activatebutton === "Point" && !this.pointCreated) {
             const letter = this.count;
@@ -133,7 +127,7 @@ export class Point {
                 }
             }
         }
-    }
+    });}
     
     movePoint() {
         if (this.scene.activatebutton === "Move") {
