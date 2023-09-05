@@ -161,7 +161,9 @@ export class Point {
                         // Obtén el circulo al que pertenece el punto
                         let circle = point.circle;
                         if (circle) {
-                            point = this.getNearestPointOnCircle(circle, pointer);
+                            let point_circle = this.getNearestPointOnCircle(circle, pointer);
+                            point.x = point_circle.x;
+                            point.y = point_circle.y;
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                     }
