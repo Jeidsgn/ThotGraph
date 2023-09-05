@@ -107,8 +107,12 @@ export class Point {
                     nearcircle = circle;
                     nearpoint = pointcircle;
                 }
-                proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.x))/6+0.52
-                this.coordenates = nearcircle.getPointAt(proportion);
+                proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.y))
+                if (proportion>0){
+                    this.coordenates = nearcirclee.getPointAt((0.18*angle));                    
+                } else{
+                    this.coordenates = nearcircle.getPointAt((0.16*angle)+1);
+                };
                 //console.log(this.coordenates);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (NearDistanceCircle < 15) {
