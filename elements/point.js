@@ -141,7 +141,7 @@ export class Point {
                         // Obtén el segmento al que pertenece el punto
                         let segment = point.segment;
 
-                        if (segment !== null) {
+                        if (segment && segment !== null) {
                             // Calcula la posición relativa 't' dentro del segmento
                             let t = (dragX - segment.p0.x) / (segment.p1.x - segment.p0.x);
                             t = Phaser.Math.Clamp(t, 0, 1);
@@ -155,7 +155,7 @@ export class Point {
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                         // Obtén el circulo al que pertenece el punto
-                        if (point.circle !== null) {
+                        if (point.circle && point.circle !== null) {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
