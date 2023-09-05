@@ -35,7 +35,7 @@ export class Point {
         }else{
             np = circle.getPointAt((angle/6.28));
         };
-        console.log(np);;
+        console.log(np);
         return np;
     }
 
