@@ -41,7 +41,8 @@ export class Point {
             let nearsegment = null;
             let nearcircle = null;
             let nearpoint = null;
-            let neardistance = Number.MAX_VALUE;
+            let NearDistanceSegment = Number.MAX_VALUE;
+            let NearDistanceCircle = Number.MAX_VALUE;
             let proportion = null;
 
             // Itera a través de las líneas y encuentra la más cercana
@@ -55,15 +56,15 @@ export class Point {
                     pointsegment.y
                 );
 
-                if (distance < neardistance) {
-                    neardistance = distance;
+                if (distance < NearDistanceSegment) {
+                    NearDistanceSegment = distance;
                     nearsegment = segment;
                     nearpoint = pointsegment;
                 }
                 proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
                 this.coordenates = nearsegment.getPointAt(proportion);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (neardistance < 15) {
+                if (NearDistanceSegment < 15) {
 
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
@@ -94,15 +95,15 @@ export class Point {
                     pointcircle.y
                 );
 
-                if (distance < neardistance) {
-                    neardistance = distance;
+                if (distance < NearDistanceCircle) {
+                    NearDistanceCircle = distance;
                     nearcircle = circle;
                     nearpoint = pointcircle;
                 }
                 proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.x))/6+0.52
                 this.coordenates = nearcircle.getPointAt(proportion);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (neardistance < 15) {
+                if (NearDistanceCircle < 15) {
 
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
