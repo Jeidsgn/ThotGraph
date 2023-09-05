@@ -91,7 +91,6 @@ export class Circle {
             this.scene.shadow.clear();
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
-                point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.circles.length; i++) {
                             let circle = this.scene.circles[i];
@@ -128,11 +127,11 @@ export class Circle {
                                 innerpoint.x = x;
                                 innerpoint.y = y;
                             }
-                            }
+
+                              }
 
                         }
                     }
-                });
             }
         }
     }

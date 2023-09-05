@@ -53,8 +53,8 @@ export class Point {
                     nearsegment = segment;
                     nearpoint = pointsegment;
                 }
-                proportion = (nearpoint.x-segment.p0.x)/(segment.p1.x-segment.p0.x);
-                this.coordenates = segment.getPointAt(proportion);
+                proportion = (nearpoint.x-nearsegment.p0.x)/(nearsegment.p1.x-nearsegment.p0.x);
+                this.coordenates = nearsegment.getPointAt(proportion);
             }
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
             if (neardistance < 15) {
