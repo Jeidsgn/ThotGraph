@@ -57,7 +57,7 @@ export class Element {
         "point",
         0
       )
-      .setOrigin(0.5, 0.8);
+      .setOrigin(0.5, 0.52);
     const point2 = this.scene.add
       .sprite(
         this.scene.cameras.main.width / (3 / 2),
@@ -65,7 +65,7 @@ export class Element {
         "point",
         0
       )
-      .setOrigin(0.5, 0.8);
+      .setOrigin(0.5, 0.52);
     point1.setInteractive({ draggable: true });
     point2.setInteractive({ draggable: true });
     point1.on("drag", (pointer, dragX, dragY) => {
