@@ -31,7 +31,7 @@ export class Point {
         let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y));
         let np = null;
         if (angle > 0) {
-            np = circle.getPointAt((0.18 * angle));
+            np = circle.getPointAt((0.17 * angle));
         } else {
             np = circle.getPointAt((0.16 * angle) + 1);
         };
