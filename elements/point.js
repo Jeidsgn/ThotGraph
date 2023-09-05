@@ -16,6 +16,7 @@ export class Point {
         });
         this.scene.input.on("pointerup", () => {
             this.isClicking = false; // No se está haciendo clic
+            this.pointCreated = true;
         });
     }
     addName() {
