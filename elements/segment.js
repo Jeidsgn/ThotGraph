@@ -138,7 +138,6 @@ export class Segment {
             this.scene.shadow.clear();
             const interactive = this.scene.points.getChildren(); //
             for (const point of interactive) {
-                point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton == "Move") {
                         for (let i = 0; i < this.scene.segments.length; i++) {
                             let segment = this.scene.segments[i];
@@ -173,7 +172,6 @@ export class Segment {
 
                         }
                     }
-                });
             }
         }
     }
