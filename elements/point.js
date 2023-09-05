@@ -41,7 +41,8 @@ export class Point {
     }
 
     createPoint() {
-        if (this.isClicking && !this.pointCreated) {
+        this.scene.input.on("pointerdown", () => {
+        if (this.scene.activatebutton == "Point") {
             const letter = this.count;
             this.count = this.count + 1;
             // Inicializa variables para rastrear la línea y el punto más cercano
@@ -86,7 +87,6 @@ export class Point {
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", proportion);
                     this.scene.points.add(point); // Agrega el punto al grupo
-                    this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
                     this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
                 }
             }
@@ -128,13 +128,13 @@ export class Point {
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", nearpoint.t);
                     this.scene.points.add(point); // Agrega el punto al grupo
-                    this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
                 }
             }
 
 
         }
-    }
+    });
+}
     movePoint() {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
