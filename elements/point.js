@@ -94,7 +94,7 @@ export class Point {
                     pointcircle.x,
                     pointcircle.y
                 );
-
+                    console.log(distance);
                 if (distance < NearDistanceCircle) {
                     NearDistanceCircle = distance;
                     nearcircle = circle;
@@ -102,6 +102,7 @@ export class Point {
                 }
                 proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.x))/6+0.52
                 this.coordenates = nearcircle.getPointAt(proportion);
+                console.log(this.coordenates);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (NearDistanceCircle < 15) {
 
@@ -114,6 +115,7 @@ export class Point {
                     // Asigna el segmento al punto
                     point.circle = nearcircle;
                     nearcircle.innerpoint.push(point);
+                    console.log(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", proportion);
