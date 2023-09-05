@@ -33,6 +33,7 @@ export class Point {
             this.count = this.count + 1;
             // Inicializa variables para rastrear la línea y el punto más cercano
             let nearsegment = null;
+            let nearcircle = null;
             let nearpoint = null;
             let neardistance = Number.MAX_VALUE;
             let proportion = null;
@@ -55,25 +56,26 @@ export class Point {
                 }
                 proportion = (nearpoint.x-nearsegment.p0.x)/(nearsegment.p1.x-nearsegment.p0.x);
                 this.coordenates = nearsegment.getPointAt(proportion);
+                if (neardistance < 15) {
+
+                    const point = this.scene.add
+                        .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                        .setOrigin(0.5, 0.8);
+                    this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                        fill: "#000000",
+                    });
+                    // Asigna el segmento al punto
+                    point.segment = nearsegment;
+                    nearsegment.innerpoint.push(point);
+                    this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                    point.id = letter; // Agrega el nombre del punto
+                    point.setData("t", proportion);
+                    this.scene.points.add(point); // Agrega el punto al grupo
+                    this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
+                }
             }
             // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-            if (neardistance < 15) {
-
-                const point = this.scene.add
-                    .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                    .setOrigin(0.5, 0.8);
-                this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                    fill: "#000000",
-                });
-                // Asigna el segmento al punto
-                point.segment = nearsegment;
-                nearsegment.innerpoint.push(point);
-                this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                point.id = letter; // Agrega el nombre del punto
-                point.setData("t", proportion);
-                this.scene.points.add(point); // Agrega el punto al grupo
-                this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
-            }
+            
         }
     }
     movePoint() {
