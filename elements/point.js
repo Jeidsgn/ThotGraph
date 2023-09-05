@@ -108,7 +108,7 @@ export class Point {
                 }
                 proportion = (Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y))
                 if (proportion > 0) {
-                    this.coordenates = nearcircle.getPointAt((0.18 * proportion));
+                    this.coordenates = nearcircle.getPointAt((0.17 * proportion));
                 } else {
                     this.coordenates = nearcircle.getPointAt((0.16 * proportion) + 1);
                 };
