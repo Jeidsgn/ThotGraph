@@ -29,9 +29,13 @@ export class Point {
     }
     getNearestPointOnCircle(circle, p) {
         let angle = (Phaser.Math.Angle.Between(circle.x,circle.y,p.x,p.y));
-        console.log(angle);
-        console.log((angle/6)+0.53);
-        let np = circle.getPointAt((angle/6)+0.53);
+        let np = null;
+        if (angle>0){
+            np = circle.getPointAt((angle/5.7)+1);
+        }else{
+            np = circle.getPointAt((angle/6.28));
+        };
+        console.log(np);;
         return np;
     }
 
