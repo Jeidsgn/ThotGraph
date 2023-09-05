@@ -28,12 +28,12 @@ export class Point {
 
     }
     getNearestPointOnCircle(circle, p) {
-        let angle = (Phaser.Math.Angle.Between(circle.x,circle.y,p.x,p.y));
+        let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y));
         let np = null;
-        if (angle>0){
-            np = circle.getPointAt((0.18*angle));
-        }else{
-            np = circle.getPointAt((0.16*angle)+1);
+        if (angle > 0) {
+            np = circle.getPointAt((0.18 * angle));
+        } else {
+            np = circle.getPointAt((0.16 * angle) + 1);
         };
         return np;
 
@@ -105,11 +105,11 @@ export class Point {
                     nearcircle = circle;
                     nearpoint = pointcircle;
                 }
-                proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.y))
-                if (proportion>0){
-                    this.coordenates = nearcircle.getPointAt((0.18*proportion));                    
-                } else{
-                    this.coordenates = nearcircle.getPointAt((0.16*proportion)+1);
+                proportion = (Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y))
+                if (proportion > 0) {
+                    this.coordenates = nearcircle.getPointAt((0.18 * proportion));
+                } else {
+                    this.coordenates = nearcircle.getPointAt((0.16 * proportion) + 1);
                 };
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (NearDistanceCircle < 15) {
@@ -156,6 +156,17 @@ export class Point {
                             // Actualiza la posición del punto solo dentro del segmento
                             point.x = x;
                             point.y = y;
+                            point.setData("t", t); // Actualiza la propiedad 't'
+                        }
+                        // Obtén el segmento al que pertenece el punto
+                        const circle = point.circle;
+
+                        if (circle) {
+                            // Calcula la posición relativa 't' dentro del circulo
+                            let drag = null;
+                            drag.x = dragX;
+                            drag.y = dragY;
+                            point = this.getNearestPointOnCircle(circle, drag);
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                     }
