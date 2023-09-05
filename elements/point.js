@@ -44,7 +44,7 @@ export class Point {
         });
         this.scene.input.on("pointerup", () => {
         // Verifica si ya se ha creado un punto en este clic
-        if (this.scene.activatebutton === "Point" && this.pointscreated == this.scene.points.getChildren().length) {
+        if (this.scene.activatebutton === "Point") {
             this.canCreatePoint = false; // Establece la bandera para indicar que se está haciendo clic
             const letter = this.count;
             this.count = this.count + 1;
@@ -75,7 +75,7 @@ export class Point {
                 proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
                 this.coordenates = nearsegment.getPointAt(proportion);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (NearDistanceSegment < 15) {
+                if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length) {
     
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
@@ -117,7 +117,7 @@ export class Point {
                     this.coordenates = nearcircle.getPointAt((0.16 * proportion) + 1);
                 };
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (NearDistanceCircle < 15) {
+                if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                         .setOrigin(0.5, 0.52);
