@@ -7,9 +7,9 @@ export class Point {
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
+        this.pointCreated = false;
         this.scene.input.on("pointerdown", () => {
             this.isClicking = true; // Se está haciendo clic
-            this.pointCreated = false; // No hay punto creado
         });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
@@ -41,8 +41,8 @@ export class Point {
     }
 
     createPoint() {
-        this.scene.input.on("pointerdown", () => {
-        if (this.scene.activatebutton == "Point") {
+        // Verifica si ya se ha creado un punto en este clic
+        if (this.scene.activatebutton === "Point" && !this.pointCreated) {
             const letter = this.count;
             this.count = this.count + 1;
             // Inicializa variables para rastrear la línea y el punto más cercano
@@ -52,7 +52,7 @@ export class Point {
             let NearDistanceSegment = Number.MAX_VALUE;
             let NearDistanceCircle = Number.MAX_VALUE;
             let proportion = null;
-
+    
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
                 let segment = this.scene.segments[i];
@@ -63,7 +63,7 @@ export class Point {
                     pointsegment.x,
                     pointsegment.y
                 );
-
+    
                 if (distance < NearDistanceSegment) {
                     NearDistanceSegment = distance;
                     nearsegment = segment;
@@ -73,7 +73,7 @@ export class Point {
                 this.coordenates = nearsegment.getPointAt(proportion);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (NearDistanceSegment < 15) {
-
+    
                     const point = this.scene.add
                         .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                         .setOrigin(0.5, 0.52);
@@ -90,11 +90,11 @@ export class Point {
                     this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
                 }
             }
-
-            // Itera a través de los circulos y encuentra el más cercana
+    
+            // Itera a través de los círculos y encuentra el más cercano
             for (let i = 0; i < this.scene.circles.length; i++) {
                 let circle = this.scene.circles[i];
-                let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);//El punto más cercano dentro de los circulos
+                let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);
                 let distance = Phaser.Math.Distance.Between(
                     this.pointer.x,
                     this.pointer.y,
@@ -128,13 +128,12 @@ export class Point {
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", nearpoint.t);
                     this.scene.points.add(point); // Agrega el punto al grupo
+                    this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
                 }
             }
-
-
         }
-    });
-}
+    }
+    
     movePoint() {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
