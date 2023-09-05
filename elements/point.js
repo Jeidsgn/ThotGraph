@@ -8,6 +8,10 @@ export class Point {
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
         this.pointCreated = false;
+            // Agrega un evento "pointerup" para restablecer la bandera cuando se libera el clic
+    this.scene.input.on("pointerup", () => {
+        this.isClicking = false; // Restablece la bandera cuando se libera el clic
+    });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
         });
@@ -35,9 +39,10 @@ export class Point {
     }
 
     createPoint() {
-        this.scene.input.on("pointerup", () => {
+        this.scene.input.on("pointerdown", () => {
         // Verifica si ya se ha creado un punto en este clic
-        if (this.scene.activatebutton === "Point" && !this.pointCreated) {
+        if (this.scene.activatebutton === "Point" && !this.isClicking) {
+            this.isClicking = true; // Establece la bandera para indicar que se está haciendo clic
             const letter = this.count;
             this.count = this.count + 1;
             // Inicializa variables para rastrear la línea y el punto más cercano
@@ -139,9 +144,9 @@ export class Point {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
                         // Obtén el segmento al que pertenece el punto
-                        let segment = point.segment;
+                        const segment = point.segment;
 
-                        if (segment && segment !== null) {
+                        if (segment !== null) {
                             // Calcula la posición relativa 't' dentro del segmento
                             let t = (dragX - segment.p0.x) / (segment.p1.x - segment.p0.x);
                             t = Phaser.Math.Clamp(t, 0, 1);
@@ -155,7 +160,8 @@ export class Point {
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                         // Obtén el circulo al que pertenece el punto
-                        if (point.circle && point.circle !== null) {
+                        let circle = point.circle;
+                        if (circle !== null) {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
