@@ -27,6 +27,11 @@ export class Point {
         return np;
 
     }
+    getNearestPointOnCircle(circle, p) {
+        let angle = (Phaser.Math.Angle.Between(circle.x,circle.y,p.x,p.y))/6+0.52;
+        let np = circle.getPointAt(angle);
+        return np;
+    }
 
     createPoint() {
         if (this.isClicking && !this.pointCreated) {
@@ -77,24 +82,25 @@ export class Point {
                     this.pointCreated = true; // Establece la bandera para indicar que se ha creado un punto
                 }
             }
+
             // Itera a través de los circulos y encuentra el más cercana
             for (let i = 0; i < this.scene.circles.length; i++) {
-                let segment = this.scene.segments[i];
-                let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, this.pointer);
+                let circle = this.scene.circles[i];
+                let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);//El punto más cercano dentro de los circulos
                 let distance = Phaser.Math.Distance.Between(
                     this.pointer.x,
                     this.pointer.y,
-                    pointsegment.x,
-                    pointsegment.y
+                    pointcircle.x,
+                    pointcircle.y
                 );
 
                 if (distance < neardistance) {
                     neardistance = distance;
-                    nearsegment = segment;
-                    nearpoint = pointsegment;
+                    nearcircle = circle;
+                    nearpoint = pointcircle;
                 }
-                proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
-                this.coordenates = nearsegment.getPointAt(proportion);
+                proportion = (Phaser.Math.Angle.Between(nearcircle.x,nearcircle.y,nearpoint.x,nearpoint.x))/6+0.52
+                this.coordenates = nearcircle.getPointAt(proportion);
                 // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                 if (neardistance < 15) {
 
@@ -105,8 +111,8 @@ export class Point {
                         fill: "#000000",
                     });
                     // Asigna el segmento al punto
-                    point.segment = nearsegment;
-                    nearsegment.innerpoint.push(point);
+                    point.circle = nearcircle;
+                    nearcircle.innerpoint.push(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", proportion);
