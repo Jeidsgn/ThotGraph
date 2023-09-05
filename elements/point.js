@@ -32,11 +32,11 @@ export class Point {
         let np = null;
         console.log(angle);
         if (angle>0){
-            np = circle.getPointAt((0.16*angle)+1.01);
-            console.log((-0.16*angle)+1.01);
+            np = circle.getPointAt((0.18*angle));
+            console.log((0.18*angle));
         }else{
-            np = circle.getPointAt((0.16*angle));
-            console.log((0.16*angle));
+            np = circle.getPointAt((0.16*angle)+1.01);
+            console.log((0.16*angle)+1.01);
         };
         
         return np;
