@@ -126,7 +126,7 @@ export class Point {
                     //console.log(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
-                    point.setData("t", proportion);
+                    //point.setData("t", proportion);
                     this.scene.points.add(point); // Agrega el punto al grupo
                     this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
                 }
