@@ -95,7 +95,7 @@ export class Point {
                     pointcircle.x,
                     pointcircle.y
                 );
-                distance = distance-circle.xRadius;
+                //distance = distance-circle.xRadius;
                 console.log(distance);    
                 if (distance < NearDistanceCircle) {
                     NearDistanceCircle = distance;
