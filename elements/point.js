@@ -35,7 +35,7 @@ export class Point {
         } else {
             np = circle.getPointAt((0.16 * angle) + 1);
         };
-        np.setData("t", angle)
+        np.t = angle;
         return np;
 
     }
@@ -126,7 +126,7 @@ export class Point {
                     //console.log(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
-                    point.setData("t", nearpoint.getData("t"));
+                    point.setData("t", nearpoint.t);
                     this.scene.points.add(point); // Agrega el punto al grupo
                     this.isClicking = false; // Desactiva el clic para evitar creación continua en el mismo clic
                 }
@@ -164,7 +164,7 @@ export class Point {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
-                            point.setData("t", point_circle.getData("t")); // Actualiza la propiedad 't'
+                            point.setData("t", point_circle.t); // Actualiza la propiedad 't'
                         }
                     }
                 });
