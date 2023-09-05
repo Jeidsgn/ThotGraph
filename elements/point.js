@@ -139,7 +139,7 @@ export class Point {
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
                         // Obtén el segmento al que pertenece el punto
-                        const segment = point.segment;
+                        let segment = point.segment;
 
                         if (segment !== null) {
                             // Calcula la posición relativa 't' dentro del segmento
@@ -155,8 +155,7 @@ export class Point {
                             point.setData("t", t); // Actualiza la propiedad 't'
                         }
                         // Obtén el circulo al que pertenece el punto
-                        let circle = point.circle;
-                        if (circle !== null) {
+                        if (point.circle !== null) {
                             let point_circle = this.getNearestPointOnCircle(circle, pointer);
                             point.x = point_circle.x;
                             point.y = point_circle.y;
