@@ -39,7 +39,7 @@ export class Point {
     }
 
     createPoint() {
-        this.scene.input.on("pointerdown", () => {
+        this.scene.input.once("pointerdown", () => {
         // Verifica si ya se ha creado un punto en este clic
         if (this.scene.activatebutton === "Point" && !this.isClicking) {
             this.isClicking = true; // Establece la bandera para indicar que se está haciendo clic
