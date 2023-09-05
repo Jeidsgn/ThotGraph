@@ -134,6 +134,7 @@ export class Point {
                 }
             }
         }
+        console.log(this.scene.points.length)
     });}
     
     movePoint() {
