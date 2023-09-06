@@ -171,7 +171,7 @@ export class Point {
                             } else {
                                 np = (0.16 * angle) + 1;
                             };
-                            const { x, y } = segment.getPointAt(np);
+                            const { x, y } = circle.getPointAt(np);
                             point.x = x;
                             point.y = y;
                             point.setData("t", point_circle.t); // Actualiza la propiedad 't'
