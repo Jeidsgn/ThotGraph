@@ -120,8 +120,6 @@ export class Segment {
                         this.scene.parabolic = null;
                         this.scene.shadow.clear();
                         this.scene.curvestyle.clear();
-
-                        this.reductionparabole == true;
                     }
                 });
             }

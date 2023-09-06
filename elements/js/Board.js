@@ -21,6 +21,7 @@ export class Board extends Phaser.Scene {
     this.load.spritesheet('Move', './assets/toolbox/movepoint.svg', { frameWidth: 80, frameHeight: 85 });
     this.load.spritesheet('Segment', './assets/toolbox/createsegment.svg', { frameWidth: 80, frameHeight: 85 });
     this.load.spritesheet('Circle', './assets/toolbox/createcircle.svg', { frameWidth: 80, frameHeight: 85 });
+    this.load.spritesheet('Line', './assets/toolbox/createline.svg', { frameWidth: 80, frameHeight: 85 });
     this.load.image('Bg', './assets/Bg.svg');
   }
 

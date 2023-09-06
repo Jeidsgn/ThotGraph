@@ -1,6 +1,7 @@
 import { Point } from "./point.js";
 import { Segment } from "./segment.js";
 import { Circle} from "./circle.js";
+import { Line} from "./line.js";
 
 export class Element {
   constructor(scene) {
@@ -9,6 +10,7 @@ export class Element {
     this.point = new Point(scene); // Crea una instancia de la clase Point y la almacena en la propiedad "point" de la instancia de Element
     this.segment = new Segment(scene);
     this.circle = new Circle(scene);
+    this.line = new Line(scene);
     this.scene.segment_gr = scene.add.graphics({
       lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
     });
@@ -28,6 +30,9 @@ export class Element {
       Circle: () => {
         this.circle.createCircle();
       },
+      Line: () => {
+        this.line.createLine();
+      },
     };
     return functions[buttonName];
   }
@@ -38,6 +43,7 @@ export class Element {
     this.point.addName();
     this.segment.addName();
     this.circle.addName();
+    this.line.addName();
   }
 
   // Crea un nuevo elemento
@@ -45,6 +51,7 @@ export class Element {
     this.point.movePoint();
     this.segment.moveSegment();
     this.circle.moveCircle();
+    this.line.moveLine();
   }
 
   // Puedes agregar métodos comunes a todos los elementos aquí
