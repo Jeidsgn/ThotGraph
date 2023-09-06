@@ -39,7 +39,6 @@ export class Element {
     this.segment.addName();
     this.circle.addName();
   }
-
   // Crea un nuevo elemento
   moveElement() {
     this.point.movePoint();
