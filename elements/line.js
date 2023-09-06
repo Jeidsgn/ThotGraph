@@ -57,7 +57,7 @@ export class Line {
                         // Borrar la línea anterior
                         this.scene.shadow.clear();
                         // Actualiza el aspecto visual de la líne mientras se mueve
-                        this.scene.shadow.lineStyle(5, 0x2aa4bf, 0.1);
+                        this.scene.shadow.lineStyle(5, 0xA9F250, 0.1);
                         // Define la línea
                         let infinitepts = this.getInfiniteLineCoordinates(point, pointer);
                         this.scene.line = new Phaser.Geom.Line(
@@ -75,7 +75,7 @@ export class Line {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.line_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
+                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.9 },
                             });
                             let infinitepts = this.getInfiniteLineCoordinates(point, dropZone);
                             this.line = new Phaser.Curves.Line(infinitepts[0],  infinitepts[1]);
@@ -110,7 +110,7 @@ export class Line {
                         let line = this.scene.lines[i];
                         if (point == line.sp0) {
                             this.scene.lines_gr[i].clear();
-                            this.scene.lines_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.9);
                             let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
@@ -126,7 +126,7 @@ export class Line {
                             }
                         } else if (point == line.sp1) {
                             this.scene.lines_gr[i].clear();
-                            this.scene.lines_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.9);
                             let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
