@@ -174,7 +174,7 @@ export class Point {
                             const { x, y } = circle.getPointAt(np);
                             point.x = x;
                             point.y = y;
-                            point.setData("t", point_circle.t); // Actualiza la propiedad 't'
+                            point.setData("t", np); // Actualiza la propiedad 't'
                         }
                     }
                 });
