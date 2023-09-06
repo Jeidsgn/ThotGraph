@@ -154,10 +154,8 @@ export class Point {
                             // Calcula la posición relativa 't' dentro del segmento
                             let t = (dragX - segment.p0.x) / (segment.p1.x - segment.p0.x);
                             t = Phaser.Math.Clamp(t, 0, 1);
-
                             // Calcula las coordenadas del punto en el segmento
                             const { x, y } = segment.getPointAt(t);
-
                             // Actualiza la posición del punto solo dentro del segmento
                             point.x = x;
                             point.y = y;
@@ -166,9 +164,16 @@ export class Point {
                         // Obtén el circulo al que pertenece el punto
                         let circle = point.circle;
                         if (circle !== null) {
-                            let point_circle = this.getNearestPointOnCircle(circle, pointer);
-                            point.x = point_circle.x;
-                            point.y = point_circle.y;
+                            let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, dragX, dragY));
+                            let np = null;
+                            if (angle > 0) {
+                                np = (0.17 * angle);
+                            } else {
+                                np = (0.16 * angle) + 1;
+                            };
+                            const { x, y } = segment.getPointAt(np);
+                            point.x = x;
+                            point.y = y;
                             point.setData("t", point_circle.t); // Actualiza la propiedad 't'
                         }
                     }
