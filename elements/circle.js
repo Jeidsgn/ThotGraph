@@ -1,4 +1,4 @@
-import { Segment } from "../elements/segment.js";
+import { Segment } from "./segment.js";
 
 export class Circle {
     constructor(scene) {

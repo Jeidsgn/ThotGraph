@@ -1,7 +1,7 @@
 import { Point } from "./point.js";
 import { Segment } from "./segment.js";
-import { Circle } from "../assets/circle.js";
-import { Line } from "../assets/line.js";
+import { Circle } from "./circle.js";
+import { Line } from "./line.js";
 
 export class Element {
   constructor(scene) {
