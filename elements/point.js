@@ -7,7 +7,6 @@ export class Point {
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
-        this.scene.intersectionsCalculated = false;
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
         });
@@ -35,8 +34,6 @@ export class Point {
     }
     findIntersections(objects) {
         const intersections = [];
-        console.log(this.scene.intersectionsCalculated);
-        if (this.scene.intersectionsCalculated == false) {
             for (let i = 0; i < objects.length; i++) {
                 for (let j = i + 1; j < objects.length; j++) {
                     const intersection = new Phaser.Geom.Point();
@@ -71,15 +68,13 @@ export class Point {
                     }
                     // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
                 }
-            }
+            
         };
-        this.scene.intersectionsCalculated = true;
         return intersections;
     }
     createPoint() {
         this.scene.input.on("pointerdown", () => {
             this.pointscreated = this.scene.points.getChildren().length;
-            this.scene.intersectionsCalculated = false;
         });
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
