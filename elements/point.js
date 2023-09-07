@@ -230,6 +230,7 @@ export class Point {
                     }; 
                     this.coordenates = nearcircle.getPointAt(t);
                     nearpoint.t = t;
+                    console.log(proportion);
                     console.log(t);
                     console.log(this.coordenates);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
