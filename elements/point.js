@@ -40,6 +40,7 @@ export class Point {
     }
     findIntersections(objects) {
         const intersections = [];
+        console.log(this.scene.intersectionsCalculated);
         if (this.scene.intersectionsCalculated == false) {
             for (let i = 0; i < objects.length; i++) {
                 for (let j = i + 1; j < objects.length; j++) {
