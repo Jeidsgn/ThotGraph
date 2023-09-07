@@ -83,6 +83,7 @@ export class Point {
     createPoint() {
         this.scene.input.on("pointerdown", () => {
             this.pointscreated = this.scene.points.getChildren().length;
+            this.scene.intersectionsCalculated = false;
         });
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
