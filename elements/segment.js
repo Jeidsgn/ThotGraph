@@ -73,6 +73,7 @@ export class Segment {
                 point.on("pointerdown", () => {
                     if (this.scene.activatebutton == "Segment") {
                         point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                        this.segmentscreated = this.scene.segments.length;
                     }
                 });
 
@@ -97,7 +98,7 @@ export class Segment {
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
-                    if (this.scene.activatebutton == "Segment") {
+                    if (this.scene.activatebutton == "Segment" && this.segmentscreated == this.scene.segments.length) {
                         if (dropZone != point) {
                             this.scene.vertex = [];
                             this.scene.parabolic = null;

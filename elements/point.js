@@ -7,12 +7,7 @@ export class Point {
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
-        this.canCreatePoint = true;
         this.scene.intersectionsCalculated = false;
-        // Agrega un evento "pointerup" para restablecer la bandera cuando se libera el clic
-        this.scene.input.on("pointerup", () => {
-            this.canCreatePoint = true; // Restablece la bandera cuando se libera el clic
-        });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
         });
@@ -89,7 +84,7 @@ export class Point {
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
             if (this.scene.activatebutton === "Point") {
-                this.canCreatePoint = false; // Establece la bandera para indicar que se está haciendo clic
+                // Establece la bandera para indicar que se está haciendo clic
                 const letter = this.count;
                 this.count = this.count + 1;
                 // Inicializa variables para rastrear la línea y el punto más cercano
