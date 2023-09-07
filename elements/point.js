@@ -8,10 +8,11 @@ export class Point {
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
         this.canCreatePoint = true;
-            // Agrega un evento "pointerup" para restablecer la bandera cuando se libera el clic
-    this.scene.input.on("pointerup", () => {
-        this.canCreatePoint = true; // Restablece la bandera cuando se libera el clic
-    });
+        this.scene.intersectionsCalculated = false;
+        // Agrega un evento "pointerup" para restablecer la bandera cuando se libera el clic
+        this.scene.input.on("pointerup", () => {
+            this.canCreatePoint = true; // Restablece la bandera cuando se libera el clic
+        });
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
         });
@@ -39,185 +40,187 @@ export class Point {
     }
     findIntersections(objects) {
         const intersections = [];
-    
-        for (let i = 0; i < objects.length; i++) {
-            for (let j = i + 1; j < objects.length; j++) {
-                const intersection = new Phaser.Geom.Point();
-    
-                // Verificar el tipo de objetos y calcular la intersección adecuada
-                if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
-                    const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                    const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
-    
-                    if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
-                        intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
-                        console.log("LineToLine");
+        if (this.scene.intersectionsCalculated == false) {
+            for (let i = 0; i < objects.length; i++) {
+                for (let j = i + 1; j < objects.length; j++) {
+                    const intersection = new Phaser.Geom.Point();
+
+                    // Verificar el tipo de objetos y calcular la intersección adecuada
+                    if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
+                        const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                        const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
+
+                        if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
+                            intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
+                            console.log("LineToLine");
+                        }
+                    } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
+                        // Convertir la curva a un objeto Geom para verificar la intersección
+                        const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                        const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
+
+                        if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
+                            intersections.push(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
+                            console.log("LineToCircle");
+                        }
+                    } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
+                        // Convertir la curva a un objeto Geom para verificar la intersección
+                        const geomEllipse1 = new Phaser.Geom.Ellipse(objects[i].x, objects[i].y, objects[i].radiusX * 2, objects[i].radiusY * 2);
+                        const geomEllipse2 = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
+
+                        if (Phaser.Geom.Intersects.CircleToCircle(geomEllipse1, geomEllipse2)) {
+                            intersections.push(Phaser.Geom.Intersects.GetCircleToCircle(geomEllipse1, geomEllipse2));
+                            console.log("CircleToCircle");
+                        }
                     }
-                } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
-                    // Convertir la curva a un objeto Geom para verificar la intersección
-                    const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                    const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
-    
-                    if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
-                        intersections.push(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
-                        console.log("LineToCircle");
-                    }
-                } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
-                    // Convertir la curva a un objeto Geom para verificar la intersección
-                    const geomEllipse1 = new Phaser.Geom.Ellipse(objects[i].x, objects[i].y, objects[i].radiusX * 2, objects[i].radiusY * 2);
-                    const geomEllipse2 = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
-    
-                    if (Phaser.Geom.Intersects.CircleToCircle(geomEllipse1, geomEllipse2)) {
-                        intersections.push(Phaser.Geom.Intersects.GetCircleToCircle(geomEllipse1, geomEllipse2));
-                        console.log("CircleToCircle");
-                    }
+                    // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
                 }
-                // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
             }
-        }
-    
+        };
+        this.scene.intersectionsCalculated = true;
         return intersections;
-    }    
+    }
     createPoint() {
         this.scene.input.on("pointerdown", () => {
             this.pointscreated = this.scene.points.getChildren().length;
         });
         this.scene.input.on("pointerup", () => {
-        // Verifica si ya se ha creado un punto en este clic
-        if (this.scene.activatebutton === "Point") {
-            this.canCreatePoint = false; // Establece la bandera para indicar que se está haciendo clic
-            const letter = this.count;
-            this.count = this.count + 1;
-            // Inicializa variables para rastrear la línea y el punto más cercano
-            let nearsegment = null;
-            let nearcircle = null;
-            let nearintersection = null;
-            let nearpoint = null;
-            let NearDistanceSegment = Number.MAX_VALUE;
-            let NearDistanceCircle = Number.MAX_VALUE;
-            let NearDistanceIntersection = Number.MAX_VALUE;
-            let proportion = null;
-            this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
-            this.scene.intersections = this.findIntersections(this.scene.objects);
-            // Itera a través de las intersecciones y encuentra la más cercana
-            for (let i = 0; i < this.scene.intersections.length; i++) {
-                let intersection = this.scene.intersections[i];
-                let distance = Phaser.Math.Distance.Between(
-                    this.pointer.x,
-                    this.pointer.y,
-                    intersection.x,
-                    intersection.y
-                );
-    
-                if (distance < NearDistanceIntersection) {
-                    NearDistanceIntersection = distance;
-                    nearintersection = intersection;
+            // Verifica si ya se ha creado un punto en este clic
+            if (this.scene.activatebutton === "Point") {
+                this.canCreatePoint = false; // Establece la bandera para indicar que se está haciendo clic
+                const letter = this.count;
+                this.count = this.count + 1;
+                // Inicializa variables para rastrear la línea y el punto más cercano
+                let nearsegment = null;
+                let nearcircle = null;
+                let nearintersection = null;
+                let nearpoint = null;
+                let NearDistanceSegment = Number.MAX_VALUE;
+                let NearDistanceCircle = Number.MAX_VALUE;
+                let NearDistanceIntersection = Number.MAX_VALUE;
+                let proportion = null;
+                this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
+                this.scene.intersections = this.findIntersections(this.scene.objects);
+                // Itera a través de las intersecciones y encuentra la más cercana
+                for (let i = 0; i < this.scene.intersections.length; i++) {
+                    let intersection = this.scene.intersections[i];
+                    let distance = Phaser.Math.Distance.Between(
+                        this.pointer.x,
+                        this.pointer.y,
+                        intersection.x,
+                        intersection.y
+                    );
+
+                    if (distance < NearDistanceIntersection) {
+                        NearDistanceIntersection = distance;
+                        nearintersection = intersection;
+                    }
+                    this.coordenates = nearintersection;
+                    // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
+                    if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
+
+                        const point = this.scene.add
+                            .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                            .setOrigin(0.5, 0.52);
+                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                            fill: "#000000",
+                        });
+                        // Asigna el segmento al punto
+                        point.intersection = true;
+                        point.segment = null;
+                        point.circle = null;
+                        //nearsegment.innerpoint.push(point);
+                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                        point.id = letter; // Agrega el nombre del punto
+                        //point.setData("t", proportion);
+                        this.scene.points.add(point); // Agrega el punto al grupo
+                        // Establece la bandera para indicar que se ha creado un punto
+                    }
+                } //console.log(this.scene.intersections.length);
+
+                // Itera a través de las líneas y encuentra la más cercana
+                for (let i = 0; i < this.scene.segments.length; i++) {
+                    let segment = this.scene.segments[i];
+                    let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, this.pointer);
+                    let distance = Phaser.Math.Distance.Between(
+                        this.pointer.x,
+                        this.pointer.y,
+                        pointsegment.x,
+                        pointsegment.y
+                    );
+
+                    if (distance < NearDistanceSegment) {
+                        NearDistanceSegment = distance;
+                        nearsegment = segment;
+                        nearpoint = pointsegment;
+                    }
+                    proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
+                    this.coordenates = nearsegment.getPointAt(proportion);
+                    // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
+                    if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length) {
+
+                        const point = this.scene.add
+                            .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                            .setOrigin(0.5, 0.52);
+                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                            fill: "#000000",
+                        });
+                        // Asigna el segmento al punto
+                        point.segment = nearsegment;
+                        point.circle = null;
+                        nearsegment.innerpoint.push(point);
+                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                        point.id = letter; // Agrega el nombre del punto
+                        point.setData("t", proportion);
+                        this.scene.points.add(point); // Agrega el punto al grupo
+                        // Establece la bandera para indicar que se ha creado un punto
+                    }
                 }
-                this.coordenates = nearintersection;
-                // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
-                if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
-    
-                    const point = this.scene.add
-                        .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                        .setOrigin(0.5, 0.52);
-                    this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                        fill: "#000000",
-                    });
-                    // Asigna el segmento al punto
-                    point.intersection = true;
-                    point.segment = null;
-                    point.circle = null;
-                    //nearsegment.innerpoint.push(point);
-                    this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                    point.id = letter; // Agrega el nombre del punto
-                    //point.setData("t", proportion);
-                    this.scene.points.add(point); // Agrega el punto al grupo
-                     // Establece la bandera para indicar que se ha creado un punto
-                }
-            } //console.log(this.scene.intersections.length);
-    
-            // Itera a través de las líneas y encuentra la más cercana
-            for (let i = 0; i < this.scene.segments.length; i++) {
-                let segment = this.scene.segments[i];
-                let pointsegment = this.getNearestPointOnSegment(segment.p0, segment.p1, this.pointer);
-                let distance = Phaser.Math.Distance.Between(
-                    this.pointer.x,
-                    this.pointer.y,
-                    pointsegment.x,
-                    pointsegment.y
-                );
-    
-                if (distance < NearDistanceSegment) {
-                    NearDistanceSegment = distance;
-                    nearsegment = segment;
-                    nearpoint = pointsegment;
-                }
-                proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
-                this.coordenates = nearsegment.getPointAt(proportion);
-                // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length) {
-    
-                    const point = this.scene.add
-                        .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                        .setOrigin(0.5, 0.52);
-                    this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                        fill: "#000000",
-                    });
-                    // Asigna el segmento al punto
-                    point.segment = nearsegment;
-                    point.circle = null;
-                    nearsegment.innerpoint.push(point);
-                    this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                    point.id = letter; // Agrega el nombre del punto
-                    point.setData("t", proportion);
-                    this.scene.points.add(point); // Agrega el punto al grupo
-                     // Establece la bandera para indicar que se ha creado un punto
+
+                // Itera a través de los círculos y encuentra el más cercano
+                for (let i = 0; i < this.scene.circles.length; i++) {
+                    let circle = this.scene.circles[i];
+                    let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);
+                    let distance = Phaser.Math.Distance.Between(
+                        this.pointer.x,
+                        this.pointer.y,
+                        pointcircle.x,
+                        pointcircle.y
+                    );
+                    if (distance < NearDistanceCircle) {
+                        NearDistanceCircle = distance;
+                        nearcircle = circle;
+                        nearpoint = pointcircle;
+                    }
+                    proportion = (Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y))
+                    if (proportion > 0) {
+                        this.coordenates = nearcircle.getPointAt((0.17 * proportion));
+                    } else {
+                        this.coordenates = nearcircle.getPointAt((0.16 * proportion) + 1);
+                    };
+                    // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
+                    if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
+                        const point = this.scene.add
+                            .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                            .setOrigin(0.5, 0.52);
+                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                            fill: "#000000",
+                        });
+                        // Asigna el segmento al punto
+                        point.circle = nearcircle;
+                        point.segment = null;
+                        nearcircle.innerpoint.push(point);
+                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                        point.id = letter; // Agrega el nombre del punto
+                        point.setData("t", nearpoint.t);
+                        this.scene.points.add(point); // Agrega el punto al grupo
+                        // Establece la bandera para indicar que se ha creado un punto
+                    }
                 }
             }
-    
-            // Itera a través de los círculos y encuentra el más cercano
-            for (let i = 0; i < this.scene.circles.length; i++) {
-                let circle = this.scene.circles[i];
-                let pointcircle = this.getNearestPointOnCircle(circle, this.pointer);
-                let distance = Phaser.Math.Distance.Between(
-                    this.pointer.x,
-                    this.pointer.y,
-                    pointcircle.x,
-                    pointcircle.y
-                );
-                if (distance < NearDistanceCircle) {
-                    NearDistanceCircle = distance;
-                    nearcircle = circle;
-                    nearpoint = pointcircle;
-                }
-                proportion = (Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y))
-                if (proportion > 0) {
-                    this.coordenates = nearcircle.getPointAt((0.17 * proportion));
-                } else {
-                    this.coordenates = nearcircle.getPointAt((0.16 * proportion) + 1);
-                };
-                // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
-                    const point = this.scene.add
-                        .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                        .setOrigin(0.5, 0.52);
-                    this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                        fill: "#000000",
-                    });
-                    // Asigna el segmento al punto
-                    point.circle = nearcircle;
-                    point.segment = null;
-                    nearcircle.innerpoint.push(point);
-                    this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                    point.id = letter; // Agrega el nombre del punto
-                    point.setData("t", nearpoint.t);
-                    this.scene.points.add(point); // Agrega el punto al grupo
-                     // Establece la bandera para indicar que se ha creado un punto
-                }
-            }
-        }
-    });}
-    
+        });
+    }
+
     movePoint() {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
