@@ -95,6 +95,7 @@ export class Point {
                 let proportion = null;
                 this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
                 this.scene.intersections = this.findIntersections(this.scene.objects);
+                console.log(this.scene.objects.length);
                 // Itera a través de las intersecciones y encuentra la más cercana
                 for (let i = 0; i < this.scene.intersections.length; i++) {
                     let intersection = this.scene.intersections[i];
