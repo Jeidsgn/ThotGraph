@@ -7,6 +7,7 @@ export class Point {
         this.scene.points = scene.add.group(); // Grupo para almacenar los puntos en la escena
         this.isClicking = false; // Variable para controlar si se está haciendo clic
         this.coordenates = null;
+        this.scene.intersectionsCalculated = false;
         this.scene.input.on("pointermove", (pointer) => {
             this.pointer = pointer; // No se está haciendo clic
         });
@@ -34,6 +35,8 @@ export class Point {
     }
     findIntersections(objects) {
         const intersections = [];
+        console.log(this.scene.intersectionsCalculated);
+        if (this.scene.intersectionsCalculated == false) {
             for (let i = 0; i < objects.length; i++) {
                 for (let j = i + 1; j < objects.length; j++) {
                     const intersection = new Phaser.Geom.Point();
@@ -67,12 +70,16 @@ export class Point {
                         }
                     }
                     // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
+                }
             }
         };
+        this.scene.intersectionsCalculated = true;
         return intersections;
     }
     createPoint() {
         this.scene.input.on("pointerdown", () => {
+            this.pointscreated = this.scene.points.getChildren().length;
+            this.scene.intersectionsCalculated = false;
         });
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
@@ -187,7 +194,7 @@ export class Point {
                     proportion = (nearpoint.x - nearline.p0.x) / (nearline.p1.x - nearline.p0.x);
                     this.coordenates = nearline.getPointAt(proportion);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                    if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length) {
+                    if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length && 0 < proportion < 1) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                             .setOrigin(0.5, 0.52);
