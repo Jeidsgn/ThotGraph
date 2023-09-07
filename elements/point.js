@@ -178,7 +178,7 @@ export class Point {
                 // Itera a través de las líneas y encuentra la más cercana
                 for (let i = 0; i < this.scene.lines.length; i++) {
                     let line = this.scene.lines[i];
-                    let pointline = this.getNearestPointOnSegment(segment.p0, segment.p1, this.pointer);
+                    let pointline = this.getNearestPointOnSegment(line.p0, line.p1, this.pointer);
                     let distance = Phaser.Math.Distance.Between(
                         this.pointer.x,
                         this.pointer.y,
