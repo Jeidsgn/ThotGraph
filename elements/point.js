@@ -130,8 +130,7 @@ export class Point {
                         this.scene.points.add(point); // Agrega el punto al grupo
                         // Establece la bandera para indicar que se ha creado un punto
                     }
-                } //console.log(this.scene.intersections.length);
-
+                } console.log(this.scene.intersections.length);
                 // Itera a través de las líneas y encuentra la más cercana
                 for (let i = 0; i < this.scene.lines.length; i++) {
                     let line = this.scene.lines[i];
@@ -170,7 +169,6 @@ export class Point {
                         // Establece la bandera para indicar que se ha creado un punto
                     }
                 }
-
                 // Itera a través de los segmentos y encuentra la más cercana
                 for (let i = 0; i < this.scene.segments.length; i++) {
                     let segment = this.scene.segments[i];
@@ -209,7 +207,6 @@ export class Point {
                         // Establece la bandera para indicar que se ha creado un punto
                     }
                 }
-
                 // Itera a través de los círculos y encuentra el más cercano
                 for (let i = 0; i < this.scene.circles.length; i++) {
                     let circle = this.scene.circles[i];
