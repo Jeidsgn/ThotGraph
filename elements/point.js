@@ -37,7 +37,44 @@ export class Point {
         return np;
 
     }
-
+    findIntersections(objects) {
+        const intersections = [];
+    
+        for (let i = 0; i < objects.length; i++) {
+            for (let j = i + 1; j < objects.length; j++) {
+                const intersection = new Phaser.Geom.Point();
+    
+                // Verificar el tipo de objetos y calcular la intersección adecuada
+                if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
+                    const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                    const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
+    
+                    if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2, intersection)) {
+                        intersections.push(intersection);
+                    }
+                } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
+                    // Convertir la curva a un objeto Geom para verificar la intersección
+                    const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                    const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
+    
+                    if (Phaser.Geom.Intersects.LineToEllipse(geomLine, geomEllipse, intersection)) {
+                        intersections.push(intersection);
+                    }
+                } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Line) {
+                    // Convertir la curva a un objeto Geom para verificar la intersección
+                    const geomEllipse = new Phaser.Geom.Ellipse(objects[i].x, objects[i].y, objects[i].radiusX * 2, objects[i].radiusY * 2);
+                    const geomLine = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
+    
+                    if (Phaser.Geom.Intersects.LineToEllipse(geomLine, geomEllipse, intersection)) {
+                        intersections.push(intersection);
+                    }
+                }
+                // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
+            }
+        }
+    
+        return intersections;
+    }    
     createPoint() {
         this.scene.input.on("pointerdown", () => {
             this.pointscreated = this.scene.points.getChildren().length;
@@ -51,10 +88,50 @@ export class Point {
             // Inicializa variables para rastrear la línea y el punto más cercano
             let nearsegment = null;
             let nearcircle = null;
+            let nearintersection = null;
             let nearpoint = null;
             let NearDistanceSegment = Number.MAX_VALUE;
             let NearDistanceCircle = Number.MAX_VALUE;
+            let NearDistanceIntersection = Number.MAX_VALUE;
             let proportion = null;
+            this.scene.objects = [].concat(this,scene.segments, this.scene.lines, this.scene.circles);
+            this.scene.intersections = this.findIntersections(this.scene.objects);
+            // Itera a través de las intersecciones y encuentra la más cercana
+            for (let i = 0; i < this.scene.intersections.length; i++) {
+                let intersection = this.scene.intersections[i];
+                let distance = Phaser.Math.Distance.Between(
+                    this.pointer.x,
+                    this.pointer.y,
+                    intersection.x,
+                    intersection.y
+                );
+    
+                if (distance < NearDistanceIntersection) {
+                    NearDistanceIntersection = distance;
+                    nearintersection = intersection;
+                }
+                this.coordenates = nearintersection;
+                // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
+                if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
+    
+                    const point = this.scene.add
+                        .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                        .setOrigin(0.5, 0.52);
+                    this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
+                        fill: "#000000",
+                    });
+                    // Asigna el segmento al punto
+                    point.intersection = true;
+                    point.segment = null;
+                    point.circle = null;
+                    //nearsegment.innerpoint.push(point);
+                    this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
+                    point.id = letter; // Agrega el nombre del punto
+                    //point.setData("t", proportion);
+                    this.scene.points.add(point); // Agrega el punto al grupo
+                     // Establece la bandera para indicar que se ha creado un punto
+                }
+            }
     
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
