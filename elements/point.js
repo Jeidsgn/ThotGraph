@@ -51,7 +51,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersections.concat(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
-                        console.log("LineToLine");
+                        //console.log("LineToLine");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
@@ -60,7 +60,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
                         intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
-                        console.log("LineToCircle");
+                        //console.log("LineToCircle");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
@@ -69,7 +69,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.CircleToCircle(geomEllipse1, geomEllipse2)) {
                         intersections.concat(Phaser.Geom.Intersects.GetCircleToCircle(geomEllipse1, geomEllipse2));
-                        console.log("CircleToCircle");
+                        //console.log("CircleToCircle");
                     }
                 }
                 // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
@@ -134,7 +134,7 @@ export class Point {
                     this.scene.points.add(point); // Agrega el punto al grupo
                      // Establece la bandera para indicar que se ha creado un punto
                 }
-            } console.log(this.scene.intersections.length);
+            } //console.log(this.scene.intersections.length);
     
             // Itera a través de las líneas y encuentra la más cercana
             for (let i = 0; i < this.scene.segments.length; i++) {
@@ -208,7 +208,6 @@ export class Point {
                     point.circle = nearcircle;
                     point.segment = null;
                     nearcircle.innerpoint.push(point);
-                    //console.log(point);
                     this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                     point.id = letter; // Agrega el nombre del punto
                     point.setData("t", nearpoint.t);
