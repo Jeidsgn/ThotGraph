@@ -94,7 +94,7 @@ export class Point {
             let NearDistanceCircle = Number.MAX_VALUE;
             let NearDistanceIntersection = Number.MAX_VALUE;
             let proportion = null;
-            this.scene.objects = [].concat(this,scene.segments, this.scene.lines, this.scene.circles);
+            this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
             this.scene.intersections = this.findIntersections(this.scene.objects);
             // Itera a través de las intersecciones y encuentra la más cercana
             for (let i = 0; i < this.scene.intersections.length; i++) {
