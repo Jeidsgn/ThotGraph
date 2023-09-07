@@ -42,7 +42,7 @@ export class Point {
                     if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
                         // Convertir la curva a un objeto Geom para verificar la intersección
                         const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                        const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius*2);
+                        const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
                         console.log(Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle));
                         this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },});
                         if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) { 
@@ -59,8 +59,8 @@ export class Point {
                         }
                     } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                         // Convertir la curva a un objeto Geom para verificar la intersección
-                        const geomCircle1 = new Phaser.Geom.Circle(objects[i].x, objects[i].y, objects[i].xRadius * 2, objects[i].yRadius * 2);
-                        const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius * 2, objects[j].yRadius * 2);
+                        const geomCircle1 = new Phaser.Geom.Circle(objects[i].x, objects[i].y, objects[i].xRadius);
+                        const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
 
                         if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
                             intersections.concat(Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2));
