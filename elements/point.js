@@ -39,22 +39,22 @@ export class Point {
                     const intersection = new Phaser.Geom.Point();
 
                     // Verificar el tipo de objetos y calcular la intersección adecuada
-                    if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
+                    if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
+                        // Convertir la curva a un objeto Geom para verificar la intersección
+                        const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                        const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].xRadius*2, objects[j].yRadius*2);
+                        console.log(Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse));
+                        if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) { 
+                            intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
+                            console.log("LineToCircle");
+                        }
+                    } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
                         const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                         const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
 
                         if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                             intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
                             console.log("LineToLine");
-                        }
-                    } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
-                        // Convertir la curva a un objeto Geom para verificar la intersección
-                        const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                        const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].xRadius*2, objects[j].yRadius*2);
-                        console.log(Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse));
-                        if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
-                            intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
-                            console.log("LineToCircle");
                         }
                     } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                         // Convertir la curva a un objeto Geom para verificar la intersección
