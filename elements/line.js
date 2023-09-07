@@ -47,6 +47,7 @@ export class Line {
                 point.on("pointerdown", () => {
                     if (this.scene.activatebutton == "Line") {
                         point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                        this.linescreated = this.scene.lines.length;
                     }
                 });
 
@@ -70,12 +71,12 @@ export class Line {
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
-                    if (this.scene.activatebutton == "Line") {
+                    if (this.scene.activatebutton == "Line" && this.linescreated == this.scene.lines.lengt) {
                         if (dropZone != point) {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.line_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },
+                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.5 },
                             });
                             let infinitepts = this.getInfiniteLineCoordinates(point, dropZone);
                             this.line = new Phaser.Curves.Line(infinitepts[0],  infinitepts[1]);
