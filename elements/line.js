@@ -75,7 +75,7 @@ export class Line {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.line_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.5 },
+                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },
                             });
                             let infinitepts = this.getInfiniteLineCoordinates(point, dropZone);
                             this.line = new Phaser.Curves.Line(infinitepts[0],  infinitepts[1]);
