@@ -51,6 +51,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersections.concat(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
+                        console.log("LineToLine");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
@@ -59,6 +60,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
                         intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
+                        console.log("LineToCircle");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
@@ -67,6 +69,7 @@ export class Point {
     
                     if (Phaser.Geom.Intersects.CircleToCircle(geomEllipse1, geomEllipse2)) {
                         intersections.concat(Phaser.Geom.Intersects.GetCircleToCircle(geomEllipse1, geomEllipse2));
+                        console.log("CircleToCircle");
                     }
                 }
                 // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
