@@ -224,9 +224,9 @@ export class Point {
                     proportion = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y)));
                     let t = null;
                     if (proportion > 0) {
-                        t = 1-(proportion/360);
-                    } else {
                         t = proportion/360;
+                    } else {
+                        t = (proportion/360)+1;
                     }; 
                     this.coordenates = nearcircle.getPointAt(t);
                     nearpoint.t = t;
