@@ -49,24 +49,24 @@ export class Point {
                     const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                     const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
     
-                    if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2, intersection)) {
-                        intersections.push(intersection);
+                    if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
+                        intersections.concat(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
                     const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                     const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
     
-                    if (Phaser.Geom.Intersects.LineToEllipse(geomLine, geomEllipse, intersection)) {
-                        intersections.push(intersection);
+                    if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
+                        intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
                     }
-                } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Line) {
+                } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
-                    const geomEllipse = new Phaser.Geom.Ellipse(objects[i].x, objects[i].y, objects[i].radiusX * 2, objects[i].radiusY * 2);
-                    const geomLine = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
+                    const geomEllipse1 = new Phaser.Geom.Ellipse(objects[i].x, objects[i].y, objects[i].radiusX * 2, objects[i].radiusY * 2);
+                    const geomEllipse2 = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX * 2, objects[j].radiusY * 2);
     
-                    if (Phaser.Geom.Intersects.LineToEllipse(geomLine, geomEllipse, intersection)) {
-                        intersections.push(intersection);
+                    if (Phaser.Geom.Intersects.CircleToCircle(geomEllipse1, geomEllipse2)) {
+                        intersections.concat(Phaser.Geom.Intersects.GetCircleToCircle(geomEllipse1, geomEllipse2));
                     }
                 }
                 // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
