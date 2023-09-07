@@ -122,6 +122,7 @@ export class Segment {
                         this.scene.curvestyle.clear();
                     }
                 });
+                console.log(this.scene.segments.length);
             }
             if (this.isClicking == false) {
                 this.scene.vertex = [];
