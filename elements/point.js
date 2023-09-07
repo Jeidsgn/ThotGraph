@@ -187,7 +187,7 @@ export class Point {
                     proportion = (nearpoint.x - nearline.p0.x) / (nearline.p1.x - nearline.p0.x);
                     this.coordenates = nearline.getPointAt(proportion);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                    if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length && 0 < proportion < 1) {
+                    if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                             .setOrigin(0.5, 0.52);
