@@ -34,6 +34,7 @@ export class Circle {
                 point.on("pointerdown", () => {
                     if (this.scene.activatebutton == "Circle") {
                         point.input.dropZone = false; // Desactiva la propiedad de drop solo para este objeto
+                        this.circlescreated = this.scene.circles.length;
                     }
                 });
 
@@ -56,7 +57,7 @@ export class Circle {
                     }
                 });
                 point.on("drop", (pointer, dropZone) => {
-                    if (this.scene.activatebutton == "Circle") {
+                    if (this.scene.activatebutton == "Circle" && this.circlescreated == this.scene.circles.length) {
                         if (dropZone != point) {
                             this.scene.shadow.clear();
                             this.circle_gr = this.scene.add.graphics({
