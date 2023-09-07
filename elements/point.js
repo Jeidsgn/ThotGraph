@@ -51,7 +51,7 @@ export class Point {
                         // Convertir la curva a un objeto Geom para verificar la intersección
                         const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                         const geomEllipse = new Phaser.Geom.Ellipse(objects[j].x, objects[j].y, objects[j].radiusX*2, objects[j].radiusY*2);
-                        console.log(geom.Ellipse);
+                        console.log(geomEllipse);
                         if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomEllipse)) {
                             intersections.push(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomEllipse));
                             console.log("LineToCircle");
