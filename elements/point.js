@@ -115,7 +115,7 @@ export class Point {
 
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                            .setOrigin(0.5, 0.52);
+                            .setOrigin(0.5, 0.58);
                         this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                             fill: "#000000",
                         });
@@ -155,7 +155,7 @@ export class Point {
                     if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                            .setOrigin(0.5, 0.52);
+                            .setOrigin(0.5, 0.58);
                         this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                             fill: "#000000",
                         });
@@ -194,7 +194,7 @@ export class Point {
                     if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                            .setOrigin(0.5, 0.52);
+                            .setOrigin(0.5, 0.58);
                         this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                             fill: "#000000",
                         });
@@ -235,7 +235,7 @@ export class Point {
                     if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                            .setOrigin(0.5, 0.52);
+                            .setOrigin(0.5, 0.58);
                         this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                             fill: "#000000",
                         });
