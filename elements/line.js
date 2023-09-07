@@ -12,7 +12,7 @@ export class Line {
 
         // Crear una propiedad graphics en la escena para mantener la instancia de Phaser.Graphics
         this.scene.shadow = scene.add.graphics({
-            lineStyle: { width: 5, color: 0x000000, alpha: 0.8 },
+            lineStyle: { width: 5, color: 0x000000, alpha: 0.5 },
         });
         this.line = null;
         this.isClicking = false; // Variable para controlar si se está haciendo clic
@@ -57,7 +57,7 @@ export class Line {
                         // Borrar la línea anterior
                         this.scene.shadow.clear();
                         // Actualiza el aspecto visual de la líne mientras se mueve
-                        this.scene.shadow.lineStyle(5, 0xA9F250, 0.1);
+                        this.scene.shadow.lineStyle(5, 0xA9F250, 0.2);
                         // Define la línea
                         let infinitepts = this.getInfiniteLineCoordinates(point, pointer);
                         this.scene.line = new Phaser.Geom.Line(
@@ -126,7 +126,7 @@ export class Line {
                             }
                         } else if (point == line.sp1) {
                             this.scene.lines_gr[i].clear();
-                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.9);
+                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.5);
                             let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
