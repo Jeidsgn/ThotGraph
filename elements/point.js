@@ -43,7 +43,6 @@ export class Point {
                         // Convertir la curva a un objeto Geom para verificar la intersección
                         const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                         const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
-                        console.log(Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle));
                         this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },});
                         if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) { 
                             intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle));
@@ -131,7 +130,7 @@ export class Point {
                         this.scene.points.add(point); // Agrega el punto al grupo
                         // Establece la bandera para indicar que se ha creado un punto
                     }
-                } console.log(this.scene.intersections.length);
+                } 
                 // Itera a través de las líneas y encuentra la más cercana
                 for (let i = 0; i < this.scene.lines.length; i++) {
                     let line = this.scene.lines[i];
@@ -223,7 +222,7 @@ export class Point {
                         nearpoint = pointcircle;
                     }
                     proportion = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y)));
-                    let t = []
+                    let t = null;
                     if (proportion > 0) {
                         t = nearcircle.getPointAt(1-(proportion/360));
                     } else {
@@ -231,6 +230,8 @@ export class Point {
                     }; 
                     this.coordenates = nearcircle.getPointAt(t);
                     nearpoint.t = t;
+                    console.log(t);
+                    console.log(this.coordenates);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
