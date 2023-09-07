@@ -98,44 +98,7 @@ export class Point {
                 let NearDistanceCircle = Number.MAX_VALUE;
                 let NearDistanceIntersection = Number.MAX_VALUE;
                 let proportion = null;
-                this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
-                this.scene.intersections = this.findIntersections(this.scene.objects);
-                // Itera a través de las intersecciones y encuentra la más cercana
-                for (let i = 0; i < this.scene.intersections.length; i++) {
-                    let intersection = this.scene.intersections[i];
-                    let distance = Phaser.Math.Distance.Between(
-                        this.pointer.x,
-                        this.pointer.y,
-                        intersection.x,
-                        intersection.y
-                    );
 
-                    if (distance < NearDistanceIntersection) {
-                        NearDistanceIntersection = distance;
-                        nearintersection = intersection;
-                    }
-                    this.coordenates = nearintersection;
-                    // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
-                    if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
-
-                        const point = this.scene.add
-                            .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
-                            .setOrigin(0.5, 0.52);
-                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                            fill: "#000000",
-                        });
-                        // Asigna el segmento al punto
-                        point.intersection = true;
-                        point.segment = null;
-                        point.circle = null;
-                        //nearsegment.innerpoint.push(point);
-                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                        point.id = letter; // Agrega el nombre del punto
-                        //point.setData("t", proportion);
-                        this.scene.points.add(point); // Agrega el punto al grupo
-                        // Establece la bandera para indicar que se ha creado un punto
-                    }
-                } //console.log(this.scene.intersections.length);
 
                 // Itera a través de los segmentos y encuentra la más cercana
                 for (let i = 0; i < this.scene.segments.length; i++) {
