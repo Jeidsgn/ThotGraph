@@ -29,7 +29,7 @@ export class Line {
     getInfiniteLineCoordinates(p0, p1) {
         // Calcula la dirección de la línea original
         const direction = new Phaser.Math.Vector2(p1.x - p0.x, p1.y - p0.y).normalize();
-        const extensionDistance = 5000;
+        const extensionDistance = 3000;
         // Calcula los puntos extremos para simular la línea infinita
         const extendedP0 = new Phaser.Math.Vector2(p0.x - direction.x * extensionDistance, p0.y - direction.y * extensionDistance);
         const extendedP1 = new Phaser.Math.Vector2(p1.x + direction.x * extensionDistance, p1.y + direction.y * extensionDistance);
@@ -75,7 +75,7 @@ export class Line {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.line_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.9 },
+                                lineStyle: { width: 5, color: 0xA9F250, alpha: 0.5 },
                             });
                             let infinitepts = this.getInfiniteLineCoordinates(point, dropZone);
                             this.line = new Phaser.Curves.Line(infinitepts[0],  infinitepts[1]);
@@ -110,7 +110,7 @@ export class Line {
                         let line = this.scene.lines[i];
                         if (point == line.sp0) {
                             this.scene.lines_gr[i].clear();
-                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.9);
+                            this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.5);
                             let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
