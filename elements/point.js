@@ -223,11 +223,14 @@ export class Point {
                         nearpoint = pointcircle;
                     }
                     proportion = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(nearcircle.x, nearcircle.y, nearpoint.x, nearpoint.y)));
+                    let t = []
                     if (proportion > 0) {
-                        this.coordenates = nearcircle.getPointAt(1-(proportion/360));
+                        t = nearcircle.getPointAt(1-(proportion/360));
                     } else {
-                        this.coordenates = nearcircle.getPointAt((proportion/360));
-                    };
+                        t = nearcircle.getPointAt((proportion/360));
+                    }; 
+                    this.coordenates = nearcircle.getPointAt(t);
+                    nearpoint.t = t;
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
