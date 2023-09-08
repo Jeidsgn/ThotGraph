@@ -24,9 +24,9 @@ export class Point {
         let angle = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y)));
         let np = null;
         if (angle > 0) {
-            angle = angle/360;
+            angle = angle / 360;
         } else {
-            angle = (angle/360)+1;
+            angle = (angle / 360) + 1;
         };
         np = circle.getPointAt(angle);
         np.t = angle;
@@ -35,41 +35,45 @@ export class Point {
     }
     findIntersections(objects) {
         const intersections = [];
-            for (let i = 0; i < objects.length; i++) {
-                for (let j = i + 1; j < objects.length; j++) {
-                    const intersection = new Phaser.Geom.Point();
-
-                    // Verificar el tipo de objetos y calcular la intersección adecuada
-                    if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
-                        // Convertir la curva a un objeto Geom para verificar la intersección
-                        const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                        const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
-                        this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },});
-                        if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) { 
-                            intersections.push(...Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle));
-                            console.log("LineToCircle");
-                        }
-                    } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
-                        const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
-                        const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
-
-                        if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
-                            intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
-                            console.log("LineToLine");
-                        }
-                    } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
-                        // Convertir la curva a un objeto Geom para verificar la intersección
-                        const geomCircle1 = new Phaser.Geom.Circle(objects[i].x, objects[i].y, objects[i].xRadius);
-                        const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
-
-                        if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
-                            intersections.push(...Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2));
-                            console.log("CircleToCircle");
-                        }
+        for (let i = 0; i < objects.length; i++) {
+            for (let j = i + 1; j < objects.length; j++) {
+                const intersection = new Phaser.Geom.Point();
+                // Verificar el tipo de objetos y calcular la intersección adecuada
+                if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
+                    // Convertir la curva a un objeto Geom para verificar la intersección
+                    const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                    const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
+                    this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 }, });
+                    if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) {
+                        for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle); k++) {
+                            intersection = Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle)[k];
+                            intersection.objects = [geomLine, geomCircle];
+                            intersections.push(intersection);
+                        };
+                        console.log("LineToCircle");
                     }
-                    // Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
-                }
-            
+                } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
+                    const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
+                    const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
+
+                    if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
+                        intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
+                        console.log("LineToLine");
+                    }
+                } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
+                    // Convertir la curva a un objeto Geom para verificar la intersección
+                    const geomCircle1 = new Phaser.Geom.Circle(objects[i].x, objects[i].y, objects[i].xRadius);
+                    const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
+                    if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
+                        for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2); k++) {
+                            intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
+                            intersection.objects = [geomLine, geomCircle];
+                            intersections.push(intersection);
+                        };
+                        console.log("CircleToCircle");
+                    }
+                }// Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
+            }
         };
         return intersections;
     }
@@ -111,7 +115,7 @@ export class Point {
                         NearDistanceIntersection = distance;
                         nearintersection = intersection;
                     }
-                    
+
                     this.coordenates = nearintersection;
                     // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
@@ -133,7 +137,7 @@ export class Point {
                         this.scene.points.add(point); // Agrega el punto al grupo
                         // Establece la bandera para indicar que se ha creado un punto
                     }
-                } 
+                }
                 // Itera a través de las líneas y encuentra la más cercana
                 for (let i = 0; i < this.scene.lines.length; i++) {
                     let line = this.scene.lines[i];
@@ -153,7 +157,7 @@ export class Point {
                     proportion = (nearpoint.x - nearline.p0.x) / (nearline.p1.x - nearline.p0.x);
                     this.coordenates = nearline.getPointAt(proportion);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea+
-                    
+
                     if (NearDistanceLine < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
@@ -191,7 +195,7 @@ export class Point {
                     proportion = (nearpoint.x - nearsegment.p0.x) / (nearsegment.p1.x - nearsegment.p0.x);
                     this.coordenates = nearsegment.getPointAt(proportion);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
-                    if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length  && 0 < proportion && proportion < 1) {
+                    if (NearDistanceSegment < 15 && this.pointscreated == this.scene.points.getChildren().length && 0 < proportion && proportion < 1) {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                             .setOrigin(0.5, 0.58);
