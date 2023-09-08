@@ -79,6 +79,7 @@ export class Point {
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
             if (this.scene.activatebutton === "Point") {
+                console.log(this.pointer);
                 // Establece la bandera para indicar que se está haciendo clic
                 const letter = this.count;
                 this.count = this.count + 1;
