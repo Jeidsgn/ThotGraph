@@ -140,7 +140,7 @@ export class Line {
                                 if (innerpoint.intersection == true) {
 
                                     let nearDistance = Number.MAX_VALUE
-                                    console.log(point.object);
+                                    console.log(point.objects);
                                     let ip = this.point.findIntersections(point.objects);
                                     let newIntersection = null;
                                     for (let k = 0; k < ip.length; k++) {
