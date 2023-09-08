@@ -57,7 +57,9 @@ export class Point {
                     const geomLine2 = new Phaser.Geom.Line(objects[j].p0.x, objects[j].p0.y, objects[j].p1.x, objects[j].p1.y);
 
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
-                        intersections.push(Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2));
+                        intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
+                        intersection.objects = [geomLine1,geomLine2]
+                        intersections.push();
                         console.log("LineToLine");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
@@ -67,7 +69,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
-                            intersection.objects = [geomLine, geomCircle];
+                            intersection.objects = [geomCircle1, geomCircle2];
                             intersections.push(intersection);
                         };
                         console.log("CircleToCircle");
