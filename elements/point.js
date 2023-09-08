@@ -96,6 +96,7 @@ export class Point {
                 let proportion = null;
                 this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
                 this.scene.intersections = this.findIntersections(this.scene.objects);
+                console.log(this.scene.intersections.length);
                 // Itera a través de las intersecciones y encuentra la más cercana
                 for (let i = 0; i < this.scene.intersections.length; i++) {
                     let intersection = this.scene.intersections[i];
@@ -110,7 +111,7 @@ export class Point {
                         NearDistanceIntersection = distance;
                         nearintersection = intersection;
                     }
-                    console.log(this.scene.intersections.length);
+                    
                     this.coordenates = nearintersection;
                     // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
