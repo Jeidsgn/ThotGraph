@@ -137,28 +137,10 @@ export class Line {
 
                             // Actualiza los puntos internos asociados al lineo
                             for (const innerpoint of line.innerpoint) {
-                                if (innerpoint.intersection == true) {
-
-                                    let nearDistance = Number.MAX_VALUE
-                                    console.log(innerpoint.objects);
-                                    let ip = this.point.findIntersections(innerpoint.objects);
-                                    let newIntersection = null;
-                                    for (let k = 0; k < ip.length; k++) {
-                                        let distance = Phaser.Math.Distance.Between(innerpoint.x, innerpoint.y, ip[k].x, ip[k].y);
-                                        if (distance < nearDistance) {
-                                            nearDistance = distance;
-                                            newIntersection = ip[k];
-                                        };
-                                    };
-                                    innerpoint.x = newIntersection.x;
-                                    innerpoint.y = newIntersection.y;
-                                } else {
                                     const t = innerpoint.getData("t"); // Obtiene la posición relativa t
                                     const { x, y } = line.getPoint(t); // Calcula las nuevas coordenadas
                                     innerpoint.x = x;
                                     innerpoint.y = y;
-
-                                }
                             }
                         }
 
