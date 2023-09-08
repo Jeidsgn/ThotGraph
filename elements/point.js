@@ -45,7 +45,7 @@ export class Point {
                     const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
                     this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 }, });
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) {
-                        for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle); k++) {
+                        for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle)[k];
                             intersection.objects = [geomLine, geomCircle];
                             intersections.push(intersection);
@@ -65,7 +65,7 @@ export class Point {
                     const geomCircle1 = new Phaser.Geom.Circle(objects[i].x, objects[i].y, objects[i].xRadius);
                     const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
                     if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
-                        for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2); k++) {
+                        for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
                             intersection.objects = [geomLine, geomCircle];
                             intersections.push(intersection);
