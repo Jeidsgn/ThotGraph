@@ -80,7 +80,6 @@ export class Point {
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
             if (this.scene.activatebutton === "Point") {
-                console.log(this.pointer);
                 // Establece la bandera para indicar que se está haciendo clic
                 const letter = this.count;
                 this.count = this.count + 1;
@@ -111,6 +110,7 @@ export class Point {
                         NearDistanceIntersection = distance;
                         nearintersection = intersection;
                     }
+                    console.log(distance);
                     this.coordenates = nearintersection;
                     // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
@@ -223,8 +223,6 @@ export class Point {
                         nearcircle = circle;
                         nearpoint = pointcircle;
                     }
-                    console.log(pointcircle.t);
-                    console.log(pointcircle);
                     // Si la distancia es menor a 15 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceCircle < 15 && this.pointscreated == this.scene.points.getChildren().length) {
                         const point = this.scene.add
@@ -273,13 +271,6 @@ export class Point {
                         let circle = point.circle;
                         if (circle !== null) {
                             let np = this.getNearestPointOnCircle(circle, pointer)
-                            //let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, dragX, dragY));
-                            //let np = null;
-                            //if (angle > 0) {
-                            //    np = (0.17 * angle);
-                            //} else {
-                            //    np = (0.16 * angle) + 1;
-                            //};
                             point.x = np.x;
                             point.y = np.y;
                             point.setData("t", np.t); // Actualiza la propiedad 't'
