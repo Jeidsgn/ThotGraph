@@ -110,7 +110,7 @@ export class Point {
                         NearDistanceIntersection = distance;
                         nearintersection = intersection;
                     }
-                    console.log(distance);
+                    console.log(this.scene.intersections.length);
                     this.coordenates = nearintersection;
                     // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
