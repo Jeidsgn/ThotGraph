@@ -132,8 +132,8 @@ export class Point {
                         point.circle = null;
                         console.log(nearintersection.objects);
                         for (i in nearintersection.objects){
-                            console.log(i);
-                            i.innerpoint.push(point);
+                            console.log(nearintersection.objects[i]);
+                            nearintersection.objects[i].innerpoint.push(point);
                         }
                         point.objects = nearintersection.objects;
                         //nearsegment.innerpoint.push(point);
