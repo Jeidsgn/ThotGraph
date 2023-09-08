@@ -140,8 +140,8 @@ export class Line {
                                 if (innerpoint.intersection == true) {
 
                                     let nearDistance = Number.MAX_VALUE
-                                    console.log(point.objects);
-                                    let ip = this.point.findIntersections(point.objects);
+                                    console.log(innerpoint.objects);
+                                    let ip = this.point.findIntersections(innerpoint.objects);
                                     let newIntersection = null;
                                     for (let k = 0; k < ip.length; k++) {
                                         let distance = Phaser.Math.Distance.Between(innerpoint.x, innerpoint.y, ip[k].x, ip[k].y);
