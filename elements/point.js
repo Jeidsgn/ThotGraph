@@ -46,7 +46,7 @@ export class Point {
                         const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
                         this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },});
                         if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) { 
-                            intersections.concat(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle));
+                            intersections.push(Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle));
                             console.log("LineToCircle");
                         }
                     } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
@@ -63,7 +63,7 @@ export class Point {
                         const geomCircle2 = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
 
                         if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
-                            intersections.concat(Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2));
+                            intersections.push(Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2));
                             console.log("CircleToCircle");
                         }
                     }
