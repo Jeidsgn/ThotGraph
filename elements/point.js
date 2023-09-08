@@ -47,7 +47,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle)[k];
-                            intersection.objects = [geomLine, geomCircle];
+                            intersection.objects = [objects[i], objects[j]];
                             intersections.push(intersection);
                         };
                         console.log("LineToCircle");
@@ -58,7 +58,7 @@ export class Point {
 
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
-                        intersection.objects = [geomLine1,geomLine2];
+                        intersection.objects = [objects[i], objects[j]];
                         intersections.push(intersection);
                         console.log("LineToLine");
                     }
@@ -69,7 +69,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
-                            intersection.objects = [geomCircle1, geomCircle2];
+                            intersection.objects = [objects[i], objects[j]];
                             intersections.push(intersection);
                         };
                         console.log("CircleToCircle");
