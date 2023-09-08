@@ -282,7 +282,7 @@ export class Point {
                             //};
                             point.x = np.x;
                             point.y = np.y;
-                            point.setData("t", np); // Actualiza la propiedad 't'
+                            point.setData("t", np.t); // Actualiza la propiedad 't'
                         }
                     }
                 });
