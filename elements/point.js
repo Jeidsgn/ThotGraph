@@ -117,13 +117,11 @@ export class Point {
                         NearDistanceIntersection = distance;
                         nearintersection = intersection;
                     }
-
-                    this.coordenates = nearintersection;
                     // Si la distancia es menor a 22 píxeles, crea el punto en el punto más cercano en la línea
                     if (NearDistanceIntersection < 22 && this.pointscreated == this.scene.points.getChildren().length) {
 
                         const point = this.scene.add
-                            .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
+                            .sprite(nearintersection.x, nearintersection.y, "point", 0)
                             .setOrigin(0.5, 0.58);
                         this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
                             fill: "#000000",
@@ -132,9 +130,11 @@ export class Point {
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
+                        console.log(nearintersection.objects);
                         for (i in nearintersection.objects){
                             i.innerpoint.push(point);
                         }
+                        point.objects = nearintersection.objects;
                         //nearsegment.innerpoint.push(point);
                         this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                         point.id = letter; // Agrega el nombre del punto
