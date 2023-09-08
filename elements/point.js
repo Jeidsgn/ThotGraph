@@ -258,21 +258,6 @@ export class Point {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
             for (const point of interactive) {
-                if (point.intersection == true) {
-                    let nearDistance = Number.MAX_VALUE
-                    let ip = this.findIntersections(point.objects);
-                    let newIntersection = null;
-                    for (let k = 0; k < ip.length; k++) {
-                        let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
-                        if (distance < nearDistance) {
-                            nearDistance = distance;
-                            newIntersection = ip[k];
-                        };
-                    };
-                    point.x = newIntersection.x;
-                    point.y = newIntersection.y;
-                    console.log(newIntersection);
-                }
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
@@ -300,6 +285,20 @@ export class Point {
                         }
                     }
                 });
+                if (point.intersection == true) {
+                    let nearDistance = Number.MAX_VALUE
+                    let ip = this.findIntersections(point.objects);
+                    let newIntersection = null;
+                    for (let k = 0; k < ip.length; k++) {
+                        let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
+                        if (distance < nearDistance) {
+                            nearDistance = distance;
+                            newIntersection = ip[k];
+                        };
+                    };
+                    point.x = newIntersection.x;
+                    point.y = newIntersection.y;
+                };
             }
         }
     }
