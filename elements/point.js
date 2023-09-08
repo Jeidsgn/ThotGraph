@@ -21,13 +21,14 @@ export class Point {
 
     }
     getNearestPointOnCircle(circle, p) {
-        let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y));
+        angle = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y)));
         let np = null;
         if (angle > 0) {
-            np = circle.getPointAt((0.17 * angle));
+            angle = angle/360;
         } else {
-            np = circle.getPointAt((0.16 * angle) + 1);
+            angle = (angle/360)+1;
         };
+        np = circle.getPointAt(angle);
         np.t = angle;
         return np;
 
