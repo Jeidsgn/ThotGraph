@@ -282,6 +282,20 @@ export class Point {
                             point.y = np.y;
                             point.setData("t", np.t); // Actualiza la propiedad 't'
                         }
+                        if (point.intersection == true){
+                            let nearDistance = Number.MAX_VALUE
+                            let ip = this.findIntersections(point.objects);
+                            let newIntersection = null;
+                            for (let k=0; k<ip.length; k++){
+                                let distance = Phaser.Math.Distance.Between(pointer.x,pointer.y,ip[k].x,ip[k].y); 
+                                if (distance<nearDistance){
+                                    nearDistance = distance;
+                                    newIntersection = ip[k];
+                                };
+                            };
+                            point.x=newIntersection.x;
+                            point.y=newIntersection.y;
+                        };
                     }
                 });
             }
