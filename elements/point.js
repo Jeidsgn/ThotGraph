@@ -282,16 +282,16 @@ export class Point {
                         // Obtén el circulo al que pertenece el punto
                         let circle = point.circle;
                         if (circle !== null) {
-                            let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, dragX, dragY));
-                            let np = null;
-                            if (angle > 0) {
-                                np = (0.17 * angle);
-                            } else {
-                                np = (0.16 * angle) + 1;
-                            };
-                            const { x, y } = circle.getPointAt(np);
-                            point.x = x;
-                            point.y = y;
+                            let np = this.getNearestPointOnCircle(circle, pointer)
+                            //let angle = (Phaser.Math.Angle.Between(circle.x, circle.y, dragX, dragY));
+                            //let np = null;
+                            //if (angle > 0) {
+                            //    np = (0.17 * angle);
+                            //} else {
+                            //    np = (0.16 * angle) + 1;
+                            //};
+                            point.x = np.x;
+                            point.y = np.y;
                             point.setData("t", np); // Actualiza la propiedad 't'
                         }
                     }
