@@ -21,7 +21,7 @@ export class Point {
 
     }
     getNearestPointOnCircle(circle, p) {
-        angle = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y)));
+        let angle = Phaser.Math.RadToDeg((Phaser.Math.Angle.Between(circle.x, circle.y, p.x, p.y)));
         let np = null;
         if (angle > 0) {
             angle = angle/360;
