@@ -37,7 +37,7 @@ export class Point {
         const intersections = [];
         for (let i = 0; i < objects.length; i++) {
             for (let j = i + 1; j < objects.length; j++) {
-                const intersection = new Phaser.Geom.Point();
+                let intersection = new Phaser.Geom.Point();
                 // Verificar el tipo de objetos y calcular la intersección adecuada
                 if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
