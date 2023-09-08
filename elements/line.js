@@ -33,9 +33,9 @@ export class Line {
         // Calcula los puntos extremos para simular la línea infinita
         const extendedP0 = new Phaser.Math.Vector2(p0.x - direction.x * extensionDistance, p0.y - direction.y * extensionDistance);
         const extendedP1 = new Phaser.Math.Vector2(p1.x + direction.x * extensionDistance, p1.y + direction.y * extensionDistance);
-    
+
         return [extendedP0, extendedP1];
-    
+
     }
 
     createLine() {
@@ -79,7 +79,7 @@ export class Line {
                                 lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 },
                             });
                             let infinitepts = this.getInfiniteLineCoordinates(point, dropZone);
-                            this.line = new Phaser.Curves.Line(infinitepts[0],  infinitepts[1]);
+                            this.line = new Phaser.Curves.Line(infinitepts[0], infinitepts[1]);
                             this.line.draw(this.line_gr);
                             this.line.innerpoint = [];
                             this.line.sp0 = point;
@@ -112,7 +112,7 @@ export class Line {
                         if (point == line.sp0) {
                             this.scene.lines_gr[i].clear();
                             this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.5);
-                            let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
+                            let infinitepts = this.getInfiniteLineCoordinates(line.sp0, line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
                             line.sp0.x = point.x;
@@ -128,7 +128,7 @@ export class Line {
                         } else if (point == line.sp1) {
                             this.scene.lines_gr[i].clear();
                             this.scene.lines_gr[i].lineStyle(5, 0xA9F250, 0.5);
-                            let infinitepts = this.getInfiniteLineCoordinates(line.sp0,line.sp1);
+                            let infinitepts = this.getInfiniteLineCoordinates(line.sp0, line.sp1);
                             line.p0 = infinitepts[0];
                             line.p1 = infinitepts[1];
                             line.sp1.x = point.x;
@@ -137,10 +137,27 @@ export class Line {
 
                             // Actualiza los puntos internos asociados al lineo
                             for (const innerpoint of line.innerpoint) {
-                                const t = innerpoint.getData("t"); // Obtiene la posición relativa t
-                                const { x, y } = line.getPoint(t); // Calcula las nuevas coordenadas
-                                innerpoint.x = x;
-                                innerpoint.y = y;
+                                if (innerpoint.intersection == true) {
+
+                                    let nearDistance = Number.MAX_VALUE
+                                    let ip = this.point.findIntersections(point.objects);
+                                    let newIntersection = null;
+                                    for (let k = 0; k < ip.length; k++) {
+                                        let distance = Phaser.Math.Distance.Between(innerpoint.x, innerpoint.y, ip[k].x, ip[k].y);
+                                        if (distance < nearDistance) {
+                                            nearDistance = distance;
+                                            newIntersection = ip[k];
+                                        };
+                                    };
+                                    innerpoint.x = newIntersection.x;
+                                    innerpoint.y = newIntersection.y;
+                                } else {
+                                    const t = innerpoint.getData("t"); // Obtiene la posición relativa t
+                                    const { x, y } = line.getPoint(t); // Calcula las nuevas coordenadas
+                                    innerpoint.x = x;
+                                    innerpoint.y = y;
+
+                                }
                             }
                         }
 

@@ -132,6 +132,9 @@ export class Point {
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
+                        for (i in intersection.objects){
+                            i.innerpoint.push(point);
+                        }
                         //nearsegment.innerpoint.push(point);
                         this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                         point.id = letter; // Agrega el nombre del punto
