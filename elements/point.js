@@ -58,8 +58,8 @@ export class Point {
 
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
-                        intersection.objects = [geomLine1,geomLine2]
-                        intersections.push();
+                        intersection.objects = [geomLine1,geomLine2];
+                        intersections.push(intersection);
                         console.log("LineToLine");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
@@ -132,7 +132,7 @@ export class Point {
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
-                        for (i in intersection.objects){
+                        for (i in nearintersection.objects){
                             i.innerpoint.push(point);
                         }
                         //nearsegment.innerpoint.push(point);
