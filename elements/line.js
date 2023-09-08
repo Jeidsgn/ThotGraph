@@ -137,10 +137,10 @@ export class Line {
 
                             // Actualiza los puntos internos asociados al lineo
                             for (const innerpoint of line.innerpoint) {
-                                    const t = innerpoint.getData("t"); // Obtiene la posición relativa t
-                                    const { x, y } = line.getPoint(t); // Calcula las nuevas coordenadas
-                                    innerpoint.x = x;
-                                    innerpoint.y = y;
+                                const t = innerpoint.getData("t"); // Obtiene la posición relativa t
+                                const { x, y } = line.getPoint(t); // Calcula las nuevas coordenadas
+                                innerpoint.x = x;
+                                innerpoint.y = y;
                             }
                         }
 

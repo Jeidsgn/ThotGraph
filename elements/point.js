@@ -102,7 +102,6 @@ export class Point {
                 let proportion = null;
                 this.scene.objects = [].concat(this.scene.segments, this.scene.lines, this.scene.circles);
                 this.scene.intersections = this.findIntersections(this.scene.objects);
-                console.log(this.scene.intersections.length);
                 // Itera a través de las intersecciones y encuentra la más cercana
                 for (let i = 0; i < this.scene.intersections.length; i++) {
                     let intersection = this.scene.intersections[i];
@@ -130,9 +129,7 @@ export class Point {
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
-                        console.log(nearintersection.objects);
-                        for (i in nearintersection.objects){
-                            console.log(nearintersection.objects[i]);
+                        for (i in nearintersection.objects) {
                             nearintersection.objects[i].innerpoint.push(point);
                         }
                         point.objects = nearintersection.objects;
@@ -274,7 +271,8 @@ export class Point {
                     };
                     point.x = newIntersection.x;
                     point.y = newIntersection.y;
-            }
+                    console.log(newIntersection);
+                }
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
