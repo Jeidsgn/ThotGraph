@@ -292,10 +292,13 @@ export class Point {
                     for (let k = 0; k < ip.length; k++) {
                         let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
                         console.log(distance);
-                        if (distance < nearDistance) {
+                        if (0 < distance && distance < nearDistance) {
                             nearDistance = distance;
                             newIntersection = ip[k];
                             console.log(ip[k]);
+                        };
+                        if(0 == distance){
+                            newIntersection = point;
                         };                        
                         console.log(newIntersection);
                     };
