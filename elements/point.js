@@ -294,8 +294,8 @@ export class Point {
                         if (distance < nearDistance) {
                             nearDistance = distance;
                             newIntersection = ip[k];
-                        };
-                        console.log(ip);
+                            console.log(ip[k]);
+                        };                        
                         console.log(newIntersection);
                     };
                     point.x = newIntersection.x;
