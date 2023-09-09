@@ -295,7 +295,7 @@ export class Point {
                             nearDistance = distance;
                             newIntersection = ip[k];
                         };
-                        console.log(k);
+                        console.log(ip);
                         console.log(newIntersection);
                     };
                     point.x = newIntersection.x;
