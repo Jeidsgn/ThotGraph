@@ -302,7 +302,8 @@ export class Point {
                         console.log(newIntersection);
                     };
                     if (newIntersection !== null) {
-                        point = newIntersection;
+                        point.x = newIntersection.x;
+point.y = newIntersection.y;
                     }
                 };
             }
