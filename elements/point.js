@@ -73,7 +73,6 @@ export class Point {
                             intersections.push(intersection);
                         };
                         console.log("CircleToCircle");
-                        console.log(intersection);
                     }
                 }// Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
             }
@@ -292,6 +291,7 @@ export class Point {
                     let newIntersection = null;
                     for (let k = 0; k < ip.length; k++) {
                         let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
+                        console.log(distance);
                         if (distance < nearDistance) {
                             nearDistance = distance;
                             newIntersection = ip[k];
