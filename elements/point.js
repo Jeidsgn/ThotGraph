@@ -73,6 +73,7 @@ export class Point {
                             intersections.push(intersection);
                         };
                         console.log("CircleToCircle");
+                        console.log(intersection);
                     }
                 }// Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
             }
