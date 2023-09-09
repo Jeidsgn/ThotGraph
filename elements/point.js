@@ -290,7 +290,7 @@ export class Point {
                     let ip = this.findIntersections(point.objects);
                     let newIntersection = point;
                     for (let k = 0; k < ip.length; k++) {
-                        if (pk[k] instanceof Phaser.Geom.Point){
+                        if (ip[k] instanceof Phaser.Geom.Point){
                         let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
                         console.log(distance);
                         if (distance < nearDistance && !isNaN(distance)) {
