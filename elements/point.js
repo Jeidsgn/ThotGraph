@@ -68,7 +68,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
-                            intersection.objects = [objects[i], objects[j]];
+                            intersection.objects = [objects[i], objects[j], k];
                             intersections.push(intersection);
                         };
                         console.log("CircleToCircle");
