@@ -233,9 +233,6 @@ export class Point {
     movePoint() {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
-            let distance = null;
-            let neardistance = Number.MAX_VALUE;
-            let nearintersection = null;
             for (const point of interactive) {                
                 if (point.intersection == true) {
                     let ip = this.findIntersections(point.objects);
