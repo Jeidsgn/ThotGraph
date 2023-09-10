@@ -260,8 +260,9 @@ export class Point {
             const interactive = this.scene.points.getChildren();
             for (const point of interactive) {                
                 if (point.intersection == true) {
-                    let nearDistance = Number.MAX_VALUE
                     let ip = this.findIntersections(point.objects);
+                    console.log(point.objects[2]);
+                    console.log(point.objects);
                     point.x = ip[point.objects[2]].x;
                     point.y = ip[point.objects[2]].y;                                        
                 };
