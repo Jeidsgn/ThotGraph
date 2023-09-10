@@ -263,6 +263,7 @@ export class Point {
                     let ip = this.findIntersections(point.objects);
                     console.log(point.objects[2]);
                     console.log(point.objects);
+                    console.log(point);
                     point.x = ip[point.objects[2]].x;
                     point.y = ip[point.objects[2]].y;                                        
                 };
