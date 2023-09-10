@@ -49,7 +49,6 @@ export class Point {
                             intersection.objects = [objects[i], objects[j], k];
                             intersections.push(intersection);
                         };
-                        console.log("LineToCircle");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Line && objects[j] instanceof Phaser.Curves.Line) {
                     const geomLine1 = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
@@ -59,7 +58,6 @@ export class Point {
                         intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
                         intersection.objects = [objects[i], objects[j]];
                         intersections.push(intersection);
-                        console.log("LineToLine");
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
                     // Convertir la curva a un objeto Geom para verificar la intersección
@@ -71,7 +69,6 @@ export class Point {
                             intersection.objects = [objects[i], objects[j], k];
                             intersections.push(intersection);
                         };
-                        console.log("CircleToCircle");
                     }
                 }// Agregar casos para otros tipos de objetos (círculos, líneas, etc.)
             }
@@ -258,9 +255,6 @@ export class Point {
             for (const point of interactive) {                
                 if (point.intersection == true) {
                     let ip = this.findIntersections(point.objects);
-                    console.log(point.objects[2]);
-                    console.log(point.objects);
-                    console.log(point);
                     point.x = ip[point.objects[2]].x;
                     point.y = ip[point.objects[2]].y;                                        
                 };
