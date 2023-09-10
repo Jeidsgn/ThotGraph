@@ -291,12 +291,16 @@ export class Point {
                     let newIntersection = point;
                     for (let k = 0; k < ip.length; k++) {
                         if (ip[k] instanceof Phaser.Geom.Point) {
+                            console.log(k);
                             console.log(ip[k]);
                             console.log(ip);
                             let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
+                            console.log(distance);
                             if (distance < nearDistance) {// && !isNaN(distance)
                                 nearDistance = distance;
+                                console.log(nearDistance);
                                 newIntersection = ip[k];
+                                console.log(newIntersection);
                             };
                             point.x = newIntersection.x;
                             point.y = newIntersection.y;
