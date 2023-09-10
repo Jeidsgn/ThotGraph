@@ -259,8 +259,7 @@ export class Point {
     movePoint() {
         if (this.scene.activatebutton === "Move") {
             const interactive = this.scene.points.getChildren();
-            for (const point of interactive) {
-                point.setInteractive({ draggable: true });
+            for (const point of interactive) {                
                 if (point.intersection == true) {
                     let nearDistance = Number.MAX_VALUE
                     let ip = this.findIntersections(point.objects);
@@ -283,6 +282,7 @@ export class Point {
                         };
                     
                 };
+                point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
                         // Obtén el segmento al que pertenece el punto
