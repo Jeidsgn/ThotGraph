@@ -126,6 +126,8 @@ export class Point {
                             fill: "#000000",
                         });
                         // Asigna el segmento al punto
+                        point.x=nearintersection.x
+                        point.y=nearintersection.y
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
