@@ -46,7 +46,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle)[k];
-                            intersection.objects = [objects[i], objects[j], intersection.y];
+                            intersection.objects = [objects[i], objects[j], intersection];
                             intersections.push(intersection);
                         };
                     }
@@ -56,7 +56,7 @@ export class Point {
 
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
-                        intersection.objects = [objects[i], objects[j], intersection.y];
+                        intersection.objects = [objects[i], objects[j], intersection];
                         intersections.push(intersection);
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
@@ -66,7 +66,7 @@ export class Point {
                     if (Phaser.Geom.Intersects.CircleToCircle(geomCircle1, geomCircle2)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetCircleToCircle(geomCircle1, geomCircle2)[k];
-                            intersection.objects = [objects[i], objects[j], intersection.y];
+                            intersection.objects = [objects[i], objects[j], intersection];
                             intersections.push(intersection);
                         };
                     }
@@ -239,22 +239,19 @@ export class Point {
             for (const point of interactive) {                
                 if (point.intersection == true) {
                     let ip = this.findIntersections(point.objects);
-                    if (ip.length == 2){
-                        for (let i = 0; i < ip.length; i++){
-                            distance = (point.objects[2]- ip[i].y)**2;
-                            if (distance < neardistance){
-                                neardistance = distance;
-                                nearintersection = ip[i];
-                            };
-                        };
-                        point.x = nearintersection.x;
-                        point.y = nearintersection.y;
-                    } else{
-                        point.x = ip[0].x;
-                        point.y = ip[0].y;   
-                    };
-                                     
-                };
+                    // Calcula la distancia entre point y las intersecciones
+                    const distances = ip.map(intersection => {
+                        const dx = intersection.x - point.objects[2].x;
+                        const dy = intersection.y - point.objects[2].y;
+                        // Usa el cuadrado de la distancia para evitar cálculos costosos de raíz cuadrada
+                        return dx * dx + dy * dy;
+                    });
+                    // Encuentra la intersección más cercana
+                    const closestIntersectionIndex = distances.indexOf(Math.min(...distances));
+                    // Actualiza la posición de point con la intersección más cercana
+                    point.x = ip[closestIntersectionIndex].x;
+                    point.y = ip[closestIntersectionIndex].y;
+                }
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
