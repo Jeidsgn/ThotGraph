@@ -130,7 +130,7 @@ export class Point {
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
-                        for (i in nearintersection.objects) {
+                        for (let i=0; i < nearintersection.objects.length; i++ ) {
                             nearintersection.objects[i].innerpoint.push(point);
                         }
                         point.objects = nearintersection.objects;
