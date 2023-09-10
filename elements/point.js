@@ -118,20 +118,13 @@ export class Point {
                         const point = this.scene.add
                             .sprite(nearintersection.x, nearintersection.y, "point", 0)
                             .setOrigin(0.5, 0.58);
-                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                            fill: "#000000",
-                        });
                         // Asigna el segmento al punto
                         point.x=nearintersection.x
                         point.y=nearintersection.y
                         point.intersection = true;
                         point.segment = null;
                         point.circle = null;
-                        point.objects = nearintersection.objects;
-                        //nearsegment.innerpoint.push(point);
-                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
-                        point.id = letter; // Agrega el nombre del punto
-                        //point.setData("t", proportion);
+                        point.objects = nearintersection.objects;point.id = letter; // Agrega el nombre del punto
                         this.scene.points.add(point); // Agrega el punto al grupo
                         // Establece la bandera para indicar que se ha creado un punto
                     }
@@ -160,14 +153,10 @@ export class Point {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                             .setOrigin(0.5, 0.58);
-                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                            fill: "#000000",
-                        });
                         // Asigna la línea al punto
                         point.segment = nearline;
                         point.circle = null;
                         nearline.innerpoint.push(point);
-                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                         point.id = letter; // Agrega el nombre del punto
                         point.setData("t", proportion);
                         this.scene.points.add(point); // Agrega el punto al grupo
@@ -197,14 +186,10 @@ export class Point {
                         const point = this.scene.add
                             .sprite(this.coordenates.x, this.coordenates.y, "point", 0)
                             .setOrigin(0.5, 0.58);
-                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                            fill: "#000000",
-                        });
                         // Asigna el segmento al punto
                         point.segment = nearsegment;
                         point.circle = null;
                         nearsegment.innerpoint.push(point);
-                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                         point.id = letter; // Agrega el nombre del punto
                         point.setData("t", proportion);
                         this.scene.points.add(point); // Agrega el punto al grupo
@@ -231,14 +216,10 @@ export class Point {
                         const point = this.scene.add
                             .sprite(pointcircle.x, pointcircle.y, "point", 0)
                             .setOrigin(0.5, 0.58);
-                        this.textContainer = this.scene.add.text(point.x, point.y - 26, "", {
-                            fill: "#000000",
-                        });
                         // Asigna el segmento al punto
                         point.circle = nearcircle;
                         point.segment = null;
                         nearcircle.innerpoint.push(point);
-                        this.textContainer.text += letter + " "; // Agrega la letra asociada al punto al contenedor de texto
                         point.id = letter; // Agrega el nombre del punto
                         point.setData("t", nearpoint.t);
                         this.scene.points.add(point); // Agrega el punto al grupo
