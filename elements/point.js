@@ -240,7 +240,7 @@ export class Point {
                 if (point.intersection == true) {
                     let ip = this.findIntersections(point.objects);
                     if (ip.length == 2){
-                        for (i in ip){
+                        for (let i = 0; i < ip.length; i++){
                             distance = point.objects[2]- ip[i].y;
                             if (distance < neardistance){
                                 neardistance = distance;
