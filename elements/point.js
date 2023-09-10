@@ -241,7 +241,7 @@ export class Point {
                     let ip = this.findIntersections(point.objects);
                     if (ip.length == 2){
                         for (let i = 0; i < ip.length; i++){
-                            distance = point.objects[2]- ip[i].y;
+                            distance = (point.objects[2]- ip[i].y)**2;
                             if (distance < neardistance){
                                 neardistance = distance;
                                 nearintersection = ip[i];
