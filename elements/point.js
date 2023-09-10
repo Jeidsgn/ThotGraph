@@ -43,11 +43,10 @@ export class Point {
                     // Convertir la curva a un objeto Geom para verificar la intersección
                     const geomLine = new Phaser.Geom.Line(objects[i].p0.x, objects[i].p0.y, objects[i].p1.x, objects[i].p1.y);
                     const geomCircle = new Phaser.Geom.Circle(objects[j].x, objects[j].y, objects[j].xRadius);
-                    this.line_gr = this.scene.add.graphics({ lineStyle: { width: 5, color: 0xA9F250, alpha: 0.4 }, });
                     if (Phaser.Geom.Intersects.LineToCircle(geomLine, geomCircle)) {
                         for (let k = 0; k < Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle).length; k++) {
                             intersection = Phaser.Geom.Intersects.GetLineToCircle(geomLine, geomCircle)[k];
-                            intersection.objects = [objects[i], objects[j]];
+                            intersection.objects = [objects[i], objects[j], k];
                             intersections.push(intersection);
                         };
                         console.log("LineToCircle");
@@ -263,24 +262,8 @@ export class Point {
                 if (point.intersection == true) {
                     let nearDistance = Number.MAX_VALUE
                     let ip = this.findIntersections(point.objects);
-                    let newIntersection = point;
-                    for (let k = 0; k < ip.length; k++) {
-                            console.log(k);
-                            console.log(ip[k]);
-                            console.log(point)
-                            console.log(ip);
-                            let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
-                            console.log(distance);
-                            if (distance < nearDistance) {// && !isNaN(distance)
-                                nearDistance = distance;
-                                console.log(nearDistance);
-                                newIntersection = ip[k];
-                                console.log(newIntersection);
-                            };
-                            point.x = newIntersection.x;
-                            point.y = newIntersection.y;
-                        };
-                    
+                    point.x = ip[point.objects[2]].x;
+                    point.y = ip[point.objects[2]].y;                                        
                 };
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
