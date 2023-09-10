@@ -238,10 +238,7 @@ export class Point {
                     let ip = this.findIntersections(point.objects);
                     // Calcula la distancia entre point y las intersecciones
                     const distances = ip.map(intersection => {
-                        const dx = intersection.x - point.objects[2].x;
-                        const dy = intersection.y - point.objects[2].y;
-                        // Usa el cuadrado de la distancia para evitar cálculos costosos de raíz cuadrada
-                        return dx * dx + dy * dy;
+                        return Phaser.Math.Distance.Between(intersection.x,intersection.y,point.objects[2].x,point.objects[2].y);
                     });
                     // Encuentra la intersección más cercana
                     const closestIntersectionIndex = distances.indexOf(Math.min(...distances));
