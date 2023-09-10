@@ -88,5 +88,22 @@ export class Element {
     });
     this.scene.points.add(point1);
     this.scene.points.add(point2); // Agrega el punto al grupo
+
+    // Calcula la longitud del lado del cuadrado (distancia entre los dos puntos)
+    const dx = point2.x - point1.x;
+    const dy = point2.y - point1.y;
+    const sideLength = Phaser.Math.Distance.Between(point2.x, point2.y, point1.x, point1.y);
+
+    // Calcula el ángulo entre los dos puntos
+    const angle = Phaser.Math.Angle.Between(point1.x, point1.y, point2.x, point2.y);
+
+    // Crea un rectángulo cuadrado con el lado calculado
+    const square = this.scene.add.rectangle(point1.x, point1.y, sideLength, sideLength, 0xF2A950);
+
+    // Rota el rectángulo por el ángulo calculado
+    square.setAngle(Phaser.Math.RadToDeg(angle));
+
+    // Añade el rectángulo a la escena
+    this.scene.add.existing(square);
   }
 }
