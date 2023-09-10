@@ -261,6 +261,28 @@ export class Point {
             const interactive = this.scene.points.getChildren();
             for (const point of interactive) {
                 point.setInteractive({ draggable: true });
+                if (point.intersection == true) {
+                    let nearDistance = Number.MAX_VALUE
+                    let ip = this.findIntersections(point.objects);
+                    let newIntersection = point;
+                    for (let k = 0; k < ip.length; k++) {
+                            console.log(k);
+                            console.log(ip[k]);
+                            console.log(point)
+                            console.log(ip);
+                            let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
+                            console.log(distance);
+                            if (distance < nearDistance) {// && !isNaN(distance)
+                                nearDistance = distance;
+                                console.log(nearDistance);
+                                newIntersection = ip[k];
+                                console.log(newIntersection);
+                            };
+                            point.x = newIntersection.x;
+                            point.y = newIntersection.y;
+                        };
+                    
+                };
                 point.on("drag", (pointer, dragX, dragY) => {
                     if (this.scene.activatebutton === "Move") {
                         // Obtén el segmento al que pertenece el punto
@@ -287,28 +309,7 @@ export class Point {
                         }
                     }
                 });
-                if (point.intersection == true) {
-                    let nearDistance = Number.MAX_VALUE
-                    let ip = this.findIntersections(point.objects);
-                    let newIntersection = point;
-                    for (let k = 0; k < ip.length; k++) {
-                            console.log(k);
-                            console.log(ip[k]);
-                            console.log(point)
-                            console.log(ip);
-                            let distance = Phaser.Math.Distance.Between(point.x, point.y, ip[k].x, ip[k].y);
-                            console.log(distance);
-                            if (distance < nearDistance) {// && !isNaN(distance)
-                                nearDistance = distance;
-                                console.log(nearDistance);
-                                newIntersection = ip[k];
-                                console.log(newIntersection);
-                            };
-                            point.x = newIntersection.x;
-                            point.y = newIntersection.y;
-                        };
-                    
-                };
+                
             }
         }
     }
