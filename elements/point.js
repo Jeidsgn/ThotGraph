@@ -246,6 +246,8 @@ export class Point {
                     // Actualiza la posición de point con la intersección más cercana
                     point.x = ip[closestIntersectionIndex].x;
                     point.y = ip[closestIntersectionIndex].y;
+                    point.objects[2].x = point.x;
+                    point.objects[2].y = point.y;
                 }
                 point.setInteractive({ draggable: true });
                 point.on("drag", (pointer, dragX, dragY) => {
