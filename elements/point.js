@@ -56,7 +56,7 @@ export class Point {
 
                     if (Phaser.Geom.Intersects.LineToLine(geomLine1, geomLine2)) {
                         intersection = Phaser.Geom.Intersects.GetLineToLine(geomLine1, geomLine2);
-                        intersection.objects = [objects[i], objects[j]];
+                        intersection.objects = [objects[i], objects[j], 0];
                         intersections.push(intersection);
                     }
                 } else if (objects[i] instanceof Phaser.Curves.Ellipse && objects[j] instanceof Phaser.Curves.Ellipse) {
