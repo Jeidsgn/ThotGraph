@@ -105,7 +105,7 @@ export class Segment {
                             this.scene.shadow.clear();
                             this.scene.curvestyle.clear();
                             this.segment_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.9 },
+                                lineStyle: { width: 5, color: 0x2aa4bf, alpha: 0.7 },
                             });
                             this.segment = new Phaser.Curves.Line(point, dropZone);
                             this.segment.draw(this.segment_gr);
@@ -142,7 +142,7 @@ export class Segment {
                             let segment = this.scene.segments[i];
                             if (point == segment.p0) {
                                 this.scene.segments_gr[i].clear();
-                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.7);
                                 segment.p0.x = point.x;
                                 segment.p0.y = point.y;
                                 segment.draw(this.scene.segments_gr[i]);
@@ -155,7 +155,7 @@ export class Segment {
                             }
                             } else if (point == segment.p1) {
                                 this.scene.segments_gr[i].clear();
-                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.9);
+                                this.scene.segments_gr[i].lineStyle(5, 0x2aa4bf, 0.7);
                                 segment.p1.x = point.x;
                                 segment.p1.y = point.y;
                                 segment.draw(this.scene.segments_gr[i]);

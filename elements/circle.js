@@ -46,7 +46,7 @@ export class Circle {
                         this.scene.shadow.clear();
                         // Actualiza el aspecto visual de la líne mientras se mueve
                         this.scene.circle= new Phaser.Curves.Path();
-                        this.scene.shadow.lineStyle(5, 0xF250DA, 0.5);
+                        this.scene.shadow.lineStyle(3, 0xF250DA, 0.3);
 
                         // Define la línea
                         let ratio = Phaser.Math.Distance.Between(point.x, point.y, pointer.x, pointer.y);
@@ -61,7 +61,7 @@ export class Circle {
                         if (dropZone != point) {
                             this.scene.shadow.clear();
                             this.circle_gr = this.scene.add.graphics({
-                                lineStyle: { width: 5, color: 0xF250DA, alpha: 0.9 },
+                                lineStyle: { width: 3, color: 0xF250DA, alpha: 0.3 },
                             });
 
                             let ratio = Phaser.Math.Distance.Between(point.x, point.y, dropZone.x, dropZone.y);
@@ -97,7 +97,7 @@ export class Circle {
                             let circle = this.scene.circles[i];
                             if (point == circle.p0) {
                                 this.scene.circles_gr[i].clear();
-                                this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
+                                this.scene.circles_gr[i].lineStyle(3, 0xF250DA, 0.3);
                                 circle.p0.x = point.x;
                                 circle.p0.y = point.y;
                                 circle.x = circle.p0.x
@@ -115,7 +115,7 @@ export class Circle {
                             }
                             } else if (point == circle.p1) {
                                 this.scene.circles_gr[i].clear();
-                                this.scene.circles_gr[i].lineStyle(5, 0xF250DA, 0.9);
+                                this.scene.circles_gr[i].lineStyle(3, 0xF250DA, 0.3);
                                 let ratio = Phaser.Math.Distance.Between(circle.x, circle.y, circle.p1.x, circle.p1.y)
                                 circle.xRadius = ratio;
                                 circle.yRadius = ratio;
