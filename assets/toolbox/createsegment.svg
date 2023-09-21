@@ -1,38 +1,38 @@
-<svg width="320" height="85" viewBox="0 0 320 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect y="10.8537" width="80" height="74.1463" rx="10" fill="#9E5817"/>
-<rect y="5" width="80" height="70.2439" rx="10" fill="#EDB878"/>
-<rect y="7.92682" width="80" height="72.1951" rx="10" fill="#E29536"/>
-<rect x="3.90247" y="9.87805" width="72.1951" height="66.3415" rx="10" fill="#F2A950"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 17 68)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 17 68)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 52 33)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 52 33)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<path d="M23 62L58 27" stroke="black" stroke-width="5"/>
-<rect x="160" y="10.8537" width="80" height="74.1463" rx="10" fill="#179E8A"/>
-<rect x="160" y="5" width="80" height="70.2439" rx="10" fill="#78EDDB"/>
-<rect x="160" y="7.92682" width="80" height="72.1951" rx="10" fill="#36E2C8"/>
-<rect x="163.902" y="9.87805" width="72.1951" height="66.3415" rx="10" fill="#50F2DA"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 177 68)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 177 68)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 212 33)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 212 33)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<path d="M183 62L218 27" stroke="black" stroke-width="5"/>
-<rect x="80" y="6" width="80" height="79" rx="10" fill="#9E5817"/>
-<rect x="80" width="80" height="70.2439" rx="10" fill="#EDB878"/>
-<rect x="80" y="2.92682" width="80" height="72.1951" rx="10" fill="#E29536"/>
-<rect x="83.9025" y="4.87805" width="72.1951" height="66.3415" rx="10" fill="#F2A950"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 97 62)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 97 62)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 132 27)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 132 27)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<path d="M103 56L138 21" stroke="black" stroke-width="5"/>
-<rect x="240" y="5.93024" width="80" height="79.0698" rx="10" fill="#179E8A"/>
-<rect x="240" width="80" height="71.1628" rx="10" fill="#78EDDB"/>
-<rect x="240" y="2.96512" width="80" height="73.1395" rx="10" fill="#36E2C8"/>
-<rect x="243.902" y="4.94186" width="72.1951" height="67.2093" rx="10" fill="#50F2DA"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 257 62)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 257 62)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<circle cx="6" cy="6" r="6" transform="matrix(1 0 0 -1 292 27)" fill="black"/>
-<circle cx="6" cy="6" r="8.5" transform="matrix(1 0 0 -1 292 27)" stroke="black" stroke-opacity="0.5" stroke-width="5"/>
-<path d="M263 56L298 21" stroke="black" stroke-width="5"/>
+<svg width="200" height="54" viewBox="0 0 200 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="6.78354" width="50" height="46.3415" rx="10" fill="#9E5817"/>
+<rect y="3.125" width="50" height="43.9024" rx="10" fill="#EDB878"/>
+<rect y="4.95425" width="50" height="45.122" rx="10" fill="#E29536"/>
+<rect x="2.43903" y="6.17377" width="45.122" height="41.4634" rx="10" fill="#F2A950"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 10.625 42.5)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 10.625 42.5)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 32.5 20.625)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 32.5 20.625)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<path d="M14.375 38.75L36.25 16.875" stroke="black" stroke-width="3"/>
+<rect x="100" y="6.78354" width="50" height="46.3415" rx="10" fill="#179E8A"/>
+<rect x="100" y="3.125" width="50" height="43.9024" rx="10" fill="#78EDDB"/>
+<rect x="100" y="4.95425" width="50" height="45.122" rx="10" fill="#36E2C8"/>
+<rect x="102.439" y="6.17377" width="45.122" height="41.4634" rx="10" fill="#50F2DA"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 110.625 42.5)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 110.625 42.5)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 132.5 20.625)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 132.5 20.625)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<path d="M114.375 38.75L136.25 16.875" stroke="black" stroke-width="3"/>
+<rect x="50" y="3.75" width="50" height="49.375" rx="10" fill="#9E5817"/>
+<rect x="50" width="50" height="43.9024" rx="10" fill="#EDB878"/>
+<rect x="50" y="1.82925" width="50" height="45.122" rx="10" fill="#E29536"/>
+<rect x="52.439" y="3.04877" width="45.122" height="41.4634" rx="10" fill="#F2A950"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 60.625 38.75)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 60.625 38.75)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 82.5 16.875)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 82.5 16.875)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<path d="M64.375 35L86.25 13.125" stroke="black" stroke-width="3"/>
+<rect x="150" y="3.70639" width="50" height="49.4186" rx="10" fill="#179E8A"/>
+<rect x="150" width="50" height="44.4767" rx="10" fill="#78EDDB"/>
+<rect x="150" y="1.85321" width="50" height="45.7122" rx="10" fill="#36E2C8"/>
+<rect x="152.439" y="3.08865" width="45.122" height="42.0058" rx="10" fill="#50F2DA"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 160.625 38.75)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 160.625 38.75)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<circle cx="3.75" cy="3.75" r="3.75" transform="matrix(1 0 0 -1 182.5 16.875)" fill="black"/>
+<circle cx="3.75" cy="3.75" r="5.25" transform="matrix(1 0 0 -1 182.5 16.875)" stroke="black" stroke-opacity="0.5" stroke-width="3"/>
+<path d="M164.375 35L186.25 13.125" stroke="black" stroke-width="3"/>
 </svg>

@@ -17,11 +17,11 @@ export class Board extends Phaser.Scene {
     // Cargar recursos como imágenes y sprites aquí, si es necesario
     this.load.spritesheet('point', './assets/point/Point.svg', { frameWidth: 50, frameHeight: 50 });
     this.load.spritesheet('Button', './assets/point/Button.svg', { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet('Point', './assets/toolbox/createpoint.svg', { frameWidth: 80, frameHeight: 85 });
-    this.load.spritesheet('Move', './assets/toolbox/movepoint.svg', { frameWidth: 80, frameHeight: 85 });
-    this.load.spritesheet('Segment', './assets/toolbox/createsegment.svg', { frameWidth: 80, frameHeight: 85 });
-    this.load.spritesheet('Circle', './assets/toolbox/createcircle.svg', { frameWidth: 80, frameHeight: 85 });
-    this.load.spritesheet('Line', './assets/toolbox/createline.svg', { frameWidth: 80, frameHeight: 85 });
+    this.load.spritesheet('Point', './assets/toolbox/createpoint.svg', { frameWidth: 50, frameHeight: 53.13 });
+    this.load.spritesheet('Move', './assets/toolbox/movepoint.svg', { frameWidth: 50, frameHeight: 53.13 });
+    this.load.spritesheet('Segment', './assets/toolbox/createsegment.svg', { frameWidth: 50, frameHeight: 53.13 });
+    this.load.spritesheet('Circle', './assets/toolbox/createcircle.svg', { frameWidth: 50, frameHeight: 53.13 });
+    this.load.spritesheet('Line', './assets/toolbox/createline.svg', { frameWidth: 50, frameHeight: 53.13 });
     this.load.image('Bg', './assets/Bg.svg');
   }
 
