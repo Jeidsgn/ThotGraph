@@ -20,7 +20,7 @@ export class Element {
     const functions = {
       Destroy : () => {
         this.point.destroyPoint();
-        console.log("destroy")
+        console.log(this.scene.activebutton)
       },
       Move: () => {
         this.moveElement();

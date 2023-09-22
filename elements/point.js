@@ -280,7 +280,7 @@ export class Point {
         }
     }
     destroyPoint() {
-        this.scene.input.on("pointerup", () => {
+        this.scene.input.on("pointerdown", () => {
             // Verifica si ya se ha creado un punto en este clic
             if (this.scene.activebutton === "Destroy") {
                 console.log('Point to be deleted found. Point ID:', point.id);
