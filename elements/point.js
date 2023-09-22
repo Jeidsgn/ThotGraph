@@ -295,6 +295,7 @@ export class Point {
                     );
     
                     if (distanceToPointer < 20) {
+                        point.setInteractive({ draggable: true });
                         point.destroy(); // Elimina el punto
                         break; // Sal del bucle al eliminar un punto
                     }
