@@ -283,10 +283,12 @@ export class Point {
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
             if (this.scene.activebutton === "Destroy") {
+                console.log('Point to be deleted found. Point ID:', point.id);
                 const interactivePoints = this.scene.points.getChildren();
     
                 for (const point of interactivePoints) {
                     // Verifica si el punto está cerca del pointer en un rango de píxeles (por ejemplo, 10 píxeles)
+                    console.log('Point to be deleted found. Point ID:', point.id);
                     const distanceToPointer = Phaser.Math.Distance.Between(
                         this.pointer.x,
                         this.pointer.y,
