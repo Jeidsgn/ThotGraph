@@ -282,7 +282,7 @@ export class Point {
     destroyPoint() {
         this.scene.input.on("pointerup", () => {
             // Verifica si ya se ha creado un punto en este clic
-            if (this.scene.activebutton === "delete") {
+            if (this.scene.activebutton === "Destroy") {
                 const interactivePoints = this.scene.points.getChildren();
     
                 for (const point of interactivePoints) {
