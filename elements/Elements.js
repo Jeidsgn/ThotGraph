@@ -18,6 +18,9 @@ export class Element {
   buttonToFunction(buttonName) {
     // Define un objeto de mapeo entre nombres de botones y funciones
     const functions = {
+      Destroy : () => {
+        this.point.destroyPoint();
+      },
       Move: () => {
         this.moveElement();
       },
