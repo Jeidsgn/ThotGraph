@@ -43,6 +43,7 @@ export class ToolBox {
           }});
     moveButton.setData('text',"Move");
     this.scene.toolboxButtons.push(moveButton);
+    
     const destroyButton = this.scene.add
     .sprite(center+60, this.scene.cameras.main.height - 180, 'Destroy')
     .setInteractive()

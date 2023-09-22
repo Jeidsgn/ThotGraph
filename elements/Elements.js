@@ -20,6 +20,7 @@ export class Element {
     const functions = {
       Destroy : () => {
         this.point.destroyPoint();
+        console.log("destroy")
       },
       Move: () => {
         this.moveElement();
