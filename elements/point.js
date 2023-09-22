@@ -279,5 +279,29 @@ export class Point {
             }
         }
     }
+    destroyPoint() {
+        this.scene.input.on("pointerup", () => {
+            // Verifica si ya se ha creado un punto en este clic
+            if (this.scene.activebutton === "delete") {
+                const interactivePoints = this.scene.points.getChildren();
+    
+                for (const point of interactivePoints) {
+                    // Verifica si el punto está cerca del pointer en un rango de píxeles (por ejemplo, 10 píxeles)
+                    const distanceToPointer = Phaser.Math.Distance.Between(
+                        this.pointer.x,
+                        this.pointer.y,
+                        point.x,
+                        point.y
+                    );
+    
+                    if (distanceToPointer < 20) {
+                        point.destroy(); // Elimina el punto
+                        break; // Sal del bucle al eliminar un punto
+                    }
+                }
+            }
+        });
+    }
+    
 
 }

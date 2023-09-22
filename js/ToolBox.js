@@ -27,7 +27,7 @@ export class ToolBox {
   createBaseButtons() {
     const center = (this.scene.cameras.main.width)/2;
     const moveButton = this.scene.add
-      .sprite(center, this.scene.cameras.main.height - 180, 'Move')
+      .sprite(center-60, this.scene.cameras.main.height - 180, 'Move')
       .setInteractive()
       .on("pointerdown", () => {
         this.scene.callbackfunction = this.elements.buttonToFunction("Move")
@@ -43,6 +43,23 @@ export class ToolBox {
           }});
     moveButton.setData('text',"Move");
     this.scene.toolboxButtons.push(moveButton);
+    const destroyButton = this.scene.add
+    .sprite(center+60, this.scene.cameras.main.height - 180, 'Destroy')
+    .setInteractive()
+    .on("pointerdown", () => {
+      this.scene.callbackfunction = this.elements.buttonToFunction("Destroy")
+      destroyButton.setFrame(2)
+      this.scene.activatebutton = "Destroy"})
+    .on("pointerover", () => {
+      destroyButton.setFrame(1)})
+    .on("pointerout",() =>{
+        if (this.scene.activatebutton =="Destroy"){
+          destroyButton.setFrame(3)
+        } else { 
+          destroyButton.setFrame(0)
+        }});
+  destroyButton.setData('text',"Destroy");
+  this.scene.toolboxButtons.push(destroyButton);
   }
   
   createDependentButtons() {
