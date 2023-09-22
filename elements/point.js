@@ -280,32 +280,25 @@ export class Point {
         }
     }
     destroyPoint() {
-        this.scene.input.on("pointerdown", () => {
-            // Verifica si ya se ha creado un punto en este clic
-            if (this.scene.activebutton === "Destroy") {
-                console.log('Point to be deleted found. Point ID:', point.id);
-                const interactivePoints = this.scene.points.getChildren();
+        if (this.scene.activatebutton === "Destroy") {
+            const interactivePoints = this.scene.points.getChildren();
+            let closestPoint = null;
+            let closestDistance = Number.MAX_VALUE;
     
-                for (const point of interactivePoints) {
-                    // Verifica si el punto está cerca del pointer en un rango de píxeles (por ejemplo, 10 píxeles)
-                    console.log('Point to be deleted found. Point ID:', point.id);
-                    const distanceToPointer = Phaser.Math.Distance.Between(
-                        this.pointer.x,
-                        this.pointer.y,
-                        point.x,
-                        point.y
-                    );
-    
-                    if (distanceToPointer < 20) {
-                        point.setInteractive({ draggable: true });
-                        console.log('Point to be deleted found. Point ID:', point.id);
-                        point.destroy(); // Elimina el punto
-                        break; // Sal del bucle al eliminar un punto
-                    }
+            for (const point of interactivePoints) {
+                const distance = Phaser.Math.Distance.Between(this.pointer.x, this.pointer.y, point.x, point.y);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestPoint = point;
                 }
             }
-        });
+    
+            if (closestPoint !== null && closestDistance < 15) {
+                closestPoint.destroy();
+            }
+        }
     }
+    
     
 
 }
