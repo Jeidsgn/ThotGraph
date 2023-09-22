@@ -296,6 +296,7 @@ export class Point {
     
                     if (distanceToPointer < 20) {
                         point.setInteractive({ draggable: true });
+                        console.log('Point to be deleted found. Point ID:', point.id);
                         point.destroy(); // Elimina el punto
                         break; // Sal del bucle al eliminar un punto
                     }
