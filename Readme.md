@@ -7,8 +7,10 @@
 - [Descripción del Proyecto](#descripción-del-proyecto)
 - [Inspiración](#inspiración)
 - [Instrucciones del Nivel 1](#instrucciones-del-nivel-1)
+- [Ejemplo en Video](#ejemplo-en-video)
 - [Tecnologías Usadas](#tecnologías-usadas)
 - [Contribuciones](#contribuciones)
+- [Instalación y Uso](#instalación-y-uso)
 
 ---
 
@@ -33,8 +35,7 @@ Este proyecto está inspirado en:
 
 ---
 
-
-### Explicación de los principales archivos:
+## Principales archivos
 
 1. **Elements/Elements.js**: Contiene las clases base de los elementos geométricos (puntos, líneas, círculos, segmentos).
 2. **js/Board.js**: Se encarga del tablero donde se visualizan las figuras.
@@ -81,6 +82,16 @@ Puedes probar el nivel en el siguiente enlace: [**ThotGraph - Nivel 1**](https:/
 
 ---
 
+## Ejemplo en Video
+
+Si quieres ver un ejemplo de cómo dibujar un **dodecaedro** utilizando la plataforma **ThotGraph**, puedes ver el siguiente video en **TikTok** o **YouTube**:
+
+- [Video en TikTok - Dibujo de un Dodecaedro](https://www.tiktok.com/@jeidsgn/video/7282936270089686277?is_from_webapp=1&sender_device=pc&web_id=7398844190861379078)
+  
+- [Video en YouTube - Dibujo de un Dodecaedro](https://youtu.be/w3CEbeqrVrU?si=2OZuzjQ9JyG-4LuJ)
+
+---
+
 ## Tecnologías Usadas
 
 - **Phaser.js**: Un motor de juegos en 2D utilizado para gestionar las interacciones dinámicas y las animaciones.
@@ -100,3 +111,10 @@ Si te interesa contribuir al desarrollo de **ThotGraph**, por favor abre un issu
 - **Gamificación**: Añadir elementos de retroalimentación o recompensas para mejorar la experiencia de usuario.
 
 ---
+
+## Instalación y Uso
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/tu_usuario/ThotGraph.git
